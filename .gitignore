@@ -4,7 +4,7 @@
 .externalNativeBuild
 build
 captures
-
+app/release
 ._*
 *.iml
 .DS_Store
