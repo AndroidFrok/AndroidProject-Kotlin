@@ -4,12 +4,13 @@ apply plugin: 'kotlin-android'
 android {
 
     // 编译源码版本
-    compileSdkVersion 30
+    def androidapi = 29
+    compileSdkVersion androidapi
     defaultConfig {
         // 最低安装版本
         minSdkVersion 21
         // 目标适配版本
-        targetSdkVersion 30
+        targetSdkVersion androidapi
         versionName '1.0'
         versionCode 10
     }
