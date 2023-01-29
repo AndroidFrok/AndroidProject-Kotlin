@@ -109,8 +109,8 @@ class AppApplication : Application() {
             // Activity 栈管理初始化
             ActivityManager.getInstance().init(application)
 
-            // MMKV 初始化
-            MMKV.initialize(application)
+            //！弃用 MMKV 初始化
+//            MMKV.initialize(application)
 
             // 网络请求框架初始化
             val okHttpClient: OkHttpClient = OkHttpClient.Builder()
