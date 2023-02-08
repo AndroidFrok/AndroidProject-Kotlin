@@ -29,7 +29,6 @@ import com.hjq.umeng.UmengClient
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.tencent.bugly.crashreport.CrashReport
-import com.tencent.mmkv.MMKV
 import okhttp3.OkHttpClient
 import timber.log.Timber
 
@@ -113,26 +112,26 @@ class AppApplication : Application() {
 //            MMKV.initialize(application)
 
             // 网络请求框架初始化
-            val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-                .build()
+              val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+                 .build()
 
             EasyConfig.with(okHttpClient)
-                // 是否打印日志
-                .setLogEnabled(AppConfig.isLogEnable())
-                // 设置服务器配置
-                .setServer(RequestServer())
-                // 设置请求处理策略
-                .setHandler(RequestHandler(application))
-                // 设置请求重试次数
-                .setRetryCount(1)
-                .setInterceptor { api: IRequestApi, params: HttpParams, headers: HttpHeaders ->
-                    // 添加全局请求头
-                    headers.put("token", "66666666666")
-                    headers.put("deviceOaid", UmengClient.getDeviceOaid())
-                    headers.put("versionName", AppConfig.getVersionName())
-                    headers.put("versionCode", AppConfig.getVersionCode().toString())
-                }
-                .into()
+                 // 是否打印日志
+                 .setLogEnabled(AppConfig.isLogEnable())
+                 // 设置服务器配置
+                 .setServer(RequestServer())
+                 // 设置请求处理策略
+                 .setHandler(RequestHandler(application))
+                 // 设置请求重试次数
+                 .setRetryCount(1)
+                 .setInterceptor { api: IRequestApi, params: HttpParams, headers: HttpHeaders ->
+                     // 添加全局请求头
+//                     headers.put("token", "66666666666")
+//                     headers.put("deviceOaid", UmengClient.getDeviceOaid())
+//                     headers.put("versionName", AppConfig.getVersionName())
+//                     headers.put("versionCode", AppConfig.getVersionCode().toString())
+                 }
+                 .into()
 
             // 设置 Json 解析容错监听
             GsonFactory.setJsonCallback { typeToken: TypeToken<*>, fieldName: String?, jsonToken: JsonToken ->

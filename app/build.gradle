@@ -198,7 +198,7 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.6'
 
     //  ！！弃用 腾讯 MMKV：https://github.com/Tencent/MMKV  改用 DataStore
-    implementation 'com.tencent:mmkv-static:1.2.10'
+//    implementation 'com.tencent:mmkv-static:1.2.10'
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
 
     // 内存泄漏监测框架：https://github.com/square/leakcanary

@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 android {
 
     // 编译源码版本
-    def androidapi = 29
+    def androidapi = 30
     compileSdkVersion androidapi
     defaultConfig {
         // 最低安装版本
