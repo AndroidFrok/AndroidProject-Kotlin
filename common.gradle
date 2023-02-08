@@ -11,8 +11,8 @@ android {
         minSdkVersion 21
         // 目标适配版本
         targetSdkVersion androidapi
-        versionName '1.0'
-        versionCode 10
+        versionName new Date().format('YYMMdd')
+        versionCode 1
     }
 
     // 支持 Java JDK 8
