@@ -9,11 +9,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" /> <!-- 拍照权限 -->
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- 安装权限 -->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- 定位权限（用于 WebView 定位） -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Android 11 软件包可见性适配：https://www.jianshu.com/p/d1ccd425c4ce -->
+        tools:ignore="ScopedStorage" />
+
     <queries>
 
         <!-- 拍照意图：MediaStore.ACTION_IMAGE_CAPTURE -->
