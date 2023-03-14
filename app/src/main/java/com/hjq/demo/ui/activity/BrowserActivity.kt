@@ -1,11 +1,13 @@
 package com.hjq.demo.ui.activity
 
 import android.app.Activity
-import android.content.*
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.text.TextUtils
-import android.view.*
+import android.view.KeyEvent
+import android.view.View
 import android.webkit.WebView
 import android.widget.ProgressBar
 import com.hjq.demo.R
@@ -63,6 +65,13 @@ class BrowserActivity : AppActivity(), StatusAction, OnRefreshListener {
         browserView?.setLifecycleOwner(this)
         // 设置网页刷新监听
         refreshLayout?.setOnRefreshListener(this)
+
+        findViewById<View>(R.id.btn_agree)!!.setOnClickListener { v: View? ->
+            //                          修改缓存标记
+            HomeActivity.start(getContext())
+            finish()
+        }
+        findViewById<View>(R.id.btn_reject)!!.setOnClickListener { v: View? -> finish() }
     }
 
     override fun initData() {
@@ -113,7 +122,9 @@ class BrowserActivity : AppActivity(), StatusAction, OnRefreshListener {
         /**
          * 网页加载错误时回调，这个方法会在 onPageFinished 之前调用
          */
-        override fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
+        override fun onReceivedError(
+            view: WebView, errorCode: Int, description: String, failingUrl: String
+        ) {
             // 这里为什么要用延迟呢？因为加载出错之后会先调用 onReceivedError 再调用 onPageFinished
             post {
                 showError(object : OnRetryListener {
@@ -141,7 +152,8 @@ class BrowserActivity : AppActivity(), StatusAction, OnRefreshListener {
         }
     }
 
-    private inner class AppBrowserChromeClient constructor(view: BrowserView) : BrowserChromeClient(view) {
+    private inner class AppBrowserChromeClient constructor(view: BrowserView) :
+        BrowserChromeClient(view) {
 
         /**
          * 收到网页标题

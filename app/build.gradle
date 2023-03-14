@@ -1,7 +1,7 @@
-apply plugin : 'com.android.application'
-apply plugin : 'android-aspectjx'
-apply plugin : 'kotlin-kapt'
-apply from : '../common.gradle'
+apply plugin: 'com.android.application'
+apply plugin: 'android-aspectjx'
+apply plugin: 'kotlin-kapt'
+apply from: '../common.gradle'
 
 // Android 代码规范文档：https://github.com/getActivity/AndroidCodeStandard
 android {
@@ -58,11 +58,11 @@ android {
             signingConfig signingConfigs.config
             // 添加清单占位符
             addManifestPlaceholders([
-                    'app_name'    :    '安卓技术中台 kt-Debug 版'
+                    'app_name': '安卓技术中台 kt-Debug 版'
             ])
             // 调试模式下只保留一种架构的 so 库，提升打包速度
             ndk {
-                abiFilters 'arm64-v8a'
+                abiFilters 'arm64-v8a', 'armeabi-v7a'
             }
         }
 
@@ -71,7 +71,7 @@ android {
             applicationIdSuffix ''
             // 添加清单占位符
             addManifestPlaceholders([
-                    'app_name'    :    '安卓技术中台 kt-Preview 版'
+                    'app_name': '安卓技术中台 kt-Preview 版'
             ])
         }
 
@@ -89,7 +89,7 @@ android {
             signingConfig signingConfigs.config
             // 添加清单占位符
             addManifestPlaceholders([
-                    'app_name'    :    '@string/app_name'
+                    'app_name': '@string/app_name'
             ])
             // 仅保留两种架构的 so 库，根据 Bugly 统计得出
             ndk {
