@@ -23,12 +23,12 @@ import com.hjq.gson.factory.GsonFactory
 import com.hjq.http.EasyConfig
 import com.hjq.http.config.IRequestApi
 import com.hjq.http.model.HttpHeaders
-import com.hjq.http.model.HttpParams
 import com.hjq.toast.ToastUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.tencent.bugly.crashreport.CrashReport
 import okhttp3.OkHttpClient
+import org.apache.http.params.HttpParams
 import timber.log.Timber
 
 /**
@@ -133,14 +133,7 @@ class AppApplication : Application() {
                 // 设置请求处理策略
                 .setHandler(RequestHandler(application))
                 // 设置请求重试次数
-                .setRetryCount(1)
-                .setInterceptor { api: IRequestApi, params: HttpParams, headers: HttpHeaders ->
-                    // 添加全局请求头
-//                     headers.put("token", "66666666666")
-//                     headers.put("deviceOaid", UmengClient.getDeviceOaid())
-//                     headers.put("versionName", AppConfig.getVersionName())
-//                     headers.put("versionCode", AppConfig.getVersionCode().toString())
-                }.into()
+                .setRetryCount(1).into()
 
             // 设置 Json 解析容错监听
             GsonFactory.setJsonCallback { typeToken: TypeToken<*>, fieldName: String?, jsonToken: JsonToken ->

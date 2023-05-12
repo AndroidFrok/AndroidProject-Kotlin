@@ -9,7 +9,6 @@ buildscript {
 
     repositories {
         // 阿里云云效仓库（Gradle 插件）：https://maven.aliyun.com/mvn/guide
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         addCommonMaven(repositories)
     }
 
@@ -17,12 +16,12 @@ buildscript {
     dependencies {
         // Gradle 插件版本说明：https://developer.android.google.cn/studio/releases/gradle-plugin.html#updating-plugin
         // noinspection GradleDependency
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.android.tools.build:gradle:7.3.1'
         // Kotlin 插件：https://plugins.jetbrains.com/plugin/6954-kotlin
         // noinspection GradleDependency
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10'
         // AOP 配置插件：https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx
-        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'
+//        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'
     }
 }
 
@@ -30,7 +29,6 @@ allprojects {
 
     repositories {
         // 友盟远程仓库：https://info.umeng.com/detail?id=443&cateId=1
-        maven { url 'https://repo1.maven.org/maven2' }
         addCommonMaven(repositories)
     }
 

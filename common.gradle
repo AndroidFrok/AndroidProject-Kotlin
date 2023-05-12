@@ -1,10 +1,10 @@
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 // 通用配置
 android {
 
     // 编译源码版本
-    def androidapi = 30
+    def androidapi = 33
     compileSdkVersion androidapi
     defaultConfig {
         // 最低安装版本

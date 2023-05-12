@@ -1,6 +1,5 @@
 package com.hjq.demo.ui.activity
 
-import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.view.View
@@ -15,7 +14,7 @@ import com.hjq.demo.other.AppConfig
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.HttpCallback
 import com.hjq.widget.view.SlantedTextView
-import java.util.*
+import java.util.Locale
 
 /**
  *    author : Android 轮子哥
@@ -35,19 +34,7 @@ class SplashActivity : AppActivity() {
     override fun initView() {
         // 设置动画监听
         lottieView?.addAnimatorListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
-                lottieView?.removeAnimatorListener(this)
-
-                val isAgreePrivacy = false  //这个需要用 datastore组件来维护
-                if (isAgreePrivacy) {
-                    HomeActivity.start(this@SplashActivity)
-                } else {
-//                     跳转到隐私政策页
-                    BrowserActivity.start(getContext(), "http://sdzxkc.com/newsInfo-94-8.html")
-                }
-
-                finish()
-            }
+            
         })
     }
 
