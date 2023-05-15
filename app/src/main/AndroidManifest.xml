@@ -52,8 +52,10 @@
     <application
         android:name=".app.AppApplication"
         android:allowBackup="false"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/launcher_ic"
         android:label="${app_name}"
+        android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
         android:resizeableActivity="true"
