@@ -48,20 +48,23 @@
     <application
         android:name=".app.AppApplication"
         android:allowBackup="false"
+        android:allowClearUserData="false"
+        android:appCategory="productivity"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:description="@string/description"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/launcher_ic"
         android:label="${app_name}"
         android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_config"
+        android:persistent="true"
         android:requestLegacyExternalStorage="true"
         android:resizeableActivity="true"
         android:roundIcon="@mipmap/launcher_ic"
         android:supportsRtl="false"
+        android:testOnly="false"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        tools:ignore="AllowBackup,LockedOrientationActivity"
-        tools:replace="android:allowBackup,android:supportsRtl"
-        tools:targetApi="n">
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.activity.ComposeTestActivity"
             android:exported="true"

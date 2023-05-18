@@ -255,5 +255,5 @@
     <string name="camera_launch_fail">无法启动相机</string>
     <string name="camera_image_error">目标地址错误</string>
     <string name="title_activity_compose_test">ComposeTestActivity</string>
-
+    <string name="description">聚辉软件android标准化工程</string>
 </resources>
