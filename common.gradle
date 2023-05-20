@@ -75,4 +75,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'com.tencent:mmkv-static:1.2.10'
+//    https://github.com/kongzue/DialogX/releases
+    implementation 'com.github.kongzue.DialogX:DialogX:0.0.48'
 }

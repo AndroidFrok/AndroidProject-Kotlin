@@ -18,17 +18,23 @@ import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.http.model.RequestHandler
 import com.hjq.demo.http.model.RequestServer
 import com.hjq.demo.manager.ActivityManager
-import com.hjq.demo.other.*
+import com.hjq.demo.other.AppConfig
+import com.hjq.demo.other.CrashHandler
+import com.hjq.demo.other.DebugLoggerTree
+import com.hjq.demo.other.MaterialHeader
+import com.hjq.demo.other.SmartBallPulseFooter
+import com.hjq.demo.other.TitleBarStyle
+import com.hjq.demo.other.ToastLogInterceptor
+import com.hjq.demo.other.ToastStyle
 import com.hjq.gson.factory.GsonFactory
 import com.hjq.http.EasyConfig
-import com.hjq.http.config.IRequestApi
-import com.hjq.http.model.HttpHeaders
 import com.hjq.toast.ToastUtils
+import com.kongzue.dialogx.DialogX
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.tencent.bugly.crashreport.CrashReport
+import com.tencent.mmkv.MMKV
 import okhttp3.OkHttpClient
-import org.apache.http.params.HttpParams
 import timber.log.Timber
 
 /**
@@ -54,14 +60,12 @@ class AppApplication : Application() {
      *  用户没同意隐私政策之前不能初始化的
      */
     private fun privacySdk() {
-
-        // 友盟统计、登录、分享 SDK
-//            UmengClient.init(application, AppConfig.isLogEnable())
         // Bugly 异常捕捉
         CrashReport.initCrashReport(this, AppConfig.getBuglyId(), AppConfig.isDebug())
         //！弃用 MMKV 初始化
-//            MMKV.initialize(application)
-
+        MMKV.initialize(this)
+        //        Bugly.init(this, AppConfig.getBuglyId(), AppConfig.isDebug());
+        DialogX.init(this)
     }
 
     override fun onLowMemory() {
