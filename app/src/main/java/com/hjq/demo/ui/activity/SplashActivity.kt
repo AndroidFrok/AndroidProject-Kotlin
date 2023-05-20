@@ -11,6 +11,7 @@ import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.http.api.UserInfoApi
 import com.hjq.demo.http.model.HttpData
+import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.other.AppConfig
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.HttpCallback
@@ -39,7 +40,7 @@ class SplashActivity : AppActivity() {
                 super.onAnimationEnd(animation)
                 lottieView?.removeAnimatorListener(this)
 
-                val isAgreePrivacy = false  //这个需要用 datastore组件来维护
+                val isAgreePrivacy = MmkvUtil.getBool("is_agree")  //这个需要用 datastore组件来维护
                 if (isAgreePrivacy) {
                     HomeActivity.start(this@SplashActivity)
                 } else {

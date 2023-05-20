@@ -18,6 +18,7 @@ import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.http.model.RequestHandler
 import com.hjq.demo.http.model.RequestServer
 import com.hjq.demo.manager.ActivityManager
+import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.CrashHandler
 import com.hjq.demo.other.DebugLoggerTree
@@ -49,7 +50,8 @@ class AppApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initSdk(this)
-        val isAgreePrivacy = false  //这个需要用 datastore组件来维护
+        MMKV.initialize(this)
+        val isAgreePrivacy = MmkvUtil.getBool("is_agree")
         if (isAgreePrivacy) {
             privacySdk()
         }
@@ -62,8 +64,6 @@ class AppApplication : Application() {
     private fun privacySdk() {
         // Bugly 异常捕捉
         CrashReport.initCrashReport(this, AppConfig.getBuglyId(), AppConfig.isDebug())
-        //！弃用 MMKV 初始化
-        MMKV.initialize(this)
         //        Bugly.init(this, AppConfig.getBuglyId(), AppConfig.isDebug());
         DialogX.init(this)
     }
