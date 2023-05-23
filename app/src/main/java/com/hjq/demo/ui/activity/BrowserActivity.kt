@@ -15,6 +15,7 @@ import com.hjq.demo.action.StatusAction
 import com.hjq.demo.aop.CheckNet
 import com.hjq.demo.aop.Log
 import com.hjq.demo.app.AppActivity
+import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.widget.BrowserView
 import com.hjq.demo.widget.BrowserView.BrowserChromeClient
 import com.hjq.demo.widget.BrowserView.BrowserViewClient
@@ -68,6 +69,7 @@ class BrowserActivity : AppActivity(), StatusAction, OnRefreshListener {
 
         findViewById<View>(R.id.btn_agree)!!.setOnClickListener { v: View? ->
             //                          修改缓存标记
+            MmkvUtil.save("is_agree", true)
             HomeActivity.start(getContext())
             finish()
         }
