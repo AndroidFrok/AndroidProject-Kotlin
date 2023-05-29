@@ -9,12 +9,14 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.SystemClock
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.core.content.FileProvider
+import com.blankj.utilcode.util.ResourceUtils
 import com.blankj.utilcode.util.ShellUtils
 import com.hjq.base.BaseDialog
 import com.hjq.base.action.AnimAction
@@ -23,10 +25,12 @@ import com.hjq.demo.aop.CheckNet
 import com.hjq.demo.aop.Permissions
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.other.AppConfig
+import com.hjq.demo.ui.activity.RestartActivity
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.OnDownloadListener
 import com.hjq.http.model.HttpMethod
 import com.hjq.permissions.Permission
+import com.kongzue.dialogx.dialogs.PopTip
 import com.tencent.bugly.crashreport.CrashReport
 import java.io.File
 
@@ -309,6 +313,8 @@ class UpdateDialog {
                 CrashReport.postCatchedException(Throwable(result.errorMsg))
             }
         }
+
+
 
         /**
          * 获取安装意图

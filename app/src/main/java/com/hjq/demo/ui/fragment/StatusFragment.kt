@@ -1,14 +1,20 @@
 package com.hjq.demo.ui.fragment
 
+import android.os.SystemClock
 import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.ResourceUtils
+import com.blankj.utilcode.util.ShellUtils
 import com.hjq.base.BaseAdapter
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.app.TitleBarFragment
+import com.hjq.demo.ui.activity.RestartActivity
 import com.hjq.demo.ui.adapter.StatusAdapter
+import com.hjq.toast.ToastUtils
 import com.hjq.widget.layout.WrapRecyclerView
+import com.kongzue.dialogx.dialogs.PopTip
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
@@ -20,12 +26,34 @@ import java.util.*
  *    time   : 2020/07/10
  *    desc   : 加载案例 Fragment
  */
-class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener {
+class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListener,
+    BaseAdapter.OnItemClickListener {
 
     companion object {
 
         fun newInstance(): StatusFragment {
             return StatusFragment()
+        }
+    }
+
+    private fun testInstall() {
+        //            测试静默安装
+        ResourceUtils.copyFileFromAssets(
+            "SilentInstall-1.1.0-10.apk", "/sdcard/SilentInstall.apk"
+        )
+        SystemClock.sleep(2000)
+        val result = ShellUtils.execCmd("pm install -r /sdcard/SilentInstall.apk", true)
+        SystemClock.sleep(1000)
+        if (result.result == 0) {
+            if (result.successMsg.equals("Success")) {
+//                  安装成功  重启app
+                PopTip.show("静默更新成功")
+                getAttachActivity()?.getContext()?.let { RestartActivity.restart(it) }
+            }
+        } else {
+//            安装失败
+            ToastUtils.show("安装失败")
+            PopTip.show("安装失败")
         }
     }
 
@@ -80,6 +108,7 @@ class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListene
      * @param position          被点击的条目位置
      */
     override fun onItemClick(recyclerView: RecyclerView?, itemView: View?, position: Int) {
+        testInstall()
         toast(adapter?.getItem(position))
     }
 
