@@ -9,7 +9,7 @@ import com.hjq.demo.ui.activity.HomeActivity;
 public class Autorun extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent1) {
-        if (!AppConfig.INSTANCE.isDebug() && intent1.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+        if (intent1.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
             Intent intent = new Intent();
             intent.setClass(context, HomeActivity.class);// 开机后指定要执行程序的界面文件
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
