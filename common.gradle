@@ -78,4 +78,5 @@ dependencies {
     implementation 'com.tencent:mmkv-static:1.2.10'
 //    https://github.com/kongzue/DialogX/releases
     implementation 'com.github.kongzue.DialogX:DialogX:0.0.48'
+    api 'com.blankj:utilcode:1.30.6'
 }
