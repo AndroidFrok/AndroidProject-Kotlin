@@ -1,7 +1,7 @@
 package com.hjq.demo.ui.fragment
 
 import android.os.SystemClock
-import android.view.*
+import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ResourceUtils
@@ -12,13 +12,15 @@ import com.hjq.demo.app.AppActivity
 import com.hjq.demo.app.TitleBarFragment
 import com.hjq.demo.ui.activity.RestartActivity
 import com.hjq.demo.ui.adapter.StatusAdapter
-import com.hjq.toast.ToastUtils
+import com.hjq.permissions.OnPermissionCallback
+import com.hjq.permissions.Permission
+import com.hjq.permissions.XXPermissions
 import com.hjq.widget.layout.WrapRecyclerView
 import com.kongzue.dialogx.dialogs.PopTip
+import com.kongzue.dialogx.dialogs.WaitDialog
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import java.util.*
 
 /**
  *    author : Android 轮子哥
@@ -37,24 +39,37 @@ class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListene
     }
 
     private fun testInstall() {
+        WaitDialog.show("程序更新中")
         //            测试静默安装
-        ResourceUtils.copyFileFromAssets(
-            "SilentInstall-1.1.0-10.apk", "/sdcard/SilentInstall.apk"
-        )
-        SystemClock.sleep(2000)
-        val result = ShellUtils.execCmd("pm install -r /sdcard/SilentInstall.apk", true)
-        SystemClock.sleep(1000)
-        if (result.result == 0) {
-            if (result.successMsg.equals("Success")) {
+        XXPermissions.with(this).permission(Permission.MANAGE_EXTERNAL_STORAGE)
+            .request(object : OnPermissionCallback {
+                override fun onGranted(permissions: MutableList<String>?, all: Boolean) {
+                    ResourceUtils.copyFileFromAssets(
+                        "SilentInstall-1.1.0-10.apk", "/sdcard/SilentInstall.apk"
+                    )
+                    val result = ShellUtils.execCmd("pm install -r /sdcard/SilentInstall.apk", true)
+                    SystemClock.sleep(1000)
+
+                    if (result.result == 0) {
+                        if (result.successMsg.equals("Success")) {
 //                  安装成功  重启app
-                PopTip.show("静默更新成功")
-                getAttachActivity()?.getContext()?.let { RestartActivity.restart(it) }
-            }
-        } else {
+                            PopTip.show("静默更新成功")
+                            getContext()?.let { RestartActivity.restart(it) }
+                        }
+                    } else {
 //            安装失败
-            ToastUtils.show("安装失败")
-            PopTip.show("安装失败")
-        }
+                        PopTip.show("安装失败")
+                    }
+                    postDelayed({ WaitDialog.dismiss() }, 3000)
+
+                }
+
+                override fun onDenied(permissions: MutableList<String>?, never: Boolean) {
+                    super.onDenied(permissions, never)
+                    PopTip.show("权限")
+                }
+
+            })
     }
 
     private val refreshLayout: SmartRefreshLayout? by lazy { findViewById(R.id.rl_status_refresh) }
