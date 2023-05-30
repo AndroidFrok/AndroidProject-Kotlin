@@ -79,4 +79,7 @@ dependencies {
 //    https://github.com/kongzue/DialogX/releases
     implementation 'com.github.kongzue.DialogX:DialogX:0.0.48'
     api 'com.blankj:utilcode:1.30.6'
+    def work_version = "2.7.1"
+    // (Java only)https://developer.android.google.cn/topic/libraries/architecture/workmanager/how-to/define-work?hl=zh-cn#java
+    implementation "androidx.work:work-runtime:$work_version"
 }
