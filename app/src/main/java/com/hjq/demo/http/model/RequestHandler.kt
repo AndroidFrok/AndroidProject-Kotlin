@@ -14,7 +14,6 @@ import com.hjq.http.EasyLog
 import com.hjq.http.config.IRequestApi
 import com.hjq.http.config.IRequestHandler
 import com.hjq.http.exception.*
-import com.tencent.mmkv.MMKV
 import okhttp3.Headers
 import okhttp3.Response
 import okhttp3.ResponseBody
@@ -35,7 +34,7 @@ import java.net.UnknownHostException
  */
 class RequestHandler constructor(private val application: Application) : IRequestHandler {
 
-    private val mmkv: MMKV = MMKV.mmkvWithID("http_cache_id")
+//    private val mmkv: MMKV = MMKV.mmkvWithID("http_cache_id")
 
     @Throws(Exception::class)
     override fun requestSucceed(lifecycle: LifecycleOwner, api: IRequestApi, response: Response, type: Type): Any? {
@@ -147,7 +146,7 @@ class RequestHandler constructor(private val application: Application) : IReques
         return HttpException(e.message, e)
     }
 
-    override fun readCache(lifecycle: LifecycleOwner, api: IRequestApi, type: Type): Any? {
+    /*override fun readCache(lifecycle: LifecycleOwner, api: IRequestApi, type: Type): Any? {
         val cacheKey: String? = GsonFactory.getSingletonGson().toJson(api)
         val cacheValue: String? = mmkv.getString(cacheKey, null)
         if ((cacheValue == null) || ("" == cacheValue) || ("{}" == cacheValue)) {
@@ -171,5 +170,5 @@ class RequestHandler constructor(private val application: Application) : IReques
         EasyLog.print("---------- cacheValue ----------")
         EasyLog.json(cacheValue)
         return mmkv.putString(cacheKey, cacheValue).commit()
-    }
+    }*/
 }

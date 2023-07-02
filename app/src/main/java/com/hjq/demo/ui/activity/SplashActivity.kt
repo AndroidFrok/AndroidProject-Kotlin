@@ -1,8 +1,9 @@
 package com.hjq.demo.ui.activity
 
-import android.animation.*
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Intent
-import android.view.*
+import android.view.View
 import com.airbnb.lottie.LottieAnimationView
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ImmersionBar
@@ -10,6 +11,7 @@ import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.http.api.UserInfoApi
 import com.hjq.demo.http.model.HttpData
+import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.other.AppConfig
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.HttpCallback
@@ -34,9 +36,18 @@ class SplashActivity : AppActivity() {
     override fun initView() {
         // 设置动画监听
         lottieView?.addAnimatorListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
+                super.onAnimationEnd(animation)
                 lottieView?.removeAnimatorListener(this)
-                HomeActivity.start(this@SplashActivity)
+
+                val isAgreePrivacy = MmkvUtil.getBool("is_agree")  //这个需要用 datastore组件来维护
+                if (isAgreePrivacy) {
+                    HomeActivity.start(this@SplashActivity)
+                } else {
+//                     跳转到隐私政策页
+                    BrowserActivity.start(getContext(), "http://sdzxkc.com/newsInfo-94-8.html")
+                }
+
                 finish()
             }
         })
@@ -56,8 +67,7 @@ class SplashActivity : AppActivity() {
             return
         }
         // 刷新用户信息
-        EasyHttp.post(this)
-            .api(UserInfoApi())
+        EasyHttp.post(this).api(UserInfoApi())
             .request(object : HttpCallback<HttpData<UserInfoApi.Bean?>>(this) {
 
                 override fun onSucceed(data: HttpData<UserInfoApi.Bean?>) {
@@ -83,8 +93,7 @@ class SplashActivity : AppActivity() {
         if (!isTaskRoot) {
             val intent: Intent? = intent
             // 如果当前 Activity 是通过桌面图标启动进入的
-            if (((intent != null) && intent.hasCategory(Intent.CATEGORY_LAUNCHER)
-                        && (Intent.ACTION_MAIN == intent.action))) {
+            if (((intent != null) && intent.hasCategory(Intent.CATEGORY_LAUNCHER) && (Intent.ACTION_MAIN == intent.action))) {
                 // 对当前 Activity 执行销毁操作，避免重复实例化入口
                 finish()
                 return

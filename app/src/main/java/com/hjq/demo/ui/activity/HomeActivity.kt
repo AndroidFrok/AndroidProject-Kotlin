@@ -3,9 +3,12 @@ package com.hjq.demo.ui.activity
 import android.app.Activity
 import android.content.*
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.blankj.utilcode.util.ResourceUtils
+import com.blankj.utilcode.util.ShellUtils
 import com.gyf.immersionbar.ImmersionBar
 import com.hjq.base.FragmentPagerAdapter
 import com.hjq.demo.R
@@ -18,6 +21,7 @@ import com.hjq.demo.ui.fragment.FindFragment
 import com.hjq.demo.ui.fragment.HomeFragment
 import com.hjq.demo.ui.fragment.MessageFragment
 import com.hjq.demo.ui.fragment.MineFragment
+import com.kongzue.dialogx.dialogs.PopTip
 
 /**
  *    author : Android 轮子哥

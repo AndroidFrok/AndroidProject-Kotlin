@@ -1,8 +1,10 @@
 package com.hjq.demo.ui.activity
 
 import android.content.Intent
-import android.view.*
-import android.widget.*
+import android.view.Gravity
+import android.view.KeyEvent
+import android.view.View
+import android.widget.Button
 import com.hjq.base.BaseDialog
 import com.hjq.base.BasePopupWindow
 import com.hjq.base.action.AnimAction
@@ -12,11 +14,6 @@ import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.DialogManager
 import com.hjq.demo.ui.dialog.*
 import com.hjq.demo.ui.popup.ListPopup
-import com.hjq.umeng.Platform
-import com.hjq.umeng.UmengClient
-import com.hjq.umeng.UmengShare.OnShareListener
-import com.umeng.socialize.media.UMImage
-import com.umeng.socialize.media.UMWeb
 import java.util.*
 
 /**
@@ -384,7 +381,7 @@ class DialogActivity : AppActivity() {
             R.id.btn_dialog_share -> {
 
                 toast("记得改好第三方 AppID 和 Secret，否则会调不起来哦")
-                val content = UMWeb("https://github.com/getActivity/AndroidProject-Kotlin")
+               /* val content = UMWeb("https://github.com/getActivity/AndroidProject-Kotlin")
                 content.title = "Github"
                 content.setThumb(UMImage(this, R.mipmap.launcher_ic))
                 content.description = getString(R.string.app_name)
@@ -406,7 +403,7 @@ class DialogActivity : AppActivity() {
                             toast("分享取消")
                         }
                     })
-                    .show()
+                    .show()*/
 
             }
             R.id.btn_dialog_update -> {
@@ -535,6 +532,6 @@ class DialogActivity : AppActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         // 友盟回调
-        UmengClient.onActivityResult(this, requestCode, resultCode, data)
+//        UmengClient.onActivityResult(this, requestCode, resultCode, data)
     }
 }

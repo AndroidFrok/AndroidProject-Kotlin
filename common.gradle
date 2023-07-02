@@ -1,18 +1,18 @@
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 // 通用配置
 android {
 
     // 编译源码版本
-    def androidapi = 29
+    def androidapi = 33
     compileSdkVersion androidapi
     defaultConfig {
         // 最低安装版本
         minSdkVersion 21
         // 目标适配版本
         targetSdkVersion androidapi
-        versionName '1.0'
-        versionCode 10
+        versionName new Date().format('YYMMdd')
+        versionCode 1
     }
 
     // 支持 Java JDK 8
@@ -69,10 +69,17 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.1'
     // Material 库：https://github.com/material-components/material-components-android
     implementation 'com.google.android.material:material:1.4.0'
-
+    implementation 'org.greenrobot:eventbus:3.2.0'
     // Kotlin 协程：https://github.com/Kotlin/kotlinx.coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'com.tencent:mmkv-static:1.2.10'
+//    https://github.com/kongzue/DialogX/releases
+    implementation 'com.github.kongzue.DialogX:DialogX:0.0.48'
+    api 'com.blankj:utilcode:1.30.6'
+    def work_version = "2.7.1"
+    // (Java only)https://developer.android.google.cn/topic/libraries/architecture/workmanager/how-to/define-work?hl=zh-cn#java
+    implementation "androidx.work:work-runtime:$work_version"
 }

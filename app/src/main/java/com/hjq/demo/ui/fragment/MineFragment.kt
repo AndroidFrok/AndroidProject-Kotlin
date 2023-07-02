@@ -50,7 +50,8 @@ class MineFragment : TitleBarFragment<HomeActivity>() {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_mine_dialog -> {
-                startActivity(DialogActivity::class.java)
+                startActivity(AdminActivity::class.java)
+//                startActivity(DialogActivity::class.java)
             }
             R.id.btn_mine_hint -> {
                 startActivity(StatusActivity::class.java)

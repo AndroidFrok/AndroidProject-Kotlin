@@ -1,6 +1,7 @@
 package com.hjq.demo.ui.fragment
 
 import android.content.res.ColorStateList
+import android.os.SystemClock
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
@@ -8,16 +9,20 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import com.blankj.utilcode.util.ResourceUtils
+import com.blankj.utilcode.util.ShellUtils
 import com.gyf.immersionbar.ImmersionBar
 import com.hjq.base.FragmentPagerAdapter
 import com.hjq.demo.R
 import com.hjq.demo.app.AppFragment
 import com.hjq.demo.app.TitleBarFragment
 import com.hjq.demo.ui.activity.HomeActivity
+import com.hjq.demo.ui.activity.RestartActivity
 import com.hjq.demo.ui.adapter.TabAdapter
 import com.hjq.demo.ui.adapter.TabAdapter.OnTabListener
 import com.hjq.demo.widget.XCollapsingToolbarLayout
 import com.hjq.demo.widget.XCollapsingToolbarLayout.OnScrimsListener
+import com.kongzue.dialogx.dialogs.PopTip
 
 /**
  *    author : Android 轮子哥
@@ -25,8 +30,8 @@ import com.hjq.demo.widget.XCollapsingToolbarLayout.OnScrimsListener
  *    time   : 2018/10/18
  *    desc   : 首页 Fragment
  */
-class HomeFragment : TitleBarFragment<HomeActivity>(), OnTabListener,
-    OnPageChangeListener, OnScrimsListener {
+class HomeFragment : TitleBarFragment<HomeActivity>(), OnTabListener, OnPageChangeListener,
+    OnScrimsListener {
 
     companion object {
 
@@ -34,6 +39,8 @@ class HomeFragment : TitleBarFragment<HomeActivity>(), OnTabListener,
             return HomeFragment()
         }
     }
+
+
 
     private val collapsingToolbarLayout: XCollapsingToolbarLayout? by lazy { findViewById(R.id.ctl_home_bar) }
     private val toolbar: Toolbar? by lazy { findViewById(R.id.tb_home_title) }
@@ -53,7 +60,9 @@ class HomeFragment : TitleBarFragment<HomeActivity>(), OnTabListener,
     override fun initView() {
         pagerAdapter = FragmentPagerAdapter(this)
         pagerAdapter!!.addFragment(StatusFragment.newInstance(), "列表演示")
-        pagerAdapter!!.addFragment(BrowserFragment.newInstance("https://github.com/getActivity"), "网页演示")
+        pagerAdapter!!.addFragment(
+            BrowserFragment.newInstance("https://github.com/getActivity"), "网页演示"
+        )
         viewPager?.adapter = pagerAdapter
         viewPager?.addOnPageChangeListener(this)
         tabAdapter = TabAdapter(getAttachActivity()!!)
@@ -108,11 +117,22 @@ class HomeFragment : TitleBarFragment<HomeActivity>(), OnTabListener,
     @Suppress("RestrictedApi")
     override fun onScrimsStateChange(layout: XCollapsingToolbarLayout?, shown: Boolean) {
         getStatusBarConfig().statusBarDarkFont(shown).init()
-        addressView?.setTextColor(ContextCompat.getColor(getAttachActivity()!!, if (shown) R.color.black else R.color.white))
+        addressView?.setTextColor(
+            ContextCompat.getColor(
+                getAttachActivity()!!, if (shown) R.color.black else R.color.white
+            )
+        )
         hintView?.setBackgroundResource(if (shown) R.drawable.home_search_bar_gray_bg else R.drawable.home_search_bar_transparent_bg)
-        hintView?.setTextColor(ContextCompat.getColor(getAttachActivity()!!, if (shown) R.color.black60 else R.color.white60))
-        searchView?.supportImageTintList = ColorStateList.valueOf(ContextCompat.getColor(getAttachActivity()!!,
-            if (shown) R.color.common_icon_color else R.color.white))
+        hintView?.setTextColor(
+            ContextCompat.getColor(
+                getAttachActivity()!!, if (shown) R.color.black60 else R.color.white60
+            )
+        )
+        searchView?.supportImageTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(
+                getAttachActivity()!!, if (shown) R.color.common_icon_color else R.color.white
+            )
+        )
     }
 
     override fun onDestroy() {

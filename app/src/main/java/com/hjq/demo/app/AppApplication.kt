@@ -18,14 +18,19 @@ import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.http.model.RequestHandler
 import com.hjq.demo.http.model.RequestServer
 import com.hjq.demo.manager.ActivityManager
-import com.hjq.demo.other.*
+import com.hjq.demo.manager.MmkvUtil
+import com.hjq.demo.other.AppConfig
+import com.hjq.demo.other.CrashHandler
+import com.hjq.demo.other.DebugLoggerTree
+import com.hjq.demo.other.MaterialHeader
+import com.hjq.demo.other.SmartBallPulseFooter
+import com.hjq.demo.other.TitleBarStyle
+import com.hjq.demo.other.ToastLogInterceptor
+import com.hjq.demo.other.ToastStyle
 import com.hjq.gson.factory.GsonFactory
 import com.hjq.http.EasyConfig
-import com.hjq.http.config.IRequestApi
-import com.hjq.http.model.HttpHeaders
-import com.hjq.http.model.HttpParams
 import com.hjq.toast.ToastUtils
-import com.hjq.umeng.UmengClient
+import com.kongzue.dialogx.DialogX
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.tencent.bugly.crashreport.CrashReport
@@ -45,6 +50,22 @@ class AppApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initSdk(this)
+        MMKV.initialize(this)
+        val isAgreePrivacy = MmkvUtil.getBool("is_agree")
+        if (isAgreePrivacy) {
+            privacySdk()
+        }
+    }
+
+
+    /**
+     *  用户没同意隐私政策之前不能初始化的
+     */
+    private fun privacySdk() {
+        // Bugly 异常捕捉
+        CrashReport.initCrashReport(this, AppConfig.getBuglyId(), AppConfig.isDebug())
+        //        Bugly.init(this, AppConfig.getBuglyId(), AppConfig.isDebug());
+        DialogX.init(this)
     }
 
     override fun onLowMemory() {
@@ -67,13 +88,18 @@ class AppApplication : Application() {
         fun initSdk(application: Application) {
             // 设置标题栏初始化器
             TitleBar.setDefaultStyle(TitleBarStyle())
-
+            // Activity 栈管理初始化
+            ActivityManager.getInstance().init(application)
             // 设置全局的 Header 构建器
-            SmartRefreshLayout.setDefaultRefreshHeaderCreator{ context: Context, layout: RefreshLayout ->
-                MaterialHeader(context).setColorSchemeColors(ContextCompat.getColor(context, R.color.common_accent_color))
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context: Context, layout: RefreshLayout ->
+                MaterialHeader(context).setColorSchemeColors(
+                    ContextCompat.getColor(
+                        context, R.color.common_accent_color
+                    )
+                )
             }
             // 设置全局的 Footer 构建器
-            SmartRefreshLayout.setDefaultRefreshFooterCreator{ context: Context, layout: RefreshLayout ->
+            SmartRefreshLayout.setDefaultRefreshFooterCreator { context: Context, layout: RefreshLayout ->
                 SmartBallPulseFooter(context)
             }
             // 设置全局初始化器
@@ -100,21 +126,8 @@ class AppApplication : Application() {
             // 本地异常捕捉
             CrashHandler.register(application)
 
-            // 友盟统计、登录、分享 SDK
-            UmengClient.init(application, AppConfig.isLogEnable())
-
-            // Bugly 异常捕捉
-            CrashReport.initCrashReport(application, AppConfig.getBuglyId(), AppConfig.isDebug())
-
-            // Activity 栈管理初始化
-            ActivityManager.getInstance().init(application)
-
-            //！弃用 MMKV 初始化
-//            MMKV.initialize(application)
-
             // 网络请求框架初始化
-            val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-                .build()
+            val okHttpClient: OkHttpClient = OkHttpClient.Builder().build()
 
             EasyConfig.with(okHttpClient)
                 // 是否打印日志
@@ -124,15 +137,7 @@ class AppApplication : Application() {
                 // 设置请求处理策略
                 .setHandler(RequestHandler(application))
                 // 设置请求重试次数
-                .setRetryCount(1)
-                .setInterceptor { api: IRequestApi, params: HttpParams, headers: HttpHeaders ->
-                    // 添加全局请求头
-                    headers.put("token", "66666666666")
-                    headers.put("deviceOaid", UmengClient.getDeviceOaid())
-                    headers.put("versionName", AppConfig.getVersionName())
-                    headers.put("versionCode", AppConfig.getVersionCode().toString())
-                }
-                .into()
+                .setRetryCount(1).into()
 
             // 设置 Json 解析容错监听
             GsonFactory.setJsonCallback { typeToken: TypeToken<*>, fieldName: String?, jsonToken: JsonToken ->
@@ -146,9 +151,11 @@ class AppApplication : Application() {
             }
 
             // 注册网络状态变化监听
-            val connectivityManager: ConnectivityManager? = ContextCompat.getSystemService(application, ConnectivityManager::class.java)
+            val connectivityManager: ConnectivityManager? =
+                ContextCompat.getSystemService(application, ConnectivityManager::class.java)
             if (connectivityManager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
+                connectivityManager.registerDefaultNetworkCallback(object :
+                    ConnectivityManager.NetworkCallback() {
                     override fun onLost(network: Network) {
                         val topActivity: Activity? = ActivityManager.getInstance().getTopActivity()
                         if (topActivity !is LifecycleOwner) {

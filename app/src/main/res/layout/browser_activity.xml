@@ -23,8 +23,9 @@
 
     <com.hjq.demo.widget.StatusLayout
         android:id="@+id/hl_browser_hint"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/sl_browser_refresh"
@@ -44,4 +45,25 @@
 
     </com.hjq.demo.widget.StatusLayout>
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/scroll">
+
+        <Button
+            android:id="@+id/btn_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="同意" />
+
+        <Button
+            android:id="@+id/btn_reject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="不同意" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </LinearLayout>

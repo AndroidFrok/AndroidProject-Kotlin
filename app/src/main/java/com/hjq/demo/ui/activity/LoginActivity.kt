@@ -20,18 +20,13 @@ import com.hjq.demo.aop.Log
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.http.api.LoginApi
-import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.manager.InputTextManager
 import com.hjq.demo.other.KeyboardWatcher
 import com.hjq.demo.ui.fragment.MineFragment
-import com.hjq.demo.wxapi.WXEntryActivity
 import com.hjq.http.EasyConfig
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.HttpCallback
-import com.hjq.umeng.Platform
-import com.hjq.umeng.UmengClient
-import com.hjq.umeng.UmengLogin
 import com.hjq.widget.view.SubmitButton
 import okhttp3.Call
 
@@ -41,7 +36,7 @@ import okhttp3.Call
  *    time   : 2018/10/18
  *    desc   : 登录界面
  */
-class LoginActivity : AppActivity(), UmengLogin.OnLoginListener,
+class LoginActivity : AppActivity(),
     KeyboardWatcher.SoftKeyboardStateListener, TextView.OnEditorActionListener {
 
     companion object {
@@ -100,14 +95,14 @@ class LoginActivity : AppActivity(), UmengLogin.OnLoginListener,
         }, 500)
 
         // 判断用户当前有没有安装 QQ
-        if (!UmengClient.isAppInstalled(this, Platform.QQ)) {
+       /* if (!UmengClient.isAppInstalled(this, Platform.QQ)) {
             qqView?.visibility = View.GONE
         }
 
         // 判断用户当前有没有安装微信
         if (!UmengClient.isAppInstalled(this, Platform.WECHAT)) {
             weChatView?.visibility = View.GONE
-        }
+        }*/
 
         // 如果这两个都没有安装就隐藏提示
         if (qqView?.visibility == View.GONE && weChatView?.visibility == View.GONE) {
@@ -204,7 +199,7 @@ class LoginActivity : AppActivity(), UmengLogin.OnLoginListener,
         }
         if (view === qqView || view === weChatView) {
             toast("记得改好第三方 AppID 和 Secret，否则会调不起来哦")
-            val platform: Platform?
+            /*val platform: Platform?
             when {
                 view === qqView -> {
                     platform = Platform.QQ
@@ -221,14 +216,14 @@ class LoginActivity : AppActivity(), UmengLogin.OnLoginListener,
                     throw IllegalStateException("are you ok?")
                 }
             }
-            UmengClient.login(this, platform, this)
+            UmengClient.login(this, platform, this)*/
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         // 友盟回调
-        UmengClient.onActivityResult(this, requestCode, resultCode, data)
+//        UmengClient.onActivityResult(this, requestCode, resultCode, data)
     }
 
     /**
@@ -240,7 +235,7 @@ class LoginActivity : AppActivity(), UmengLogin.OnLoginListener,
      * @param platform      平台名称
      * @param data          用户资料返回
      */
-    override fun onSucceed(platform: Platform?, data: UmengLogin.LoginData?) {
+    /*override fun onSucceed(platform: Platform?, data: UmengLogin.LoginData?) {
         if (isFinishing || isDestroyed) {
             // Glide：You cannot start a load for a destroyed activity
             return
@@ -265,7 +260,7 @@ class LoginActivity : AppActivity(), UmengLogin.OnLoginListener,
                     "性别：" + data?.getSex() + "\n" +
                     "id：" + data?.getId() + "\n" +
                     "token：" + data?.getToken()))
-    }
+    }*/
 
     /**
      * 授权失败的回调
@@ -273,9 +268,9 @@ class LoginActivity : AppActivity(), UmengLogin.OnLoginListener,
      * @param platform      平台名称
      * @param t             错误原因
      */
-    override fun onError(platform: Platform?, t: Throwable) {
+    /*override fun onError(platform: Platform?, t: Throwable) {
         toast("第三方登录出错：" + t.message)
-    }
+    }*/
 
     /**
      * [KeyboardWatcher.SoftKeyboardStateListener]
