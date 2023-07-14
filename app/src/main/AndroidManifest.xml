@@ -18,7 +18,6 @@
         android:allowBackup="false"
         android:allowClearUserData="false"
         android:appCategory="productivity"
-        android:dataExtractionRules="@xml/data_extraction_rules"
         android:description="@string/description"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/launcher_ic"
@@ -74,7 +73,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
-
             <!-- 程序入口 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

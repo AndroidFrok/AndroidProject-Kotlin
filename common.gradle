@@ -4,14 +4,14 @@ apply plugin: 'kotlin-kapt'
 android {
 
     // 编译源码版本
-    def androidapi = 33
+    def androidapi = 29
     compileSdkVersion androidapi
     defaultConfig {
         // 最低安装版本
         minSdkVersion 21
         // 目标适配版本
         targetSdkVersion androidapi
-        versionName new Date().format('YYMMdd')
+        versionName "20230713"
         versionCode 1
     }
 
@@ -79,7 +79,7 @@ dependencies {
 //    https://github.com/kongzue/DialogX/releases
     implementation 'com.github.kongzue.DialogX:DialogX:0.0.48'
     api 'com.blankj:utilcode:1.30.6'
-    def work_version = "2.7.1"
+    def work_version = "2.5.0"
     // (Java only)https://developer.android.google.cn/topic/libraries/architecture/workmanager/how-to/define-work?hl=zh-cn#java
     implementation "androidx.work:work-runtime:$work_version"
 }
