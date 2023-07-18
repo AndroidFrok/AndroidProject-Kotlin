@@ -38,6 +38,7 @@ class MineFragment : TitleBarFragment<HomeActivity>() {
     }
 
     override fun initView() {
+
         setOnClickListener(R.id.btn_mine_dialog, R.id.btn_mine_hint, R.id.btn_mine_login, R.id.btn_mine_register,
             R.id.btn_mine_forget, R.id.btn_mine_reset, R.id.btn_mine_change, R.id.btn_mine_personal, R.id.btn_mine_setting,
             R.id.btn_mine_about, R.id.btn_mine_guide, R.id.btn_mine_browser, R.id.btn_mine_image_select, R.id.btn_mine_image_preview,
@@ -50,8 +51,8 @@ class MineFragment : TitleBarFragment<HomeActivity>() {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_mine_dialog -> {
-                startActivity(AdminActivity::class.java)
-//                startActivity(DialogActivity::class.java)
+//                startActivity(AdminActivity::class.java)
+                startActivity(DialogActivity::class.java)
             }
             R.id.btn_mine_hint -> {
                 startActivity(StatusActivity::class.java)
