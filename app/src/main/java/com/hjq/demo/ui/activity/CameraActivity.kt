@@ -4,6 +4,7 @@ import android.content.Intent
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.*
+import android.os.Build.VERSION.SDK
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
 import com.hjq.base.BaseActivity
@@ -34,17 +35,33 @@ class CameraActivity : AppActivity() {
         const val INTENT_KEY_OUT_ERROR: String = "error"
 
         fun start(activity: BaseActivity, listener: OnCameraListener?) {
-            XXPermissions.with(activity).permission(
-                Permission.CAMERA,
-                Permission.WRITE_EXTERNAL_STORAGE,
-                Permission.READ_EXTERNAL_STORAGE,
-            ).request { permissions, all ->
-                if (all) {
-                    start(activity, false, listener)
-                } else {
-                    Timber.d("权限未通过 ")
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                XXPermissions.with(activity).permission(
+                    Permission.CAMERA,
+                    Permission.READ_MEDIA_IMAGES,
+                    Permission.READ_MEDIA_VIDEO,
+                    Permission.READ_MEDIA_AUDIO,
+                ).request { permissions, all ->
+                    if (all) {
+                        start(activity, false, listener)
+                    } else {
+                        Timber.d("权限未通过 ")
+                    }
+                }
+            }else{
+                XXPermissions.with(activity).permission(
+                    Permission.CAMERA,
+                    Permission.WRITE_EXTERNAL_STORAGE,
+                    Permission.READ_EXTERNAL_STORAGE,
+                ).request { permissions, all ->
+                    if (all) {
+                        start(activity, false, listener)
+                    } else {
+                        Timber.d("权限未通过 ")
+                    }
                 }
             }
+
         }
 
         @Log

@@ -327,7 +327,7 @@ class BrowserView  @JvmOverloads constructor(
                 .setListener(object : MessageDialog.OnListener {
 
                     override fun onConfirm(dialog: BaseDialog?) {
-                        XXPermissions.with(activity)
+                        /*XXPermissions.with(activity)
                             .permission(Permission.ACCESS_FINE_LOCATION)
                             .permission(Permission.ACCESS_COARSE_LOCATION)
                             .request(object : PermissionCallback() {
@@ -339,7 +339,7 @@ class BrowserView  @JvmOverloads constructor(
                                         callback.invoke(origin, true, true)
                                     }
                                 }
-                            })
+                            })*/
                     }
 
                     override fun onCancel(dialog: BaseDialog?) {

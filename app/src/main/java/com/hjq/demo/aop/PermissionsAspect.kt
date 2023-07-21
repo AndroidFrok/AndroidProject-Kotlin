@@ -57,8 +57,8 @@ class PermissionsAspect {
         XXPermissions.with(activity)
             .permission(*permissions)
             .request(object : PermissionCallback() {
-                override fun onGranted(permissions: MutableList<String?>?, all: Boolean) {
-                    if (all) {
+                override fun onGranted(permissions: MutableList<String>, allGranted: Boolean) {
+                    if (allGranted) {
                         try {
                             // 获得权限，执行原方法
                             joinPoint.proceed()
@@ -67,6 +67,7 @@ class PermissionsAspect {
                         }
                     }
                 }
+
             })
     }
 }
