@@ -5,6 +5,7 @@
 build
 captures
 app/release
+app/preview
 ._*
 *.iml
 .DS_Store
