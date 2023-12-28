@@ -61,7 +61,7 @@ android {
             // 签名信息配置
             signingConfig signingConfigs.config
             // 添加清单占位符
-            addManifestPlaceholders(['app_name': '安卓技术中台 kt-Debug 版'])
+            addManifestPlaceholders(['app_name': '安卓中台kt-dev'])
             // 调试模式下只保留一种架构的 so 库，提升打包速度
             ndk {
                 abiFilters 'arm64-v8a', 'armeabi-v7a'
@@ -72,7 +72,7 @@ android {
         preview {
             applicationIdSuffix ''
             // 添加清单占位符
-            addManifestPlaceholders(['app_name': '安卓技术中台 kt-Preview 版'])
+            addManifestPlaceholders(['app_name': '安卓中台kt-pre'])
         }
 
         release {
@@ -119,7 +119,7 @@ android {
         exclude 'org.jetbrains.kotlin', "module-info", 'versions.9'
     }*/
     buildFeatures {
-        compose true
+        compose false
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.1.1'
@@ -148,7 +148,7 @@ dependencies {
 //    implementation project(':library:umeng')
 
     // 权限请求框架：https://github.com/getActivity/XXPermissions
-    implementation 'com.github.getActivity:XXPermissions:12.3'
+    implementation 'com.github.getActivity:XXPermissions:18.2'
 
     // 标题栏框架：https://github.com/getActivity/TitleBar
     implementation 'com.github.getActivity:TitleBar:9.2'
@@ -157,7 +157,7 @@ dependencies {
     implementation 'com.github.getActivity:ToastUtils:9.5'
 
     // 网络请求框架：https://github.com/getActivity/EasyHttp
-    implementation 'com.github.getActivity:EasyHttp:10.2'
+    implementation 'com.github.getActivity:EasyHttp:11.6'
     // OkHttp 框架：https://github.com/square/okhttp
     // noinspection GradleDependency
     implementation 'com.squareup.okhttp3:okhttp:3.12.13'
@@ -178,10 +178,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.5.1'
+    /*implementation 'androidx.activity:activity-compose:1.5.1'
     implementation platform('androidx.compose:compose-bom:2022.10.00')
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-graphics'
@@ -190,7 +190,7 @@ dependencies {
     androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
-    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    debugImplementation 'androidx.compose.ui:ui-test-manifest'*/
 
     // 沉浸式框架：https://github.com/gyf-dev/ImmersionBar
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
@@ -218,7 +218,7 @@ dependencies {
 
     //  ！！弃用 腾讯 MMKV：https://github.com/Tencent/MMKV  改用 DataStore
 //    implementation 'com.tencent:mmkv-static:1.2.10'
-    implementation 'androidx.datastore:datastore-preferences:1.0.0'
+//    implementation 'androidx.datastore:datastore-preferences:1.0.0' 、、 30+
 
     // 内存泄漏监测框架：https://github.com/square/leakcanary
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'

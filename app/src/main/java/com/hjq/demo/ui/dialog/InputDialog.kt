@@ -60,6 +60,13 @@ class InputDialog {
             inputView?.setInputRegex(regex)
         }
 
+        /**
+         * EditorInfo.TYPE_CLASS_NUMBER or EditorInfo.TYPE_NUMBER_FLAG_DECIMAL
+         */
+        fun setInputType(type: Int): Builder = apply {
+            inputView?.inputType = type
+        }
+
         fun setListener(listener: OnListener?): Builder = apply {
             this.listener = listener
         }
@@ -78,6 +85,7 @@ class InputDialog {
                     autoDismiss()
                     listener?.onConfirm(getDialog(), inputView?.text?.toString() ?: "")
                 }
+
                 R.id.tv_ui_cancel -> {
                     autoDismiss()
                     listener?.onCancel(getDialog())

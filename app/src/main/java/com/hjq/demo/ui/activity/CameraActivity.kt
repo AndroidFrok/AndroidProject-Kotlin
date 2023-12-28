@@ -4,6 +4,7 @@ import android.content.Intent
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.*
+import android.os.Build.VERSION.SDK
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
 import com.hjq.base.BaseActivity
@@ -14,6 +15,7 @@ import com.hjq.demo.app.AppActivity
 import com.hjq.demo.other.AppConfig
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
+import timber.log.Timber
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,11 +35,39 @@ class CameraActivity : AppActivity() {
         const val INTENT_KEY_OUT_ERROR: String = "error"
 
         fun start(activity: BaseActivity, listener: OnCameraListener?) {
-            start(activity, false, listener)
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                XXPermissions.with(activity).permission(
+                    Permission.CAMERA,
+                    Permission.READ_MEDIA_IMAGES,
+                    Permission.READ_MEDIA_VIDEO,
+                    Permission.READ_MEDIA_AUDIO,
+                ).request { permissions, all ->
+                    if (all) {
+                        start(activity, false, listener)
+                    } else {
+                        Timber.d("权限未通过 ")
+                    }
+                }
+            }else{
+                XXPermissions.with(activity).permission(
+                    Permission.CAMERA,
+                    Permission.WRITE_EXTERNAL_STORAGE,
+                    Permission.READ_EXTERNAL_STORAGE,
+                ).request { permissions, all ->
+                    if (all) {
+                        start(activity, false, listener)
+                    } else {
+                        Timber.d("权限未通过 ")
+                    }
+                }
+            }
+
         }
 
         @Log
-        @Permissions(Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE, Permission.CAMERA)
+        @Permissions(
+            Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE, Permission.CAMERA
+        )
         fun start(activity: BaseActivity, video: Boolean, listener: OnCameraListener?) {
             val file: File = createCameraFile(video)
             val intent = Intent(activity, CameraActivity::class.java)
@@ -57,6 +87,7 @@ class CameraActivity : AppActivity() {
                                 listener.onCancel()
                             }
                         }
+
                         RESULT_ERROR -> {
                             var details: String? = null
                             if (data != null) {
@@ -67,6 +98,7 @@ class CameraActivity : AppActivity() {
                             }
                             listener.onError(details)
                         }
+
                         RESULT_CANCELED -> listener.onCancel()
                         else -> listener.onCancel()
                     }
@@ -79,15 +111,19 @@ class CameraActivity : AppActivity() {
          */
         @Suppress("deprecation")
         private fun createCameraFile(video: Boolean): File {
-            var folder = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera")
+            var folder = File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera"
+            )
             if (!folder.exists() || !folder.isDirectory) {
                 if (!folder.mkdirs()) {
                     folder = Environment.getExternalStorageDirectory()
                 }
             }
-            return File(folder, ((if (video) "VID" else "IMG") + "_" +
-                        SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date()) +
-                        (if (video) ".mp4" else ".jpg")))
+            return File(
+                folder, ((if (video) "VID" else "IMG") + "_" + SimpleDateFormat(
+                    "yyyyMMdd_HHmmss", Locale.getDefault()
+                ).format(Date()) + (if (video) ".mp4" else ".jpg"))
+            )
         }
     }
 
@@ -107,15 +143,27 @@ class CameraActivity : AppActivity() {
             // 拍摄照片
             intent.action = MediaStore.ACTION_IMAGE_CAPTURE
         }
-        if (intent.resolveActivity(packageManager) == null || !XXPermissions.isGranted(this,
-                Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE, Permission.CAMERA)) {
-            setResult(RESULT_ERROR, Intent().putExtra(INTENT_KEY_OUT_ERROR, getString(R.string.camera_launch_fail)))
+        val isGrant = XXPermissions.isGranted(
+            this,
+            Permission.READ_EXTERNAL_STORAGE,
+            Permission.WRITE_EXTERNAL_STORAGE,
+            Permission.CAMERA
+        )
+        val isResolve = intent.resolveActivity(packageManager)
+        if (isResolve == null || !isGrant) {
+            setResult(
+                RESULT_ERROR,
+                Intent().putExtra(INTENT_KEY_OUT_ERROR, getString(R.string.camera_launch_fail))
+            )
             finish()
             return
         }
         val file: File? = getSerializable(INTENT_KEY_IN_FILE)
         if (file == null) {
-            setResult(RESULT_ERROR, Intent().putExtra(INTENT_KEY_OUT_ERROR, getString(R.string.camera_image_error)))
+            setResult(
+                RESULT_ERROR,
+                Intent().putExtra(INTENT_KEY_OUT_ERROR, getString(R.string.camera_image_error))
+            )
             finish()
             return
         }
@@ -133,7 +181,9 @@ class CameraActivity : AppActivity() {
             override fun onActivityResult(resultCode: Int, data: Intent?) {
                 if (resultCode == RESULT_OK) {
                     // 通知系统多媒体扫描该文件，否则会导致拍摄出来的图片或者视频没有及时显示到相册中，而需要通过重启手机才能看到
-                    MediaScannerConnection.scanFile(applicationContext, arrayOf(file.path), null, null)
+                    MediaScannerConnection.scanFile(
+                        applicationContext, arrayOf(file.path), null, null
+                    )
                 }
                 setResult(resultCode)
                 finish()

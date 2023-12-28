@@ -77,7 +77,7 @@ class LoginActivity : AppActivity(),
     }
 
     override fun initView() {
-        setOnClickListener(forgetView, commitView, qqView, weChatView)
+        /*setOnClickListener(forgetView, commitView, qqView, weChatView)
         passwordView?.setOnEditorActionListener(this)
         commitView?.let {
             InputTextManager.with(this)
@@ -85,14 +85,14 @@ class LoginActivity : AppActivity(),
                 .addView(passwordView)
                 .setMain(it)
                 .build()
-        }
+        }*/
     }
 
     override fun initData() {
-        postDelayed({
+        /*postDelayed({
             KeyboardWatcher.with(this@LoginActivity)
                 .setListener(this@LoginActivity)
-        }, 500)
+        }, 500)*/
 
         // 判断用户当前有没有安装 QQ
        /* if (!UmengClient.isAppInstalled(this, Platform.QQ)) {
@@ -105,13 +105,13 @@ class LoginActivity : AppActivity(),
         }*/
 
         // 如果这两个都没有安装就隐藏提示
-        if (qqView?.visibility == View.GONE && weChatView?.visibility == View.GONE) {
+        /*if (qqView?.visibility == View.GONE && weChatView?.visibility == View.GONE) {
             otherView?.visibility = View.GONE
         }
 
         // 自动填充手机号和密码
         phoneView?.setText(getString(INTENT_KEY_IN_PHONE))
-        passwordView?.setText(getString(INTENT_KEY_IN_PASSWORD))
+        passwordView?.setText(getString(INTENT_KEY_IN_PASSWORD))*/
     }
 
     override fun onRightClick(view: View) {

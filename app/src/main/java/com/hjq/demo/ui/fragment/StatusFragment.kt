@@ -41,7 +41,7 @@ class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListene
     private fun testInstall() {
         WaitDialog.show("程序更新中")
         //            测试静默安装
-        XXPermissions.with(this).permission(Permission.MANAGE_EXTERNAL_STORAGE)
+        /*XXPermissions.with(this).permission(Permission.MANAGE_EXTERNAL_STORAGE)
             .request(object : OnPermissionCallback {
                 override fun onGranted(permissions: MutableList<String>?, all: Boolean) {
                     ResourceUtils.copyFileFromAssets(
@@ -69,7 +69,7 @@ class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListene
                     PopTip.show("权限")
                 }
 
-            })
+            })*/
     }
 
     private val refreshLayout: SmartRefreshLayout? by lazy { findViewById(R.id.rl_status_refresh) }
