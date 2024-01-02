@@ -8,7 +8,8 @@ import com.tencent.mmkv.MMKV;
 public class MmkvUtil {
     private static MMKV kv;
     public static String DeviceCode = "dev_code";
-
+    public static String Token = "token";
+    public static String Version = "version";
     private static MMKV init() {
         if (kv == null) {
             kv = MMKV.defaultMMKV();

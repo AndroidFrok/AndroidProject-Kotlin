@@ -135,7 +135,9 @@ class AppApplication : Application() {
                 // 设置服务器配置
                 .setServer(RequestServer())
                 // 设置请求处理策略
-                .setHandler(RequestHandler(application))
+                .setHandler(RequestHandler(application)).addHeader(MmkvUtil.Token, "")
+                .addHeader(MmkvUtil.Version, AppConfig.getVersionName())
+                .addHeader("v-code", "${AppConfig.getVersionCode()}")
                 // 设置请求重试次数
                 .setRetryCount(1).into()
 
