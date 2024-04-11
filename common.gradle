@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 android {
 
     // 编译源码版本
-    def androidapi = 33
+    def androidapi = 32
     compileSdkVersion androidapi
     defaultConfig {
         // 最低安装版本

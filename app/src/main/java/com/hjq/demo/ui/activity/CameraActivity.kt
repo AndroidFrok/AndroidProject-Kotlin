@@ -35,7 +35,7 @@ class CameraActivity : AppActivity() {
         const val INTENT_KEY_OUT_ERROR: String = "error"
 
         fun start(activity: BaseActivity, listener: OnCameraListener?) {
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            if (Build.VERSION.SDK_INT >= 32) {
                 XXPermissions.with(activity).permission(
                     Permission.CAMERA,
                     Permission.READ_MEDIA_IMAGES,
@@ -48,7 +48,7 @@ class CameraActivity : AppActivity() {
                         Timber.d("权限未通过 ")
                     }
                 }
-            }else{
+            } else {
                 XXPermissions.with(activity).permission(
                     Permission.CAMERA,
                     Permission.WRITE_EXTERNAL_STORAGE,
