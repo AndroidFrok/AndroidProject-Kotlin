@@ -1,4 +1,4 @@
-package com.hjq.demo.http.api
+package com.hjq.demo.http.api.demo
 
 import com.hjq.http.config.IRequestApi
 
@@ -6,11 +6,15 @@ import com.hjq.http.config.IRequestApi
  *    author : Android 轮子哥
  *    github : https://github.com/getActivity/AndroidProject-Kotlin
  *    time   : 2019/12/07
- *    desc   : 退出登录
+ *    desc   : 获取用户信息
  */
-class LogoutApi : IRequestApi {
+class UserInfoApi : IRequestApi {
 
     override fun getApi(): String {
-        return "user/logout"
+        return "user/info"
+    }
+
+    class Bean {
+
     }
 }

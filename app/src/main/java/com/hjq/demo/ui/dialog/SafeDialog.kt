@@ -7,8 +7,8 @@ import android.widget.TextView
 import com.hjq.base.BaseDialog
 import com.hjq.demo.R
 import com.hjq.demo.aop.SingleClick
-import com.hjq.demo.http.api.GetCodeApi
-import com.hjq.demo.http.api.VerifyCodeApi
+import com.hjq.demo.http.api.demo.GetCodeApi
+import com.hjq.demo.http.api.demo.VerifyCodeApi
 import com.hjq.demo.http.model.HttpData
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.OnHttpListener

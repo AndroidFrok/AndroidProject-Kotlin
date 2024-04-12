@@ -12,7 +12,7 @@ import com.hjq.base.BaseDialog
 import com.hjq.demo.R
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
-import com.hjq.demo.http.api.UpdateImageApi
+import com.hjq.demo.http.api.demo.UpdateImageApi
 import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.ui.dialog.AddressDialog

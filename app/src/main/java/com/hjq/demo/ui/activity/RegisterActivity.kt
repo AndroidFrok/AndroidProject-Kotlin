@@ -13,8 +13,8 @@ import com.hjq.demo.R
 import com.hjq.demo.aop.Log
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
-import com.hjq.demo.http.api.GetCodeApi
-import com.hjq.demo.http.api.RegisterApi
+import com.hjq.demo.http.api.demo.GetCodeApi
+import com.hjq.demo.http.api.demo.RegisterApi
 import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.manager.InputTextManager
 import com.hjq.http.EasyHttp

@@ -9,7 +9,7 @@ import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ImmersionBar
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
-import com.hjq.demo.http.api.UserInfoApi
+import com.hjq.demo.http.api.demo.UserInfoApi
 import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.other.AppConfig

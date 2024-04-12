@@ -8,7 +8,7 @@ import com.hjq.base.action.AnimAction
 import com.hjq.demo.R
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
-import com.hjq.demo.http.api.LogoutApi
+import com.hjq.demo.http.api.demo.LogoutApi
 import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.manager.ActivityManager
