@@ -29,6 +29,7 @@ import okhttp3.Call
  *    time   : 2018/10/18
  *    desc   : 注册界面
  */
+@Deprecated("demo")
 class RegisterActivity : AppActivity(), OnEditorActionListener {
 
     companion object {
@@ -37,7 +38,12 @@ class RegisterActivity : AppActivity(), OnEditorActionListener {
         private const val INTENT_KEY_PASSWORD: String = "password"
 
         @Log
-        fun start(activity: BaseActivity, phone: String?, password: String?, listener: OnRegisterListener?) {
+        fun start(
+            activity: BaseActivity,
+            phone: String?,
+            password: String?,
+            listener: OnRegisterListener?
+        ) {
             val intent = Intent(activity, RegisterActivity::class.java)
             intent.putExtra(INTENT_KEY_PHONE, phone)
             intent.putExtra(INTENT_KEY_PASSWORD, password)
@@ -48,7 +54,10 @@ class RegisterActivity : AppActivity(), OnEditorActionListener {
                         return
                     }
                     if (resultCode == RESULT_OK) {
-                        listener.onSucceed(data.getStringExtra(INTENT_KEY_PHONE), data.getStringExtra(INTENT_KEY_PASSWORD))
+                        listener.onSucceed(
+                            data.getStringExtra(INTENT_KEY_PHONE),
+                            data.getStringExtra(INTENT_KEY_PASSWORD)
+                        )
                     } else {
                         listener.onCancel()
                     }
@@ -97,7 +106,12 @@ class RegisterActivity : AppActivity(), OnEditorActionListener {
         if (view === countdownView) {
 
             if (phoneView?.text.toString().length != 11) {
-                phoneView?.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.shake_anim))
+                phoneView?.startAnimation(
+                    AnimationUtils.loadAnimation(
+                        getContext(),
+                        R.anim.shake_anim
+                    )
+                )
                 toast(R.string.common_phone_input_error)
                 return
             }
@@ -129,22 +143,42 @@ class RegisterActivity : AppActivity(), OnEditorActionListener {
         } else if (view === commitView) {
 
             if (phoneView?.text.toString().length != 11) {
-                phoneView?.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.shake_anim))
+                phoneView?.startAnimation(
+                    AnimationUtils.loadAnimation(
+                        getContext(),
+                        R.anim.shake_anim
+                    )
+                )
                 commitView?.showError(3000)
                 toast(R.string.common_phone_input_error)
                 return
             }
 
             if (codeView?.text.toString().length != resources.getInteger(R.integer.sms_code_length)) {
-                codeView?.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.shake_anim))
+                codeView?.startAnimation(
+                    AnimationUtils.loadAnimation(
+                        getContext(),
+                        R.anim.shake_anim
+                    )
+                )
                 commitView?.showError(3000)
                 toast(R.string.common_code_error_hint)
                 return
             }
 
             if (firstPassword?.text.toString() != secondPassword?.text.toString()) {
-                firstPassword?.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.shake_anim))
-                secondPassword?.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.shake_anim))
+                firstPassword?.startAnimation(
+                    AnimationUtils.loadAnimation(
+                        getContext(),
+                        R.anim.shake_anim
+                    )
+                )
+                secondPassword?.startAnimation(
+                    AnimationUtils.loadAnimation(
+                        getContext(),
+                        R.anim.shake_anim
+                    )
+                )
                 commitView?.showError(3000)
                 toast(R.string.common_password_input_unlike)
                 return
@@ -157,9 +191,11 @@ class RegisterActivity : AppActivity(), OnEditorActionListener {
                 postDelayed({
                     commitView?.showSucceed()
                     postDelayed({
-                        setResult(RESULT_OK, Intent()
+                        setResult(
+                            RESULT_OK, Intent()
                                 .putExtra(INTENT_KEY_PHONE, phoneView?.text.toString())
-                                .putExtra(INTENT_KEY_PASSWORD, firstPassword?.text.toString()))
+                                .putExtra(INTENT_KEY_PASSWORD, firstPassword?.text.toString())
+                        )
                         finish()
                     }, 1000)
                 }, 2000)
@@ -185,9 +221,14 @@ class RegisterActivity : AppActivity(), OnEditorActionListener {
                         postDelayed({
                             commitView?.showSucceed()
                             postDelayed({
-                                setResult(RESULT_OK, Intent()
+                                setResult(
+                                    RESULT_OK, Intent()
                                         .putExtra(INTENT_KEY_PHONE, phoneView?.text.toString())
-                                        .putExtra(INTENT_KEY_PASSWORD, firstPassword?.text.toString()))
+                                        .putExtra(
+                                            INTENT_KEY_PASSWORD,
+                                            firstPassword?.text.toString()
+                                        )
+                                )
                                 finish()
                             }, 1000)
                         }, 1000)

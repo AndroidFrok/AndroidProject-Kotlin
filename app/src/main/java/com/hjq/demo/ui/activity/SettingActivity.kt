@@ -147,14 +147,14 @@ class SettingActivity : AppActivity(), SwitchButton.OnCheckedChangeListener {
             }
             R.id.sb_setting_exit -> {
 
-                if (true) {
+               /* if (true) {
                     startActivity(LoginActivity::class.java)
                     // 进行内存优化，销毁除登录页之外的所有界面
                     ActivityManager.getInstance().finishAllActivities(
                         LoginActivity::class.java
                     )
                     return
-                }
+                }*/
 
                 // 退出登录
                 EasyHttp.post(this)
@@ -162,9 +162,9 @@ class SettingActivity : AppActivity(), SwitchButton.OnCheckedChangeListener {
                     .request(object : HttpCallback<HttpData<Void?>>(this) {
 
                         override fun onSucceed(data: HttpData<Void?>?) {
-                            startActivity(LoginActivity::class.java)
+                          /*  startActivity(LoginActivity::class.java)
                             // 进行内存优化，销毁除登录页之外的所有界面
-                            ActivityManager.getInstance().finishAllActivities(LoginActivity::class.java)
+                            ActivityManager.getInstance().finishAllActivities(LoginActivity::class.java)*/
                         }
                     })
             }

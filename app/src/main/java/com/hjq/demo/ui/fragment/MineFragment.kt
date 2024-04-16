@@ -58,7 +58,7 @@ class MineFragment : TitleBarFragment<HomeActivity>() {
                 startActivity(StatusActivity::class.java)
             }
             R.id.btn_mine_login -> {
-                startActivity(LoginActivity::class.java)
+//                startActivity(LoginActivity::class.java)
             }
             R.id.btn_mine_register -> {
                 startActivity(RegisterActivity::class.java)
