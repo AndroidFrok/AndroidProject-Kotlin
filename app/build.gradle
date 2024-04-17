@@ -31,6 +31,12 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        ndk {
+            // 警告：无特殊情况不要改这里了  armeabi：万金油架构平台（占用率：0%）
+            // armeabi-v7a：曾经主流的架构平台（占用率：10%）
+            // arm64-v8a：目前主流架构平台（占用率：95%）
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
     }
 
     // Apk 签名的那些事：https://www.jianshu.com/p/a1f8e5896aa2
@@ -62,10 +68,6 @@ android {
             signingConfig signingConfigs.config
             // 添加清单占位符
             addManifestPlaceholders(['app_name': '安卓中台kt-dev'])
-            // 调试模式下只保留一种架构的 so 库，提升打包速度
-            ndk {
-                abiFilters 'arm64-v8a', 'armeabi-v7a'
-            }
         }
 
         preview.initWith(debug)
@@ -89,13 +91,6 @@ android {
             signingConfig signingConfigs.config
             // 添加清单占位符
             addManifestPlaceholders(['app_name': '@string/app_name'])
-            // 仅保留两种架构的 so 库，根据 Bugly 统计得出
-            ndk {
-                // armeabi：万金油架构平台（占用率：0%）
-                // armeabi-v7a：曾经主流的架构平台（占用率：10%）
-                // arm64-v8a：目前主流架构平台（占用率：95%）
-                abiFilters 'armeabi-v7a', 'arm64-v8a'
-            }
         }
     }
 

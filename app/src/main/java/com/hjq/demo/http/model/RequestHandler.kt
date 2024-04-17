@@ -46,7 +46,7 @@ class RequestHandler constructor(private val application: Application) : IReques
             return response
         }
 
-        if (!response.isSuccessful) {
+        /*if (!response.isSuccessful) {
             // 返回响应异常 + "，message：" + response.message()
             if (response.code() == 401) {
                 throw ResponseException(
@@ -58,7 +58,7 @@ class RequestHandler constructor(private val application: Application) : IReques
                 })
                 throw ResponseException("请五秒后重试...", response)
             }
-        }
+        }*/
         if ((Headers::class.java == type)) {
             return response.headers()
         }
