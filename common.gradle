@@ -82,4 +82,7 @@ dependencies {
     def work_version = "2.7.1"
     // (Java only)https://developer.android.google.cn/topic/libraries/architecture/workmanager/how-to/define-work?hl=zh-cn#java
     implementation "androidx.work:work-runtime:$work_version"
+    debugImplementation "io.github.didi.dokit:dokitx:${dokit}"
+    releaseImplementation "io.github.didi.dokit:dokitx-no-op:${dokit}"
+    debugImplementation "io.github.didi.dokit:dokitx-weex:${dokit}"
 }

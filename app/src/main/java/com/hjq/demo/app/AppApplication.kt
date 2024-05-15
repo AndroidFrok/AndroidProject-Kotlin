@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import com.didichuxing.doraemonkit.DoKit
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonToken
 import com.hjq.bar.TitleBar
@@ -66,6 +67,9 @@ class AppApplication : Application() {
         CrashReport.initCrashReport(this, AppConfig.getBuglyId(), AppConfig.isDebug())
         //        Bugly.init(this, AppConfig.getBuglyId(), AppConfig.isDebug());
         DialogX.init(this)
+        DoKit.Builder(this) //                .productId("需要使用平台功能的话，需要到dokit.cn平台申请id")
+//            .customKits(mapKits)
+            .build()
     }
 
     override fun onLowMemory() {
