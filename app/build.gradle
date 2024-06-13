@@ -216,8 +216,9 @@ dependencies {
 //    implementation 'androidx.datastore:datastore-preferences:1.0.0' 、、 30+
 
     // 内存泄漏监测框架：https://github.com/square/leakcanary
-//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
-    previewImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+    def leak = 2.14  // 2.14
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak"
+//    previewImplementation "com.squareup.leakcanary:leakcanary-android:$leak"
 
     // 多语种：https://github.com/getActivity/MultiLanguages
     // 悬浮窗：https://github.com/getActivity/XToast
