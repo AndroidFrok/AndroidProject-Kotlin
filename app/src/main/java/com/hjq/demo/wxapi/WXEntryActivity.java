@@ -1,17 +1,16 @@
 package com.hjq.demo.wxapi;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.hjq.demo.other.Constant;
-import com.hjq.demo.other.DebugLogUtil;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.umeng.socialize.weixin.view.WXCallbackActivity;
 
 import timber.log.Timber;
 
@@ -21,20 +20,21 @@ import timber.log.Timber;
  * time   : 2019/05/06
  * desc   : 微信登录回调（请注意这个 Activity 放置的包名要和当前项目的包名保持一致，否则将不能正常回调）
  */
-public final class WXEntryActivity extends WXCallbackActivity {
+public final class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     private IWXAPI api;
     private String token;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DebugLogUtil.getInstance().Debug("WXEntryActivity...........");
 //        finish();// 本页面必须在任何一个可能打开的地方进行关闭操作 否则会有透明的act展示给用户
 //        setContentView(R.layout.pay_result);
-        api = WXAPIFactory.createWXAPI(this, Constant.OpenWeiXinAppid, false);
+        api = WXAPIFactory.createWXAPI(this, WeChatOpenPlatform.OpenWeiXinAppid, false);
         api.handleIntent(getIntent(), this);
 //        initClick();
     }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -42,6 +42,7 @@ public final class WXEntryActivity extends WXCallbackActivity {
         setIntent(intent);
         api.handleIntent(intent, this);
     }
+
     @Override
     public void onReq(BaseReq req) {
 //        Toast.makeText(this, "openid = " + req.openId, Toast.LENGTH_SHORT).show();
@@ -60,7 +61,13 @@ public final class WXEntryActivity extends WXCallbackActivity {
                 break;
         }
     }
+
     @Override
+    public void onResp(BaseResp baseResp) {
+
+    }
+
+   /*@Override
     public void onResp(BaseResp resp) {
         super.onResp(resp);
         if (resp.getType() == ConstantsAPI.COMMAND_LAUNCH_WX_MINIPROGRAM) {
@@ -68,5 +75,5 @@ public final class WXEntryActivity extends WXCallbackActivity {
             String extraData = launchMiniProResp.extMsg; //对应小程序组件 <button open-type="launchApp"> 中的 app-parameter 属性
             Timber.d("extraData" + extraData);
         }
-    }
+    }*/
 }
