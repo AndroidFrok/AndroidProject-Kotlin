@@ -219,8 +219,9 @@ dependencies {
     def leak = 2.14  // 2.14
 //  不如不用。。   debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak"
 //    previewImplementation "com.squareup.leakcanary:leakcanary-android:$leak"
-    debugImplementation 'com.github.getActivity:Logcat:11.86'
-    previewImplementation 'com.github.getActivity:Logcat:11.86'
+    def logcat = 11.85
+    debugImplementation "com.github.getActivity:Logcat:$logcat"
+    previewImplementation "com.github.getActivity:Logcat:$logcat"
     // 多语种：https://github.com/getActivity/MultiLanguages
     // 悬浮窗：https://github.com/getActivity/XToast
     // 日志输出：https://github.com/getActivity/Logcat

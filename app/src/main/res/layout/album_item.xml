@@ -18,7 +18,7 @@
         android:scaleType="centerCrop"
         android:translationZ="@dimen/dp_10"
         app:scaleRatio="0.95"
-        tools:src="@drawable/logo_big_ic" />
+        tools:src="@drawable/update_app_top_bg" />
 
     <LinearLayout
         android:layout_width="0px"

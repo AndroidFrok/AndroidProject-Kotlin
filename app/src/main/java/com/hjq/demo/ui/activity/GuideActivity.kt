@@ -35,9 +35,9 @@ class GuideActivity : AppActivity() {
     }
 
     override fun initData() {
-        adapter.addItem(R.drawable.guide_1_bg)
-        adapter.addItem(R.drawable.guide_2_bg)
-        adapter.addItem(R.drawable.guide_3_bg)
+        adapter.addItem(R.drawable.update_app_top_bg)
+        adapter.addItem(R.drawable.update_app_top_bg)
+        adapter.addItem(R.drawable.update_app_top_bg)
 
         viewPager?.adapter = adapter
         viewPager?.registerOnPageChangeCallback(mCallback)

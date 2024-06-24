@@ -38,8 +38,8 @@ public class ImageUtils {
     static public String getValidAvatar(String inputAvatar) {
         if (inputAvatar != null && inputAvatar.contains("thirdwx.qlogo.cn")) {
             inputAvatar = inputAvatar.replace("https://thirdwx.qlogo.cn", "http://wx.qlogo.cn");
-        } else if (!inputAvatar.contains(AppConfig.getHostUrl())) {
-            inputAvatar =AppConfig.getHostUrl()+ inputAvatar;
+        } else if (!inputAvatar.contains(AppConfig.INSTANCE.getHostUrl())) {
+            inputAvatar =AppConfig.INSTANCE.getHostUrl()+ inputAvatar;
         }
 
         return inputAvatar;
@@ -211,7 +211,6 @@ public class ImageUtils {
                 } else {
                     break;
                 }
-                DebugLogUtil.getInstance().Debug(output.size() + ",options=" + options);
                 realSize = output.toByteArray().length;
             }
             result = output.toByteArray();

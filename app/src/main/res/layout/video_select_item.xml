@@ -14,7 +14,7 @@
         android:background="@color/white"
         android:scaleType="centerCrop"
         app:scaleRatio="0.95"
-        tools:src="@drawable/logo_big_ic" />
+        tools:src="@drawable/update_app_top_bg" />
 
     <FrameLayout
         android:id="@+id/fl_video_select_check"
