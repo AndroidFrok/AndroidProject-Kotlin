@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.android.application'
 apply from: '../common.gradle'
 //apply plugin: 'android-aspectjx'
 apply plugin: 'org.jetbrains.kotlin.android'
