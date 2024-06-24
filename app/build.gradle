@@ -222,17 +222,4 @@ dependencies {
     def logcat = 11.85
     debugImplementation "com.github.getActivity:Logcat:$logcat"
     previewImplementation "com.github.getActivity:Logcat:$logcat"
-    // 多语种：https://github.com/getActivity/MultiLanguages
-    // 悬浮窗：https://github.com/getActivity/XToast
-    // 日志输出：https://github.com/getActivity/Logcat
-    // 工具类：https://github.com/Blankj/AndroidUtilCode
-    // 轮播图：https://github.com/bingoogolapple/BGABanner-Android
-    // 二维码：https://github.com/bingoogolapple/BGAQRCode-Android
-    // 跑马灯：https://github.com/sunfusheng/MarqueeView
-    // 对象注解：https://www.jianshu.com/p/f1f888e4a35f
-    // 对象存储：https://github.com/leavesC/DoKV
-    // 多渠道打包：https://github.com/Meituan-Dianping/walle
-    // 设备唯一标识：http://msa-alliance.cn/col.jsp?id=120
-    // 嵌套滚动容器：https://github.com/donkingliang/ConsecutiveScroller
-    // 隐私调用监控：https://github.com/huage2580/PermissionMonitor
 }

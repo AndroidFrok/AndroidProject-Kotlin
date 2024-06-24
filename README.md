@@ -106,7 +106,11 @@
 
 #### [版本适配文档请点击这里查看](https://github.com/getActivity/AndroidVersionAdapter)
 
-#### [常见问题解答请点击这里查看](HelpDoc.md)
+#### [常见问题解答请点击这里查看](HelpDoc.md)  
+#### 用过的好用的东西 
+1- 带有全屏的视频播放器  'com.github.xiaoyanger0825:NiceVieoPlayer:v2.2'
+2- DialogX  com.blankj:utilcode   eventbus  io.github.youth5201314:banner  https://bugly.qq.com/docs/user-guide/instruction-manual-android/?v=20190418140644   timber  
+in.xiandan:count-down-timer 
 
 #### 作者的其他开源项目
 
@@ -137,7 +141,19 @@
 * 表情包大集合：[EmojiPackage](https://github.com/getActivity/EmojiPackage) ![](https://img.shields.io/github/stars/getActivity/EmojiPackage.svg) ![](https://img.shields.io/github/forks/getActivity/EmojiPackage.svg)
 
 * 省市区 Json 数据：[ProvinceJson](https://github.com/getActivity/ProvinceJson) ![](https://img.shields.io/github/stars/getActivity/ProvinceJson.svg) ![](https://img.shields.io/github/forks/getActivity/ProvinceJson.svg)
-
+  // 多语种：https://github.com/getActivity/MultiLanguages
+  // 悬浮窗：https://github.com/getActivity/XToast
+  // 日志输出：https://github.com/getActivity/Logcat
+  // 工具类：https://github.com/Blankj/AndroidUtilCode
+  // 轮播图：https://github.com/bingoogolapple/BGABanner-Android
+  // 二维码：https://github.com/bingoogolapple/BGAQRCode-Android
+  // 跑马灯：https://github.com/sunfusheng/MarqueeView
+  // 对象注解：https://www.jianshu.com/p/f1f888e4a35f
+  // 对象存储：https://github.com/leavesC/DoKV
+  // 多渠道打包：https://github.com/Meituan-Dianping/walle
+  // 设备唯一标识：http://msa-alliance.cn/col.jsp?id=120
+  // 嵌套滚动容器：https://github.com/donkingliang/ConsecutiveScroller
+  // 隐私调用监控：https://github.com/huage2580/PermissionMonitor
 #### 微信公众号：Android轮子哥
 
 ![](https://raw.githubusercontent.com/getActivity/Donate/master/picture/official_ccount.png)

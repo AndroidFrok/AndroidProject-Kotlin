@@ -65,8 +65,8 @@ class SettingBar @JvmOverloads constructor(
         lineView.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, 1, Gravity.BOTTOM)
         leftView.gravity = Gravity.START or Gravity.CENTER_VERTICAL
         rightView.gravity = Gravity.END or Gravity.CENTER_VERTICAL
-        leftView.isSingleLine = true
-        rightView.isSingleLine = true
+//        leftView.isSingleLine = true
+//        rightView.isSingleLine = true
         leftView.ellipsize = TextUtils.TruncateAt.END
         rightView.ellipsize = TextUtils.TruncateAt.END
         leftView.setLineSpacing(resources.getDimension(R.dimen.dp_5), leftView.lineSpacingMultiplier)

@@ -786,11 +786,12 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
          */
         private fun registerActivityLifecycleCallbacks() {
             activity?.let {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     it.registerActivityLifecycleCallbacks(this)
                 } else {
-                    it.application.registerActivityLifecycleCallbacks(this)
-                }
+                }*/
+                it.application.registerActivityLifecycleCallbacks(this)
+
             }
         }
 
@@ -799,11 +800,13 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
          */
         private fun unregisterActivityLifecycleCallbacks() {
             activity?.let {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     it.unregisterActivityLifecycleCallbacks(this)
                 } else {
-                    it.application.unregisterActivityLifecycleCallbacks(this)
-                }
+                }*/
+
+                it.application.unregisterActivityLifecycleCallbacks(this)
+
             }
         }
     }
