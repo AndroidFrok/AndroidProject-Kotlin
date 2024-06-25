@@ -19,6 +19,7 @@ import com.hjq.http.exception.ResponseException
 import com.hjq.http.exception.ServerException
 import com.hjq.http.exception.TimeoutException
 import com.hjq.http.request.HttpRequest
+import com.tencent.bugly.crashreport.CrashReport
 import okhttp3.Headers
 import okhttp3.Response
 import okhttp3.ResponseBody
@@ -72,6 +73,7 @@ class RequestHandler constructor(private val application: Application) : IReques
             text = body.string()
         } catch (e: IOException) {
             // 返回结果读取异常
+            CrashReport.postCatchedException(Throwable("${httpRequest.requestApi},${e.localizedMessage}"))
             throw DataException(application.getString(R.string.http_data_explain_error), e)
         }
 
@@ -86,6 +88,7 @@ class RequestHandler constructor(private val application: Application) : IReques
                 // 如果这是一个 JSONObject 对象
                 return JSONObject(text)
             } catch (e: JSONException) {
+                CrashReport.postCatchedException(Throwable("${httpRequest.requestApi},${e.localizedMessage}"))
                 throw DataException(application.getString(R.string.http_data_explain_error), e)
             }
         }
@@ -95,6 +98,7 @@ class RequestHandler constructor(private val application: Application) : IReques
                 // 如果这是一个 JSONArray 对象
                 return JSONArray(text)
             } catch (e: JSONException) {
+                CrashReport.postCatchedException(Throwable("${httpRequest.requestApi},${e.localizedMessage}"))
                 throw DataException(application.getString(R.string.http_data_explain_error), e)
             }
         }
@@ -104,7 +108,7 @@ class RequestHandler constructor(private val application: Application) : IReques
             try {
                 val error = GsonFactory.getSingletonGson().fromJson(text, CommonModel::class.java)
 
-            } catch (e: JsonSyntaxException) {
+            } catch (e: JsonSyntaxException) { CrashReport.postCatchedException(Throwable("${httpRequest.requestApi},${e.localizedMessage}"))
                 // 返回结果读取异常
                 throw HttpException(
                     application.getString(R.string.http_data_explain_error), e
