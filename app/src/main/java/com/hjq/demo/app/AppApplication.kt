@@ -29,6 +29,7 @@ import com.hjq.demo.other.ToastLogInterceptor
 import com.hjq.demo.other.ToastStyle
 import com.hjq.gson.factory.GsonFactory
 import com.hjq.http.EasyConfig
+import com.hjq.language.MultiLanguages
 import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.DialogX
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -65,8 +66,7 @@ class AppApplication : Application() {
         // Bugly 异常捕捉
         CrashReport.initCrashReport(this, AppConfig.getBuglyId(), AppConfig.isDebug())
         //        Bugly.init(this, AppConfig.getBuglyId(), AppConfig.isDebug());
-        DialogX.init(this)
-        /*DoKit.Builder(this) //                .productId("需要使用平台功能的话，需要到dokit.cn平台申请id")
+        DialogX.init(this)/*DoKit.Builder(this) //                .productId("需要使用平台功能的话，需要到dokit.cn平台申请id")
 //            .customKits(mapKits)
             .build()*/
     }
@@ -83,12 +83,17 @@ class AppApplication : Application() {
         GlideApp.get(this).onTrimMemory(level)
     }
 
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(MultiLanguages.attach(base))
+    }
+
     companion object {
 
         /**
          * 初始化一些第三方框架
          */
         fun initSdk(application: Application) {
+            MultiLanguages.init(application)
             // 设置标题栏初始化器
             TitleBar.setDefaultStyle(TitleBarStyle())
             // Activity 栈管理初始化

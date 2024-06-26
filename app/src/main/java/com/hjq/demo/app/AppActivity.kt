@@ -1,5 +1,6 @@
 package com.hjq.demo.app
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -14,6 +15,7 @@ import com.hjq.demo.action.ToastAction
 import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.ui.dialog.WaitDialog
 import com.hjq.http.listener.OnHttpListener
+import com.hjq.language.MultiLanguages
 import okhttp3.Call
 
 /**
@@ -197,5 +199,8 @@ abstract class AppActivity : BaseActivity(),
             hideDialog()
         }
         dialog = null
+    }
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(MultiLanguages.attach(newBase))
     }
 }

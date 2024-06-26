@@ -85,6 +85,6 @@ dependencies {
 //    debugImplementation "io.github.didi.dokit:dokitx:${dokit}"
 //    releaseImplementation "io.github.didi.dokit:dokitx-no-op:${dokit}"
 //    debugImplementation "io.github.didi.dokit:dokitx-weex:${dokit}"
-
+    implementation 'com.github.getActivity:MultiLanguages:9.3'
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
 }

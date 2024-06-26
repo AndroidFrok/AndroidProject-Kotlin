@@ -1,4 +1,4 @@
-package com.hjq.demo.http.api.demo
+package com.hjq.demo.http.api
 
 import com.hjq.http.config.IRequestApi
 
