@@ -9,12 +9,8 @@ import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ImmersionBar
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
-import com.hjq.demo.http.api.demo.UserInfoApi
-import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.other.AppConfig
-import com.hjq.http.EasyHttp
-import com.hjq.http.listener.HttpCallback
 import com.hjq.widget.view.SlantedTextView
 import java.util.Locale
 
@@ -63,18 +59,6 @@ class SplashActivity : AppActivity() {
                 it.visibility = View.INVISIBLE
             }
         }
-
-        if (true) {
-            return
-        }
-        // 刷新用户信息
-        EasyHttp.post(this).api(UserInfoApi())
-            .request(object : HttpCallback<HttpData<UserInfoApi.Bean?>>(this) {
-
-                override fun onSucceed(data: HttpData<UserInfoApi.Bean?>) {
-
-                }
-            })
     }
 
     override fun createStatusBarConfig(): ImmersionBar {

@@ -8,6 +8,7 @@ import android.widget.TextView.OnEditorActionListener
 import com.hjq.demo.R
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
+import com.hjq.demo.http.HttpCacheManager
 import com.hjq.demo.http.api.demo.GetCodeApi
 import com.hjq.demo.http.api.demo.VerifyCodeApi
 import com.hjq.demo.http.model.HttpData
@@ -74,6 +75,7 @@ class PasswordForgetActivity : AppActivity(), OnEditorActionListener {
                 .api(GetCodeApi().apply {
                     setPhone(phoneView?.text.toString())
                 })
+                .delay(HttpCacheManager.getRandomDelay())
                 .request(object : HttpCallback<HttpData<Void?>>(this) {
                     override fun onSucceed(data: HttpData<Void?>) {
                         toast(R.string.common_code_send_hint)
