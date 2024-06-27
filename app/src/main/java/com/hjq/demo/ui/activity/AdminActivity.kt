@@ -7,8 +7,12 @@ import com.google.android.material.button.MaterialButton
 import com.hjq.base.BaseDialog
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
+import com.hjq.demo.manager.ActivityManager
 import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.ui.dialog.InputDialog
+import com.hjq.http.EasyConfig
+import com.hjq.language.LocaleContract
+import com.hjq.language.MultiLanguages
 import com.kongzue.dialogx.dialogs.PopTip
 import com.kongzue.dialogx.dialogs.TipDialog
 
@@ -20,7 +24,10 @@ class AdminActivity : AppActivity() {
     private val btn_launcher: MaterialButton? by lazy { findViewById(R.id.btn_launcher) }
     private val btn_sys_setting: MaterialButton? by lazy { findViewById(R.id.btn_sys_setting) }
     private val btn_sn: MaterialButton? by lazy { findViewById(R.id.btn_sn) }
-
+    private val bt_zh: MaterialButton? by lazy { findViewById(R.id.bt_zh) }
+    private val bt_laji: MaterialButton? by lazy { findViewById(R.id.bt_laji) }
+    private val bt_en: MaterialButton? by lazy { findViewById(R.id.bt_en) }
+    private val bt_ko: MaterialButton? by lazy { findViewById(R.id.bt_ko) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -32,6 +39,54 @@ class AdminActivity : AppActivity() {
     override fun initView() {
         btn_back?.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+        bt_zh?.setOnClickListener {
+//             切换中文 繁體
+            val restart = MultiLanguages.setAppLanguage(
+                this, LocaleContract.getTraditionalChineseLocale()
+            )
+            if (restart) {
+                EasyConfig.getInstance().addHeader("language", "tw")
+                ActivityManager.getInstance().finishAllActivities()
+//                startActivity(SplashActivity::class.java)
+                startActivity(AdminActivity::class.java)
+            }
+        }
+        bt_ko?.setOnClickListener {
+//             切换
+            val restart = MultiLanguages.setAppLanguage(
+                this, LocaleContract.getKoreanLocale()
+            )
+            if (restart) {
+                EasyConfig.getInstance().addHeader("language", "ko")
+                ActivityManager.getInstance().finishAllActivities()
+//                startActivity(SplashActivity::class.java)
+                startActivity(AdminActivity::class.java)
+            }
+        }
+        bt_laji?.setOnClickListener {
+//             切换 廁所語言
+            val restart = MultiLanguages.setAppLanguage(
+                this, LocaleContract.getJapaneseLocale()
+            )
+            if (restart) {
+                EasyConfig.getInstance().addHeader("language", "wc")
+                ActivityManager.getInstance().finishAllActivities()
+//                startActivity(SplashActivity::class.java)
+                startActivity(AdminActivity::class.java)
+            }
+        }
+        bt_en?.setOnClickListener {
+//             切换 英語
+            val restart = MultiLanguages.setAppLanguage(
+                this, LocaleContract.getEnglishLocale()
+            )
+            if (restart) {
+                EasyConfig.getInstance().addHeader("language", "en")
+                ActivityManager.getInstance().finishAllActivities()
+//                startActivity(SplashActivity::class.java)
+                startActivity(AdminActivity::class.java)
+            }
         }
         btn_sn?.setOnClickListener {
             val code: String = MmkvUtil.getString(MmkvUtil.DeviceCode, "")

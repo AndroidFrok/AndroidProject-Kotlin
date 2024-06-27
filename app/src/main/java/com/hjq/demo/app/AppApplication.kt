@@ -30,6 +30,7 @@ import com.hjq.demo.other.ToastStyle
 import com.hjq.gson.factory.GsonFactory
 import com.hjq.http.EasyConfig
 import com.hjq.language.MultiLanguages
+import com.hjq.language.OnLanguageListener
 import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.DialogX
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -38,6 +39,7 @@ import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
 import okhttp3.OkHttpClient
 import timber.log.Timber
+import java.util.Locale
 
 /**
  *    author : Android 轮子哥
@@ -84,6 +86,7 @@ class AppApplication : Application() {
     }
 
     override fun attachBaseContext(base: Context?) {
+// 没用        MultiLanguages.setDefaultLanguage(Locale.TAIWAN);
         super.attachBaseContext(MultiLanguages.attach(base))
     }
 
@@ -94,6 +97,17 @@ class AppApplication : Application() {
          */
         fun initSdk(application: Application) {
             MultiLanguages.init(application)
+            MultiLanguages.setOnLanguageListener(object : OnLanguageListener {
+                override fun onAppLocaleChange(oldLocale: Locale?, newLocale: Locale?) {
+                    Timber.d("onAppLocaleChange{${newLocale?.language}}")
+                }
+
+                override fun onSystemLocaleChange(oldLocale: Locale?, newLocale: Locale?) {
+                    Timber.d("onSystemLocaleChange{${newLocale?.language}}")
+                }
+
+            })
+
             // 设置标题栏初始化器
             TitleBar.setDefaultStyle(TitleBarStyle())
             // Activity 栈管理初始化

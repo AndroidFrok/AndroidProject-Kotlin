@@ -111,7 +111,8 @@
 1- 带有全屏的视频播放器  'com.github.xiaoyanger0825:NiceVieoPlayer:v2.2'
 2- DialogX  com.blankj:utilcode   eventbus  io.github.youth5201314:banner  https://bugly.qq.com/docs/user-guide/instruction-manual-android/?v=20190418140644   timber  
 in.xiandan:count-down-timer 
-
+3-     // 动画解析库：https://github.com/airbnb/lottie-android
+// 动画资源：https://lottiefiles.com、https://icons8.com/animated-icons https://www.iconfont.cn/lotties/index?spm=a313x.home_index.i1.4.58a33a8144qZSU
 #### 作者的其他开源项目
 
 * 权限框架：[XXPermissions](https://github.com/getActivity/XXPermissions) ![](https://img.shields.io/github/stars/getActivity/XXPermissions.svg) ![](https://img.shields.io/github/forks/getActivity/XXPermissions.svg)

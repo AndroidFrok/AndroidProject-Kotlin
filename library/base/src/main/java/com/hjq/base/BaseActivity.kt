@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import com.hjq.base.action.*
+import com.hjq.language.MultiLanguages
 import java.util.*
 import kotlin.math.pow
 
@@ -21,8 +22,8 @@ import kotlin.math.pow
  *    time   : 2018/10/18
  *    desc   : Activity 技术基类
  */
-abstract class BaseActivity : AppCompatActivity(), ActivityAction,
-    ClickAction, HandlerAction, BundleAction, KeyboardAction {
+abstract class BaseActivity : AppCompatActivity(), ActivityAction, ClickAction, HandlerAction,
+    BundleAction, KeyboardAction {
 
     companion object {
 
@@ -155,7 +156,9 @@ abstract class BaseActivity : AppCompatActivity(), ActivityAction,
     }
 
     @Suppress("deprecation")
-    open fun startActivityForResult(intent: Intent, options: Bundle?, callback: OnActivityCallback?) {
+    open fun startActivityForResult(
+        intent: Intent, options: Bundle?, callback: OnActivityCallback?
+    ) {
         // 请求码必须在 2 的 16 次方以内
         val requestCode: Int = Random().nextInt(2.0.pow(16.0).toInt())
         activityCallbacks.put(requestCode, callback)
@@ -171,6 +174,10 @@ abstract class BaseActivity : AppCompatActivity(), ActivityAction,
             return
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(MultiLanguages.attach(newBase))
     }
 
     interface OnActivityCallback {

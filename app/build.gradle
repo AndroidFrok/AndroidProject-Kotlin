@@ -13,7 +13,7 @@ android {
         applicationId 'com.hjq.demo.kt'
 
         // 仅保留中文语种的资源
-        resConfigs 'zh'
+//        resConfigs 'zh'
 
         // 仅保留 xxhdpi 图片资源（目前主流分辨率 1920 * 1080）
         resConfigs 'xxhdpi'
@@ -195,9 +195,6 @@ dependencies {
     // Bugly 异常捕捉：https://bugly.qq.com/docs/user-guide/instruction-manual-android/?v=20190418140644
     implementation 'com.tencent.bugly:crashreport:3.4.4'
     implementation 'com.tencent.bugly:nativecrashreport:3.9.2'
-
-    // 动画解析库：https://github.com/airbnb/lottie-android
-    // 动画资源：https://lottiefiles.com、https://icons8.com/animated-icons
     implementation 'com.airbnb.android:lottie:4.1.0'
 
     // 上拉刷新下拉加载框架：https://github.com/scwang90/SmartRefreshLayout

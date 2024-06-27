@@ -1,7 +1,6 @@
 package com.hjq.demo.ui.fragment
 
 import android.content.res.ColorStateList
-import android.os.SystemClock
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
@@ -9,20 +8,17 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import com.blankj.utilcode.util.ResourceUtils
-import com.blankj.utilcode.util.ShellUtils
 import com.gyf.immersionbar.ImmersionBar
 import com.hjq.base.FragmentPagerAdapter
 import com.hjq.demo.R
 import com.hjq.demo.app.AppFragment
 import com.hjq.demo.app.TitleBarFragment
+import com.hjq.demo.ui.activity.AdminActivity
 import com.hjq.demo.ui.activity.HomeActivity
-import com.hjq.demo.ui.activity.RestartActivity
 import com.hjq.demo.ui.adapter.TabAdapter
 import com.hjq.demo.ui.adapter.TabAdapter.OnTabListener
 import com.hjq.demo.widget.XCollapsingToolbarLayout
 import com.hjq.demo.widget.XCollapsingToolbarLayout.OnScrimsListener
-import com.kongzue.dialogx.dialogs.PopTip
 
 /**
  *    author : Android 轮子哥
@@ -39,7 +35,6 @@ class HomeFragment : TitleBarFragment<HomeActivity>(), OnTabListener, OnPageChan
             return HomeFragment()
         }
     }
-
 
 
     private val collapsingToolbarLayout: XCollapsingToolbarLayout? by lazy { findViewById(R.id.ctl_home_bar) }
@@ -73,6 +68,9 @@ class HomeFragment : TitleBarFragment<HomeActivity>(), OnTabListener, OnPageChan
 
         // 设置渐变监听
         collapsingToolbarLayout?.setOnScrimsListener(this)
+        addressView?.setOnClickListener {
+            startActivity(AdminActivity::class.java)
+        }
     }
 
     override fun initData() {

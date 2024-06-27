@@ -16,7 +16,7 @@ import com.hjq.demo.other.AppConfig
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.HttpCallback
 import com.hjq.widget.view.SlantedTextView
-import java.util.*
+import java.util.Locale
 
 /**
  *    author : Android 轮子哥
@@ -35,6 +35,7 @@ class SplashActivity : AppActivity() {
 
     override fun initView() {
         // 设置动画监听
+//        lottieView?.speed = 8.6f;
         lottieView?.addAnimatorListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)

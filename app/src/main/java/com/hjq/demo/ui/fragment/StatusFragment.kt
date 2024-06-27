@@ -123,7 +123,7 @@ class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListene
      * @param position          被点击的条目位置
      */
     override fun onItemClick(recyclerView: RecyclerView?, itemView: View?, position: Int) {
-        testInstall()
+//        testInstall()
         toast(adapter?.getItem(position))
     }
 
