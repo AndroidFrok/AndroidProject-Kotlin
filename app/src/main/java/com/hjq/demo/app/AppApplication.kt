@@ -20,6 +20,7 @@ import com.hjq.demo.http.model.RequestServer
 import com.hjq.demo.manager.ActivityManager
 import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.other.AppConfig
+import com.hjq.demo.other.AppConfig.isDebug
 import com.hjq.demo.other.CrashHandler
 import com.hjq.demo.other.DebugLoggerTree
 import com.hjq.demo.other.MaterialHeader
@@ -33,8 +34,11 @@ import com.hjq.language.MultiLanguages
 import com.hjq.language.OnLanguageListener
 import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.DialogX
+import com.kongzue.dialogx.style.IOSStyle
+import com.kongzue.dialogx.style.MIUIStyle
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.tencent.bugly.Bugly
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
 import okhttp3.OkHttpClient
@@ -66,11 +70,27 @@ class AppApplication : Application() {
      */
     private fun privacySdk() {
         // Bugly 异常捕捉
-        CrashReport.initCrashReport(this, AppConfig.getBuglyId(), AppConfig.isDebug())
-        //        Bugly.init(this, AppConfig.getBuglyId(), AppConfig.isDebug());
-        DialogX.init(this)/*DoKit.Builder(this) //                .productId("需要使用平台功能的话，需要到dokit.cn平台申请id")
-//            .customKits(mapKits)
-            .build()*/
+        CrashReport.initCrashReport(this, AppConfig.getBuglyId(), isDebug())
+        Bugly.init(this, AppConfig.getBuglyId(), isDebug());
+        val brand = Build.BRAND.lowercase(Locale.getDefault())
+        DialogX.DEBUGMODE = isDebug()
+        DialogX.init(this)
+        /*if (brand == "xiaomi") {
+            DialogX.globalStyle = MIUIStyle()
+        } else {
+            DialogX.globalStyle = IOSStyle()
+        }*/
+        DialogX.globalStyle = MIUIStyle()
+        DialogX.implIMPLMode = DialogX.IMPL_MODE.VIEW
+        DialogX.useHaptic = true
+        DialogX.globalTheme = DialogX.THEME.AUTO
+
+        DialogX.onlyOnePopTip = false
+
+
+        /*DoKit.Builder(this) //                .productId("需要使用平台功能的话，需要到dokit.cn平台申请id")
+    //            .customKits(mapKits)
+                .build()*/
     }
 
     override fun onLowMemory() {
@@ -141,7 +161,7 @@ class AppApplication : Application() {
             // 初始化吐司
             ToastUtils.init(application, ToastStyle())
             // 设置调试模式
-            ToastUtils.setDebugMode(AppConfig.isDebug())
+            ToastUtils.setDebugMode(isDebug())
             // 设置 Toast 拦截器
             ToastUtils.setInterceptor(ToastLogInterceptor())
 
