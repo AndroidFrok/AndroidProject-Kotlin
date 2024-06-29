@@ -79,10 +79,10 @@ dependencies {
 //    https://github.com/kongzue/DialogX/releases
     def dialogx_version = "0.0.49"
     implementation "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
-//    implementation "com.kongzue.dialogx.style:DialogXIOSStyle:${dialogx_version}"
-//    implementation "com.kongzue.dialogx.style:DialogXKongzueStyle:${dialogx_version}"
-    implementation "com.kongzue.dialogx.style:DialogXMIUIStyle:${dialogx_version}"
-//    implementation "com.kongzue.dialogx.style:DialogXMaterialYouStyle:${dialogx_version}"
+    implementation "com.github.kongzue.DialogX:DialogXMIUIStyle:${dialogx_version}"
+    implementation "com.github.kongzue.DialogX:DialogXIOSStyle:${dialogx_version}"
+//    implementation "com.github.kongzue.DialogX:DialogXKongzueStyle:${dialogx_version}"
+//    implementation "com.github.kongzue.DialogX:DialogXMaterialYou:${dialogx_version}"
     api 'com.blankj:utilcode:1.30.6'
     def work_version = "2.4.0"
     // https://developer.android.google.cn/jetpack/androidx/releases/work?hl=zh-cn (Java only)https://developer.android.google.cn/topic/libraries/architecture/workmanager/how-to/define-work?hl=zh-cn#java

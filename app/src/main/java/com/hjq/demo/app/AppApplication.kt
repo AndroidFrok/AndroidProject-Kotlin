@@ -34,7 +34,6 @@ import com.hjq.language.MultiLanguages
 import com.hjq.language.OnLanguageListener
 import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.DialogX
-import com.kongzue.dialogx.style.IOSStyle
 import com.kongzue.dialogx.style.MIUIStyle
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
