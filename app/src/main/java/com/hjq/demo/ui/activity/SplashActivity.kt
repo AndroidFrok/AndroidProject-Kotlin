@@ -10,7 +10,9 @@ import com.gyf.immersionbar.ImmersionBar
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.MmkvUtil
+import com.hjq.demo.manager.ThreadPoolManager
 import com.hjq.demo.other.AppConfig
+import com.hjq.demo.other.AppConfig.getHostUrl
 import com.hjq.widget.view.SlantedTextView
 import java.util.Locale
 
@@ -30,6 +32,7 @@ class SplashActivity : AppActivity() {
     }
 
     override fun initView() {
+//        ThreadPoolManager.getInstance().execute(r) // 用自己的闪屏  不用现有动画
         // 设置动画监听
 //        lottieView?.speed = 8.6f;
         lottieView?.addAnimatorListener(object : AnimatorListenerAdapter() {
@@ -37,17 +40,19 @@ class SplashActivity : AppActivity() {
                 super.onAnimationEnd(animation)
                 lottieView?.removeAnimatorListener(this)
 
-                val isAgreePrivacy = MmkvUtil.getBool("is_agree")  //这个需要用 datastore组件来维护
-                if (isAgreePrivacy) {
-                    HomeActivity.start(this@SplashActivity)
-                } else {
-//                     跳转到隐私政策页
-                    BrowserActivity.start(getContext(), "http://sdzxkc.com/newsInfo-94-8.html")
-                }
-
-                finish()
             }
         })
+    }
+    private fun toMain(){
+        val isAgreePrivacy = MmkvUtil.getBool("is_agree")  //这个需要用 datastore组件来维护
+        if (isAgreePrivacy) {
+            HomeActivity.start(this@SplashActivity)
+        } else {
+//                     跳转到隐私政策页
+            BrowserActivity.start(getContext(), "http://sdzxkc.com/newsInfo-94-8.html")
+        }
+
+        finish()
     }
 
     override fun initData() {
@@ -91,5 +96,21 @@ class SplashActivity : AppActivity() {
         // 因为修复了一个启动页被重复启动的问题，所以有可能 Activity 还没有初始化完成就已经销毁了
         // 所以如果需要在此处释放对象资源需要先对这个对象进行判空，否则可能会导致空指针异常
         super.onDestroy()
+    }
+    var r = Runnable {
+
+//             如果想用自己的闪屏  不用现有动画 可打开延迟注释  并隐藏xml里的控件 android:visibility="gone"
+        /*try {
+                  Thread.sleep(1000);
+              } catch (InterruptedException e) {
+                  e.printStackTrace();
+              }*/
+
+
+//        toMain()
+        val u = getHostUrl()
+//        u = "#";
+        BrowserActivity.start(getContext(), u)
+        finish()
     }
 }

@@ -56,7 +56,6 @@ class AppApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initSdk(this)
-        MMKV.initialize(this)
         val isAgreePrivacy = MmkvUtil.getBool("is_agree")
         if (isAgreePrivacy) {
             privacySdk()
@@ -73,8 +72,7 @@ class AppApplication : Application() {
         Bugly.init(this, AppConfig.getBuglyId(), isDebug());
         val brand = Build.BRAND.lowercase(Locale.getDefault())
         DialogX.DEBUGMODE = isDebug()
-        DialogX.init(this)
-        /*if (brand == "xiaomi") {
+        DialogX.init(this)/*if (brand == "xiaomi") {
             DialogX.globalStyle = MIUIStyle()
         } else {
             DialogX.globalStyle = IOSStyle()
@@ -116,6 +114,7 @@ class AppApplication : Application() {
          */
         fun initSdk(application: Application) {
             MultiLanguages.init(application)
+            MMKV.initialize(application)
             MultiLanguages.setOnLanguageListener(object : OnLanguageListener {
                 override fun onAppLocaleChange(oldLocale: Locale?, newLocale: Locale?) {
                     Timber.d("onAppLocaleChange{${newLocale?.language}}")
@@ -178,7 +177,10 @@ class AppApplication : Application() {
                 // 设置请求处理策略
                 .setHandler(RequestHandler(application)).addHeader(MmkvUtil.Token, "")
                 .addHeader(MmkvUtil.Version, AppConfig.getVersionName())
-                .addHeader("v-code", "${AppConfig.getVersionCode()}")
+                .addHeader("v-code", "${AppConfig.getVersionCode()}").addHeader(
+                    "phone",
+                    Build.BRAND + "-" + Build.MODEL + "-" + Build.PRODUCT + "-" + Build.BOARD + "-" + Build.DEVICE + "-Android" + Build.VERSION.RELEASE + "-API" + Build.VERSION.SDK_INT
+                )
                 // 设置请求重试次数
                 .setRetryCount(1).into()
 

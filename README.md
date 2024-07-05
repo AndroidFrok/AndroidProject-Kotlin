@@ -108,7 +108,7 @@
 
 #### [常见问题解答请点击这里查看](HelpDoc.md)  
 #### 用过的好用的东西 
-1- 带有全屏的视频播放器  'com.github.xiaoyanger0825:NiceVieoPlayer:v2.2'
+1- 带有全屏的视频播放器   https://github.com/CarGuo/GSYVideoPlayer    'com.github.xiaoyanger0825:NiceVieoPlayer:v2.2'
 2- DialogX  com.blankj:utilcode   eventbus  io.github.youth5201314:banner  https://bugly.qq.com/docs/user-guide/instruction-manual-android/?v=20190418140644   timber  
 in.xiandan:count-down-timer 
 3-     // 动画解析库：https://github.com/airbnb/lottie-android

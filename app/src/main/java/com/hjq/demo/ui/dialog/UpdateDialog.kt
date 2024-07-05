@@ -248,7 +248,7 @@ class UpdateDialog {
                                 // 设置通知点击之后的意图
                                 .setContentIntent(
                                     PendingIntent.getActivity(
-                                        getContext(), 1, getInstallIntent(), Intent.FILL_IN_ACTION
+                                        getContext(), 1, getInstallIntent(), Intent.FILL_IN_ACTION or  PendingIntent.FLAG_IMMUTABLE
                                     )
                                 )
                                 // 设置点击通知后是否自动消失

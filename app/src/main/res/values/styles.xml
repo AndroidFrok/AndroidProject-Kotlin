@@ -4,7 +4,8 @@
     <!-- 应用主题样式 -->
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar.Bridge">
         <!-- 窗口背景颜色 -->
-        <item name="android:windowBackground">@color/common_accent_color</item>
+                <item name="android:windowBackground">@color/common_accent_color</item>
+<!--        <item name="android:windowBackground">@mipmap/launcher_ic</item>-->
         <!-- 应用的主要色调，ActionBar Toolbar 默认使用该颜色 -->
         <item name="colorPrimary">@color/common_primary_color</item>
         <!-- 应用的主要暗色调，状态栏默认使用该颜色 -->

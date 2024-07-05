@@ -10,6 +10,7 @@ public class MmkvUtil {
     public static String DeviceCode = "dev_code";
     public static String Token = "token";
     public static String Version = "version";
+    static public String DeveloperOpenDebug = "k9";
     private static MMKV init() {
         if (kv == null) {
             kv = MMKV.defaultMMKV();
