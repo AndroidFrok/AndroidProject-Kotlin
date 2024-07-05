@@ -14,7 +14,10 @@ import com.hjq.demo.manager.ThreadPoolManager
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.AppConfig.getHostUrl
 import com.hjq.widget.view.SlantedTextView
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.Locale
+import kotlin.concurrent.thread
 
 /**
  *    author : Android 轮子哥
@@ -32,6 +35,9 @@ class SplashActivity : AppActivity() {
     }
 
     override fun initView() {
+        /*GlobalScope.launch {
+
+        }*/
 //        ThreadPoolManager.getInstance().execute(r) // 用自己的闪屏  不用现有动画
         // 设置动画监听
 //        lottieView?.speed = 8.6f;
@@ -39,11 +45,12 @@ class SplashActivity : AppActivity() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 lottieView?.removeAnimatorListener(this)
-
+                toMain()
             }
         })
     }
-    private fun toMain(){
+
+    private fun toMain() {
         val isAgreePrivacy = MmkvUtil.getBool("is_agree")  //这个需要用 datastore组件来维护
         if (isAgreePrivacy) {
             HomeActivity.start(this@SplashActivity)
@@ -97,6 +104,7 @@ class SplashActivity : AppActivity() {
         // 所以如果需要在此处释放对象资源需要先对这个对象进行判空，否则可能会导致空指针异常
         super.onDestroy()
     }
+
     var r = Runnable {
 
 //             如果想用自己的闪屏  不用现有动画 可打开延迟注释  并隐藏xml里的控件 android:visibility="gone"

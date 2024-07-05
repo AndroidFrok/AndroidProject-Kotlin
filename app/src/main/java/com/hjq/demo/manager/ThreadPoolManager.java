@@ -10,6 +10,8 @@ import java.util.concurrent.TimeUnit;
  *    time   : 2020/01/11
  *    desc   : 线程池管理类
  */
+
+@Deprecated
 public final class ThreadPoolManager extends ThreadPoolExecutor {
 
     private static volatile ThreadPoolManager sInstance;
