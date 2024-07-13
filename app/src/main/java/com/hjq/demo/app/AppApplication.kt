@@ -72,7 +72,8 @@ class AppApplication : Application() {
         Bugly.init(this, AppConfig.getBuglyId(), isDebug());
         val brand = Build.BRAND.lowercase(Locale.getDefault())
         DialogX.DEBUGMODE = isDebug()
-        DialogX.init(this)/*if (brand == "xiaomi") {
+        DialogX.init(this)
+        /*if (brand == "xiaomi") {
             DialogX.globalStyle = MIUIStyle()
         } else {
             DialogX.globalStyle = IOSStyle()
