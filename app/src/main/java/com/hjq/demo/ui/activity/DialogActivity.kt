@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
+import com.hjq.bar.TitleBar
 import com.hjq.base.BaseDialog
 import com.hjq.base.BasePopupWindow
 import com.hjq.base.action.AnimAction
@@ -504,7 +505,7 @@ class DialogActivity : AppActivity() {
         }
     }
 
-    override fun onRightClick(view: View) {
+    override fun onRightClick(titleBar: TitleBar?) {
         // 菜单弹窗
         ListPopup.Builder(this)
             .setList("选择拍照", "选取相册")
@@ -526,7 +527,7 @@ class DialogActivity : AppActivity() {
                     toast("点击了：$data")
                 }
             })
-            .showAsDropDown(view)
+            .showAsDropDown(titleBar)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

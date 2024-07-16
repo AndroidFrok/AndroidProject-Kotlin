@@ -10,6 +10,7 @@ import android.view.*
 import android.view.animation.*
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.hjq.bar.TitleBar
 import com.hjq.base.BaseActivity
 import com.hjq.base.BaseAdapter
 import com.hjq.base.BaseDialog
@@ -160,7 +161,7 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
     }
 
     @SingleClick
-    override fun onRightClick(view: View) {
+    override fun onRightClick(titleBar: TitleBar?) {
         if (allImage.isEmpty()) {
             return
         }

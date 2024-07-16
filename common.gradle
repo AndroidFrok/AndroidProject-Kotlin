@@ -66,10 +66,10 @@ dependencies {
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
 
     // AndroidX 库：https://github.com/androidx/androidx
-    implementation 'androidx.appcompat:appcompat:1.3.1' // 别改版本
+    implementation 'androidx.appcompat:appcompat:1.3.1'
     // Material 库：https://github.com/material-components/material-components-android
-    implementation 'com.google.android.material:material:1.12.0'
-    implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'org.greenrobot:eventbus:3.2.0'
     // Kotlin 协程：https://github.com/Kotlin/kotlinx.coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
@@ -80,9 +80,6 @@ dependencies {
     def dialogx_version = "0.0.49"
     implementation "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
     implementation "com.github.kongzue.DialogX:DialogXMIUIStyle:${dialogx_version}"
-    implementation "com.github.kongzue.DialogX:DialogXIOSStyle:${dialogx_version}"
-//    implementation "com.github.kongzue.DialogX:DialogXKongzueStyle:${dialogx_version}"
-//    implementation "com.github.kongzue.DialogX:DialogXMaterialYou:${dialogx_version}"
     api 'com.blankj:utilcode:1.30.6'
     def work_version = "2.4.0"
     // https://developer.android.google.cn/jetpack/androidx/releases/work?hl=zh-cn (Java only)https://developer.android.google.cn/topic/libraries/architecture/workmanager/how-to/define-work?hl=zh-cn#java
@@ -93,24 +90,10 @@ dependencies {
     implementation 'com.github.getActivity:MultiLanguages:9.3'
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
 
-    // Shape 框架：https://github.com/getActivity/ShapeView
-    implementation 'com.github.getActivity:ShapeView:6.0'
-
-    // AOP 插件库：https://mvnrepository.com/artifact/org.aspectj/aspectjrt
-    implementation 'org.aspectj:aspectjrt:1.9.6'
-
-    // 图片加载框架：https://github.com/bumptech/glide
-    // 官方使用文档：https://github.com/Muyangmin/glide-docs-cn
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    kapt 'com.github.bumptech.glide:compiler:4.12.0'
-    def logcat = 11.85
-    debugImplementation "com.github.getActivity:Logcat:$logcat"
-//    previewImplementation "com.github.getActivity:Logcat:$logcat"
-
     implementation 'com.github.getActivity:XXPermissions:18.63'
 
     // 标题栏框架：https://github.com/getActivity/TitleBar
-    implementation 'com.github.getActivity:TitleBar:9.2' // 别改版本
+    implementation 'com.github.getActivity:TitleBar:10.5'
 
     // 吐司框架：https://github.com/getActivity/ToastUtils
     implementation 'com.github.getActivity:ToastUtils:9.5'
@@ -126,6 +109,19 @@ dependencies {
     // Gson 解析容错：https://github.com/getActivity/GsonFactory
     implementation 'com.github.getActivity:GsonFactory:5.2'
 
+    // Shape 框架：https://github.com/getActivity/ShapeView
+    implementation 'com.github.getActivity:ShapeView:6.0'
+
+    // AOP 插件库：https://mvnrepository.com/artifact/org.aspectj/aspectjrt
+    implementation 'org.aspectj:aspectjrt:1.9.6'
+
+    // 图片加载框架：https://github.com/bumptech/glide
+    // 官方使用文档：https://github.com/Muyangmin/glide-docs-cn
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     // 沉浸式框架：https://github.com/gyf-dev/ImmersionBar
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 
@@ -135,7 +131,7 @@ dependencies {
     // Bugly 异常捕捉：https://bugly.qq.com/docs/user-guide/instruction-manual-android/?v=20190418140644
     implementation 'com.tencent.bugly:crashreport:4.1.9'
     implementation 'com.tencent.bugly:nativecrashreport:3.9.2'
-    implementation 'com.airbnb.android:lottie:6.4.1'
+    implementation 'com.airbnb.android:lottie:4.1.0'
 
     // 上拉刷新下拉加载框架：https://github.com/scwang90/SmartRefreshLayout
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'
@@ -146,4 +142,9 @@ dependencies {
 
     // 指示器框架：https://github.com/ongakuer/CircleIndicator
     implementation 'me.relex:circleindicator:2.1.6'
+    // 内存泄漏监测框架：https://github.com/square/leakcanary
+    def logcat = 11.85 // 11.86 佬报错
+    debugImplementation "com.github.getActivity:Logcat:$logcat"
+    previewImplementation "com.github.getActivity:Logcat:$logcat"
+
 }

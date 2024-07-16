@@ -152,10 +152,6 @@ open class BaseDialog constructor(
         super.dismiss()
     }
 
-    override fun getLifecycle(): Lifecycle {
-        return lifecycle
-    }
-
     /**
      * 设置一个显示监听器
      *
@@ -1244,4 +1240,10 @@ open class BaseDialog constructor(
          */
         fun onKey(dialog: BaseDialog?, event: KeyEvent?): Boolean
     }
+
+    override fun getLifecycle(): Lifecycle {
+        return lifecycle
+    }
+
+
 }

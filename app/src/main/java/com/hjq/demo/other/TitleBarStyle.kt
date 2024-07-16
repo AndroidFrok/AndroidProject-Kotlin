@@ -46,7 +46,7 @@ class TitleBarStyle : LightBarStyle() {
         return null
     }
 
-    override fun getChildHorizontalPadding(context: Context): Int {
+    fun getChildHorizontalPadding(context: Context): Int {
         return context.resources.getDimension(R.dimen.dp_12).toInt()
     }
 

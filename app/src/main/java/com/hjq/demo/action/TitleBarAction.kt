@@ -25,21 +25,21 @@ interface TitleBarAction : OnTitleBarListener {
      *
      * @param view     被点击的左项View
      */
-    override fun onLeftClick(view: View) {}
+    override fun onLeftClick(titleBar: TitleBar?) {}
 
     /**
      * 标题被点击
      *
      * @param view     被点击的标题View
      */
-    override fun onTitleClick(view: View) {}
+    override fun onTitleClick(titleBar: TitleBar?) {}
 
     /**
      * 右项被点击
      *
      * @param view     被点击的右项View
      */
-    override fun onRightClick(view: View) {}
+    override fun onRightClick(titleBar: TitleBar?) {}
 
     /**
      * 设置标题栏的标题

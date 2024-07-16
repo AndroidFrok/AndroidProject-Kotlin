@@ -127,7 +127,7 @@ class LogAspect {
     }
 
     private fun log(tag: String?, msg: String?) {
-        Timber.tag(tag)
+        Timber.tag(tag!!)
         Timber.d(msg)
     }
 }

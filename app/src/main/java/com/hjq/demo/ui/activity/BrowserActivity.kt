@@ -10,6 +10,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.webkit.WebView
 import android.widget.ProgressBar
+import com.hjq.bar.TitleBar
 import com.hjq.demo.R
 import com.hjq.demo.action.StatusAction
 import com.hjq.demo.aop.CheckNet
@@ -89,7 +90,7 @@ class BrowserActivity : AppActivity(), StatusAction, OnRefreshListener {
         return hintLayout
     }
 
-    override fun onLeftClick(view: View) {
+    override fun onLeftClick(titleBar: TitleBar?) {
         finish()
     }
 

@@ -14,6 +14,7 @@ import com.hjq.demo.R
  *    time   : 2018/12/2
  *    desc   : 等待加载对话框
  */
+@Deprecated("DialogX")
 class WaitDialog {
 
     class Builder(context: Context) : BaseDialog.Builder<Builder>(context) {

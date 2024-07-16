@@ -158,7 +158,7 @@ abstract class AppActivity : BaseActivity(),
         return titleBar
     }
 
-    override fun onLeftClick(view: View) {
+    override fun onLeftClick(titleBar: TitleBar?) {
         onBackPressed()
     }
 

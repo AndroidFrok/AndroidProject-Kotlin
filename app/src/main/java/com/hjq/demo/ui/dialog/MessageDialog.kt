@@ -14,6 +14,7 @@ import com.hjq.demo.aop.SingleClick
  *    time   : 2018/12/2
  *    desc   : 消息对话框
  */
+@Deprecated("DialogX")
 class MessageDialog {
 
     class Builder constructor(context: Context) : CommonDialog.Builder<Builder>(context) {

@@ -18,6 +18,7 @@ import com.hjq.widget.view.RegexEditText
  *    time   : 2019/02/27
  *    desc   : 输入对话框
  */
+@Deprecated("DialogX")
 class InputDialog {
 
     class Builder(context: Context) : CommonDialog.Builder<Builder>(context),

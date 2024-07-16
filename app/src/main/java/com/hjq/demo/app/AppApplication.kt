@@ -34,10 +34,10 @@ import com.hjq.language.MultiLanguages
 import com.hjq.language.OnLanguageListener
 import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.DialogX
+import com.kongzue.dialogx.dialogs.InputDialog
 import com.kongzue.dialogx.style.MIUIStyle
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
-import com.tencent.bugly.Bugly
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
 import okhttp3.OkHttpClient
@@ -69,7 +69,7 @@ class AppApplication : Application() {
     private fun privacySdk() {
         // Bugly 异常捕捉
         CrashReport.initCrashReport(this, AppConfig.getBuglyId(), isDebug())
-        Bugly.init(this, AppConfig.getBuglyId(), isDebug());
+//        Bugly.init(this, AppConfig.getBuglyId(), isDebug());
         val brand = Build.BRAND.lowercase(Locale.getDefault())
         DialogX.DEBUGMODE = isDebug()
         DialogX.init(this)
@@ -84,7 +84,6 @@ class AppApplication : Application() {
         DialogX.globalTheme = DialogX.THEME.AUTO
 
         DialogX.onlyOnePopTip = false
-
 
         /*DoKit.Builder(this) //                .productId("需要使用平台功能的话，需要到dokit.cn平台申请id")
     //            .customKits(mapKits)
