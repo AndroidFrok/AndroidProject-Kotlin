@@ -92,7 +92,7 @@ dependencies {
     implementation "androidx.work:work-runtime:$work_version"
     implementation 'com.github.getActivity:MultiLanguages:9.3'
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
-    implementation 'com.github.getActivity:XXPermissions:18.63'
+    implementation 'com.github.getActivity:XXPermissions:20.0'
     // 标题栏框架：https://github.com/getActivity/TitleBar
     implementation 'com.github.getActivity:TitleBar:10.5'
     // 吐司框架：https://github.com/getActivity/ToastUtils

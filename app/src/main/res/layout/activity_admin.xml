@@ -54,29 +54,40 @@
                 android:text="棒子语" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="返回主界面" />
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_sn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="设置设备编号" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="返回主界面" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_launcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="固件桌面" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="设置设备编号" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_sys_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="系统设置" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_launcher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="固件桌面" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sys_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="系统设置" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -116,8 +116,8 @@ class AdminActivity : AppActivity() {
             loadActivity("com.android.settings", "Settings")
         }
         btn_launcher?.setOnClickListener {
-            val pkg = "com.android.launcher3"
-            loadActivity(pkg, "Launcher")
+            val pkg = "com.android.launcher3" // 每个rom都是不同的
+            loadActivity(pkg, "uioverrides.QuickstepLauncher")
 
         }
     }
