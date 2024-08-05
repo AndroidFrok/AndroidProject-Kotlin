@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/common_window_background_white"
     android:orientation="vertical"
     tools:context=".ui.activity.SplashActivity">
 
@@ -26,7 +26,7 @@
         android:colorBackground="#b65656"
         android:paddingHorizontal="@dimen/dp_15"
         android:paddingVertical="@dimen/dp_10"
-        android:textColor="@color/white"
+        android:textColor="@color/common_text_color"
         android:textSize="@dimen/sp_12"
         android:textStyle="bold"
         tools:text="DEBUG" />
@@ -39,7 +39,7 @@
         android:layout_marginTop="@dimen/dp_50"
         android:layout_marginBottom="@dimen/dp_30"
         android:text="@string/app_name"
-        android:textColor="@color/black60"
+        android:textColor="@color/common_text_color"
         android:textSize="@dimen/sp_18"
         android:textStyle="bold" />
 
