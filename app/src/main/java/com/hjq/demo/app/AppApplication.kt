@@ -6,6 +6,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Build
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -34,7 +35,6 @@ import com.hjq.language.MultiLanguages
 import com.hjq.language.OnLanguageListener
 import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.DialogX
-import com.kongzue.dialogx.dialogs.InputDialog
 import com.kongzue.dialogx.style.MIUIStyle
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -67,13 +67,17 @@ class AppApplication : Application() {
      *  用户没同意隐私政策之前不能初始化的
      */
     private fun privacySdk() {
+        if (isDebug()) {
+
+        } else {
+//             如果已经配置了深色模式资源  而客户没这个需求则需要开启这样代码
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
         // Bugly 异常捕捉
         CrashReport.initCrashReport(this, AppConfig.getBuglyId(), isDebug())
-//        Bugly.init(this, AppConfig.getBuglyId(), isDebug());
-        val brand = Build.BRAND.lowercase(Locale.getDefault())
+//        val brand = Build.BRAND.lowercase(Locale.getDefault())
         DialogX.DEBUGMODE = isDebug()
-        DialogX.init(this)
-        /*if (brand == "xiaomi") {
+        DialogX.init(this)/*if (brand == "xiaomi") {
             DialogX.globalStyle = MIUIStyle()
         } else {
             DialogX.globalStyle = IOSStyle()
