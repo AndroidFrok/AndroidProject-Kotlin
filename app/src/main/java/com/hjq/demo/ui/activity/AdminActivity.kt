@@ -37,6 +37,8 @@ class AdminActivity : AppActivity() {
     }
 
     override fun initView() {
+
+
         btn_back?.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }

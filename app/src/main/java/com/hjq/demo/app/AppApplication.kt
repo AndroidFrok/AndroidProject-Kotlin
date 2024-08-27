@@ -13,9 +13,12 @@ import androidx.lifecycle.LifecycleOwner
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonToken
 import com.hjq.bar.TitleBar
+import com.hjq.bar.style.NightBarStyle
+import com.hjq.base.CommonContext
 import com.hjq.demo.R
 import com.hjq.demo.aop.Log
 import com.hjq.demo.http.glide.GlideApp
+import com.hjq.demo.http.glide.ImageUtils
 import com.hjq.demo.http.model.RequestHandler
 import com.hjq.demo.http.model.RequestServer
 import com.hjq.demo.manager.ActivityManager
@@ -55,6 +58,7 @@ class AppApplication : Application() {
     @Log("启动耗时")
     override fun onCreate() {
         super.onCreate()
+        CommonContext.initContext(this)
         initSdk(this)
         val isAgreePrivacy = MmkvUtil.getBool("is_agree")
         if (isAgreePrivacy) {
@@ -68,7 +72,12 @@ class AppApplication : Application() {
      */
     private fun privacySdk() {
         if (isDebug()) {
-
+            // 设置标题栏初始化器
+            if (ImageUtils.isDark(this)) {
+                TitleBar.setDefaultStyle(NightBarStyle())
+            } else {
+                TitleBar.setDefaultStyle(TitleBarStyle())
+            }
         } else {
 //             如果已经配置了深色模式资源  而客户没这个需求则需要开启这样代码
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -130,8 +139,7 @@ class AppApplication : Application() {
 
             })
 
-            // 设置标题栏初始化器
-            TitleBar.setDefaultStyle(TitleBarStyle())
+
             // Activity 栈管理初始化
             ActivityManager.getInstance().init(application)
             // 设置全局的 Header 构建器

@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.Registry
 import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.bitmap_recycle.LruBitmapPool
 import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper
 import com.bumptech.glide.load.engine.cache.LruResourceCache
@@ -57,6 +58,7 @@ class GlideConfig : AppGlideModule() {
         builder.setBitmapPool(LruBitmapPool(customBitmapPoolSize))
         builder.setDefaultRequestOptions(
             RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
             // 设置默认加载中占位图
             .placeholder(R.drawable.image_loading_ic)
             // 设置默认加载出错占位图
