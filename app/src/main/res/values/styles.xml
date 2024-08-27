@@ -7,7 +7,7 @@
         <item name="android:windowBackground">@color/common_window_background_color</item>
         <!--        <item name="android:windowBackground">@mipmap/launcher_ic</item>-->
         <!-- 应用的主要色调，ActionBar Toolbar 默认使用该颜色 -->
-        <item name="colorPrimary">@color/common_primary_color</item>
+        <item name="colorPrimary">@color/common_accent_color</item>
         <!-- 应用的主要暗色调，状态栏默认使用该颜色 -->
         <item name="colorPrimaryDark">@color/common_primary_dark_color</item>
         <!-- 应用的强调色，CheckBox RadioButton Switch 等一般控件的选中效果默认采用该颜色 -->
