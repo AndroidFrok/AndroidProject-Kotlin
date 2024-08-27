@@ -13,6 +13,7 @@ import com.hjq.demo.ui.dialog.InputDialog
 import com.hjq.http.EasyConfig
 import com.hjq.language.LocaleContract
 import com.hjq.language.MultiLanguages
+import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.dialogs.PopTip
 import com.kongzue.dialogx.dialogs.TipDialog
 
@@ -28,6 +29,8 @@ class AdminActivity : AppActivity() {
     private val bt_laji: MaterialButton? by lazy { findViewById(R.id.bt_laji) }
     private val bt_en: MaterialButton? by lazy { findViewById(R.id.bt_en) }
     private val bt_ko: MaterialButton? by lazy { findViewById(R.id.bt_ko) }
+    private val bt_simple: MaterialButton? by lazy { findViewById(R.id.bt_simple) }
+    private val bt_def: MaterialButton? by lazy { findViewById(R.id.bt_def) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -39,6 +42,32 @@ class AdminActivity : AppActivity() {
     override fun initView() {
         btn_back?.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+        bt_def?.setOnClickListener {
+            val restart = MultiLanguages.clearAppLanguage(this)
+            MultiLanguages.updateAppLanguage(this)
+            if (restart) {
+                EasyConfig.getInstance().addHeader("language", "no")
+                ActivityManager.getInstance().finishAllActivities()
+//                startActivity(SplashActivity::class.java)
+                startActivity(AdminActivity::class.java)
+            } else {
+                ToastUtils.show("无需重启")
+            }
+
+        }
+        bt_simple?.setOnClickListener {
+
+//             切换中文
+            val restart = MultiLanguages.setAppLanguage(
+                this, LocaleContract.getSimplifiedChineseLocale()
+            )
+            if (restart) {
+                EasyConfig.getInstance().addHeader("language", "zh")
+                ActivityManager.getInstance().finishAllActivities()
+//                startActivity(SplashActivity::class.java)
+                startActivity(AdminActivity::class.java)
+            }
         }
         bt_zh?.setOnClickListener {
 //             切换中文 繁體

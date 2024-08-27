@@ -27,6 +27,20 @@
                 android:text="@string/app_name" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/bt_def"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="默认" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bt_simple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="简体中文" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/bt_zh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
