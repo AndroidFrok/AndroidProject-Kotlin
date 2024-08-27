@@ -29,6 +29,7 @@ import com.kongzue.dialogx.dialogs.PopTip
  *    time   : 2018/10/18
  *    desc   : 首页界面
  */
+@Deprecated("")
 class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
 
     companion object {
