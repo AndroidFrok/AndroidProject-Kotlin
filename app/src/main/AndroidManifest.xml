@@ -27,7 +27,7 @@
         android:allowClearUserData="false"
         android:appCategory="productivity"
         android:description="@string/description"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/launcher_ic"
         android:label="${app_name}"
         android:largeHeap="true"
