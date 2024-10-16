@@ -75,6 +75,8 @@ dependencies {
     def coroutines = "1.6.0"//1.6.0
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines}"
+    // Json 解析框架：https://github.com/google/gson
+    implementation 'com.google.code.gson:gson:2.8.9'
     /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑以上依赖不可随意升级版本 */
 
     implementation 'org.greenrobot:eventbus:3.3.1'
@@ -102,8 +104,6 @@ dependencies {
     // OkHttp 框架：https://github.com/square/okhttp
     // noinspection GradleDependency
     implementation 'com.squareup.okhttp3:okhttp:3.12.13'
-    // Json 解析框架：https://github.com/google/gson
-    implementation 'com.google.code.gson:gson:2.10.1'
     // Gson 解析容错：https://github.com/getActivity/GsonFactory
     implementation 'com.github.getActivity:GsonFactory:5.2'
     // Shape 框架：https://github.com/getActivity/ShapeView
