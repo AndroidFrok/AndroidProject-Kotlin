@@ -3,7 +3,7 @@
 
     <!-- 通用的 -->
     <string name="common_loading">加载中&#8230;</string>
-
+    <string name="waiting4upgrade">Waitting for app upgrade...</string>
     <string name="common_unknown_error">未知错误</string>
 
     <string name="common_confirm">确定</string>

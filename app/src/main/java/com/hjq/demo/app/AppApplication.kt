@@ -3,6 +3,7 @@ package com.hjq.demo.app
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Build
@@ -15,6 +16,7 @@ import com.google.gson.stream.JsonToken
 import com.hjq.bar.TitleBar
 import com.hjq.demo.R
 import com.hjq.demo.aop.Log
+import com.hjq.demo.http.api.MyIntercept
 import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.http.model.RequestHandler
 import com.hjq.demo.http.model.RequestServer
@@ -36,6 +38,8 @@ import com.hjq.language.OnLanguageListener
 import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.DialogX
 import com.kongzue.dialogx.style.MIUIStyle
+import com.kongzue.dialogx.util.InputInfo
+import com.kongzue.dialogx.util.TextInfo
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.tencent.bugly.crashreport.CrashReport
@@ -77,7 +81,15 @@ class AppApplication : Application() {
         CrashReport.initCrashReport(this, AppConfig.getBuglyId(), isDebug())
 //        val brand = Build.BRAND.lowercase(Locale.getDefault())
         DialogX.DEBUGMODE = isDebug()
-        DialogX.init(this)/*if (brand == "xiaomi") {
+        DialogX.init(this)
+        DialogX.backgroundColor = Color.WHITE
+//        DialogX.okButtonTextInfo =            TextInfo().setFontColor(ContextCompat.getColor(this, R.color.red))
+//        DialogX.buttonTextInfo =            TextInfo().setFontColor(ContextCompat.getColor(this, R.color.common_accent_color))
+//        DialogX.menuTextInfo =            TextInfo().setFontColor(ContextCompat.getColor(this, R.color.common_accent_color))
+//        DialogX.messageTextInfo =            TextInfo().setFontColor(ContextCompat.getColor(this, R.color.common_accent_color))
+//        DialogX.titleTextInfo =            TextInfo().setFontColor(ContextCompat.getColor(this, R.color.common_accent_color))
+
+        /*if (brand == "xiaomi") {
             DialogX.globalStyle = MIUIStyle()
         } else {
             DialogX.globalStyle = IOSStyle()
@@ -176,6 +188,7 @@ class AppApplication : Application() {
             EasyConfig.with(okHttpClient)
                 // 是否打印日志
                 .setLogEnabled(AppConfig.isLogEnable())
+                .setInterceptor(MyIntercept())
                 // 设置服务器配置
                 .setServer(RequestServer())
                 // 设置请求处理策略

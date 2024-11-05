@@ -13,6 +13,8 @@ android {
         targetSdkVersion androidapi
         versionName "20230713"
         versionCode 1
+        renderscriptTargetApi 21
+        renderscriptSupportModeEnabled true
     }
 
     // 支持 Java JDK 8
