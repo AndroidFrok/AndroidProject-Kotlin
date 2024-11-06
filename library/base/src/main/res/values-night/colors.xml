@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App 样式中引用的颜色 -->
+    <color name="common_primary_color">@color/common_window_background_color</color>
+    <color name="common_primary_dark_color">@color/black</color>
+    <color name="common_accent_color">#5A8DDF</color>
+    <color name="common_window_background_color">#101010</color>
+    <!--common_window_background_white 有些白色背景色的如标题栏的地方  深色模式用默认背景色 -->
+    <color name="common_window_background_white">@color/common_window_background_color</color>
+    <color name="common_text_color">@color/white</color>
+    <color name="common_text_hint_color">@color/panda</color>
+    <!-- 按钮按压时的颜色 -->
+    <color name="common_button_pressed_color">#AA5A8DDF</color>
+    <!-- 按钮禁用时的颜色 -->
+    <color name="common_button_disable_color">#BBBBBB</color>
+    <!-- 分割线的颜色 -->
+    <color name="common_line_color">#ECECEC</color>
+    <!-- 矢量图标的颜色 -->
+    <color name="common_icon_color">#7C7C7C</color>
+
+    <!-- 对话框确认按钮的文本颜色 -->
+    <color name="common_confirm_text_color">#007AFF</color>
+    <!-- 对话框取消按钮的文本颜色 -->
+    <color name="common_cancel_text_color">#F44336</color>
+    <color name="main_nav_bg">#424242</color>
+    <!--特别用于列表items，白色背景的翻转-->
+    <color name="list_item_bg">#424242</color>
+</resources>
