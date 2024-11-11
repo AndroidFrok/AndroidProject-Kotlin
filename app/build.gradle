@@ -1,4 +1,5 @@
-apply plugin: 'com.android.application'
+//apply plugin: 'com.android.application'
+apply plugin : 'com.android.library'
 apply from: '../common.gradle'
 //apply plugin: 'android-aspectjx'
 apply plugin: 'org.jetbrains.kotlin.android'
@@ -10,7 +11,7 @@ android {
     defaultConfig {
 
         // 无痛修改包名：https://www.jianshu.com/p/17327e191d2e
-        applicationId 'com.hjq.demo.kt'
+//        applicationId 'com.hjq.demo.kt'
 
         // 仅保留中文语种的资源
 //        resConfigs 'zh'
@@ -51,46 +52,6 @@ android {
     // 构建配置：https://developer.android.google.cn/studio/build/build-variants
     buildTypes {
 
-        debug {
-            // 给包名添加后缀
-            applicationIdSuffix '.debug'
-            // 调试模式开关
-            debuggable true
-            jniDebuggable true
-            // 压缩对齐开关
-            zipAlignEnabled false
-            // 移除无用的资源
-            shrinkResources false
-            // 代码混淆开关
-            minifyEnabled false
-            // 签名信息配置
-            signingConfig signingConfigs.config
-            // 添加清单占位符
-            addManifestPlaceholders(['app_name': '安卓中台kt-dev'])
-        }
-
-        preview.initWith(debug)
-        preview {
-            applicationIdSuffix ''
-            // 添加清单占位符
-            addManifestPlaceholders(['app_name': '安卓中台kt-pre'])
-        }
-
-        release {
-            // 调试模式开关
-            debuggable false
-            jniDebuggable false
-            // 压缩对齐开关
-            zipAlignEnabled true
-            // 移除无用的资源
-            shrinkResources true
-            // 代码混淆开关
-            minifyEnabled true
-            // 签名信息配置
-            signingConfig signingConfigs.config
-            // 添加清单占位符
-            addManifestPlaceholders(['app_name': '@string/app_name'])
-        }
     }
 
     packagingOptions {
@@ -119,7 +80,7 @@ android {
         kotlinCompilerExtensionVersion '1.1.1'
     }
 
-    applicationVariants.all { variant ->
+   /* applicationVariants.all { variant ->
         // apk 输出文件名配置
         variant.outputs.all { output ->
             outputFileName = rootProject.getName() + '_v' + variant.versionName + '_' + variant.buildType.name
@@ -128,7 +89,7 @@ android {
             }
             outputFileName += '.apk'
         }
-    }
+    }*/
 }
 
 // 添加构建依赖项：https://developer.android.google.cn/studio/build/dependencies

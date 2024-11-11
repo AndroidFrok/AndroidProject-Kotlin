@@ -10,7 +10,6 @@ import android.util.ArrayMap;
 import androidx.annotation.NonNull;
 
 import com.hjq.demo.manager.MmkvUtil;
-import com.hjq.demo.other.AppConfig;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.Map;

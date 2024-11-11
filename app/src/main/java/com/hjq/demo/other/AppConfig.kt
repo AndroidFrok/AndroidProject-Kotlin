@@ -1,6 +1,5 @@
 package com.hjq.demo.other
 
-import com.hjq.demo.BuildConfig
 import com.hjq.demo.manager.MmkvUtil
 
 /**
@@ -17,7 +16,7 @@ object AppConfig {
     fun isDebug(): Boolean {
         val isUserDebug: Boolean = MmkvUtil.getBool(MmkvUtil.DeveloperOpenDebug)
         return if (!isUserDebug) {
-            BuildConfig.DEBUG
+            return false
         } else true
     }
 
@@ -25,7 +24,7 @@ object AppConfig {
      * 获取当前构建的模式
      */
     fun getBuildType(): String {
-        return BuildConfig.BUILD_TYPE
+        return ""
     }
 
     /**
@@ -39,28 +38,28 @@ object AppConfig {
      * 获取当前应用的包名
      */
     fun getPackageName(): String {
-        return BuildConfig.APPLICATION_ID
+        return ""
     }
 
     /**
      * 获取当前应用的版本名
      */
     fun getVersionName(): String {
-        return BuildConfig.VERSION_NAME
+        return ""
     }
 
     /**
      * 获取当前应用的版本码
      */
     fun getVersionCode(): Int {
-        return BuildConfig.VERSION_CODE
+        return 0
     }
 
     /**
      * 获取 Bugly Id
      */
     fun getBuglyId(): String {
-        return BuildConfig.BUGLY_ID
+        return ""
     }
 
     /**
