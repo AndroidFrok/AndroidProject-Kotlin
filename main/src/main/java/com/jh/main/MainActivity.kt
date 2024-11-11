@@ -1,5 +1,6 @@
 package com.jh.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,11 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.hjq.demo.ui.activity.HomeActivity
 import com.jh.main.ui.theme.AndroidProjectKotlinTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        startActivity(Intent(this, HomeActivity::class.java))
         setContent {
             AndroidProjectKotlinTheme {
                 // A surface container using the 'background' color from the theme
