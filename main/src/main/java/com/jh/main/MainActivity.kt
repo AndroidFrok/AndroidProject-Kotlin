@@ -12,13 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.hjq.demo.ui.activity.HomeActivity
+import com.hjq.demo.ui.activity.SplashActivity
 import com.jh.main.ui.theme.AndroidProjectKotlinTheme
 
+@Deprecated("仅作为中转")
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Intent(this, HomeActivity::class.java))
-        setContent {
+        startActivity(Intent(this, SplashActivity::class.java))
+        finish()
+        /*setContent {
             AndroidProjectKotlinTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -28,7 +31,7 @@ class MainActivity : ComponentActivity() {
                     Greeting("Android23")
                 }
             }
-        }
+        }*/
     }
 }
 
@@ -44,6 +47,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     AndroidProjectKotlinTheme {
-        Greeting("Android")
+        Greeting("aaaaaaaaaaaa")
     }
 }
