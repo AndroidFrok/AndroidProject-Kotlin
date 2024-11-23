@@ -3,6 +3,10 @@ package com.hjq.demo.ui.activity
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.AppCompatSpinner
 import com.google.android.material.button.MaterialButton
 import com.hjq.base.BaseDialog
 import com.hjq.demo.R
@@ -149,6 +153,35 @@ class AdminActivity : AppActivity() {
             loadActivity(pkg, "uioverrides.QuickstepLauncher")
 
         }
+        initHostSpinner()
+    }
+
+    private val sp_host: AppCompatSpinner? by lazy { findViewById(com.hjq.demo.R.id.sp_host) }
+    val hosts = arrayOf("请选择", "https://jnb.winstarsmart.com", "https://jinianbi.jhwangluo.com");
+    private fun initHostSpinner() {
+        val adapter = ArrayAdapter(
+//            this, android.R.layout.simple_spinner_item, hosts
+            this, R.layout.item_host, hosts
+        )
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.item_host);
+        sp_host?.adapter = adapter;
+        sp_host?.onItemSelectedListener = hostSpinnerListener;
+        sp_host?.setSelection(MmkvUtil.getInt(MmkvUtil.HostsIndex, 0)) // 将上次选的默认选
+
+    }
+
+    private val hostSpinnerListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//            Timber.d("$position")
+            MmkvUtil.save(MmkvUtil.Hosts, hosts.get(position))
+            MmkvUtil.save(MmkvUtil.HostsIndex, position)
+
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
     }
 
     private fun loadActivity(pkg: String, act: String) {

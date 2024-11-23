@@ -66,7 +66,16 @@ object AppConfig {
      * 获取服务器主机地址
      */
     fun getHostUrl(): String {
-        return "http://appppa.cn/"
+        /**
+         *  为了防止上线时写错host   直接把正式地址干上默认   ，
+         *
+         */
+        val index = MmkvUtil.getInt(MmkvUtil.HostsIndex, 0);
+        if (index < 1) {
+            MmkvUtil.save(MmkvUtil.Hosts, "https://jnb.winstarsmart.com");
+        }
+        val h = MmkvUtil.getString(MmkvUtil.Hosts, "https://jnb.winstarsmart.com");
+        return h;
     }
 
     /**
