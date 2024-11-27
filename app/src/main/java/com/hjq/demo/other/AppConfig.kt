@@ -71,10 +71,11 @@ object AppConfig {
          *
          */
         val index = MmkvUtil.getInt(MmkvUtil.HostsIndex, 0);
+        val pro = "http://pro.loc";
         if (index < 1) {
-            MmkvUtil.save(MmkvUtil.Hosts, "https://jnb.winstarsmart.com");
+            MmkvUtil.save(MmkvUtil.Hosts, pro);
         }
-        val h = MmkvUtil.getString(MmkvUtil.Hosts, "https://jnb.winstarsmart.com");
+        val h = MmkvUtil.getString(MmkvUtil.Hosts, pro);
         return h;
     }
 
