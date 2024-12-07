@@ -71,6 +71,11 @@ class RequestHandler constructor(private val application: Application) : IReques
         val text: String
         try {
             text = body.string()
+            if (!response.isSuccessful) {
+//                 将请求异常的结果提交bugly
+                val p = httpRequest.requestApi.api
+                CrashReport.postCatchedException(Throwable("$p 报错了 $text"))
+            }
         } catch (e: IOException) {
             // 返回结果读取异常
             CrashReport.postCatchedException(Throwable("${httpRequest.requestApi},${e.localizedMessage}"))
@@ -78,7 +83,7 @@ class RequestHandler constructor(private val application: Application) : IReques
         }
 
         // 打印这个 Json 或者文本
-        EasyLog.printJson(httpRequest, text)
+//        EasyLog.printJson(httpRequest, text)
         if ((String::class.java == type)) {
             return text
         }
@@ -160,10 +165,9 @@ class RequestHandler constructor(private val application: Application) : IReques
         if (cacheValue == null || "" == cacheValue || "{}".equals(cacheValue)) {
             return null
         }
-        EasyLog.printLog(httpRequest, "----- readCache cacheKey -----")
-        EasyLog.printJson(httpRequest, cacheKey)
+        EasyLog.printLog(httpRequest, "----- readCache cacheKey -----")/*EasyLog.printJson(httpRequest, cacheKey)
         EasyLog.printLog(httpRequest, "----- readCache cacheValue -----")
-        EasyLog.printJson(httpRequest, cacheValue)
+        EasyLog.printJson(httpRequest, cacheValue)*/
 //        return GsonFactory.getSingletonGson().fromJson(cacheValue, attr.type)
         return GsonFactory.getSingletonGson().fromJson(cacheValue, type)
     }
@@ -173,11 +177,10 @@ class RequestHandler constructor(private val application: Application) : IReques
         val cacheValue = GsonFactory.getSingletonGson().toJson(result)
         if (cacheValue == null || "" == cacheValue || "{}".equals(cacheValue)) {
             return false
-        }
-        EasyLog.printLog(httpRequest, "----- writeCache cacheKey -----")
+        }/*EasyLog.printLog(httpRequest, "----- writeCache cacheKey -----")
         EasyLog.printJson(httpRequest, cacheKey)
         EasyLog.printLog(httpRequest, "----- writeCache cacheValue -----")
-        EasyLog.printJson(httpRequest, cacheValue)
+        EasyLog.printJson(httpRequest, cacheValue)*/
         return HttpCacheManager.getMmkv()?.putString(cacheKey, cacheValue)?.commit() == true
     }
 

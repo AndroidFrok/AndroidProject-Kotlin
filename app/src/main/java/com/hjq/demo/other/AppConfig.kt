@@ -81,7 +81,6 @@ object AppConfig {
 
     /**
      * 加载的网页地址
-     *
      * @return
      */
     fun getWebUrl(): String? {
