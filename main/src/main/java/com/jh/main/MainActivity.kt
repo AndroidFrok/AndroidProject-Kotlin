@@ -10,8 +10,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.hjq.demo.ui.activity.HomeActivity
 import com.hjq.demo.ui.activity.SplashActivity
 import com.jh.main.ui.theme.AndroidProjectKotlinTheme
 
@@ -43,10 +41,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     AndroidProjectKotlinTheme {
         Greeting("aaaaaaaaaaaa")
     }
-}
+}*/
