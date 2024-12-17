@@ -60,11 +60,11 @@ class SimpleRatingBar @JvmOverloads constructor(
     init {
         val array: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.SimpleRatingBar)
         normalDrawable = ContextCompat.getDrawable(getContext(), array.getResourceId(
-            R.styleable.SimpleRatingBar_normalDrawable, R.drawable.rating_star_off_ic))!!
+            R.styleable.SimpleRatingBar_normalDrawable, R.mipmap.img_drawable_down))!!
         halfDrawable = ContextCompat.getDrawable(getContext(), array.getResourceId(
-            R.styleable.SimpleRatingBar_halfDrawable, R.drawable.rating_star_half_ic))
+            R.styleable.SimpleRatingBar_halfDrawable, R.mipmap.img_drawable_down))
         fillDrawable = ContextCompat.getDrawable(getContext(), array.getResourceId(
-            R.styleable.SimpleRatingBar_fillDrawable, R.drawable.rating_star_fill_ic))!!
+            R.styleable.SimpleRatingBar_fillDrawable, R.mipmap.img_drawable_down))!!
 
         // 两张图片的宽高不一致
         if ((normalDrawable.intrinsicWidth != fillDrawable.intrinsicWidth) || (

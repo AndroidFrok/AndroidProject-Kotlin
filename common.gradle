@@ -4,11 +4,10 @@ apply plugin: 'kotlin-kapt'
 android {
 
     // 编译源码版本  targetSdkVersion 最低到29就行  再低要改清单文件很多地方
-//    def androidapi = 29
     compileSdkVersion rootProject.ext.vc.compileSdkVersion
     defaultConfig {
         // 最低安装版本
-        minSdkVersion 21
+        minSdkVersion 19
         // 目标适配版本
         targetSdkVersion rootProject.ext.vc.compileSdkVersion
         versionName "20230713"
