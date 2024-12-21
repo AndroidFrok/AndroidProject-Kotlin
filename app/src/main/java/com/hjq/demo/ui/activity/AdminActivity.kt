@@ -3,11 +3,14 @@ package com.hjq.demo.ui.activity
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
+import com.blankj.utilcode.util.AppUtils
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textview.MaterialTextView
 import com.hjq.base.BaseDialog
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
@@ -20,6 +23,7 @@ import com.hjq.language.MultiLanguages
 import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.dialogs.PopTip
 import com.kongzue.dialogx.dialogs.TipDialog
+import java.io.File
 
 /**
  *  管理员界面
@@ -47,6 +51,8 @@ class AdminActivity : AppActivity() {
         btn_back?.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+        tv_root?.text =
+            "Superuser:${checkRootPermission()} 是否root:  ${AppUtils.isAppRoot()},SU:${isSuEnable()}"
         bt_def?.setOnClickListener {
             val restart = MultiLanguages.clearAppLanguage(this)
             MultiLanguages.updateAppLanguage(this)
@@ -193,5 +199,47 @@ class AdminActivity : AppActivity() {
     }
 
     override fun initData() {
+    }
+    private val tv_root: MaterialTextView? by lazy { findViewById(R.id.tv_root) }
+    fun checkRootPermission(): Boolean {
+        var hasRoot = false
+        try {
+            hasRoot =
+                if (!File("/system/app/Superuser.apk").exists() && !File("/system/bin/superuser").exists() && !File(
+                        "/system/xbin/daemonsu"
+                    ).exists()
+                ) {
+                    false
+                } else {
+                    true
+                }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return hasRoot
+    }
+
+    /**
+     * 是否存在su命令，并且有执行权限
+     *
+     * @return 存在su命令，并且有执行权限返回true
+     */
+    fun isSuEnable(): Boolean {
+        var file: File? = null
+        val paths = arrayOf(
+            "/system/bin/", "/system/xbin/", "/system/sbin/", "/sbin/", "/vendor/bin/", "/su/bin/"
+        )
+        try {
+            for (path in paths) {
+                file = File(path + "su")
+                if (file.exists() && file.canExecute()) {
+                    Log.i("TAG", "find su in : $path")
+                    return true
+                }
+            }
+        } catch (x: java.lang.Exception) {
+            x.printStackTrace()
+        }
+        return false
     }
 }

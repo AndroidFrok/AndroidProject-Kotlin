@@ -67,7 +67,7 @@
 
 
         <receiver
-            android:name=".other.Autorun"
+            android:name=".receiver.Autorun"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

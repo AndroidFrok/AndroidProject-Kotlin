@@ -1,4 +1,4 @@
-package com.hjq.demo.other;
+package com.hjq.demo.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
