@@ -1,13 +1,12 @@
 package com.hjq.demo.ui.activity
 
 import android.app.Activity
-import android.content.*
+import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
-import com.gyf.immersionbar.BarHide
-import com.gyf.immersionbar.ImmersionBar
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.widget.PlayerView
@@ -83,10 +82,7 @@ open class VideoPlayActivity : AppActivity(), OnPlayListener {
         }
     }
 
-    override fun createStatusBarConfig(): ImmersionBar {
-        return super.createStatusBarConfig() // 隐藏状态栏和导航栏
-            .hideBar(BarHide.FLAG_HIDE_BAR)
-    }
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

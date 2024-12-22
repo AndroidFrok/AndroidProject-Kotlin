@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+    <dimen name="dev_state_title">@dimen/sp_10</dimen>
+    <dimen name="dev_state_value">@dimen/sp_8</dimen>
     <!-- 最小宽度适配方案：https://github.com/wildma/ScreenAdaptation -->
     <dimen name="sp_6">6sp</dimen>
     <dimen name="sp_7">7sp</dimen>

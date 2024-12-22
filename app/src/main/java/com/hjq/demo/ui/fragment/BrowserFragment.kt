@@ -3,6 +3,7 @@ package com.hjq.demo.ui.fragment
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.webkit.WebView
 import com.hjq.demo.R
 import com.hjq.demo.action.StatusAction
@@ -65,6 +66,10 @@ class BrowserFragment : AppFragment<AppActivity>(), StatusAction, OnRefreshListe
             loadUrl(getString(INTENT_KEY_IN_URL)!!)
         }
         showLoading()
+    }
+
+    override fun <V : View?> findViewById(id: Int): V? {
+        TODO("Not yet implemented")
     }
 
     override fun getStatusLayout(): StatusLayout {

@@ -19,7 +19,6 @@ import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
-import com.gyf.immersionbar.ImmersionBar
 import com.hjq.demo.R
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
@@ -83,8 +82,8 @@ class CrashActivity : AppActivity() {
         setOnClickListener(R.id.iv_crash_info, R.id.iv_crash_share, R.id.iv_crash_restart)
 
         // 设置状态栏沉浸
-        ImmersionBar.setTitleBar(this, findViewById(R.id.ll_crash_bar))
-        ImmersionBar.setTitleBar(this, findViewById(R.id.ll_crash_info))
+//        ImmersionBar.setTitleBar(this, findViewById(R.id.ll_crash_bar))
+//        ImmersionBar.setTitleBar(this, findViewById(R.id.ll_crash_info))
     }
 
     override fun initData() {
@@ -170,7 +169,7 @@ class CrashActivity : AppActivity() {
 
         builder.append("\n安卓版本：\t").append(Build.VERSION.RELEASE)
             .append("\nAPI 版本：\t").append(Build.VERSION.SDK_INT)
-            .append("\nCPU 架构：\t").append(Build.SUPPORTED_ABIS[0])
+//            .append("\nCPU 架构：\t").append(Build.SUPPORTED_ABIS[0])
 
         builder.append("\n应用版本：\t").append(AppConfig.getVersionName())
             .append("\n版本代码：\t").append(AppConfig.getVersionCode())
@@ -274,10 +273,6 @@ class CrashActivity : AppActivity() {
         finish()
     }
 
-    override fun createStatusBarConfig(): ImmersionBar {
-        return super.createStatusBarConfig() // 指定导航栏背景颜色
-            .navigationBarColor(R.color.white)
-    }
 
     /**
      * 判断当前设备是否是平板

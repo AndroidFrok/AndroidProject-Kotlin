@@ -16,7 +16,7 @@ buildscript {
     // Studio 插件推荐：https://github.com/getActivity/StudioPlugins
     dependencies {
         // Gradle 插件版本说明：https://developer.android.google.cn/studio/releases/gradle-plugin.html#updating-plugin
-        // noinspection GradleDependency
+        // noinspection GradleDependency https://blog.csdn.net/fxjzzyo/article/details/134390809c
         classpath 'com.android.tools.build:gradle:4.2.0'
         // Kotlin 插件：https://plugins.jetbrains.com/plugin/6954-kotlin
         // noinspection GradleDependency

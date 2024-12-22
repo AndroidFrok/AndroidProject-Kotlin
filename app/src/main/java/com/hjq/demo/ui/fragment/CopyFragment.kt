@@ -1,5 +1,6 @@
 package com.hjq.demo.ui.fragment
 
+import android.view.View
 import com.hjq.demo.R
 import com.hjq.demo.app.AppFragment
 import com.hjq.demo.ui.activity.CopyActivity
@@ -26,4 +27,7 @@ class CopyFragment : AppFragment<CopyActivity>() {
     override fun initView() {}
 
     override fun initData() {}
+    override fun <V : View?> findViewById(id: Int): V? {
+        TODO("Not yet implemented")
+    }
 }

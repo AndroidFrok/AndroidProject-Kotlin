@@ -143,8 +143,8 @@ abstract class BaseAdapter<VH : BaseAdapter<VH>.BaseViewHolder> (private val con
             return itemView
         }
 
-        open fun <V : View?> findViewById(@IdRes id: Int): V? {
-            return getItemView().findViewById(id)
+        open fun <V : View> findViewById(@IdRes id: Int): V {
+            return getItemView()?.findViewById(id) as V!!
         }
     }
 

@@ -5,10 +5,10 @@ android {
 
     defaultConfig {
         // 模块混淆配置
-//        consumerProguardFiles 'proguard-umeng.pro'
+        consumerProguardFiles 'proguard-umeng.pro'
 
         // 构建配置字段
-//        buildConfigField('String', 'UM_KEY', '\"' + UMENG_APP_KEY + '\"')
+        buildConfigField('String', 'UM_KEY', '\"' + UMENG_APP_KEY + '\"')
         buildConfigField('String', 'QQ_ID', '\"' + QQ_APP_ID + '\"')
         buildConfigField('String', 'QQ_SECRET', '\"' + QQ_APP_SECRET + '\"')
         buildConfigField('String', 'WX_ID', '\"' + WX_APP_ID + '\"')
@@ -16,7 +16,7 @@ android {
 
         // 清单占位符
         addManifestPlaceholders([
-//                'UM_KEY' : UMENG_APP_KEY,
+                'UM_KEY' : UMENG_APP_KEY,
                 'QQ_ID' : QQ_APP_ID,
                 'QQ_SECRET' : QQ_APP_SECRET,
                 'WX_ID' : WX_APP_ID,

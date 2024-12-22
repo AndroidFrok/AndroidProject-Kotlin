@@ -62,6 +62,10 @@ class FindFragment : TitleBarFragment<HomeActivity>(),
         }
     }
 
+    override fun <V : View?> findViewById(id: Int): V? {
+        TODO("Not yet implemented")
+    }
+
     @SingleClick
     override fun onClick(view: View) {
         if (view === countdownView) {

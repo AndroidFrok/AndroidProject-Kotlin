@@ -42,7 +42,7 @@ open class BottomSheetDialog @JvmOverloads constructor(context: Context, themeRe
 
         // 沉浸式状态栏
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 
         // 隐藏底部导航栏
         val decorView: View = window.decorView

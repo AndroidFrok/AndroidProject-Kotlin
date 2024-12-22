@@ -16,7 +16,7 @@ import com.hjq.widget.R
 class CustomViewStub @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null,
     defStyleAttr: Int = 0, defStyleRes: Int = 0) :
-    FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
+    FrameLayout(context, attrs, defStyleAttr) {
 
     private var listener: OnViewStubListener? = null
     private val layoutResource: Int
@@ -39,9 +39,9 @@ class CustomViewStub @JvmOverloads constructor(
             if (layoutParams != null) {
                 layoutParams.width = getLayoutParams().width
                 layoutParams.height = getLayoutParams().height
-                if (layoutParams.gravity == LayoutParams.UNSPECIFIED_GRAVITY) {
+                /*if (layoutParams.gravity == LayoutParams.UNSPECIFIED_GRAVITY) {
                     layoutParams.gravity = Gravity.CENTER
-                }
+                }*/
                 inflateView!!.layoutParams = layoutParams
             }
             addView(inflateView)

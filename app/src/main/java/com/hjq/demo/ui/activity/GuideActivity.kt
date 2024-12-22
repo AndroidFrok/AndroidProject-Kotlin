@@ -5,7 +5,6 @@ import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
-import com.gyf.immersionbar.ImmersionBar
 import com.hjq.demo.R
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
@@ -57,11 +56,6 @@ class GuideActivity : AppActivity() {
         viewPager?.unregisterOnPageChangeCallback(mCallback)
     }
 
-    override fun createStatusBarConfig(): ImmersionBar {
-        return super.createStatusBarConfig()
-            // 指定导航栏背景颜色
-            .navigationBarColor(R.color.white)
-    }
 
     private val mCallback: OnPageChangeCallback = object : OnPageChangeCallback() {
 

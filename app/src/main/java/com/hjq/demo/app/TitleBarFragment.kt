@@ -1,10 +1,9 @@
 package com.hjq.demo.app
 
 import android.os.Bundle
-import android.view.*
-import com.gyf.immersionbar.ImmersionBar
+import android.view.View
+import android.view.ViewGroup
 import com.hjq.bar.TitleBar
-import com.hjq.demo.R
 import com.hjq.demo.action.TitleBarAction
 
 /**
@@ -19,7 +18,6 @@ abstract class TitleBarFragment<A : AppActivity> : AppFragment<A>(), TitleBarAct
     private var titleBar: TitleBar? = null
 
     /** 状态栏沉浸 */
-    private var immersionBar: ImmersionBar? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,10 +28,9 @@ abstract class TitleBarFragment<A : AppActivity> : AppFragment<A>(), TitleBarAct
 
         if (isStatusBarEnabled()) {
             // 初始化沉浸式状态栏
-            getStatusBarConfig().init()
+
             if (titleBar != null) {
                 // 设置标题栏沉浸
-                ImmersionBar.setTitleBar(this, titleBar)
             }
         }
     }
@@ -42,7 +39,7 @@ abstract class TitleBarFragment<A : AppActivity> : AppFragment<A>(), TitleBarAct
         super.onResume()
         if (isStatusBarEnabled()) {
             // 重新初始化状态栏
-            getStatusBarConfig().init()
+
         }
     }
 
@@ -56,26 +53,11 @@ abstract class TitleBarFragment<A : AppActivity> : AppFragment<A>(), TitleBarAct
     /**
      * 获取状态栏沉浸的配置对象
      */
-    protected fun getStatusBarConfig(): ImmersionBar {
-        if (immersionBar == null) {
-            immersionBar = createStatusBarConfig()
-        }
-        return immersionBar!!
-    }
+
 
     /**
      * 初始化沉浸式
      */
-    protected fun createStatusBarConfig(): ImmersionBar {
-        return ImmersionBar.with(this)
-            // 默认状态栏字体颜色为黑色
-            .statusBarDarkFont(isStatusBarDarkFont())
-            // 指定导航栏背景颜色
-            .navigationBarColor(R.color.white)
-            // 状态栏字体和导航栏内容自动变色，必须指定状态栏颜色和导航栏颜色才可以自动变色
-            .autoDarkModeEnable(true, 0.2f)
-    }
-
     /**
      * 获取状态栏字体颜色
      */

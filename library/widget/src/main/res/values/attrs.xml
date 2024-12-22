@@ -84,8 +84,6 @@
         <attr name="android:textStyle" />
         <attr name="android:gravity" />
         <attr name="android:colorBackground" />
-        <attr name="android:paddingVertical" />
-        <attr name="android:paddingHorizontal" />
         <!-- 显示成三角形 -->
         <attr name="triangle" format="boolean" />
     </declare-styleable>

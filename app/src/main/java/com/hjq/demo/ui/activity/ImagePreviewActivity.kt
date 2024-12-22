@@ -8,8 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
-import com.gyf.immersionbar.BarHide
-import com.gyf.immersionbar.ImmersionBar
 import com.hjq.base.BaseAdapter
 import com.hjq.demo.R
 import com.hjq.demo.aop.Log
@@ -112,10 +110,7 @@ class ImagePreviewActivity : AppActivity(), BaseAdapter.OnItemClickListener {
         }
     }
 
-    override fun createStatusBarConfig(): ImmersionBar {
-        return super.createStatusBarConfig() // 隐藏状态栏和导航栏
-            .hideBar(BarHide.FLAG_HIDE_BAR)
-    }
+
 
     override fun isStatusBarDarkFont(): Boolean {
         return false

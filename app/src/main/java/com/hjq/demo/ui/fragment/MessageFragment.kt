@@ -35,13 +35,20 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
 
     override fun initView() {
         setOnClickListener(
-            R.id.btn_message_image1, R.id.btn_message_image2, R.id.btn_message_image3,
-            R.id.btn_message_toast, R.id.btn_message_permission, R.id.btn_message_setting,
-            R.id.btn_message_black, R.id.btn_message_white, R.id.btn_message_tab
+            R.id.btn_message_image1,
+            R.id.btn_message_image2,
+            R.id.btn_message_image3,
+            R.id.btn_message_toast,
+            R.id.btn_message_permission,
+            R.id.btn_message_setting,
+            R.id.btn_message_black,
+            R.id.btn_message_white,
+            R.id.btn_message_tab
         )
     }
 
     override fun initData() {}
+
 
     override fun isStatusBarEnabled(): Boolean {
         // 使用沉浸式状态栏
@@ -52,62 +59,57 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_message_image1 -> {
-
                 imageView?.let {
                     it.visibility = View.VISIBLE
-                    GlideApp.with(this)
-                        .load("https://www.baidu.com/img/bd_logo.png")
-                        .into(it)
+                    GlideApp.with(this).load("https://www.baidu.com/img/bd_logo.png").into(it)
                 }
             }
+
             R.id.btn_message_image2 -> {
-
                 imageView?.let {
                     it.visibility = View.VISIBLE
-                    GlideApp.with(this)
-                        .load("https://www.baidu.com/img/bd_logo.png")
-                        .circleCrop()
+                    GlideApp.with(this).load("https://www.baidu.com/img/bd_logo.png").circleCrop()
                         .into(it)
                 }
             }
+
             R.id.btn_message_image3 -> {
 
                 imageView?.let {
                     it.visibility = View.VISIBLE
-                    GlideApp.with(this)
-                        .load("https://www.baidu.com/img/bd_logo.png")
+                    GlideApp.with(this).load("https://www.baidu.com/img/bd_logo.png")
                         .transform(RoundedCorners(resources.getDimension(R.dimen.dp_20).toInt()))
                         .into(it)
                 }
             }
+
             R.id.btn_message_toast -> {
 
                 toast("我是吐司")
 
             }
+
             R.id.btn_message_permission -> {
 
                 requestPermission()
             }
+
             R.id.btn_message_setting -> {
 
                 XXPermissions.startPermissionActivity(this)
             }
-            R.id.btn_message_black -> {
 
-                getStatusBarConfig()
-                    .statusBarDarkFont(true)
-                    .init()
+            R.id.btn_message_black -> {
             }
+
             R.id.btn_message_white -> {
 
-                getStatusBarConfig()
-                    .statusBarDarkFont(false)
-                    .init()
+
             }
+
             R.id.btn_message_tab -> {
 
-                HomeActivity.start(getAttachActivity()!!, HomeFragment::class.java)
+                HomeActivity.start(getAttachActivity()!!, FindFragment::class.java)
             }
         }
     }

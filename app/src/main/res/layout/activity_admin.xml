@@ -108,37 +108,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reboot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="dsfadsfadf" />
+                android:layout_weight="1"
+                android:text="尝试重启设备" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextInputEditText" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/t_host"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="当前主机(点击可下拉选择)："
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/sp_host"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@+id/t_host"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

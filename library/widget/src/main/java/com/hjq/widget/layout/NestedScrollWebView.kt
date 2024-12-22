@@ -17,7 +17,7 @@ import kotlin.math.max
  */
 open class NestedScrollWebView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0)  :
-    WebView(context, attrs, defStyleAttr, defStyleRes), NestedScrollingChild {
+    WebView(context, attrs, defStyleAttr), NestedScrollingChild {
 
     @Suppress("LeakingThis")
     private val childHelper: NestedScrollingChildHelper = NestedScrollingChildHelper(this)

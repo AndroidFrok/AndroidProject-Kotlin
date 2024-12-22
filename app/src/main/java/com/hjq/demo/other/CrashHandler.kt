@@ -31,7 +31,8 @@ class CrashHandler private constructor(private val application: Application) :
         }
     }
 
-    private val nextHandler: Thread.UncaughtExceptionHandler? = Thread.getDefaultUncaughtExceptionHandler()
+    private val nextHandler: Thread.UncaughtExceptionHandler? =
+        Thread.getDefaultUncaughtExceptionHandler()
 
     init {
         if ((javaClass.name == nextHandler?.javaClass?.name)) {
@@ -43,7 +44,8 @@ class CrashHandler private constructor(private val application: Application) :
     @Suppress("ApplySharedPref")
     override fun uncaughtException(thread: Thread, throwable: Throwable) {
         val sharedPreferences: SharedPreferences = application.getSharedPreferences(
-            CRASH_FILE_NAME, Context.MODE_PRIVATE)
+            CRASH_FILE_NAME, Context.MODE_PRIVATE
+        )
         val currentCrashTime: Long = System.currentTimeMillis()
         val lastCrashTime: Long = sharedPreferences.getLong(KEY_CRASH_TIME, 0)
         // 记录当前崩溃的时间，以便下次崩溃时进行比对
@@ -51,7 +53,7 @@ class CrashHandler private constructor(private val application: Application) :
 
         // 致命异常标记：如果上次崩溃的时间距离当前崩溃小于 5 分钟，那么判定为致命异常
         val deadlyCrash: Boolean = currentCrashTime - lastCrashTime < 1000 * 60 * 5
-        if (AppConfig.isDebug()) {
+        if (AppConfig.isDebug() || AppConfig.getBuildType().equals("preview")) {
             CrashActivity.start(application, throwable)
         } else {
             if (!deadlyCrash) {
@@ -62,7 +64,8 @@ class CrashHandler private constructor(private val application: Application) :
 
         // 不去触发系统的崩溃处理（com.android.internal.os.RuntimeInit$KillApplicationHandler）
         if (nextHandler != null && !nextHandler.javaClass.name
-                .startsWith("com.android.internal.os")) {
+                .startsWith("com.android.internal.os")
+        ) {
             nextHandler.uncaughtException(thread, throwable)
         }
 

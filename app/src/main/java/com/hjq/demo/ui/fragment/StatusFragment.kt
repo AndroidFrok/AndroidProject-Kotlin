@@ -101,6 +101,10 @@ class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListene
         adapter?.setData(analogData())
     }
 
+    override fun <V : View?> findViewById(id: Int): V? {
+        TODO("Not yet implemented")
+    }
+
     /**
      * 模拟数据
      */

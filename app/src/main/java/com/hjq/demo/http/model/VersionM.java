@@ -3,6 +3,7 @@ package com.hjq.demo.http.model;
 import com.google.gson.annotations.SerializedName;
 
 public class VersionM {
+
     /**
      * code
      */
@@ -63,15 +64,20 @@ public class VersionM {
         @SerializedName("id")
         private Integer id;
         /**
-         * newversion
+         * version
          */
-        @SerializedName("newversion")
-        private String newversion;
+        @SerializedName("version")
+        private Integer version;
         /**
-         * downloadurl
+         * file
          */
-        @SerializedName("downloadurl")
-        private String downloadurl;
+        @SerializedName("file")
+        private String file;
+        /**
+         * content
+         */
+        @SerializedName("content")
+        private String content;
 
         public Integer getId() {
             return id;
@@ -81,20 +87,28 @@ public class VersionM {
             this.id = id;
         }
 
-        public String getNewversion() {
-            return newversion;
+        public Integer getVersion() {
+            return version;
         }
 
-        public void setNewversion(String newversion) {
-            this.newversion = newversion;
+        public void setVersion(Integer version) {
+            this.version = version;
         }
 
-        public String getDownloadurl() {
-            return downloadurl;
+        public String getFile() {
+            return file;
         }
 
-        public void setDownloadurl(String downloadurl) {
-            this.downloadurl = downloadurl;
+        public void setFile(String file) {
+            this.file = file;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
         }
     }
 }

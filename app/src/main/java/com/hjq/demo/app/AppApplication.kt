@@ -3,7 +3,6 @@ package com.hjq.demo.app
 import android.app.Activity
 import android.app.Application
 import android.content.Context
-import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Build
@@ -11,13 +10,16 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.multidex.MultiDexApplication
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonToken
 import com.hjq.bar.TitleBar
+import com.hjq.bar.style.NightBarStyle
+import com.hjq.base.CommonContext
 import com.hjq.demo.R
 import com.hjq.demo.aop.Log
-import com.hjq.demo.http.api.MyIntercept
 import com.hjq.demo.http.glide.GlideApp
+import com.hjq.demo.http.glide.ImageUtils
 import com.hjq.demo.http.model.RequestHandler
 import com.hjq.demo.http.model.RequestServer
 import com.hjq.demo.manager.ActivityManager
@@ -38,8 +40,6 @@ import com.hjq.language.OnLanguageListener
 import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.DialogX
 import com.kongzue.dialogx.style.MIUIStyle
-import com.kongzue.dialogx.util.InputInfo
-import com.kongzue.dialogx.util.TextInfo
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.tencent.bugly.crashreport.CrashReport
@@ -54,16 +54,17 @@ import java.util.Locale
  *    time   : 2018/10/18
  *    desc   : 应用入口
  */
-class AppApplication : Application() {
+class AppApplication : MultiDexApplication() {
 
     @Log("启动耗时")
     override fun onCreate() {
         super.onCreate()
-        initSdk(this)
-        val isAgreePrivacy = MmkvUtil.getBool("is_agree")
+        CommonContext.initContext(this)
+        initSdk(this)/*val isAgreePrivacy = MmkvUtil.getBool("is_agree")
         if (isAgreePrivacy) {
-            privacySdk()
-        }
+        }*/
+        privacySdk()
+
     }
 
 
@@ -72,7 +73,12 @@ class AppApplication : Application() {
      */
     private fun privacySdk() {
         if (isDebug()) {
-
+            // 设置标题栏初始化器
+            if (ImageUtils.isDark(this)) {
+                TitleBar.setDefaultStyle(NightBarStyle())
+            } else {
+                TitleBar.setDefaultStyle(TitleBarStyle())
+            }
         } else {
 //             如果已经配置了深色模式资源  而客户没这个需求则需要开启这样代码
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -81,15 +87,7 @@ class AppApplication : Application() {
         CrashReport.initCrashReport(this, AppConfig.getBuglyId(), isDebug())
 //        val brand = Build.BRAND.lowercase(Locale.getDefault())
         DialogX.DEBUGMODE = isDebug()
-        DialogX.init(this)
-        DialogX.backgroundColor = Color.WHITE
-//        DialogX.okButtonTextInfo =            TextInfo().setFontColor(ContextCompat.getColor(this, R.color.red))
-//        DialogX.buttonTextInfo =            TextInfo().setFontColor(ContextCompat.getColor(this, R.color.common_accent_color))
-//        DialogX.menuTextInfo =            TextInfo().setFontColor(ContextCompat.getColor(this, R.color.common_accent_color))
-//        DialogX.messageTextInfo =            TextInfo().setFontColor(ContextCompat.getColor(this, R.color.common_accent_color))
-//        DialogX.titleTextInfo =            TextInfo().setFontColor(ContextCompat.getColor(this, R.color.common_accent_color))
-
-        /*if (brand == "xiaomi") {
+        DialogX.init(this)/*if (brand == "xiaomi") {
             DialogX.globalStyle = MIUIStyle()
         } else {
             DialogX.globalStyle = IOSStyle()
@@ -142,8 +140,7 @@ class AppApplication : Application() {
 
             })
 
-            // 设置标题栏初始化器
-            TitleBar.setDefaultStyle(TitleBarStyle())
+
             // Activity 栈管理初始化
             ActivityManager.getInstance().init(application)
             // 设置全局的 Header 构建器
@@ -188,12 +185,12 @@ class AppApplication : Application() {
             EasyConfig.with(okHttpClient)
                 // 是否打印日志
                 .setLogEnabled(AppConfig.isLogEnable())
-                .setInterceptor(MyIntercept())
                 // 设置服务器配置
                 .setServer(RequestServer())
                 // 设置请求处理策略
                 .setHandler(RequestHandler(application)).addHeader(MmkvUtil.Token, "")
                 .addHeader(MmkvUtil.Version, AppConfig.getVersionName())
+                .addHeader(MmkvUtil.MN, MmkvUtil.getString(MmkvUtil.MN, "mj_2409120002"))
                 .addHeader("v-code", "${AppConfig.getVersionCode()}").addHeader(
                     "phone",
                     Build.BRAND + "-" + Build.MODEL + "-" + Build.PRODUCT + "-" + Build.BOARD + "-" + Build.DEVICE + "-Android" + Build.VERSION.RELEASE + "-API" + Build.VERSION.SDK_INT

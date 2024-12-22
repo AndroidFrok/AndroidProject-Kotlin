@@ -16,7 +16,7 @@ import com.hjq.widget.R
 class RatioFrameLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null,
     defStyleAttr: Int = 0, defStyleRes: Int = 0) :
-    FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
+    FrameLayout(context, attrs, defStyleAttr) {
 
     /** 宽高比例 */
     private var widthRatio: Float = 0f

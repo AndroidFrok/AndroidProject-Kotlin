@@ -29,7 +29,7 @@ import com.hjq.widget.R
  */
 class SettingBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0) :
-    FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
+    FrameLayout(context, attrs, defStyleAttr) {
 
     companion object {
 

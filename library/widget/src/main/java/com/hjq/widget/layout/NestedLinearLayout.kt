@@ -15,7 +15,7 @@ import kotlin.math.abs
  */
 class NestedLinearLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0) :
-    LinearLayout(context, attrs, defStyleAttr, defStyleRes), NestedScrollingChild, NestedScrollingParent {
+    LinearLayout(context, attrs, defStyleAttr), NestedScrollingChild, NestedScrollingParent {
 
     companion object {
         private const val INVALID_POINTER: Int = -1

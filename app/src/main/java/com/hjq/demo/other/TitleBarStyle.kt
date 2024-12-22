@@ -35,7 +35,8 @@ class TitleBarStyle : LightBarStyle() {
     }
 
     override fun getBackButtonDrawable(context: Context): Drawable? {
-        return ContextCompat.getDrawable(context, R.drawable.arrows_left_ic)
+        return super.getBackButtonDrawable(context)
+//        return ContextCompat.getDrawable(context, R.drawable.bar_arrows_left_white)
     }
 
     override fun getLeftTitleBackground(context: Context): Drawable? {
