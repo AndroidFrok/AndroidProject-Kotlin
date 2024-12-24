@@ -27,7 +27,5 @@ class CopyFragment : AppFragment<CopyActivity>() {
     override fun initView() {}
 
     override fun initData() {}
-    override fun <V : View?> findViewById(id: Int): V? {
-        TODO("Not yet implemented")
-    }
+
 }

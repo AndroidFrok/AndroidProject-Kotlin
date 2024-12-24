@@ -10,8 +10,10 @@ import com.hjq.base.BaseAdapter
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.app.TitleBarFragment
+import com.hjq.demo.ui.activity.HomeActivity
 import com.hjq.demo.ui.activity.RestartActivity
 import com.hjq.demo.ui.adapter.StatusAdapter
+import com.hjq.http.EasyUtils.postDelayed
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
@@ -21,6 +23,7 @@ import com.kongzue.dialogx.dialogs.WaitDialog
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
+import timber.log.Timber
 
 /**
  *    author : Android 轮子哥
@@ -28,7 +31,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
  *    time   : 2020/07/10
  *    desc   : 加载案例 Fragment
  */
-class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListener,
+class StatusFragment : TitleBarFragment<HomeActivity>(), OnRefreshLoadMoreListener,
     BaseAdapter.OnItemClickListener {
 
     companion object {
@@ -72,8 +75,8 @@ class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListene
             })*/
     }
 
-    private val refreshLayout: SmartRefreshLayout? by lazy { findViewById(R.id.rl_status_refresh) }
-    private val recyclerView: WrapRecyclerView? by lazy { findViewById(R.id.rv_status_list) }
+    private lateinit var refreshLayout: SmartRefreshLayout;
+    private lateinit var recyclerView: WrapRecyclerView;
 
     private var adapter: StatusAdapter? = null
 
@@ -82,6 +85,12 @@ class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListene
     }
 
     override fun initView() {
+        if (getAttachActivity() == null) {
+            Timber.e("act为空 ..")
+            finish();
+        }
+        refreshLayout = view?.findViewById(R.id.rl_status_refresh)!!
+        recyclerView = view?.findViewById(R.id.rv_status_list)!!
         adapter = StatusAdapter(getAttachActivity()!!)
         adapter?.setOnItemClickListener(this)
 
@@ -101,9 +110,6 @@ class StatusFragment : TitleBarFragment<AppActivity>(), OnRefreshLoadMoreListene
         adapter?.setData(analogData())
     }
 
-    override fun <V : View?> findViewById(id: Int): V? {
-        TODO("Not yet implemented")
-    }
 
     /**
      * 模拟数据

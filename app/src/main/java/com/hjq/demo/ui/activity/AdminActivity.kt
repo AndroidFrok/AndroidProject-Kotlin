@@ -4,13 +4,17 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.os.PowerManager
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.AppCompatSpinner
 import com.google.android.material.button.MaterialButton
 import com.hjq.base.BaseDialog
-import com.hjq.demo.BuildConfig
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.ActivityManager
 import com.hjq.demo.manager.MmkvUtil
+import com.hjq.demo.other.AppConfig
 import com.hjq.demo.ui.dialog.InputDialog
 import com.hjq.http.EasyConfig
 import com.hjq.language.LocaleContract
@@ -190,7 +194,9 @@ class AdminActivity : AppActivity() {
     }
 
     private val sp_host: AppCompatSpinner? by lazy { findViewById(com.hjq.demo.R.id.sp_host) }
-    val hosts = arrayOf("请选择", "https://upload.winstarsmart.com", "https://jinianbi.jhwangluo.com");
+    val hosts =
+        arrayOf("请选择", "https://upload.winstarsmart.com", "https://jinianbi.jhwangluo.com");
+
     private fun initHostSpinner() {
         val adapter = ArrayAdapter(
 //            this, android.R.layout.simple_spinner_item, hosts
@@ -236,7 +242,7 @@ class AdminActivity : AppActivity() {
                 }
 
                 override fun onConfirm(dialog: BaseDialog?, content: String) {
-                    if (!content.equals("qqqqqq") && !BuildConfig.DEBUG) {
+                    if (!content.equals("qqqqqq") && !AppConfig.isDebug()) {
                         ToastUtils.show("faild")
                         finish()
                     }

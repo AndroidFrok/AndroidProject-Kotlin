@@ -1,4 +1,5 @@
-apply plugin: 'com.android.application'
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply from: '../common.gradle'
 //apply plugin: 'android-aspectjx'
 apply plugin: 'org.jetbrains.kotlin.android'
@@ -10,7 +11,7 @@ android {
     defaultConfig {
 
         // 无痛修改包名：https://www.jianshu.com/p/17327e191d2e
-        applicationId 'com.hjq.demo.kt'
+//        applicationId 'com.hjq.demo.kt'
         multiDexEnabled true
         // 仅保留中文语种的资源
 //        resConfigs 'zh'
@@ -84,7 +85,7 @@ android {
             zipAlignEnabled false
             // 移除无用的资源
             shrinkResources false
-            applicationIdSuffix ''
+//            applicationIdSuffix ''
             minifyEnabled false
             // 添加清单占位符
             addManifestPlaceholders(['app_name': '毛巾机pre'])
@@ -129,11 +130,11 @@ android {
     buildFeatures {
         compose false
     }
-    composeOptions {
+    /*composeOptions {
         kotlinCompilerExtensionVersion '1.1.1'
-    }
+    }*/
 
-    applicationVariants.all { variant ->
+    /*applicationVariants.all { variant ->
         // apk 输出文件名配置
         variant.outputs.all { output ->
             outputFileName = 'maojin_vCode' + variant.versionCode + '_vName' + variant.versionName + '_' + variant.buildType.name
@@ -142,7 +143,7 @@ android {
             }
             outputFileName += '.apk'
         }
-    }
+    }*/
 }
 
 // 添加构建依赖项：https://developer.android.google.cn/studio/build/dependencies

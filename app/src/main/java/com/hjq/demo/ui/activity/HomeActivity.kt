@@ -13,9 +13,7 @@ import com.hjq.demo.app.AppFragment
 import com.hjq.demo.manager.*
 import com.hjq.demo.other.DoubleClickHelper
 import com.hjq.demo.ui.adapter.NavigationAdapter
-import com.hjq.demo.ui.fragment.FindFragment
-import com.hjq.demo.ui.fragment.MessageFragment
-import com.hjq.demo.ui.fragment.MineFragment
+import com.hjq.demo.ui.fragment.StatusFragment
 
 /**
  *    author : Android 轮子哥
@@ -23,7 +21,6 @@ import com.hjq.demo.ui.fragment.MineFragment
  *    time   : 2018/10/18
  *    desc   : 首页界面
  */
-@Deprecated("aa")
 class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
 
     companion object {
@@ -34,7 +31,7 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
         @JvmOverloads
         fun start(
             context: Context,
-            fragmentClass: Class<out AppFragment<*>?>? = FindFragment::class.java
+            fragmentClass: Class<out AppFragment<*>?>? = StatusFragment::class.java
         ) {
             val intent = Intent(context, HomeActivity::class.java)
             intent.putExtra(INTENT_KEY_IN_FRAGMENT_CLASS, fragmentClass)
@@ -87,10 +84,10 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
 
     override fun initData() {
         pagerAdapter = FragmentPagerAdapter<AppFragment<*>>(this).apply {
-            addFragment(MessageFragment.newInstance())
-            addFragment(MessageFragment.newInstance())
-            addFragment(MessageFragment.newInstance())
-            addFragment(MineFragment.newInstance())
+            addFragment(StatusFragment.newInstance())
+            addFragment(StatusFragment.newInstance())
+            addFragment(StatusFragment.newInstance())
+            addFragment(StatusFragment.newInstance())
             viewPager?.adapter = this
         }
         onNewIntent(intent)
