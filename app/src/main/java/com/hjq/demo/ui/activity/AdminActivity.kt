@@ -206,7 +206,13 @@ class AdminActivity : AppActivity() {
         adapter.setDropDownViewResource(R.layout.item_host);
         sp_host?.adapter = adapter;
         sp_host?.onItemSelectedListener = hostSpinnerListener;
-        sp_host?.setSelection(MmkvUtil.getInt(MmkvUtil.HostsIndex, 0)) // 将上次选的默认选
+
+        var index = MmkvUtil.getInt(MmkvUtil.HostsIndex, 0);
+        if (index >= hosts.size) {
+//            Timber.d("主机 判断 ${hosts.size} $index")
+            index = 0;
+        }
+        sp_host?.setSelection(index, true) // 将上次选的默认选
 
     }
 
