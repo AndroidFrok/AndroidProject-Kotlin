@@ -3,15 +3,15 @@ package com.hjq.demo.ui.activity
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
+import android.os.PowerManager
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
-import com.blankj.utilcode.util.AppUtils
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.textview.MaterialTextView
 import com.hjq.base.BaseDialog
+import com.hjq.demo.BuildConfig
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.ActivityManager
@@ -39,6 +39,8 @@ class AdminActivity : AppActivity() {
     private val bt_ko: MaterialButton? by lazy { findViewById(R.id.bt_ko) }
     private val bt_simple: MaterialButton? by lazy { findViewById(R.id.bt_simple) }
     private val bt_def: MaterialButton? by lazy { findViewById(R.id.bt_def) }
+
+    //    private val btn_reboot: MaterialButton? by lazy { findViewById(R.id.btn_reboot) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -47,12 +49,35 @@ class AdminActivity : AppActivity() {
         return R.layout.activity_admin
     }
 
+    /**
+     * https://blog.csdn.net/wzystal/article/details/26088987
+     */
+    private fun rebootDevice() {
+//        方案 1
+        /*val reboot = Intent(Intent.ACTION_REBOOT)
+        reboot.putExtra("nowait", 1)
+        reboot.putExtra("interval", 1)
+        reboot.putExtra("window", 0)
+        sendBroadcast(reboot)*/
+//        方案 2
+        /*val cmd = "su -c reboot"
+        try {
+            Runtime.getRuntime().exec(cmd)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }*/
+//        方案 3
+        val pManager = getSystemService(POWER_SERVICE) as PowerManager
+        pManager.reboot("重启")
+    }
+
     override fun initView() {
+
+
         btn_back?.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-        }
-        tv_root?.text =
-            "Superuser:${checkRootPermission()} 是否root:  ${AppUtils.isAppRoot()},SU:${isSuEnable()}"
+        }/*tv_root?.text =
+            "Superuser:${checkRootPermission()} 是否root:  ${AppUtils.isAppRoot()},SU:${isSuEnable()}"*/
         bt_def?.setOnClickListener {
             val restart = MultiLanguages.clearAppLanguage(this)
             MultiLanguages.updateAppLanguage(this)
@@ -130,7 +155,7 @@ class AdminActivity : AppActivity() {
         btn_sn?.setOnClickListener {
             val code: String = MmkvUtil.getString(MmkvUtil.DeviceCode, "")
 
-            InputDialog.Builder(this).setTitle("请设置后台分配的设备编码").setContent("")
+            InputDialog.Builder(this).setTitle("请设置后台分配的设备编码").setContent(code)
                 .setHint("请输入").setConfirm(getString(R.string.common_confirm))
                 .setCancel(getString(R.string.common_cancel))
                 .setListener(object : InputDialog.OnListener {
@@ -163,7 +188,9 @@ class AdminActivity : AppActivity() {
     }
 
     private val sp_host: AppCompatSpinner? by lazy { findViewById(com.hjq.demo.R.id.sp_host) }
-    val hosts = arrayOf("请选择", "https://jnb.winstarsmart.com", "https://jinianbi.jhwangluo.com");
+    val hosts =
+        arrayOf("请选择", "https://upload.winstarsmart.com", "https://jinianbi.jhwangluo.com");
+
     private fun initHostSpinner() {
         val adapter = ArrayAdapter(
 //            this, android.R.layout.simple_spinner_item, hosts
@@ -199,24 +226,22 @@ class AdminActivity : AppActivity() {
     }
 
     override fun initData() {
-    }
-    private val tv_root: MaterialTextView? by lazy { findViewById(R.id.tv_root) }
-    fun checkRootPermission(): Boolean {
-        var hasRoot = false
-        try {
-            hasRoot =
-                if (!File("/system/app/Superuser.apk").exists() && !File("/system/bin/superuser").exists() && !File(
-                        "/system/xbin/daemonsu"
-                    ).exists()
-                ) {
-                    false
-                } else {
-                    true
+        InputDialog.Builder(getContext()).setTitle("Admin password").setContent("")
+            .setHint("Admin password").setConfirm(getString(R.string.common_confirm))
+            .setCancel(getString(R.string.common_cancel))
+            .setListener(object : InputDialog.OnListener {
+                override fun onCancel(dialog: BaseDialog?) {
+//                            InputDialog.OnListener.super.onCancel(dialog);
+                    finish()
                 }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return hasRoot
+
+                override fun onConfirm(dialog: BaseDialog?, content: String) {
+                    if (!content.equals("qqqqqq") && !BuildConfig.DEBUG) {
+                        ToastUtils.show("faild")
+                        finish()
+                    }
+                }
+            }).show()
     }
 
     /**

@@ -11,8 +11,12 @@ public class MmkvUtil {
     public static String Hosts = "hosts";
     public static String HostsIndex = "hosts_index";
     public static String DeviceCode = "dev_code";
+    public static String Port = "key0";
+    public static String Baudrate = "key1";
     public static String Token = "token";
     public static String Version = "version";
+    public static String MN = "machine-no";
+    public static String OutMp3 = "good_out_mp3";
     static public String DeveloperOpenDebug = "k9";
     private static MMKV init() {
         if (kv == null) {
