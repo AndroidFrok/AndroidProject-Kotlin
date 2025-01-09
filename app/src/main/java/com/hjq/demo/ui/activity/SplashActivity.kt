@@ -9,9 +9,7 @@ import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.AppConfig.getHostUrl
 import com.hjq.widget.view.SlantedTextView
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Locale
 
 /**
  *    author : Android 轮子哥
@@ -30,9 +28,6 @@ class SplashActivity : AppActivity() {
 
     override fun initView() {
         toMain()
-
-        GlobalScope.launch {
-        }
 //        ThreadPoolManager.getInstance().execute(r) // 用自己的闪屏  不用现有动画
         // 设置动画监听
 //        lottieView?.speed = 8.6f;
@@ -46,8 +41,10 @@ class SplashActivity : AppActivity() {
     }
 
     private fun toMain() {
+//        startActivity(MainAct::class.java)
         startActivity(HomeActivity::class.java)
         val isAgreePrivacy = MmkvUtil.getBool("is_agree")  //这个需要用 datastore组件来维护
+
         /*if (isAgreePrivacy) {
             startActivity(MainAct::class.java)
         } else {
@@ -55,7 +52,7 @@ class SplashActivity : AppActivity() {
             BrowserActivity.start(getContext(), "http://sdzxkc.com/newsInfo-94-8.html")
         }*/
 
-//        finish()
+        finish()
     }
 
     override fun initData() {

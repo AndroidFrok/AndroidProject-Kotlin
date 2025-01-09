@@ -16,14 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="@dimen/dp_20" >
+        android:layout_marginBottom="@dimen/dp_20">
 
         <me.relex.circleindicator.CircleIndicator3
             android:id="@+id/ci_image_preview_indicator"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
             android:visibility="invisible"
-            app:ci_drawable="@drawable/image_preview_indicator"
+            app:ci_drawable="@drawable/bg_circle1"
             app:ci_height="@dimen/dp_5"
             app:ci_margin="@dimen/dp_5"
             app:ci_width="@dimen/dp_5"

@@ -244,7 +244,7 @@ class CrashActivity : AppActivity() {
                 infoView?.text = builder
             }
         } catch (e: PackageManager.NameNotFoundException) {
-            CrashReport.postCatchedException(e)
+//            CrashReport.postCatchedException(e)
         }
     }
 

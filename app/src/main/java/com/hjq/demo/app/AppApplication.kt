@@ -42,7 +42,6 @@ import com.kongzue.dialogx.DialogX
 import com.kongzue.dialogx.style.MIUIStyle
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
-import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
 import okhttp3.OkHttpClient
 import timber.log.Timber
@@ -60,7 +59,7 @@ class AppApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         CommonContext.initContext(this)
-        initSdk(this)/*val isAgreePrivacy = MmkvUtil.getBool("is_agree")
+        initSdk1()/*val isAgreePrivacy = MmkvUtil.getBool("is_agree")
         if (isAgreePrivacy) {
         }*/
         privacySdk()
@@ -84,7 +83,9 @@ class AppApplication : MultiDexApplication() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
         // Bugly 异常捕捉
-        CrashReport.initCrashReport(this, AppConfig.getBuglyId(), isDebug())
+        if (AppConfig.buglyUpload()) {
+//        CrashReport.initCrashReport(this, AppConfig.getBuglyId(), isDebug())
+        }
 //        val brand = Build.BRAND.lowercase(Locale.getDefault())
         DialogX.DEBUGMODE = isDebug()
         DialogX.init(this)/*if (brand == "xiaomi") {
@@ -120,12 +121,116 @@ class AppApplication : MultiDexApplication() {
 // 没用        MultiLanguages.setDefaultLanguage(Locale.TAIWAN);
         super.attachBaseContext(MultiLanguages.attach(base))
     }
+    fun initSdk1( ) {
+        MultiLanguages.init(this)
+        MMKV.initialize(this)
+        MultiLanguages.setOnLanguageListener(object : OnLanguageListener {
+            override fun onAppLocaleChange(oldLocale: Locale?, newLocale: Locale?) {
+                Timber.d("onAppLocaleChange{${newLocale?.language}}")
+            }
 
-    companion object {
+            override fun onSystemLocaleChange(oldLocale: Locale?, newLocale: Locale?) {
+                Timber.d("onSystemLocaleChange{${newLocale?.language}}")
+            }
 
-        /**
+        })
+
+
+        // Activity 栈管理初始化
+        ActivityManager.getInstance().init(this)
+        // 设置全局的 Header 构建器
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context: Context, layout: RefreshLayout ->
+            MaterialHeader(context).setColorSchemeColors(
+                    ContextCompat.getColor(
+                            context, R.color.common_accent_color
+                    )
+            )
+        }
+        // 设置全局的 Footer 构建器
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context: Context, layout: RefreshLayout ->
+            SmartBallPulseFooter(context)
+        }
+        // 设置全局初始化器
+        SmartRefreshLayout.setDefaultRefreshInitializer { context: Context, layout: RefreshLayout ->
+            // 刷新头部是否跟随内容偏移
+            layout.setEnableHeaderTranslationContent(true)
+                    // 刷新尾部是否跟随内容偏移
+                    .setEnableFooterTranslationContent(true)
+                    // 加载更多是否跟随内容偏移
+                    .setEnableFooterFollowWhenNoMoreData(true)
+                    // 内容不满一页时是否可以上拉加载更多
+                    .setEnableLoadMoreWhenContentNotFull(false)
+                    // 仿苹果越界效果开关
+                    .setEnableOverScrollDrag(false)
+        }
+
+        // 初始化吐司
+        ToastUtils.init(this, ToastStyle())
+        // 设置调试模式
+        ToastUtils.setDebugMode(isDebug())
+        // 设置 Toast 拦截器
+        ToastUtils.setInterceptor(ToastLogInterceptor())
+
+        // 本地异常捕捉
+        CrashHandler.register(this)
+
+        // 网络请求框架初始化
+        val okHttpClient: OkHttpClient = OkHttpClient.Builder().build()
+
+        EasyConfig.with(okHttpClient)
+                // 是否打印日志
+                .setLogEnabled(AppConfig.isLogEnable())
+                // 设置服务器配置
+                .setServer(RequestServer())
+                // 设置请求处理策略
+                .setHandler(RequestHandler(this)).addHeader(MmkvUtil.Token, "")
+                .addHeader(MmkvUtil.Version, AppConfig.getVersionName())
+                .addHeader(MmkvUtil.MN, MmkvUtil.getString(MmkvUtil.MN, "mj_2412070003"))
+                .addHeader("v-code", "${AppConfig.getVersionCode()}").addHeader(
+                        "phone",
+                        Build.BRAND + "-" + Build.MODEL + "-" + Build.PRODUCT + "-" + Build.BOARD + "-" + Build.DEVICE + "-Android" + Build.VERSION.RELEASE + "-API" + Build.VERSION.SDK_INT
+                )
+                // 设置请求重试次数
+                .setRetryCount(1).into()
+
+        // 设置 Json 解析容错监听
+        GsonFactory.setJsonCallback { typeToken: TypeToken<*>, fieldName: String?, jsonToken: JsonToken ->
+            // 上报到 Bugly 错误列表
+            if (AppConfig.buglyUpload()) {
+//                    CrashReport.postCatchedException(IllegalArgumentException("类型解析异常：$typeToken#$fieldName，后台返回的类型为：$jsonToken"))
+            }
+        }
+
+        // 初始化日志打印
+        if (AppConfig.isLogEnable()) {
+            Timber.plant(DebugLoggerTree())
+        }
+
+        // 注册网络状态变化监听
+        val connectivityManager: ConnectivityManager? =
+                ContextCompat.getSystemService(this, ConnectivityManager::class.java)
+        if (connectivityManager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            connectivityManager.registerDefaultNetworkCallback(object :
+                    ConnectivityManager.NetworkCallback() {
+                override fun onLost(network: Network) {
+                    val topActivity: Activity? = ActivityManager.getInstance().getTopActivity()
+                    if (topActivity !is LifecycleOwner) {
+                        return
+                    }
+                    val lifecycleOwner: LifecycleOwner = topActivity
+                    if (lifecycleOwner.lifecycle.currentState != Lifecycle.State.RESUMED) {
+                        return
+                    }
+//                    ToastUtils.show(R.string.common_network_error)
+                }
+            })
+        }
+    }
+   /* companion object {
+
+        *//**
          * 初始化一些第三方框架
-         */
+         *//*
         fun initSdk(application: Application) {
             MultiLanguages.init(application)
             MMKV.initialize(application)
@@ -146,9 +251,9 @@ class AppApplication : MultiDexApplication() {
             // 设置全局的 Header 构建器
             SmartRefreshLayout.setDefaultRefreshHeaderCreator { context: Context, layout: RefreshLayout ->
                 MaterialHeader(context).setColorSchemeColors(
-                    ContextCompat.getColor(
-                        context, R.color.common_accent_color
-                    )
+                        ContextCompat.getColor(
+                                context, R.color.common_accent_color
+                        )
                 )
             }
             // 设置全局的 Footer 构建器
@@ -159,14 +264,14 @@ class AppApplication : MultiDexApplication() {
             SmartRefreshLayout.setDefaultRefreshInitializer { context: Context, layout: RefreshLayout ->
                 // 刷新头部是否跟随内容偏移
                 layout.setEnableHeaderTranslationContent(true)
-                    // 刷新尾部是否跟随内容偏移
-                    .setEnableFooterTranslationContent(true)
-                    // 加载更多是否跟随内容偏移
-                    .setEnableFooterFollowWhenNoMoreData(true)
-                    // 内容不满一页时是否可以上拉加载更多
-                    .setEnableLoadMoreWhenContentNotFull(false)
-                    // 仿苹果越界效果开关
-                    .setEnableOverScrollDrag(false)
+                        // 刷新尾部是否跟随内容偏移
+                        .setEnableFooterTranslationContent(true)
+                        // 加载更多是否跟随内容偏移
+                        .setEnableFooterFollowWhenNoMoreData(true)
+                        // 内容不满一页时是否可以上拉加载更多
+                        .setEnableLoadMoreWhenContentNotFull(false)
+                        // 仿苹果越界效果开关
+                        .setEnableOverScrollDrag(false)
             }
 
             // 初始化吐司
@@ -183,25 +288,27 @@ class AppApplication : MultiDexApplication() {
             val okHttpClient: OkHttpClient = OkHttpClient.Builder().build()
 
             EasyConfig.with(okHttpClient)
-                // 是否打印日志
-                .setLogEnabled(AppConfig.isLogEnable())
-                // 设置服务器配置
-                .setServer(RequestServer())
-                // 设置请求处理策略
-                .setHandler(RequestHandler(application)).addHeader(MmkvUtil.Token, "")
-                .addHeader(MmkvUtil.Version, AppConfig.getVersionName())
-                .addHeader(MmkvUtil.MN, MmkvUtil.getString(MmkvUtil.MN, "mj_2409120002"))
-                .addHeader("v-code", "${AppConfig.getVersionCode()}").addHeader(
-                    "phone",
-                    Build.BRAND + "-" + Build.MODEL + "-" + Build.PRODUCT + "-" + Build.BOARD + "-" + Build.DEVICE + "-Android" + Build.VERSION.RELEASE + "-API" + Build.VERSION.SDK_INT
-                )
-                // 设置请求重试次数
-                .setRetryCount(1).into()
+                    // 是否打印日志
+                    .setLogEnabled(AppConfig.isLogEnable())
+                    // 设置服务器配置
+                    .setServer(RequestServer())
+                    // 设置请求处理策略
+                    .setHandler(RequestHandler(application)).addHeader(MmkvUtil.Token, "")
+                    .addHeader(MmkvUtil.Version, AppConfig.getVersionName())
+                    .addHeader(MmkvUtil.MN, MmkvUtil.getString(MmkvUtil.MN, "mj_2412070003"))
+                    .addHeader("v-code", "${AppConfig.getVersionCode()}").addHeader(
+                            "phone",
+                            Build.BRAND + "-" + Build.MODEL + "-" + Build.PRODUCT + "-" + Build.BOARD + "-" + Build.DEVICE + "-Android" + Build.VERSION.RELEASE + "-API" + Build.VERSION.SDK_INT
+                    )
+                    // 设置请求重试次数
+                    .setRetryCount(1).into()
 
             // 设置 Json 解析容错监听
             GsonFactory.setJsonCallback { typeToken: TypeToken<*>, fieldName: String?, jsonToken: JsonToken ->
                 // 上报到 Bugly 错误列表
-                CrashReport.postCatchedException(IllegalArgumentException("类型解析异常：$typeToken#$fieldName，后台返回的类型为：$jsonToken"))
+                if (AppConfig.buglyUpload()) {
+//                    CrashReport.postCatchedException(IllegalArgumentException("类型解析异常：$typeToken#$fieldName，后台返回的类型为：$jsonToken"))
+                }
             }
 
             // 初始化日志打印
@@ -211,10 +318,10 @@ class AppApplication : MultiDexApplication() {
 
             // 注册网络状态变化监听
             val connectivityManager: ConnectivityManager? =
-                ContextCompat.getSystemService(application, ConnectivityManager::class.java)
+                    ContextCompat.getSystemService(application, ConnectivityManager::class.java)
             if (connectivityManager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 connectivityManager.registerDefaultNetworkCallback(object :
-                    ConnectivityManager.NetworkCallback() {
+                        ConnectivityManager.NetworkCallback() {
                     override fun onLost(network: Network) {
                         val topActivity: Activity? = ActivityManager.getInstance().getTopActivity()
                         if (topActivity !is LifecycleOwner) {
@@ -229,5 +336,5 @@ class AppApplication : MultiDexApplication() {
                 })
             }
         }
-    }
+    }*/
 }

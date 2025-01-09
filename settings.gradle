@@ -1,5 +1,3 @@
 include ':app'
-include ':main'
 include ':library:base'
 include ':library:widget'
-//include ':library:umeng'

@@ -33,7 +33,7 @@
                     android:id="@+id/iv_find_circle"
                     android:layout_width="@dimen/dp_90"
                     android:layout_height="@dimen/dp_90"
-                    app:srcCompat="@drawable/example_bg"
+                    app:srcCompat="@mipmap/launcher_ic"
                     tools:scaleType="centerCrop" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -41,7 +41,7 @@
                     android:layout_width="@dimen/dp_90"
                     android:layout_height="@dimen/dp_90"
                     android:layout_marginStart="@dimen/dp_40"
-                    app:srcCompat="@drawable/example_bg"
+                    app:srcCompat="@mipmap/launcher_ic"
                     tools:scaleType="centerCrop" />
 
             </LinearLayout>
@@ -52,7 +52,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 app:bar_leftText="左文本"
-                app:bar_rightDrawable="@drawable/arrows_right_ic"
+                app:bar_rightDrawable="@drawable/bg_circle1"
                 app:bar_rightText="右文本" />
 
             <LinearLayout
@@ -212,7 +212,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dp_20"
-                android:drawableStart="@drawable/avatar_placeholder_ic"
+                android:drawableStart="@drawable/bg_circle1"
                 android:drawablePadding="@dimen/dp_10"
                 android:gravity="center_vertical"
                 android:text="支持限定 Drawable 大小的 TextView"

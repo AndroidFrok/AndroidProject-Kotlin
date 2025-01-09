@@ -79,7 +79,7 @@
             app:shape="oval"
             app:shape_solidColor="@color/black30"
             app:shape_solidPressedColor="@color/black60"
-            app:srcCompat="@drawable/video_lock_open_ic"
+            app:srcCompat="@mipmap/launcher_ic"
             tools:visibility="visible" />
 
         <com.hjq.shape.layout.ShapeLinearLayout

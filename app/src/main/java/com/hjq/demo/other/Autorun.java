@@ -6,11 +6,13 @@ import android.content.Intent;
 
 import com.hjq.demo.ui.activity.HomeActivity;
 import com.hjq.demo.ui.activity.SplashActivity;
+import com.hjq.toast.ToastUtils;
 
 public class Autorun extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent1) {
         if (intent1.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+            ToastUtils.show("开机了");
             Intent intent = new Intent();
             intent.setClass(context, SplashActivity.class);// 开机后指定要执行程序的界面文件
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

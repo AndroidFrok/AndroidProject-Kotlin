@@ -22,7 +22,7 @@
     <string name="common_network_error">当前网络不可用，请检查网络设置</string>
 
     <string name="common_video_error_not_support">该视频不适合在此设备上播放</string>
-    <string name="common_video_error_unknown">无法播放此视频</string>
+    <string name="common_video_error_unknown">无法播放此视频~</string>
     <string name="common_video_error_supplement">错误类型：%d，错误代码：%d。</string>
 
     <string name="common_phone_input_hint">请输入手机号码</string>

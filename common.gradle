@@ -4,15 +4,15 @@ apply plugin: 'kotlin-kapt'
 android {
 
     // 编译源码版本  targetSdkVersion 最低到29就行  再低要改清单文件很多地方
-    def androidapi = 29
-    compileSdkVersion 29
+    def androidapi = 31
+    compileSdkVersion androidapi
     defaultConfig {
         // 最低安装版本
         minSdkVersion 19
         // 目标适配版本
         targetSdkVersion androidapi
-        versionName "20241220"
-        versionCode 2
+        versionName "20241227"
+        versionCode 7
     }
 
     // 支持 Java JDK 8
@@ -70,8 +70,8 @@ dependencies {
 //material >1.4.0 太高 出现 values-v31.xml:3: error: resource android:color/system_neutral1_1000 not found.
     implementation 'com.airbnb.android:lottie:4.1.0'
     // Kotlin 协程：https://github.com/Kotlin/kotlinx.coroutines
-    def coroutines = "1.4.2"//1.6.0
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines}"
+    def coroutines = "1.6.0"//1.6.0
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines}"
     /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑以上依赖不可随意升级版本 */
 

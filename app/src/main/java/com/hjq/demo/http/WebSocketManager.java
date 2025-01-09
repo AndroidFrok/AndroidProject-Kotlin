@@ -151,14 +151,14 @@ public class WebSocketManager extends WebSocketListener {
     public void onClosing(WebSocket webSocket, int code, String reason) {
 //      Timber.d("onClosing ");
         webSocket.close(NORMAL_CLOSURE_STATUS, null);
-        CrashReport.postCatchedException(new Throwable("onClosing" + reason));
+//        CrashReport.postCatchedException(new Throwable("onClosing" + reason));
     }
 
     @Override
     public void onClosed(WebSocket webSocket, int code, String reason) {
         isConnected = false;
 //      Timber.d("onClosed ");
-        CrashReport.postCatchedException(new Throwable("onClosed" + reason));
+//        CrashReport.postCatchedException(new Throwable("onClosed" + reason));
     }
 
     @Override

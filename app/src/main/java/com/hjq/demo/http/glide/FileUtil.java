@@ -39,7 +39,7 @@ public class FileUtil {
     private final static String TAG = "PictureActivity";
     private static ProgressDialog mSaveDialog = null;
 
-    public static void donwloadImg(Context context, String filePaths, FileSaveListener fileSaveListener) {
+    public static void downloadImg(Context context, String filePaths, FileSaveListener fileSaveListener) {
         fileSave = fileSaveListener;
         filePath = filePaths;
         mContext = context;

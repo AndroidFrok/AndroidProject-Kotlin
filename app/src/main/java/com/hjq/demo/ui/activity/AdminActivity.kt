@@ -4,19 +4,15 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.os.PowerManager
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import androidx.appcompat.widget.AppCompatSpinner
 import com.google.android.material.button.MaterialButton
 import com.hjq.base.BaseDialog
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.ActivityManager
 import com.hjq.demo.manager.MmkvUtil
-import com.hjq.demo.other.AppConfig
 import com.hjq.demo.ui.dialog.InputDialog
 import com.hjq.http.EasyConfig
+import com.hjq.http.EasyHttp
 import com.hjq.language.LocaleContract
 import com.hjq.language.MultiLanguages
 import com.hjq.toast.ToastUtils
@@ -68,7 +64,7 @@ class AdminActivity : AppActivity() {
         }*/
 //        方案 3
         val pManager = getSystemService(POWER_SERVICE) as PowerManager
-        pManager.reboot("重启")
+//        pManager.reboot("重启")
     }
 
     override fun initView() {
@@ -159,10 +155,10 @@ class AdminActivity : AppActivity() {
             }
         }
         btn_sn?.setOnClickListener {
-            val code: String = MmkvUtil.getString(MmkvUtil.DeviceCode, "")
+            val code: String = MmkvUtil.getString(MmkvUtil.MN, "")
 
             InputDialog.Builder(this).setTitle("请设置后台分配的设备编码").setContent(code)
-                .setHint("请输入").setConfirm(getString(R.string.common_confirm))
+                .setHint("内测可用 mj_2409120002").setConfirm(getString(R.string.common_confirm))
                 .setCancel(getString(R.string.common_cancel))
                 .setListener(object : InputDialog.OnListener {
 
@@ -173,10 +169,17 @@ class AdminActivity : AppActivity() {
                             )
 
                         } else {
-                            MmkvUtil.save(MmkvUtil.DeviceCode, content)
-                            PopTip.show("如需修改设备码，请到设置-应用管理找到本应用-清除所有数据：")
+                            MmkvUtil.save(MmkvUtil.MN, content)
+//                            EasyConfig.getInstance().removeHeader(MmkvUtil.MN);
+                            EasyConfig.getInstance()
+                                .addHeader(MmkvUtil.MN, MmkvUtil.getString(MmkvUtil.MN, ""));
+//                            PopTip.show("如需修改设备码，请到设置-应用管理找到本应用-清除所有数据：")
                             //                                  填完后   你得请求接口呀
-                            finish()
+                            PopTip.show("重启应用生效")
+                            postDelayed({
+                                ActivityManager.getInstance().finishAllActivities()
+//                                startActivity(MainAct::class.java)
+                            }, 500)
 
                         }
                     }
@@ -190,43 +193,6 @@ class AdminActivity : AppActivity() {
             loadActivity(pkg, "uioverrides.QuickstepLauncher")
 
         }
-        initHostSpinner()
-    }
-
-    private val sp_host: AppCompatSpinner? by lazy { findViewById(com.hjq.demo.R.id.sp_host) }
-    val hosts =
-        arrayOf("请选择", "https://upload.winstarsmart.com", "https://jinianbi.jhwangluo.com");
-
-    private fun initHostSpinner() {
-        val adapter = ArrayAdapter(
-//            this, android.R.layout.simple_spinner_item, hosts
-            this, R.layout.item_host, hosts
-        )
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.item_host);
-        sp_host?.adapter = adapter;
-        sp_host?.onItemSelectedListener = hostSpinnerListener;
-
-        var index = MmkvUtil.getInt(MmkvUtil.HostsIndex, 0);
-        if (index >= hosts.size) {
-//            Timber.d("主机 判断 ${hosts.size} $index")
-            index = 0;
-        }
-        sp_host?.setSelection(index, true) // 将上次选的默认选
-
-    }
-
-    private val hostSpinnerListener = object : AdapterView.OnItemSelectedListener {
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//            Timber.d("$position")
-            MmkvUtil.save(MmkvUtil.Hosts, hosts.get(position))
-            MmkvUtil.save(MmkvUtil.HostsIndex, position)
-
-        }
-
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-        }
-
     }
 
     private fun loadActivity(pkg: String, act: String) {
@@ -238,22 +204,5 @@ class AdminActivity : AppActivity() {
     }
 
     override fun initData() {
-        InputDialog.Builder(getContext()).setTitle("Admin password").setContent("")
-            .setHint("Admin password").setConfirm(getString(R.string.common_confirm))
-            .setCancel(getString(R.string.common_cancel))
-            .setListener(object : InputDialog.OnListener {
-                override fun onCancel(dialog: BaseDialog?) {
-//                            InputDialog.OnListener.super.onCancel(dialog);
-                    finish()
-                }
-
-                override fun onConfirm(dialog: BaseDialog?, content: String) {
-                    if (!content.equals("qqqqqq") && !AppConfig.isDebug()) {
-                        ToastUtils.show("faild")
-                        finish()
-                    }
-                }
-            }).show()
-
     }
 }

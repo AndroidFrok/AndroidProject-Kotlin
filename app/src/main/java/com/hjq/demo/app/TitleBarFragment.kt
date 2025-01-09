@@ -12,7 +12,7 @@ import com.hjq.demo.action.TitleBarAction
  *    time   : 2020/10/31
  *    desc   : 带标题栏的 Fragment 业务基类
  */
-abstract class TitleBarFragment<A : AppActivity> : AppFragment<A>(), TitleBarAction {
+abstract class TitleBarFragment<A : AppActivity> : AppFragment<A>()  {
 
     /** 标题栏对象 */
     private var titleBar: TitleBar? = null
@@ -22,9 +22,9 @@ abstract class TitleBarFragment<A : AppActivity> : AppFragment<A>(), TitleBarAct
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val titleBar = getTitleBar()
+//        val titleBar = getTitleBar()
         // 设置标题栏点击监听
-        titleBar?.setOnTitleBarListener(this)
+//        titleBar?.setOnTitleBarListener(this)
 
         if (isStatusBarEnabled()) {
             // 初始化沉浸式状态栏
@@ -66,10 +66,10 @@ abstract class TitleBarFragment<A : AppActivity> : AppFragment<A>(), TitleBarAct
         return getAttachActivity()!!.isStatusBarDarkFont()
     }
 
-    override fun getTitleBar(): TitleBar? {
+    /*override fun getTitleBar(): TitleBar? {
         if (titleBar == null || !isLoading()) {
             titleBar = obtainTitleBar(view as ViewGroup)
         }
         return titleBar
-    }
+    }*/
 }

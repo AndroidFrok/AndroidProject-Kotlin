@@ -25,7 +25,7 @@ import com.hjq.base.action.KeyboardAction
  *    desc   : Fragment 技术基类
  */
 abstract class BaseFragment<A : BaseActivity> : Fragment(),
-       BundleAction, KeyboardAction {
+    HandlerAction,   BundleAction, KeyboardAction {
 
     /** Activity 对象 */
     private var activity: A? = null
@@ -89,6 +89,7 @@ abstract class BaseFragment<A : BaseActivity> : Fragment(),
     override fun onDestroy() {
         super.onDestroy()
         loading = false
+        removeCallbacks()
     }
 
     override fun onDetach() {

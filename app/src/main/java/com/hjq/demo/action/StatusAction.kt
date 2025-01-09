@@ -52,7 +52,7 @@ interface StatusAction {
      * 显示空提示
      */
     fun showEmpty() {
-        showLayout(R.drawable.status_empty_ic, R.string.status_layout_no_data, null)
+//        showLayout(R.drawable.status_empty_ic, R.string.status_layout_no_data, null)
     }
 
     /**
@@ -65,11 +65,11 @@ interface StatusAction {
                 val info: NetworkInfo? = manager.activeNetworkInfo
                 // 判断网络是否连接
                 if (info == null || !info.isConnected) {
-                    showLayout(R.drawable.status_network_ic, R.string.status_layout_error_network, listener)
+//                    showLayout(R.drawable.status_network_ic, R.string.status_layout_error_network, listener)
                     return
                 }
             }
-            showLayout(R.drawable.status_error_ic, R.string.status_layout_error_request, listener)
+//            showLayout(R.drawable.status_error_ic, R.string.status_layout_error_request, listener)
         }
     }
 

@@ -28,6 +28,7 @@ abstract class AppActivity : BaseActivity(), ToastAction, TitleBarAction, OnHttp
 
     /** 标题栏对象 */
     private var titleBar: TitleBar? = null
+
     /** 加载对话框 */
     private var dialog: BaseDialog? = null
 
@@ -157,7 +158,8 @@ abstract class AppActivity : BaseActivity(), ToastAction, TitleBarAction, OnHttp
     }
 
     override fun onFail(e: Exception) {
-        toast(e.message)
+//        toast(e.message)
+        toast("离线模式")
     }
 
     override fun onEnd(call: Call) {

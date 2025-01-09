@@ -62,9 +62,9 @@ class PersonalDataActivity : AppActivity() {
     override fun initData() {
         avatarView?.let {
             GlideApp.with(this)
-                .load(R.drawable.avatar_placeholder_ic)
-                .placeholder(R.drawable.avatar_placeholder_ic)
-                .error(R.drawable.avatar_placeholder_ic)
+                .load(R.mipmap.add)
+                /*.placeholder(R.drawable.avatar_placeholder_ic)
+                .error(R.drawable.avatar_placeholder_ic)*/
                 .transform(MultiTransformation(CenterCrop(), CircleCrop()))
                 .into(it)
         }

@@ -60,9 +60,9 @@ class GlideConfig : AppGlideModule() {
             RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
             // 设置默认加载中占位图
-            .placeholder(R.drawable.image_loading_ic)
+//            .placeholder(R.drawable.image_loading_ic)
             // 设置默认加载出错占位图
-            .error(R.drawable.image_error_ic)
+//            .error(R.drawable.image_error_ic)
         )
     }
 

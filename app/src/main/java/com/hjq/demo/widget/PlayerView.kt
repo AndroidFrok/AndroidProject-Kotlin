@@ -27,7 +27,6 @@ import com.hjq.base.action.ActivityAction
 import com.hjq.demo.R
 import com.hjq.widget.layout.SimpleLayout
 import com.hjq.widget.view.PlayButton
-import com.tencent.bugly.crashreport.CrashReport
 import timber.log.Timber
 import java.io.File
 import java.util.*
@@ -261,7 +260,7 @@ class PlayerView @JvmOverloads constructor(
      */
     fun lock() {
         lockMode = true
-        lockView.setImageResource(R.drawable.video_lock_close_ic)
+        lockView.setImageResource(R.mipmap.add)
         topLayout.visibility = GONE
         bottomLayout.visibility = GONE
         controlView.visibility = GONE
@@ -275,7 +274,7 @@ class PlayerView @JvmOverloads constructor(
      */
     fun unlock() {
         lockMode = false
-        lockView.setImageResource(R.drawable.video_lock_open_ic)
+        lockView.setImageResource(R.mipmap.add)
         topLayout.visibility = VISIBLE
         if (videoView.isPlaying) {
             bottomLayout.visibility = VISIBLE
@@ -591,7 +590,9 @@ class PlayerView @JvmOverloads constructor(
             activity.getString(R.string.common_video_error_supplement), what, extra
         ) + videoUrl;
         Timber.e(message)
-        CrashReport.postCatchedException(Throwable(message))/*MessageDialog.Builder(activity)
+//        CrashReport.postCatchedException(Throwable(message))
+
+        /*MessageDialog.Builder(activity)
             .setMessage(message)
             .setConfirm(R.string.common_confirm)
             .setCancel(null)
@@ -722,7 +723,7 @@ class PlayerView @JvmOverloads constructor(
                     val progress: Int = getProgress() + second * 1000
                     if (progress >= 0 && progress <= getDuration()) {
                         adjustSecond = second
-                        lottieView.setImageResource(if (adjustSecond < 0) R.drawable.video_schedule_rewind_ic else R.drawable.video_schedule_forward_ic)
+                        lottieView.setImageResource(if (adjustSecond < 0) R.mipmap.add else R.mipmap.add)
                         messageView.text = String.format("%s s", abs(adjustSecond))
                         post(mShowMessageRunnable)
                     }
@@ -755,15 +756,15 @@ class PlayerView @JvmOverloads constructor(
                         val percent: Int = (brightness * 100).toInt()
                         @DrawableRes val iconId: Int = when {
                             percent > 100 / 3 * 2 -> {
-                                R.drawable.video_brightness_high_ic
+                                R.mipmap.add
                             }
 
                             percent > 100 / 3 -> {
-                                R.drawable.video_brightness_medium_ic
+                                R.mipmap.add
                             }
 
                             else -> {
-                                R.drawable.video_brightness_low_ic
+                                R.mipmap.add
                             }
                         }
                         lottieView.setImageResource(iconId)
@@ -785,19 +786,19 @@ class PlayerView @JvmOverloads constructor(
                     @DrawableRes val iconId: Int
                     iconId = when {
                         percent > 100 / 3 * 2 -> {
-                            R.drawable.video_volume_high_ic
+                            R.mipmap.add
                         }
 
                         percent > 100 / 3 -> {
-                            R.drawable.video_volume_medium_ic
+                            R.mipmap.add
                         }
 
                         percent != 0 -> {
-                            R.drawable.video_volume_low_ic
+                            R.mipmap.add
                         }
 
                         else -> {
-                            R.drawable.video_volume_mute_ic
+                            R.mipmap.add
                         }
                     }
                     lottieView.setImageResource(iconId)

@@ -15,6 +15,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.core.content.FileProvider
+import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.ShellUtils
 import com.hjq.base.BaseDialog
 import com.hjq.base.action.AnimAction
@@ -27,6 +28,8 @@ import com.hjq.http.EasyHttp
 import com.hjq.http.listener.OnDownloadListener
 import com.hjq.http.model.HttpMethod
 import com.hjq.permissions.Permission
+import com.hjq.toast.ToastUtils
+import com.kongzue.dialogx.dialogs.PopTip
 import com.tencent.bugly.crashreport.CrashReport
 import java.io.File
 
@@ -210,6 +213,7 @@ class UpdateDialog {
                     }
 
                     override fun onProgress(file: File, progress: Int) {
+                        com.kongzue.dialogx.dialogs.WaitDialog.show("新版下载中 $progress")
                         updateView?.text =
                             String.format(getString(R.string.update_status_running)!!, progress)
                         progressView?.progress = progress
@@ -248,7 +252,10 @@ class UpdateDialog {
                                 // 设置通知点击之后的意图
                                 .setContentIntent(
                                     PendingIntent.getActivity(
-                                        getContext(), 1, getInstallIntent(), Intent.FILL_IN_ACTION or  PendingIntent.FLAG_IMMUTABLE
+                                        getContext(),
+                                        1,
+                                        getInstallIntent(),
+                                        Intent.FILL_IN_ACTION or PendingIntent.FLAG_IMMUTABLE
                                     )
                                 )
                                 // 设置点击通知后是否自动消失
@@ -290,13 +297,19 @@ class UpdateDialog {
          */
         @Permissions(Permission.REQUEST_INSTALL_PACKAGES)
         private fun installApk() {
+            if (AppUtils.isAppRoot()) {
+                ToastUtils.show("静默更新中")
+                slience()
+            } else {
+                getContext().startActivity(getInstallIntent())
+            }
             when (AppType) {
                 1 -> {
                     getContext().startActivity(getInstallIntent())
                 }
 
                 2 -> {
-                    slience()
+
                 }
             }
         }
@@ -306,7 +319,7 @@ class UpdateDialog {
             updateView?.setText("静默安装")
             val result = ShellUtils.execCmd("pm install -r $apkFile", true)
             if (result.errorMsg != "") {
-                CrashReport.postCatchedException(Throwable(result.errorMsg))
+//                CrashReport.postCatchedException(Throwable(result.errorMsg))
             }
         }
 

@@ -13,7 +13,7 @@ import com.hjq.demo.app.AppFragment
 import com.hjq.demo.manager.*
 import com.hjq.demo.other.DoubleClickHelper
 import com.hjq.demo.ui.adapter.NavigationAdapter
-import com.hjq.demo.ui.fragment.StatusFragment
+import com.hjq.demo.ui.fragment.MessageFragment
 
 /**
  *    author : Android 轮子哥
@@ -30,8 +30,7 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
 
         @JvmOverloads
         fun start(
-            context: Context,
-            fragmentClass: Class<out AppFragment<*>?>? = StatusFragment::class.java
+            context: Context, fragmentClass: Class<out AppFragment<*>?>? = MessageFragment::class.java
         ) {
             val intent = Intent(context, HomeActivity::class.java)
             intent.putExtra(INTENT_KEY_IN_FRAGMENT_CLASS, fragmentClass)
@@ -56,25 +55,25 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
             addItem(
                 NavigationAdapter.MenuItem(
                     getString(R.string.home_nav_index),
-                    ContextCompat.getDrawable(this@HomeActivity, R.mipmap.add)
+                    ContextCompat.getDrawable(this@HomeActivity, R.drawable.home_home_selector)
                 )
             )
             addItem(
                 NavigationAdapter.MenuItem(
                     getString(R.string.home_nav_found),
-                    ContextCompat.getDrawable(this@HomeActivity, R.mipmap.add)
+                    ContextCompat.getDrawable(this@HomeActivity, R.drawable.home_home_selector)
                 )
             )
             addItem(
                 NavigationAdapter.MenuItem(
                     getString(R.string.home_nav_message),
-                    ContextCompat.getDrawable(this@HomeActivity, R.mipmap.add)
+                    ContextCompat.getDrawable(this@HomeActivity, R.drawable.home_home_selector)
                 )
             )
             addItem(
                 NavigationAdapter.MenuItem(
                     getString(R.string.home_nav_me),
-                    ContextCompat.getDrawable(this@HomeActivity, R.mipmap.add)
+                    ContextCompat.getDrawable(this@HomeActivity, R.drawable.home_home_selector)
                 )
             )
             setOnNavigationListener(this@HomeActivity)
@@ -84,10 +83,13 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
 
     override fun initData() {
         pagerAdapter = FragmentPagerAdapter<AppFragment<*>>(this).apply {
-            addFragment(StatusFragment.newInstance())
-            addFragment(StatusFragment.newInstance())
-            addFragment(StatusFragment.newInstance())
-            addFragment(StatusFragment.newInstance())
+//            addFragment(HomeFragment.newInstance())
+//            addFragment(FindFragment.newInstance())
+            addFragment(MessageFragment.newInstance())
+            addFragment(MessageFragment.newInstance())
+            addFragment(MessageFragment.newInstance())
+            addFragment(MessageFragment.newInstance())
+//            addFragment(MineFragment.newInstance())
             viewPager?.adapter = this
         }
         onNewIntent(intent)
@@ -139,7 +141,6 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
             else -> false
         }
     }
-
 
 
     override fun onBackPressed() {

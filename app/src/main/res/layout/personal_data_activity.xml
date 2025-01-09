@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:bar_leftText="@string/personal_data_address"
-        app:bar_rightDrawable="@drawable/arrows_right_ic"
+        app:bar_rightDrawable="@mipmap/launcher_ic"
         app:bar_rightTextHint="@string/personal_data_address_hint" />
 
 </LinearLayout>

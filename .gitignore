@@ -10,3 +10,4 @@ app/preview
 *.iml
 .DS_Store
 local.properties
+gradle.properties

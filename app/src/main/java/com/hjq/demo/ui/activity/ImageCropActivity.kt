@@ -204,7 +204,7 @@ class ImageCropActivity : AppActivity() {
                 }
             })
         } catch (e: ActivityNotFoundException) {
-            CrashReport.postCatchedException(e)
+//            CrashReport.postCatchedException(e)
             setResult(RESULT_ERROR, Intent().putExtra(INTENT_KEY_OUT_ERROR, getString(R.string.image_crop_error_not_support)))
             finish()
         }

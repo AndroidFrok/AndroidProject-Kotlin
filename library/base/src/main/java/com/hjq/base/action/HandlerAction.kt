@@ -61,6 +61,5 @@ interface HandlerAction {
         HANDLER.removeCallbacksAndMessages(this)
     }
 
-    fun <V : View?> findViewById(id: Int): V?
 //    fun <V : View?> findViewById(id: Int): V
 }
