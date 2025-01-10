@@ -10,7 +10,7 @@ android {
     defaultConfig {
 
         // 无痛修改包名：https://www.jianshu.com/p/17327e191d2e
-        applicationId 'com.juhui2024.maojin'
+        applicationId 'com.juhui2024.demo'
         multiDexEnabled true
         // 仅保留中文语种的资源
 //        resConfigs 'zh'
@@ -66,12 +66,12 @@ android {
             // 签名信息配置
             signingConfig signingConfigs.config
             // 添加清单占位符
-            addManifestPlaceholders(['app_name': '毛巾机-dev'])
+            addManifestPlaceholders(['app_name': '范例工程-dev'])
             ndk {
                 // 警告：无特殊情况不要改这里了  armeabi：万金油架构平台（占用率：0%）
                 // armeabi-v7a：曾经主流的架构平台（占用率：10%）
                 // arm64-v8a：目前主流架构平台（占用率：95%）
-                abiFilters 'armeabi-v7a', 'arm64-v8a', "x86_64","x86"
+                abiFilters 'armeabi-v7a', 'arm64-v8a', "x86_64", "x86"
             }
         }
 
@@ -87,7 +87,7 @@ android {
             applicationIdSuffix ''
             minifyEnabled false
             // 添加清单占位符
-            addManifestPlaceholders(['app_name': '毛巾机pre'])
+            addManifestPlaceholders(['app_name': '范例工程 pre'])
         }
 
         release {
@@ -136,7 +136,7 @@ android {
     applicationVariants.all { variant ->
         // apk 输出文件名配置
         variant.outputs.all { output ->
-            outputFileName =  'maojin_vCode' + variant.versionCode + '_vName' + variant.versionName + '_' + variant.buildType.name
+            outputFileName = 'maojin_vCode' + variant.versionCode + '_vName' + variant.versionName + '_' + variant.buildType.name
             if (variant.buildType.name == buildTypes.release.getName()) {
                 outputFileName += '_' + new Date().format('MMdd')
             }
