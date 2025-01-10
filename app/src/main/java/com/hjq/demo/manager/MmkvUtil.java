@@ -7,7 +7,8 @@ import com.tencent.mmkv.MMKV;
  */
 public class MmkvUtil {
     private static MMKV kv;
-
+    public static String Hosts = "hosts";
+    public static String HostsIndex = "hosts_index";
     public static String Port = "key0";
     public static String LastReq = "last_req_time";
     public static String Baudrate = "key1";

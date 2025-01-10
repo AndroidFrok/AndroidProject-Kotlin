@@ -18,7 +18,8 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
@@ -93,7 +94,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="固件桌面" />
+                android:text="固件桌面"
+                android:visibility="gone" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_sys_setting"
@@ -103,19 +105,57 @@
                 android:text="系统设置" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/t_host"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="主机切换"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_host"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/t_host"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="机器信息"
+                app:layout_constraintStart_toStartOf="@+id/t_host"
+                app:layout_constraintTop_toBottomOf="@+id/t_host" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_reboot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="尝试重启设备" />
+                android:text="重启Android"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_info"
+                app:layout_constraintStart_toEndOf="@+id/sp_host" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tt_debug"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="调试开关"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_reboot"
+                app:layout_constraintStart_toEndOf="@+id/btn_reboot" />
+
+            <com.hjq.widget.view.SwitchButton
+                android:id="@+id/switch_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/tt_debug"
+                app:layout_constraintStart_toEndOf="@+id/tt_debug" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
