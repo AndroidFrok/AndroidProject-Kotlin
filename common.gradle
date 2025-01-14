@@ -11,8 +11,8 @@ android {
         minSdkVersion 19
         // 目标适配版本
         targetSdkVersion androidapi
-        versionName "20241227"
-        versionCode 7
+        versionName "20250000"
+        versionCode 1
     }
 
     // 支持 Java JDK 8
@@ -130,7 +130,7 @@ dependencies {
 //    debugImplementation "com.github.getActivity:Logcat:$logcat"
 //    previewImplementation "com.github.getActivity:Logcat:$logcat"
     implementation 'io.github.xmaihh:serialport:2.1.2'
-    implementation'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycleV}"
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

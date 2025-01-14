@@ -16,7 +16,7 @@ public class Autorun extends BroadcastReceiver {
             Intent intent = new Intent();
             intent.setClass(context, SplashActivity.class);// 开机后指定要执行程序的界面文件
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+//            context.startActivity(intent);
         }
     }
 }
