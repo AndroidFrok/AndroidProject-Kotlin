@@ -74,7 +74,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines}"
     /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑以上依赖不可随意升级版本 */
-
+    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     implementation 'com.kyle.nestedradiogrouplib:radiogrouplib:1.0.1'
     implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
     implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
