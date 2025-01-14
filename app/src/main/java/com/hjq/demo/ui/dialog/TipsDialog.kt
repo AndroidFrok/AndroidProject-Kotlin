@@ -19,9 +19,9 @@ import com.hjq.demo.R
 class TipsDialog {
 
     companion object {
-        const val ICON_FINISH: Int = R.mipmap.add
-        const val ICON_ERROR: Int = R.mipmap.add
-        const val ICON_WARNING: Int = R.mipmap.add
+          var ICON_FINISH: Int = R.mipmap.add
+          var ICON_ERROR: Int = R.mipmap.add
+          var ICON_WARNING: Int = R.mipmap.add
     }
 
     class Builder(context: Context) : BaseDialog.Builder<Builder>(context),

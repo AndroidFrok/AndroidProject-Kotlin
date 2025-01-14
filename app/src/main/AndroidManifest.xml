@@ -108,15 +108,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-
-                <!--<category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />-->
-            </intent-filter>
         </activity> <!-- 引导页 -->
         <activity
             android:name=".ui.activity.AdminActivity"

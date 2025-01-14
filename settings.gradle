@@ -1,3 +1,4 @@
+include ':cpu'
 include ':app'
 include ':library:base'
 include ':library:widget'
