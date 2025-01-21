@@ -77,7 +77,11 @@ dependencies {
     implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     implementation 'com.kyle.nestedradiogrouplib:radiogrouplib:1.0.1'
     implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
+    /*轮播 三选一  xbanner */
     implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
+    implementation 'io.github.youth5201314:banner:2.2.3'
+
+    /*轮播 三选一*/
     implementation 'org.greenrobot:eventbus:3.3.1'
     def lifecycleV = "2.3.1"
     implementation 'com.tencent:mmkv-static:1.2.14'
