@@ -193,7 +193,7 @@ class AppApplication : MultiDexApplication() {
             // 设置请求处理策略
             .setHandler(RequestHandler(this)).addHeader(MmkvUtil.Token, "")
             .addHeader(MmkvUtil.Version, AppConfig.getVersionName())
-            .addHeader(MmkvUtil.MN, MmkvUtil.getString(MmkvUtil.MN, "mj_2412070003"))
+            .addHeader(MmkvUtil.MN, MmkvUtil.getString(MmkvUtil.MN, "-"))
             .addHeader("v-code", "${AppConfig.getVersionCode()}").addHeader(
                 "phone",
                 Build.BRAND + "-" + Build.MODEL + "-" + Build.PRODUCT + "-" + Build.BOARD + "-" + Build.DEVICE + "-Android" + Build.VERSION.RELEASE + "-API" + Build.VERSION.SDK_INT

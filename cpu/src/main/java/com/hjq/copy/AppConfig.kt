@@ -1,4 +1,4 @@
-package com.hjq.demo.other
+package com.hjq.copy
 
 import com.hjq.demo.manager.MmkvUtil
 
@@ -17,9 +17,10 @@ object AppConfig {
      * 当前是否为调试模式
      */
     fun isDebug(): Boolean {
+        return true ;
         val isUserDebug: Boolean = MmkvUtil.getBool(MmkvUtil.DeveloperOpenDebug)
         return if (!isUserDebug) {
-            true
+            BuildConfig.DEBUG
         } else true
     }
 
@@ -27,7 +28,7 @@ object AppConfig {
      * 获取当前构建的模式
      */
     fun getBuildType(): String {
-        return MmkvUtil.getString(MmkvUtil.BUILD_TYPE, "");
+        return BuildConfig.BUILD_TYPE
     }
 
     /**
@@ -41,35 +42,35 @@ object AppConfig {
      * 获取当前应用的包名
      */
     fun getPackageName(): String {
-        return MmkvUtil.getString(MmkvUtil.APPLICATION_ID, "");
+        return BuildConfig.APPLICATION_ID
     }
 
     /**
      * 获取当前应用的版本名
      */
     fun getVersionName(): String {
-        return MmkvUtil.getString(MmkvUtil.VERSION_NAME, "");
+        return BuildConfig.VERSION_NAME
     }
 
     /**
      * 获取当前应用的版本码
      */
     fun getVersionCode(): Int {
-        return MmkvUtil.getInt(MmkvUtil.VERSION_CODE, 1);
+        return BuildConfig.VERSION_CODE
     }
 
     /**
      * 获取 Bugly Id
      */
     fun getBuglyId(): String {
-        return MmkvUtil.getString(MmkvUtil.BUGLY_ID, "");
+        return BuildConfig.BUGLY_ID
     }
 
     /**
      * 获取服务器主机地址
      */
     fun getHostUrl(): String {
-        return MmkvUtil.getString(MmkvUtil.HOST_URL, "http://baidu.com");
+        return "http://xcx.cottonh2o.com"
     }
 
     /**
