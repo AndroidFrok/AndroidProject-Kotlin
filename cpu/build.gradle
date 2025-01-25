@@ -159,6 +159,6 @@ dependencies {
     // 控件封装
 //    implementation project(':library:widget')
 
-    annotationProcessor 'com.alibaba:arouter-compiler:1.5.2'
+    kapt 'com.alibaba:arouter-compiler:1.5.2'
     implementation 'com.alibaba:arouter-api:1.5.2'
 }
