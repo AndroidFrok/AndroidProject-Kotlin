@@ -1,17 +1,15 @@
 package com.hjq.demo.ui.fragment
 
-import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.alibaba.android.arouter.launcher.ARouter
 import com.hjq.demo.R
 import com.hjq.demo.aop.Permissions
-import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.TitleBarFragment
-import com.hjq.demo.http.glide.GlideApp
+import com.hjq.demo.manager.Router
+import com.hjq.demo.ui.activity.AdminActivity
 import com.hjq.demo.ui.activity.HomeActivity
 import com.hjq.permissions.Permission
-import com.hjq.permissions.XXPermissions
 import timber.log.Timber
 
 /**
@@ -52,8 +50,18 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
             return;
         }
         var a: AppCompatButton? = getAttachActivity()?.findViewById(R.id.btn_message_image3)
+        var btn_message_image1: AppCompatButton? =
+            getAttachActivity()?.findViewById(R.id.btn_message_image1)
         a?.setOnClickListener {
             toast("aaaaaaa");
+        }
+        btn_message_image1?.setOnClickListener {
+
+            ARouter.getInstance().build(Router.Main).navigation();
+        }
+        btn_message_image1?.setOnLongClickListener {
+            startActivity(AdminActivity::class.java)
+            true
         }
 
     }

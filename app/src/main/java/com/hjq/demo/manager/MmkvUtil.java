@@ -12,14 +12,24 @@ public class MmkvUtil {
     public static String Port = "key0";
     public static String LastReq = "last_req_time";
     public static String Baudrate = "key1";
-//    public static String DeviceCode = "dev_code";
+    //    public static String DeviceCode = "dev_code";
     public static String Token = "token";
     public static String Version = "version";
     public static String MN = "machine-no";
     public static String OutMp3 = "good_out_mp3";
     static public String DeveloperOpenDebug = "k9";
-    static public String AdUrl= "ad_url";
-    static public String AdLocalfile= "ad_file";
+    static public String AdUrl = "ad_url";
+    static public String AdLocalfile = "ad_file";
+
+    static public String BUILD_TYPE = "BUILD_TYPE";
+    static public String DEBUG = "DEBUG";
+    static public String APPLICATION_ID = "APPLICATION_ID";
+    static public String BUGLY_ID = "BUGLY_ID";
+    static public String VERSION_CODE = "VERSION_CODE";
+    static public String VERSION_NAME = "VERSION_NAME";
+    static public String HOST_URL = "HOST_URL";
+
+
     private static MMKV init() {
         if (kv == null) {
             kv = MMKV.defaultMMKV();
@@ -37,6 +47,7 @@ public class MmkvUtil {
         init();
         return kv.encode(key, value);
     }
+
     public static boolean save(String key, long value) {
         init();
         return kv.encode(key, value);

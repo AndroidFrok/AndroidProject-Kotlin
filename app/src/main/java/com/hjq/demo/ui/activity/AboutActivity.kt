@@ -15,7 +15,10 @@ class AboutActivity : AppActivity() {
         return R.layout.about_activity
     }
 
-    override fun initView() {}
+    override fun initView() {
+
+
+    }
 
     override fun initData() {}
 }

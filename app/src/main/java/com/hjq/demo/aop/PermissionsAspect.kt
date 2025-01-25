@@ -2,10 +2,8 @@ package com.hjq.demo.aop
 
 import android.app.Activity
 import com.hjq.demo.manager.*
-import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.PermissionCallback
 import com.hjq.permissions.XXPermissions
-import com.tencent.bugly.crashreport.CrashReport
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
@@ -64,9 +62,7 @@ class PermissionsAspect {
                             // 获得权限，执行原方法
                             joinPoint.proceed()
                         } catch (e: Throwable) {
-                            if (AppConfig.buglyUpload()) {
-//                                CrashReport.postCatchedException(e)
-                            }
+
                         }
                     }
                 }

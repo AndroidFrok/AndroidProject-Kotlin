@@ -16,7 +16,6 @@ import com.hjq.demo.aop.Permissions
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.other.AppConfig
 import com.hjq.permissions.Permission
-import com.tencent.bugly.crashreport.CrashReport
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*

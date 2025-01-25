@@ -1,7 +1,6 @@
-package com.hjq.demo.app
+package com.hjq.copy
 
 import android.app.Activity
-import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
@@ -11,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.multidex.MultiDexApplication
+import com.alibaba.android.arouter.launcher.ARouter
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonToken
 import com.hjq.bar.TitleBar
@@ -24,8 +24,7 @@ import com.hjq.demo.http.model.RequestHandler
 import com.hjq.demo.http.model.RequestServer
 import com.hjq.demo.manager.ActivityManager
 import com.hjq.demo.manager.MmkvUtil
-import com.hjq.demo.other.AppConfig
-import com.hjq.demo.other.AppConfig.isDebug
+import com.hjq.copy.AppConfig.isDebug
 import com.hjq.demo.other.CrashHandler
 import com.hjq.demo.other.DebugLoggerTree
 import com.hjq.demo.other.MaterialHeader
@@ -121,9 +120,18 @@ class AppApplication : MultiDexApplication() {
 // 没用        MultiLanguages.setDefaultLanguage(Locale.TAIWAN);
         super.attachBaseContext(MultiLanguages.attach(base))
     }
-    fun initSdk1( ) {
+
+    private fun storeBuildconfig() {
+
+    }
+
+    fun initSdk1() {
         MultiLanguages.init(this)
         MMKV.initialize(this)
+        if (isDebug()) {
+            ARouter.openDebug();ARouter.openLog()
+        }
+        ARouter.init(this)
         MultiLanguages.setOnLanguageListener(object : OnLanguageListener {
             override fun onAppLocaleChange(oldLocale: Locale?, newLocale: Locale?) {
                 Timber.d("onAppLocaleChange{${newLocale?.language}}")
@@ -141,9 +149,9 @@ class AppApplication : MultiDexApplication() {
         // 设置全局的 Header 构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context: Context, layout: RefreshLayout ->
             MaterialHeader(context).setColorSchemeColors(
-                    ContextCompat.getColor(
-                            context, R.color.common_accent_color
-                    )
+                ContextCompat.getColor(
+                    context, R.color.common_accent_color
+                )
             )
         }
         // 设置全局的 Footer 构建器
@@ -154,14 +162,14 @@ class AppApplication : MultiDexApplication() {
         SmartRefreshLayout.setDefaultRefreshInitializer { context: Context, layout: RefreshLayout ->
             // 刷新头部是否跟随内容偏移
             layout.setEnableHeaderTranslationContent(true)
-                    // 刷新尾部是否跟随内容偏移
-                    .setEnableFooterTranslationContent(true)
-                    // 加载更多是否跟随内容偏移
-                    .setEnableFooterFollowWhenNoMoreData(true)
-                    // 内容不满一页时是否可以上拉加载更多
-                    .setEnableLoadMoreWhenContentNotFull(false)
-                    // 仿苹果越界效果开关
-                    .setEnableOverScrollDrag(false)
+                // 刷新尾部是否跟随内容偏移
+                .setEnableFooterTranslationContent(true)
+                // 加载更多是否跟随内容偏移
+                .setEnableFooterFollowWhenNoMoreData(true)
+                // 内容不满一页时是否可以上拉加载更多
+                .setEnableLoadMoreWhenContentNotFull(false)
+                // 仿苹果越界效果开关
+                .setEnableOverScrollDrag(false)
         }
 
         // 初始化吐司
@@ -178,20 +186,20 @@ class AppApplication : MultiDexApplication() {
         val okHttpClient: OkHttpClient = OkHttpClient.Builder().build()
 
         EasyConfig.with(okHttpClient)
-                // 是否打印日志
-                .setLogEnabled(AppConfig.isLogEnable())
-                // 设置服务器配置
-                .setServer(RequestServer())
-                // 设置请求处理策略
-                .setHandler(RequestHandler(this)).addHeader(MmkvUtil.Token, "")
-                .addHeader(MmkvUtil.Version, AppConfig.getVersionName())
-                .addHeader(MmkvUtil.MN, MmkvUtil.getString(MmkvUtil.MN, "mj_2412070003"))
-                .addHeader("v-code", "${AppConfig.getVersionCode()}").addHeader(
-                        "phone",
-                        Build.BRAND + "-" + Build.MODEL + "-" + Build.PRODUCT + "-" + Build.BOARD + "-" + Build.DEVICE + "-Android" + Build.VERSION.RELEASE + "-API" + Build.VERSION.SDK_INT
-                )
-                // 设置请求重试次数
-                .setRetryCount(1).into()
+            // 是否打印日志
+            .setLogEnabled(AppConfig.isLogEnable())
+            // 设置服务器配置
+            .setServer(RequestServer())
+            // 设置请求处理策略
+            .setHandler(RequestHandler(this)).addHeader(MmkvUtil.Token, "")
+            .addHeader(MmkvUtil.Version, AppConfig.getVersionName())
+            .addHeader(MmkvUtil.MN, MmkvUtil.getString(MmkvUtil.MN, "mj_2412070003"))
+            .addHeader("v-code", "${AppConfig.getVersionCode()}").addHeader(
+                "phone",
+                Build.BRAND + "-" + Build.MODEL + "-" + Build.PRODUCT + "-" + Build.BOARD + "-" + Build.DEVICE + "-Android" + Build.VERSION.RELEASE + "-API" + Build.VERSION.SDK_INT
+            )
+            // 设置请求重试次数
+            .setRetryCount(1).into()
 
         // 设置 Json 解析容错监听
         GsonFactory.setJsonCallback { typeToken: TypeToken<*>, fieldName: String?, jsonToken: JsonToken ->
@@ -208,10 +216,10 @@ class AppApplication : MultiDexApplication() {
 
         // 注册网络状态变化监听
         val connectivityManager: ConnectivityManager? =
-                ContextCompat.getSystemService(this, ConnectivityManager::class.java)
+            ContextCompat.getSystemService(this, ConnectivityManager::class.java)
         if (connectivityManager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             connectivityManager.registerDefaultNetworkCallback(object :
-                    ConnectivityManager.NetworkCallback() {
+                ConnectivityManager.NetworkCallback() {
                 override fun onLost(network: Network) {
                     val topActivity: Activity? = ActivityManager.getInstance().getTopActivity()
                     if (topActivity !is LifecycleOwner) {
@@ -225,12 +233,12 @@ class AppApplication : MultiDexApplication() {
                 }
             })
         }
-    }
-   /* companion object {
+    }/* companion object {
 
-        *//**
-         * 初始化一些第三方框架
-         *//*
+         */
+    /**
+     * 初始化一些第三方框架
+     *//*
         fun initSdk(application: Application) {
             MultiLanguages.init(application)
             MMKV.initialize(application)

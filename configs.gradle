@@ -45,15 +45,11 @@ ext {
         case SERVER_TYPE_TEST:
         case SERVER_TYPE_PREVIEW:
             LOG_ENABLE = true
-            if (serverType == SERVER_TYPE_PREVIEW) {
-                HOST_URL = "https://www.pre.baidu.com/"
-            } else {
-                HOST_URL = "https://www.test.baidu.com/"
-            }
+            HOST_URL = "https://www.test.baidu.com/" //todo 每次交给客户时 必须检查一下默认主机是否正确
             break
         case SERVER_TYPE_PRODUCT:
             LOG_ENABLE = false
-            HOST_URL = "https://www.baidu.com/"
+            HOST_URL = "https://www.baidu.com/"//todo 每次交给客户时 必须检查一下默认主机是否正确
             break
     }
 }

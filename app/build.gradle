@@ -30,6 +30,11 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     // Apk 签名的那些事：https://www.jianshu.com/p/a1f8e5896aa2
@@ -146,4 +151,7 @@ dependencies {
     api project(':library:base')
     // 控件封装
     api project(':library:widget')
+
+    annotationProcessor 'com.alibaba:arouter-compiler:1.5.2'
+    implementation 'com.alibaba:arouter-api:1.5.2'
 }

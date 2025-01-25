@@ -29,8 +29,6 @@ import com.hjq.http.listener.OnDownloadListener
 import com.hjq.http.model.HttpMethod
 import com.hjq.permissions.Permission
 import com.hjq.toast.ToastUtils
-import com.kongzue.dialogx.dialogs.PopTip
-import com.tencent.bugly.crashreport.CrashReport
 import java.io.File
 
 /**

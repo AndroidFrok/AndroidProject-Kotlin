@@ -11,7 +11,6 @@ import com.hjq.demo.R
 import com.hjq.demo.action.TitleBarAction
 import com.hjq.demo.action.ToastAction
 import com.hjq.demo.http.model.HttpData
-import com.hjq.demo.other.AppConfig
 import com.hjq.demo.ui.dialog.WaitDialog
 import com.hjq.http.listener.OnHttpListener
 import com.hjq.language.MultiLanguages
@@ -169,9 +168,9 @@ abstract class AppActivity : BaseActivity(), ToastAction, TitleBarAction, OnHttp
 
     override fun onResume() {
         super.onResume()
-        if (AppConfig.isDebug()) {
+        /*if ( AppConfig.isDebug()) {
             getTitleBar()?.setTitle(localClassName + "-" + getTitleBar()?.title)
-        }
+        }*/
     }
 
     override fun onDestroy() {

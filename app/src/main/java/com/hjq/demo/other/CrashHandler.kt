@@ -53,7 +53,7 @@ class CrashHandler private constructor(private val application: Application) :
 
         // 致命异常标记：如果上次崩溃的时间距离当前崩溃小于 5 分钟，那么判定为致命异常
         val deadlyCrash: Boolean = currentCrashTime - lastCrashTime < 1000 * 60 * 5
-        if (AppConfig.isDebug() || AppConfig.getBuildType().equals("preview")) {
+        if ( AppConfig.isDebug() || AppConfig.getBuildType().equals("preview")) {
             CrashActivity.start(application, throwable)
         } else {
             if (!deadlyCrash) {
