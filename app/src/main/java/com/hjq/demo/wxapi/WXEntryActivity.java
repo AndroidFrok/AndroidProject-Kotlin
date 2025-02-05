@@ -1,25 +1,11 @@
 package com.hjq.demo.wxapi;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-
-import com.tencent.mm.opensdk.constants.ConstantsAPI;
-import com.tencent.mm.opensdk.modelbase.BaseReq;
-import com.tencent.mm.opensdk.modelbase.BaseResp;
-import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
-import timber.log.Timber;
-
 /**
  * author : Android 轮子哥
  * github : https://github.com/getActivity/AndroidProject
  * time   : 2019/05/06
  * desc   : 微信登录回调（请注意这个 Activity 放置的包名要和当前项目的包名保持一致，否则将不能正常回调）
- */
+
 public final class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     private IWXAPI api;
@@ -75,5 +61,5 @@ public final class WXEntryActivity extends Activity implements IWXAPIEventHandle
             String extraData = launchMiniProResp.extMsg; //对应小程序组件 <button open-type="launchApp"> 中的 app-parameter 属性
             Timber.d("extraData" + extraData);
         }
-    }*/
-}
+    }
+} */

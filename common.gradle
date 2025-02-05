@@ -73,17 +73,15 @@ dependencies {
     def coroutines = "1.6.0"//1.6.0
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines}"
-    /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑以上依赖不可随意升级版本 */
-    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
-    implementation 'com.kyle.nestedradiogrouplib:radiogrouplib:1.0.1'
-    implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
-    /*轮播 三选一  xbanner */
-    implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
-    implementation 'io.github.youth5201314:banner:2.2.3'
-
-    /*轮播 三选一*/
-    implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     def lifecycleV = "2.3.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycleV}"
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑以上依赖不可随意升级版本 */
+
+    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
+    implementation 'org.greenrobot:eventbus:3.3.1'
     implementation 'com.tencent:mmkv-static:1.2.14'
 //    https://github.com/kongzue/DialogX/releases
     def dialogx_version = "0.0.49"
@@ -92,7 +90,6 @@ dependencies {
     api 'com.blankj:utilcode:1.30.6'
     def work_version = "2.4.0"
     implementation 'com.github.getActivity:MultiLanguages:9.3'
-    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
     implementation 'com.github.getActivity:XXPermissions:20.0'
     // 标题栏框架：https://github.com/getActivity/TitleBar
     implementation 'com.github.getActivity:TitleBar:10.5'
@@ -107,8 +104,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
     // Gson 解析容错：https://github.com/getActivity/GsonFactory
     implementation 'com.github.getActivity:GsonFactory:5.2'
-    // Shape 框架：https://github.com/getActivity/ShapeView
-    implementation 'com.github.getActivity:ShapeView:6.0'
     // AOP 插件库：https://mvnrepository.com/artifact/org.aspectj/aspectjrt
     implementation 'org.aspectj:aspectjrt:1.9.6'
     // 图片加载框架：https://github.com/bumptech/glide
@@ -127,20 +122,23 @@ dependencies {
     implementation 'com.scwang.smart:refresh-header-material:2.0.3'
     // 日志打印框架：https://github.com/JakeWharton/timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
-    // 指示器框架：https://github.com/ongakuer/CircleIndicator
-    implementation 'me.relex:circleindicator:2.1.6'
     // 内存泄漏监测框架：https://github.com/square/leakcanary
     def logcat = 11.85 // 11.86 佬报错
 //    debugImplementation "com.github.getActivity:Logcat:$logcat"
-//    previewImplementation "com.github.getActivity:Logcat:$logcat"
-    implementation 'io.github.xmaihh:serialport:2.1.2'
-    implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycleV}"
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    previewImplementation "com.github.getActivity:Logcat:$logcat"
+    // Shape 框架：https://github.com/getActivity/ShapeView
+    implementation 'com.github.getActivity:ShapeView:6.0'
 
-    /*implementation "com.android.support:appcompat-v7:19.1.0"
-    implementation "com.android.support:recyclerview-v7:19.1.0"
-    implementation "com.android.support:constraint:c:1.1.3"
-    implementation "com.android.support:design:19.0.0"*/
+    /*可选区域 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+    implementation 'io.github.xmaihh:serialport:2.1.2'
+    // 指示器框架：https://github.com/ongakuer/CircleIndicator
+    implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'com.kyle.nestedradiogrouplib:radiogrouplib:1.0.1'
+    implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
+    /*轮播 三选一  xbanner */
+    implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
+    implementation 'io.github.youth5201314:banner:2.2.3'
+    /*轮播 三选一*/
+//    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
+    /*可选区域 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
 }
