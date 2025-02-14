@@ -130,17 +130,18 @@ dependencies {
     implementation 'com.github.getActivity:ShapeView:6.0'
 
     /*可选区域 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
-    implementation 'io.github.xmaihh:serialport:2.1.2'
+    // https://github.com/jenly1314/ZXingLite/tree/androidx  不用升级了 高版本要求 api21+ https://mvnrepository.com/artifact/com.github.jenly1314/zxing-lite
+//    implementation 'com.king.zxing:zxing-lite:1.1.9-androidx'
+//    implementation 'io.github.xmaihh:serialport:2.1.2'
     // 指示器框架：https://github.com/ongakuer/CircleIndicator
-    implementation 'me.relex:circleindicator:2.1.6'
-    implementation 'com.kyle.nestedradiogrouplib:radiogrouplib:1.0.1'
-    implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
+//    implementation 'me.relex:circleindicator:2.1.6'
+//    implementation 'com.kyle.nestedradiogrouplib:radiogrouplib:1.0.1'
+//    implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
     /*轮播 三选一  xbanner */
-    implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
-    implementation 'io.github.youth5201314:banner:2.2.3'
+    /*implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
+    implementation 'io.github.youth5201314:banner:2.2.3'*/
     /*轮播 三选一*/
 //    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
-    implementation 'com.github.jenly1314:zxing-lite:2.1.1'// 二维码 
     /*可选区域 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
 
 }
