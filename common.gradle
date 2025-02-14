@@ -140,5 +140,7 @@ dependencies {
     implementation 'io.github.youth5201314:banner:2.2.3'
     /*轮播 三选一*/
 //    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
+    implementation 'com.github.jenly1314:zxing-lite:2.1.1'// 二维码 
     /*可选区域 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
+
 }

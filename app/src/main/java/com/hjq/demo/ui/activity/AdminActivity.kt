@@ -17,6 +17,7 @@ import com.hjq.demo.app.AppActivity
 import com.hjq.demo.http.WebSocketManager
 import com.hjq.demo.manager.ActivityManager
 import com.hjq.demo.manager.MmkvUtil
+import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.RomHelper
 import com.hjq.demo.ui.dialog.InputDialog
 import com.hjq.http.EasyConfig
@@ -25,6 +26,7 @@ import com.hjq.language.MultiLanguages
 import com.hjq.toast.ToastUtils
 import com.hjq.widget.view.SwitchButton
 import com.kongzue.dialogx.dialogs.MessageDialog
+import com.kongzue.dialogx.dialogs.PopTip
 import com.kongzue.dialogx.dialogs.TipDialog
 import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener
 import java.io.DataOutputStream
@@ -96,6 +98,24 @@ class AdminActivity : AppActivity() {
     }
 
     override fun initView() {
+        InputDialog.Builder(getContext()).setCancelable(false).setTitle("请输入超管密码").setContent("").setHint("请输入密码").setConfirm(getString(R.string.common_confirm)).setCancel(getString(R.string.common_cancel)).setListener(object : InputDialog.OnListener {
+            override fun onConfirm(dialog: BaseDialog?, content: String) {
+                if (content == "qqqqqq") {
+                    PopTip.show("欢迎管理员")
+                } else {
+                    PopTip.show("密码错误")
+                    if (!AppConfig.isDebug()) {
+                        finish();
+                    }
+
+                }
+            }
+
+            override fun onCancel(dialog: BaseDialog?) {
+                super.onCancel(dialog)
+                finish()
+            }
+        }).show()
         tv_info?.text = "ROOT:${AppUtils.isAppRoot()}"
 
         btn_back?.setOnClickListener {
