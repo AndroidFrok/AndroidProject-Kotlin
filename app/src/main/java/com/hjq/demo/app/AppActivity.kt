@@ -15,7 +15,6 @@ import com.hjq.demo.ui.dialog.WaitDialog
 import com.hjq.http.listener.OnHttpListener
 import com.hjq.language.MultiLanguages
 import okhttp3.Call
-import tp.xmaihh.serialport.SerialHelper
 
 /**
  *    author : Android 轮子哥
@@ -24,7 +23,7 @@ import tp.xmaihh.serialport.SerialHelper
  *    desc   : Activity 业务基类
  */
 abstract class AppActivity : BaseActivity(), ToastAction, TitleBarAction, OnHttpListener<Any> {
-    protected var serialHelper: SerialHelper? = null
+//    protected var serialHelper: SerialHelper? = null
 
     /** 标题栏对象 */
     private var titleBar: TitleBar? = null

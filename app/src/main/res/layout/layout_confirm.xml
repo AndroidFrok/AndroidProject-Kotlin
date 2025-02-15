@@ -94,7 +94,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_40"
                 android:scaleType="fitXY"
-                android:src="@mipmap/cart_left"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -116,6 +116,7 @@ class AdminActivity : AppActivity() {
                 finish()
             }
         }).show()
+        
         tv_info?.text = "ROOT:${AppUtils.isAppRoot()}"
 
         btn_back?.setOnClickListener {

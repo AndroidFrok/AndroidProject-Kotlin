@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:background="@color/transparent"
         app:layout_constraintTop_toTopOf="parent"
-        app:leftIcon="@mipmap/cart_left"
         app:leftIconHeight="0dp"
         app:leftIconWidth="0dp"
         app:lineVisible="false"

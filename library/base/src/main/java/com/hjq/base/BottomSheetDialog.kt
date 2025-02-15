@@ -30,7 +30,7 @@ open class BottomSheetDialog @JvmOverloads constructor(context: Context, themeRe
     private var canceledOnTouchOutsideSet: Boolean = false
 
     init {
-        bottomSheetBehavior.addBottomSheetCallback(MyBottomSheetCallback())
+//        bottomSheetBehavior.addBottomSheetCallback(MyBottomSheetCallback())
         bottomSheetBehavior.isHideable = cancelable
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
     }
