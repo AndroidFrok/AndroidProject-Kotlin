@@ -66,7 +66,7 @@ dependencies {
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     /* 以下依赖不可随意升级版本 */
     // Material 库：https://github.com/material-components/material-components-android
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
 //material >1.4.0 太高 出现 values-v31.xml:3: error: resource android:color/system_neutral1_1000 not found.
     implementation 'com.airbnb.android:lottie:4.1.0'
     // Kotlin 协程：https://github.com/Kotlin/kotlinx.coroutines
@@ -129,7 +129,7 @@ dependencies {
     // Shape 框架：https://github.com/getActivity/ShapeView
     implementation 'com.github.getActivity:ShapeView:6.0'
     // 指示器框架：https://github.com/ongakuer/CircleIndicator
-//    implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'me.relex:circleindicator:2.1.6'
 
     /*可选区域 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
     // https://github.com/jenly1314/ZXingLite/tree/androidx  不用升级了 高版本要求 api21+ https://mvnrepository.com/artifact/com.github.jenly1314/zxing-lite
