@@ -59,7 +59,7 @@ android {
 
         debug {
             // 给包名添加后缀
-//            applicationIdSuffix '.debug'
+            applicationIdSuffix '.debug'
             // 调试模式开关
             debuggable true
             jniDebuggable true
@@ -93,7 +93,7 @@ android {
             applicationIdSuffix ''
             minifyEnabled false
             // 添加清单占位符
-            addManifestPlaceholders(['app_name': '范例工程 pre'])
+            addManifestPlaceholders(['app_name': '范例工程pre'])
         }
 
         release {
