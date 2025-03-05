@@ -87,7 +87,9 @@ class AppApplication : MultiDexApplication() {
         }
 //        val brand = Build.BRAND.lowercase(Locale.getDefault())
         DialogX.DEBUGMODE = isDebug()
-        DialogX.init(this)/*if (brand == "xiaomi") {
+        DialogX.init(this)
+
+        /*if (brand == "xiaomi") {
             DialogX.globalStyle = MIUIStyle()
         } else {
             DialogX.globalStyle = IOSStyle()

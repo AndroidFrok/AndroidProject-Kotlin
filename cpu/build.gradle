@@ -33,8 +33,8 @@ android {
         }
         ndk {
             // 警告：无特殊情况不要改这里了  armeabi：万金油架构平台（占用率：0%）
-            // armeabi-v7a：曾经主流的架构平台（占用率：10%）
-            // arm64-v8a：目前主流架构平台（占用率：95%）
+            // armeabi-v7a：开发板应用 仅选择  ；曾经主流的架构平台（占用率：10%）
+            // arm64-v8a：普通手机应用 仅选择 ；目前主流架构平台（占用率：95%）
             abiFilters 'armeabi-v7a'
         }
         javaCompileOptions {
@@ -73,12 +73,7 @@ android {
             signingConfig signingConfigs.config
             // 添加清单占位符
             addManifestPlaceholders(['app_name': '范例工程-dev'])
-            ndk {
-                // 警告：无特殊情况不要改这里了  armeabi：万金油架构平台（占用率：0%）
-                // armeabi-v7a：曾经主流的架构平台（占用率：10%）
-                // arm64-v8a：目前主流架构平台（占用率：95%） , 'arm64-v8a', "x86_64", "x86"
-                abiFilters 'armeabi-v7a'
-            }
+
         }
 
         preview.initWith(debug)
