@@ -235,7 +235,9 @@ class AppApplication : MultiDexApplication() {
                 }
             })
         }
-    }/* companion object {
+    }
+
+    /* companion object {
 
          */
     /**

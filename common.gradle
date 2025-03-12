@@ -137,7 +137,10 @@ dependencies {
 //    implementation 'io.github.xmaihh:serialport:2.1.2'
 
 //    implementation 'com.kyle.nestedradiogrouplib:radiogrouplib:1.0.1'
-//    implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
+//       自定义 斜门的tablayout需求 优选 dsl
+    /*implementation 'com.github.angcyo.DslTablayout:TabLayout:3.5.5'
+    implementation 'io.github.h07000223:flycoTabLayout:3.0.0'*/
+
     /*轮播 三选一  xbanner */
     /*implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
     implementation 'io.github.youth5201314:banner:2.2.3'*/
