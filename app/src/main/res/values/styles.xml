@@ -4,7 +4,7 @@
     <!-- 应用主题样式 -->
 <!--    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">-->
 <!--    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">-->
-    <style name="AppTheme" parent="Theme.Material3.DayNight">
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
 <!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
         <!-- 窗口背景颜色 -->
         <item name="android:windowBackground">@color/common_window_background_color</item>
