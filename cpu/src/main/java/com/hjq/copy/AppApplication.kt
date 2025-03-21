@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.gson.reflect.TypeToken
@@ -72,6 +73,7 @@ class AppApplication : MultiDexApplication() {
      *  用户没同意隐私政策之前不能初始化的
      */
     private fun privacySdk() {
+        MultiDex.install(this)
         if (isDebug()) {
             // 设置标题栏初始化器
             if (ImageUtils.isDark(this)) {

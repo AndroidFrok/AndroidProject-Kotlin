@@ -3,7 +3,7 @@ apply plugin: 'kotlin-kapt'
 // 通用配置
 android {
 //    def androidapi = 31
-    compileSdkVersion 33
+    compileSdkVersion 34
     defaultConfig {
         // 最低安装版本
         minSdkVersion 19

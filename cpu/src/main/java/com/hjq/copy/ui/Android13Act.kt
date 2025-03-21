@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.BroadcastReceiver
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -20,6 +21,7 @@ import com.google.android.material.button.MaterialButton
 import com.hjq.copy.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.Router
+import com.hjq.demo.ui.activity.ImageSelectActivity
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
@@ -34,6 +36,8 @@ import timber.log.Timber
 class Android13Act : AppActivity() {
     private val btn_notification: MaterialButton? by lazy { findViewById(R.id.btn_notification) }
     private val btn_nearbywifi: MaterialButton? by lazy { findViewById(R.id.btn_nearbywifi) }
+    private val btn_photochoose: MaterialButton? by lazy { findViewById(R.id.btn_photochoose) }
+    private val btn_clipboard: MaterialButton? by lazy { findViewById(R.id.btn_clipboard) }
     override fun getLayoutId(): Int {
         return R.layout.act_a13;
     }
@@ -45,10 +49,36 @@ class Android13Act : AppActivity() {
         btn_nearbywifi?.setOnClickListener {
             this.checkWifiPermission();
         }
+        btn_clipboard?.setOnClickListener {
+            this.checkClipBoard();
+        }
+        btn_photochoose?.setOnClickListener {
+            ImageSelectActivity.start(this, object : ImageSelectActivity.OnPhotoSelectListener {
+
+                override fun onSelected(data: MutableList<String>) {
+                    // 裁剪头像
+                    Timber.e("onSelected: ${data[0]}");
+                }
+
+                override fun onCancel() {
+                    super.onCancel()
+                    PopTip.show("取消").iconSuccess();
+                }
+            })
+        }
     }
 
     override fun initData() {
 
+    }
+
+    private fun checkClipBoard() {
+//        XXPermissions.with(this).permission(Permission.Cl)
+        val mng = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val s = mng.primaryClip?.getItemAt(0)?.text.toString();
+        val msg = "剪切板内容: $s";
+        Timber.d("剪切板: $s")
+        PopTip.show("$msg")
     }
 
     private fun checkWifiPermission() {
@@ -195,13 +225,11 @@ class Android13Act : AppActivity() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == WifiManager.SCAN_RESULTS_AVAILABLE_ACTION) {
                 if (XXPermissions.isGranted(
-                        getContext(),
-                        Manifest.permission.ACCESS_FINE_LOCATION
+                        getContext(), Manifest.permission.ACCESS_FINE_LOCATION
                     )
                 ) {
                     if (ActivityCompat.checkSelfPermission(
-                            getContext(),
-                            Manifest.permission.ACCESS_FINE_LOCATION
+                            getContext(), Manifest.permission.ACCESS_FINE_LOCATION
                         ) != PackageManager.PERMISSION_GRANTED
                     ) {
                         Timber.e("错 WifiScan Failed to get scan results");

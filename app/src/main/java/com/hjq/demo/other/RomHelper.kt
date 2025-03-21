@@ -21,7 +21,7 @@ class RomHelper {
             val preFix5 = "com.incar";
 //        过滤掉系统应用
             for (app in list) {
-                val appName = ctx.packageManager.getApplicationLabel(app.applicationInfo)
+                val appName = ctx.packageManager.getApplicationLabel(app.applicationInfo!!)
                 val pkg = app.packageName;
                 val isAndroid = pkg.startsWith(preFix);
                 val isGoogle = pkg.startsWith(preFix2);
@@ -30,7 +30,7 @@ class RomHelper {
                 val is4 = pkg.startsWith(preFix4);
                 val is5 = pkg.startsWith(preFix5);
                 val preInstall =
-                    app.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM !== 0;// preInstall = true 是预装
+                    app.applicationInfo!!.flags and ApplicationInfo.FLAG_SYSTEM !== 0;// preInstall = true 是预装
                 Timber.i("$pkg");
                 if (preInstall && !isAndroid && !isGoogle && !isMediatek && !is3 && !is4 && !is5) {
                     myList.add(app)
