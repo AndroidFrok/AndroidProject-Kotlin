@@ -5,6 +5,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Build
+import android.os.Build.VERSION_CODES.R
+import android.os.StrictMode
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
@@ -77,6 +79,21 @@ class AppApplication : MultiDexApplication() {
             } else {
                 TitleBar.setDefaultStyle(TitleBarStyle())
             }
+
+            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
+//  todo                  .detectDiskReads().detectDiskWrites().detectNetwork()
+                .detectAll()
+                .penaltyLog()
+                .penaltyDropBox()// Log violations to Logcat
+//                    .penaltyDialog() // Crash app on violation (optional)
+                .build())
+
+            StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder()
+//  todo                  .detectLeakedSqlLiteObjects().detectLeakedClosableObjects().detectActivityLeaks()
+                .detectAll()
+                .penaltyLog()
+                .penaltyDropBox()
+                .build())
         } else {
 //             如果已经配置了深色模式资源  而客户没这个需求则需要开启这样代码
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -235,6 +252,8 @@ class AppApplication : MultiDexApplication() {
                 }
             })
         }
+
+
     }
 
     /* companion object {
