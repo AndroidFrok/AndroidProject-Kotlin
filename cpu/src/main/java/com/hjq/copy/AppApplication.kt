@@ -80,8 +80,8 @@ class AppApplication : MultiDexApplication() {
                 TitleBar.setDefaultStyle(TitleBarStyle())
             }
 
-            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
-//  todo                  .detectDiskReads().detectDiskWrites().detectNetwork()
+            /*StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
+//                     .detectDiskReads().detectDiskWrites().detectNetwork()
                 .detectAll()
                 .penaltyLog()
                 .penaltyDropBox()// Log violations to Logcat
@@ -89,11 +89,11 @@ class AppApplication : MultiDexApplication() {
                 .build())
 
             StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder()
-//  todo                  .detectLeakedSqlLiteObjects().detectLeakedClosableObjects().detectActivityLeaks()
+//                     .detectLeakedSqlLiteObjects().detectLeakedClosableObjects().detectActivityLeaks()
                 .detectAll()
                 .penaltyLog()
                 .penaltyDropBox()
-                .build())
+                .build())*/
         } else {
 //             如果已经配置了深色模式资源  而客户没这个需求则需要开启这样代码
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -168,9 +168,9 @@ class AppApplication : MultiDexApplication() {
         // 设置全局的 Header 构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context: Context, layout: RefreshLayout ->
             MaterialHeader(context).setColorSchemeColors(
-                ContextCompat.getColor(
+                /*ContextCompat.getColor(
                     context, R.color.common_accent_color
-                )
+                )*/
             )
         }
         // 设置全局的 Footer 构建器

@@ -17,7 +17,6 @@ class AboutActivity : AppActivity() {
 
     override fun initView() {
 
-
     }
 
     override fun initData() {}

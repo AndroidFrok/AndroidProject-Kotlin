@@ -3,6 +3,7 @@ package com.hjq.demo.ui.fragment
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
 import com.alibaba.android.arouter.launcher.ARouter
+import com.google.android.material.button.MaterialButton
 import com.hjq.demo.R
 import com.hjq.demo.aop.Permissions
 import com.hjq.demo.app.TitleBarFragment
@@ -20,6 +21,9 @@ import timber.log.Timber
  */
 class MessageFragment : TitleBarFragment<HomeActivity>() {
 
+    private var btn_13: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
+
+    //btn_13
     companion object {
 
         fun newInstance(): MessageFragment {
@@ -34,6 +38,7 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
     }
 
     override fun initView() {
+        btn_13 = activity?.findViewById(R.id.btn_13);
         imageView = activity?.findViewById(com.hjq.demo.R.id.iv_message_image)/*setOnClickListener(
             R.id.btn_message_image1,
             R.id.btn_message_image2,
@@ -45,6 +50,10 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
             R.id.btn_message_white,
             R.id.btn_message_tab
         )*/
+
+        btn_13?.setOnClickListener {
+            ARouter.getInstance().build(Router.A13).navigation();
+        }
         if (getAttachActivity() == null) {
             Timber.e("aaaa");
             return;

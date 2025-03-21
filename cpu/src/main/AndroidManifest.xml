@@ -16,5 +16,9 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name=".ui.Android13Act"
+            android:screenOrientation="sensorPortrait"
+            android:exported="true" />
     </application>
 </manifest>
