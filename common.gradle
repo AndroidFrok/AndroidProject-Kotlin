@@ -8,7 +8,7 @@ android {
         // 最低安装版本
         minSdkVersion 19
         // 目标适配版本
-        targetSdkVersion 33
+        targetSdkVersion 36
         versionName "20250001"
         versionCode 2
     }
@@ -64,7 +64,7 @@ dependencies {
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     /* 以下依赖不可随意升级版本 */
     // Material 库：https://github.com/material-components/material-components-android
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.5.0'
 //material >1.4.0 太高 出现 values-v31.xml:3: error: resource android:color/system_neutral1_1000 not found.
     implementation 'com.airbnb.android:lottie:4.1.0'
     // Kotlin 协程：https://github.com/Kotlin/kotlinx.coroutines

@@ -14,6 +14,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
+import com.google.android.material.color.DynamicColors
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonToken
 import com.hjq.bar.TitleBar
@@ -74,6 +75,8 @@ class AppApplication : MultiDexApplication() {
      */
     private fun privacySdk() {
         MultiDex.install(this)
+        DynamicColors.applyToActivitiesIfAvailable(this)
+
         if (isDebug()) {
             // 设置标题栏初始化器
             if (ImageUtils.isDark(this)) {

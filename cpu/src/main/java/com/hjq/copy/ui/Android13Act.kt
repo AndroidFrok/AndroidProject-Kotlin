@@ -13,11 +13,13 @@ import android.graphics.BitmapFactory
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import android.os.Build
+import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.color.DynamicColors
 import com.hjq.copy.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.Router
@@ -220,6 +222,10 @@ class Android13Act : AppActivity() {
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        registerWifiReceiver();
+    }
 
     private val wifiScanReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {

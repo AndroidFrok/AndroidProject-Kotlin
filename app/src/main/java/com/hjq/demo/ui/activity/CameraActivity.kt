@@ -168,7 +168,9 @@ class CameraActivity : AppActivity() {
         }
         val imageUri: Uri? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             // 通过 FileProvider 创建一个 Content 类型的 Uri 文件
-            FileProvider.getUriForFile(this, AppConfig.getPackageName() + ".provider", file)
+            val pkg = AppConfig.getPackageName();
+            Timber.i("包名 $pkg");
+            FileProvider.getUriForFile(this, pkg + ".provider", file)
         } else {
             Uri.fromFile(file)
         }
