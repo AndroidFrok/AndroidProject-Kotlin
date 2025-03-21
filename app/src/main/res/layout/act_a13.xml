@@ -17,8 +17,17 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_notification"
             android:layout_width="match_parent"
-            android:gravity="center"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="5dp"
             android:text="通知栏" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_nearbywifi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="5dp"
+            android:text="附近WIFI" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.core.widget.NestedScrollView>

@@ -2,10 +2,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 // 通用配置
 android {
-
-    // 编译源码版本  targetSdkVersion 最低到29就行  再低要改清单文件很多地方
-    def androidapi = 31
-    compileSdkVersion androidapi
+//    def androidapi = 31
+    compileSdkVersion 33
     defaultConfig {
         // 最低安装版本
         minSdkVersion 19
