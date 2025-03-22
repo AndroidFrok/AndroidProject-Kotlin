@@ -3,6 +3,9 @@ package com.hjq.copy.ui
 import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
 import android.content.BroadcastReceiver
 import android.content.ClipboardManager
 import android.content.Context
@@ -40,11 +43,15 @@ class Android13Act : AppActivity() {
     private val btn_nearbywifi: MaterialButton? by lazy { findViewById(R.id.btn_nearbywifi) }
     private val btn_photochoose: MaterialButton? by lazy { findViewById(R.id.btn_photochoose) }
     private val btn_clipboard: MaterialButton? by lazy { findViewById(R.id.btn_clipboard) }
+    private val btn_ble: MaterialButton? by lazy { findViewById(R.id.btn_ble) }
     override fun getLayoutId(): Int {
         return R.layout.act_a13;
     }
 
     override fun initView() {
+        btn_ble?.setOnClickListener {
+            testBle();
+        }
         btn_notification?.setOnClickListener {
             permissionNotification()
         }
@@ -72,6 +79,23 @@ class Android13Act : AppActivity() {
 
     override fun initData() {
 
+    }
+
+    private fun testBle() {
+        val adapter = BluetoothAdapter.getDefaultAdapter();XXPermissions.with(this)
+            .permission(Permission.BLUETOOTH_CONNECT)
+            .request(object : OnPermissionCallback {
+                override fun onGranted(p0: MutableList<String>, p1: Boolean) {
+                    val state = adapter.getProfileConnectionState(BluetoothDevice.DEVICE_TYPE_LE);
+//                    Timber.i("")
+                    PopTip.show("蓝牙状态 $state").iconSuccess()
+                }
+
+                override fun onDenied(permissions: MutableList<String>, doNotAskAgain: Boolean) {
+                    super.onDenied(permissions, doNotAskAgain)
+                }
+            });
+//      val bleMng = BluetoothManager.getAdapter(this);
     }
 
     private fun checkClipBoard() {

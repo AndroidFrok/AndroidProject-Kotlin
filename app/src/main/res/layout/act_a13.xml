@@ -15,12 +15,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_ble"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="5dp"
+            android:text="14 蓝牙" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingVertical="5dp"
-            android:text="通知栏" />
+            android:text="13 通知栏" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_nearbywifi"
@@ -28,14 +36,15 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingVertical="5dp"
-            android:text="附近WIFI" />
+            android:text="13 附近WIFI" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_photochoose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingVertical="5dp"
-            android:text="照片选择/暂时无需适配" />
+            android:text="照片选择/13 14暂时无需适配" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_clipboard"
@@ -43,6 +52,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingVertical="5dp"
-            android:text="剪切板" />
+            android:text="13 剪切板" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.core.widget.NestedScrollView>
