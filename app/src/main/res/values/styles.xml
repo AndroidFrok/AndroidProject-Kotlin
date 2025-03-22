@@ -2,19 +2,19 @@
 <resources>
 
     <!-- 应用主题样式 -->
-<!--    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">-->
-<!--    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">-->
+    <!--    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">-->
+    <!--    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">-->
     <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+        <!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
         <!-- 窗口背景颜色 -->
         <item name="android:windowBackground">@color/common_window_background_color</item>
         <!--        <item name="android:windowBackground">@mipmap/launcher_ic</item>-->
         <!-- 应用的主要色调，ActionBar Toolbar 默认使用该颜色 -->
-        <item name="colorPrimary">@color/common_accent_color</item>
+<!-- attr 在低于安卓14的设备上会闪退         <item name="colorPrimary">?attr/colorPrimary</item>-->
         <!-- 应用的主要暗色调，状态栏默认使用该颜色 -->
-        <item name="colorPrimaryDark">@color/common_primary_dark_color</item>
+<!--        <item name="colorPrimaryDark">?attr/colorPrimaryDark</item>-->
         <!-- 应用的强调色，CheckBox RadioButton Switch 等一般控件的选中效果默认采用该颜色 -->
-        <item name="colorAccent">@color/common_accent_color</item>
+<!--        <item name="colorAccent">?attr/colorAccent</item>-->
         <!-- 默认文本颜色，Button、TextView 的文字颜色 -->
         <item name="android:textColor">@color/common_text_color</item>
         <!-- 默认字体大小，Button、TextView 的字体大小 -->
