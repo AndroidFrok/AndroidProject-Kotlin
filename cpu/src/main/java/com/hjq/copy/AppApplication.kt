@@ -76,7 +76,6 @@ class AppApplication : MultiDexApplication() {
     private fun privacySdk() {
         MultiDex.install(this)
         DynamicColors.applyToActivitiesIfAvailable(this)
-
         if (isDebug()) {
             // 设置标题栏初始化器
             if (ImageUtils.isDark(this)) {
