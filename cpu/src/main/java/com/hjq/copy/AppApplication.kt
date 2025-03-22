@@ -75,7 +75,6 @@ class AppApplication : MultiDexApplication() {
      */
     private fun privacySdk() {
         MultiDex.install(this)
-        DynamicColors.applyToActivitiesIfAvailable(this)
         if (isDebug()) {
             // 设置标题栏初始化器
             if (ImageUtils.isDark(this)) {
@@ -125,6 +124,13 @@ class AppApplication : MultiDexApplication() {
         /*DoKit.Builder(this) //                .productId("需要使用平台功能的话，需要到dokit.cn平台申请id")
     //            .customKits(mapKits)
                 .build()*/
+
+
+        if (DynamicColors.isDynamicColorAvailable()) {
+            DynamicColors.applyToActivitiesIfAvailable(this)
+        } else {
+            Timber.w("动态颜色不可用");
+        }
     }
 
     override fun onLowMemory() {
