@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingVertical="5dp"
-            android:text="照片选择/13 14暂时无需适配" />
+            android:text="照片选择/13 14 适配" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_clipboard"

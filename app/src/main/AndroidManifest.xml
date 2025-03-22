@@ -60,6 +60,7 @@
 
         <service
             android:name=".other.AliveService"
+            android:foregroundServiceType="systemExempted"
             android:enabled="true"
             android:exported="true" />
         <receiver
