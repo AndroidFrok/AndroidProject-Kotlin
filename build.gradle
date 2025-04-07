@@ -17,7 +17,7 @@ buildscript {
     dependencies {
         // Gradle 插件版本说明：https://developer.android.google.cn/studio/releases/gradle-plugin.html#updating-plugin
         // noinspection GradleDependency https://blog.csdn.net/fxjzzyo/article/details/134390809c
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.4.0'
         // Kotlin 插件：https://plugins.jetbrains.com/plugin/6954-kotlin
         // noinspection GradleDependency
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10'
