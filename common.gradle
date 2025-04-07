@@ -46,16 +46,20 @@ android {
         // 禁用图片描述警告
         disable 'ContentDescription'
     }
+    buildFeatures {
+        compose false
+        buildConfig true
+        dataBinding false
+    }
 }
 
 afterEvaluate {
     // 前提条件是这个 Module 工程必须是 Library 类型，并且排除名为 umeng 的 Module 工程
     if (android.defaultConfig.applicationId == null && "umeng" != getName()) {
-        android.buildFeatures.buildConfig = true
         // 排除 BuildConfig.class
-        /*generateReleaseBuildConfig.enabled = false
-        generatePreviewBuildConfig.enabled = false
-        generateDebugBuildConfig.enabled = false*/
+//        generateReleaseBuildConfig.enabled = false
+//        generatePreviewBuildConfig.enabled = false
+//        generateDebugBuildConfig.enabled = false
     }
 }
 
