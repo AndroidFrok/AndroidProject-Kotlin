@@ -4,6 +4,7 @@ import android.content.ContentResolver
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.*
@@ -28,9 +29,11 @@ import com.hjq.demo.ui.dialog.AlbumDialog.AlbumInfo
 import com.hjq.demo.widget.StatusLayout
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
+import com.hjq.toast.ToastUtils
 import com.hjq.widget.view.FloatActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.io.File
 import java.util.*
 
@@ -50,7 +53,38 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
         private const val INTENT_KEY_OUT_IMAGE_LIST: String = "imageList"
 
         fun start(activity: BaseActivity, listener: OnPhotoSelectListener?) {
-            start(activity, 1, listener)
+
+            val v = Build.VERSION.SDK_INT;
+//            val v = 34;
+            ToastUtils.show("$v");
+            if (v >= 33) {
+                XXPermissions.with(activity).permission(
+//                    Permission.CAMERA,
+                    Permission.READ_MEDIA_IMAGES,
+                    Permission.READ_MEDIA_VIDEO,
+                    Permission.READ_MEDIA_AUDIO,
+                ).request { permissions, all ->
+                    if (all) {
+                        start(activity, 1, listener)
+                    } else {
+                        Timber.d("权限未通过 ")
+                    }
+                }
+            } else {
+                XXPermissions.with(activity).permission(
+//                    Permission.CAMERA,
+                    Permission.WRITE_EXTERNAL_STORAGE,
+                    Permission.READ_EXTERNAL_STORAGE,
+                ).request { permissions, all ->
+                    if (all) {
+                        start(activity, 1, listener)
+
+                    } else {
+                        Timber.d("权限未通过 ")
+                    }
+                }
+            }
+
         }
 
         @Log

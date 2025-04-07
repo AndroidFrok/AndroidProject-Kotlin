@@ -38,8 +38,8 @@ class CameraActivity : AppActivity() {
         const val INTENT_KEY_OUT_ERROR: String = "error"
 
         fun start(activity: BaseActivity, listener: OnCameraListener?) {
-//            val v = Build.VERSION.SDK_INT;
-            val v = 34;
+            val v = Build.VERSION.SDK_INT;
+//            val v = 34;
             ToastUtils.show("$v");
             if (v >= 33) {
                 XXPermissions.with(activity).permission(
