@@ -60,9 +60,9 @@
 
         <service
             android:name=".other.AliveService"
-            android:foregroundServiceType="systemExempted"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:foregroundServiceType="systemExempted" />
         <receiver
             android:name=".other.UpdateRestartReceiver"
             android:exported="true">
@@ -70,7 +70,6 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
-
 
 
         <activity

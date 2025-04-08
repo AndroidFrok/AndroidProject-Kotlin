@@ -6,7 +6,7 @@ apply plugin: 'org.jetbrains.kotlin.android'
 
 // Android 代码规范文档：https://github.com/getActivity/AndroidCodeStandard
 android {
-    namespace 'com.juhui2024.demo'
+    namespace "com.hjq.copy"
     compileSdkVersion 34
     buildToolsVersion '34.0.0'
 
