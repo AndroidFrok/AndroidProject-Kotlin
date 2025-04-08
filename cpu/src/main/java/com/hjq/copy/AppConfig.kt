@@ -17,7 +17,7 @@ object AppConfig {
      * 当前是否为调试模式
      */
     fun isDebug(): Boolean {
-        return true ;
+        return true;
         val isUserDebug: Boolean = MmkvUtil.getBool(MmkvUtil.DeveloperOpenDebug)
         return if (!isUserDebug) {
             BuildConfig.DEBUG
@@ -49,14 +49,15 @@ object AppConfig {
      * 获取当前应用的版本名
      */
     fun getVersionName(): String {
-        return BuildConfig.VERSION_NAME
+        return "BuildConfig.VERSION_NAME"
     }
 
     /**
      * 获取当前应用的版本码
      */
     fun getVersionCode(): Int {
-        return BuildConfig.VERSION_CODE
+//        return BuildConfig.VERSION_CODE
+        return 1
     }
 
     /**
