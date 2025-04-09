@@ -60,7 +60,7 @@ android {
 
         debug {
             // 给包名添加后缀
-            applicationIdSuffix '.debug'
+//            applicationIdSuffix '.debug'// 没特殊需要 别开这玩意
             // 调试模式开关
             debuggable true
             jniDebuggable true
