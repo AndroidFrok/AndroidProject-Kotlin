@@ -9,7 +9,8 @@ android {
 
     // 资源目录存放指引：https://developer.android.google.cn/guide/topics/resources/providing-resources
     defaultConfig {
-
+        versionCode 22
+        versionName "20250409"
         // 无痛修改包名：https://www.jianshu.com/p/17327e191d2e
         applicationId 'com.juhui2024.demo'
         multiDexEnabled true

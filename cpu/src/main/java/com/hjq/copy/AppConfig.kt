@@ -49,15 +49,15 @@ object AppConfig {
      * 获取当前应用的版本名
      */
     fun getVersionName(): String {
-        return "BuildConfig.VERSION_NAME"
+        return BuildConfig.VERSION_NAME
     }
 
     /**
      * 获取当前应用的版本码
      */
     fun getVersionCode(): Int {
-//        return BuildConfig.VERSION_CODE
-        return 1
+        return BuildConfig.VERSION_CODE
+//        return 1
     }
 
     /**
