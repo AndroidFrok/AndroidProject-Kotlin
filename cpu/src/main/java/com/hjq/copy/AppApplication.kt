@@ -63,9 +63,13 @@ class AppApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         CommonContext.initContext(this)
-        initSdk1()/*val isAgreePrivacy = MmkvUtil.getBool("is_agree")
+        initSdk1()
+
+        /*val isAgreePrivacy = MmkvUtil.getBool("is_agree")
         if (isAgreePrivacy) {
         }*/
+
+
         privacySdk()
 
     }
@@ -124,6 +128,7 @@ class AppApplication : MultiDexApplication() {
 
         if (DynamicColors.isDynamicColorAvailable()) {
             DynamicColors.applyToActivitiesIfAvailable(this);
+            Timber.i("动态颜色可用");
             PopTip.show("应用主题色已根据手机壁纸切换").iconSuccess();
         } else {
             Timber.w("动态颜色不可用");

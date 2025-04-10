@@ -39,31 +39,17 @@ class CameraActivity : AppActivity() {
 
         fun start(activity: BaseActivity, listener: OnCameraListener?) {
 //            val v = Build.VERSION.SDK_INT;
-            val v = 34;
-            if (v >= 33) {
-                XXPermissions.with(activity).permission(
-                    Permission.CAMERA,
-                    Permission.READ_MEDIA_IMAGES,
-                    Permission.READ_MEDIA_VIDEO,
-                    Permission.READ_MEDIA_AUDIO,
-                ).request { permissions, all ->
-                    if (all) {
-                        start(activity, false, listener)
-                    } else {
-                        Timber.d("权限未通过 ")
-                    }
-                }
-            } else {
-                XXPermissions.with(activity).permission(
-                    Permission.CAMERA,
-                    Permission.WRITE_EXTERNAL_STORAGE,
-                    Permission.READ_EXTERNAL_STORAGE,
-                ).request { permissions, all ->
-                    if (all) {
-                        start(activity, false, listener)
-                    } else {
-                        Timber.d("权限未通过 ")
-                    }
+//            val v = 34;
+            XXPermissions.with(activity).permission(
+                Permission.CAMERA,
+                Permission.READ_MEDIA_IMAGES,
+                Permission.READ_MEDIA_VIDEO,
+                Permission.READ_MEDIA_AUDIO,
+            ).request { permissions, all ->
+                if (all) {
+                    start(activity, false, listener)
+                } else {
+                    Timber.d("权限未通过 ")
                 }
             }
 

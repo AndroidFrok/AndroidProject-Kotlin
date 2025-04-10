@@ -4,6 +4,7 @@ import android.content.ContentResolver
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.*
@@ -380,7 +381,10 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
         )
         var cursor: Cursor? = null
         if (XXPermissions.isGranted(
-                this, Permission.READ_MEDIA_IMAGES, Permission.READ_MEDIA_IMAGES
+                this,
+                Permission.READ_MEDIA_IMAGES,
+                Permission.READ_MEDIA_AUDIO,
+                Permission.READ_MEDIA_VIDEO
             )
         ) {
             cursor = contentResolver.query(
