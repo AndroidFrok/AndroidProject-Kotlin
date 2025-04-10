@@ -217,11 +217,8 @@ class InputTextManager private constructor(view: View, alpha: Boolean) : TextWat
 
             fun register(activity: Activity, helper: InputTextManager?) {
                 val lifecycle = TextInputLifecycle(activity, helper)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    activity.registerActivityLifecycleCallbacks(lifecycle)
-                } else {
-                    activity.application.registerActivityLifecycleCallbacks(lifecycle)
-                }
+                activity.application.registerActivityLifecycleCallbacks(lifecycle)
+
             }
         }
 
@@ -242,11 +239,8 @@ class InputTextManager private constructor(view: View, alpha: Boolean) : TextWat
                 return
             }
             textHelper?.removeAllViews()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                this.activity?.unregisterActivityLifecycleCallbacks(this)
-            } else {
-                this.activity?.application?.unregisterActivityLifecycleCallbacks(this)
-            }
+            this.activity?.application?.unregisterActivityLifecycleCallbacks(this)
+
             textHelper = null
             this.activity = null
         }

@@ -34,7 +34,7 @@
             android:layout_height="@dimen/dp_30"
             android:layout_gravity="end|center_vertical"
             android:padding="@dimen/dp_5"
-            app:srcCompat="@drawable/close_icon" />
+            app:srcCompat="@mipmap/launcher_ic" />
     </FrameLayout>
 
     <View

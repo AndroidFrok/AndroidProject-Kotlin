@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 
 import com.hjq.demo.manager.MmkvUtil;
 import com.hjq.demo.other.AppConfig;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -105,7 +104,7 @@ public class WebSocketManager extends WebSocketListener {
                         .build();
             }
             if (sWebSocket == null) {
-//   todo             mSocketURL = AppConfig.INSTANCE.getSockHost();
+//                 mSocketURL = AppConfig.INSTANCE.getSockHost();
                 Request request = new Request.Builder().url(mSocketURL).build();
                 sWebSocket = sClient.newWebSocket(request, this);
             }
@@ -151,14 +150,14 @@ public class WebSocketManager extends WebSocketListener {
     public void onClosing(WebSocket webSocket, int code, String reason) {
 //      Timber.d("onClosing ");
         webSocket.close(NORMAL_CLOSURE_STATUS, null);
-        CrashReport.postCatchedException(new Throwable("onClosing" + reason));
+//        CrashReport.postCatchedException(new Throwable("onClosing" + reason));
     }
 
     @Override
     public void onClosed(WebSocket webSocket, int code, String reason) {
         isConnected = false;
 //      Timber.d("onClosed ");
-        CrashReport.postCatchedException(new Throwable("onClosed" + reason));
+//        CrashReport.postCatchedException(new Throwable("onClosed" + reason));
     }
 
     @Override
@@ -211,7 +210,7 @@ public class WebSocketManager extends WebSocketListener {
     public void reqLogin() {
         Map<String, String> params = new ArrayMap<>();
         params.put("type", "1");
-        String id = MmkvUtil.getString(MmkvUtil.DeviceCode, "");
+        String id = MmkvUtil.getString(MmkvUtil.MN, "");
         params.put("sn", id);
 //        sendData(new Gson().toJson(params));
     }

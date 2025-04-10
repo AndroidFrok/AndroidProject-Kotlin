@@ -24,8 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:colorBackground="#b65656"
-        android:paddingHorizontal="@dimen/dp_15"
-        android:paddingVertical="@dimen/dp_10"
         android:textColor="@color/common_text_color"
         android:textSize="@dimen/sp_12"
         android:textStyle="bold"

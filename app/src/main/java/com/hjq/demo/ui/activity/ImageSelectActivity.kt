@@ -217,9 +217,9 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
             allAlbum[parentFile.name]?.remove(path)
             adapter.notifyDataSetChanged()
             if (selectImage.isEmpty()) {
-                floatingView?.setImageResource(R.drawable.camera_ic)
+                floatingView?.setImageResource(R.mipmap.add)
             } else {
-                floatingView?.setImageResource(R.drawable.succeed_ic)
+                floatingView?.setImageResource(R.mipmap.add)
             }
         }
     }
@@ -306,7 +306,7 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
             if (selectImage.contains(path)) {
                 selectImage.remove(path)
                 if (selectImage.isEmpty()) {
-                    floatingView?.setImageResource(R.drawable.camera_ic)
+                    floatingView?.setImageResource(R.mipmap.add)
                 }
                 adapter.notifyItemChanged(position)
                 return
@@ -321,7 +321,7 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
             } else if (selectImage.size < maxSelect) {
                 selectImage.add(path)
                 if (selectImage.size == 1) {
-                    floatingView?.setImageResource(R.drawable.succeed_ic)
+                    floatingView?.setImageResource(R.mipmap.add)
                 }
             } else {
                 toast(String.format(getString(R.string.image_select_max_hint), maxSelect))
@@ -384,9 +384,9 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
             // 设置新的列表数据
             adapter.setData(allImage)
             if (selectImage.isEmpty()) {
-                floatingView?.setImageResource(R.drawable.camera_ic)
+                floatingView?.setImageResource(R.mipmap.add)
             } else {
-                floatingView?.setImageResource(R.drawable.succeed_ic)
+                floatingView?.setImageResource(R.mipmap.add)
             }
 
             // 执行列表动画

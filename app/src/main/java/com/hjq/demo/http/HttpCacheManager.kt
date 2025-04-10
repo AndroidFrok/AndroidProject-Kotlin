@@ -1,10 +1,10 @@
 package com.hjq.demo.http
 
 import com.hjq.demo.http.model.RequestHandler
-import com.hjq.demo.other.AppConfig.isDebug
 import com.hjq.gson.factory.GsonFactory
 import com.hjq.http.request.HttpRequest
 import com.tencent.mmkv.MMKV
+import me.jessyan.autosize.utils.AutoSizeLog.isDebug
 import timber.log.Timber
 import java.security.SecureRandom
 

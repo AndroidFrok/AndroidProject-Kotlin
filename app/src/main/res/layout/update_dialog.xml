@@ -5,6 +5,7 @@
     android:layout_width="@dimen/dp_260"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:visibility="invisible"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="@dimen/dp_5"
     app:cardElevation="0px"

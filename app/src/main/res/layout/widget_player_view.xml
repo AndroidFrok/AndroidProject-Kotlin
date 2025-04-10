@@ -41,7 +41,7 @@
                 android:layout_gravity="center_vertical"
                 android:padding="@dimen/dp_10"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/arrows_left_ic"
+                app:srcCompat="@drawable/bar_arrows_left_black"
                 app:tint="@color/white"
                 tools:visibility="visible" />
 
@@ -79,7 +79,7 @@
             app:shape="oval"
             app:shape_solidColor="@color/black30"
             app:shape_solidPressedColor="@color/black60"
-            app:srcCompat="@drawable/video_lock_open_ic"
+            app:srcCompat="@mipmap/launcher_ic"
             tools:visibility="visible" />
 
         <com.hjq.shape.layout.ShapeLinearLayout

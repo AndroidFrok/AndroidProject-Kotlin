@@ -25,8 +25,9 @@ import java.util.*
  *    time   : 2019/09/16
  *    desc   : PopupWindow 技术基类
  */
-open class BasePopupWindow constructor(private val context: Context) : PopupWindow(context), ActivityAction,
-    HandlerAction, ClickAction, AnimAction, KeyboardAction, PopupWindow.OnDismissListener {
+open class BasePopupWindow constructor(private val context: Context) : PopupWindow(context),
+    ActivityAction, HandlerAction, ClickAction, AnimAction, KeyboardAction,
+    PopupWindow.OnDismissListener {
 
     private var popupBackground: PopupBackground? = null
     private var showListeners: MutableList<OnShowListener?>? = null
@@ -149,32 +150,30 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
     }
 
     override fun <V : View?> findViewById(@IdRes id: Int): V? {
-        return contentView.findViewById(id)
+        return contentView.findViewById(id) as V
     }
 
-    override fun setWindowLayoutType(type: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            super.setWindowLayoutType(type)
-        } else {
-            PopupWindowCompat.setWindowLayoutType(this, type)
-        }
-    }
+    /*override fun setWindowLayoutType(type: Int) {
 
-    override fun getWindowLayoutType(): Int {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            super.getWindowLayoutType()
-        } else {
-            PopupWindowCompat.getWindowLayoutType(this)
-        }
-    }
+        *//* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+             super.setWindowLayoutType(type)
+         } else {
+         }*//*
+        super.setWindowLayoutType(type)
+//        PopupWindowCompat.setWindowLayoutType(this, type)
 
-    override fun setOverlapAnchor(overlapAnchor: Boolean) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    }*/
+
+
+
+   /* override fun setOverlapAnchor(overlapAnchor: Boolean) {
+        PopupWindowCompat.setOverlapAnchor(this, overlapAnchor)
+
+        *//*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             super.setOverlapAnchor(overlapAnchor)
         } else {
-            PopupWindowCompat.setOverlapAnchor(this, overlapAnchor)
-        }
-    }
+        }*//*
+    }*/
 
     /**
      * 设置背景遮盖层的透明度
@@ -220,7 +219,7 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
         companion object {
             private const val DEFAULT_ANCHORED_GRAVITY: Int = Gravity.TOP or Gravity.START
         }
-        
+
         /** PopupWindow 对象 */
         private var popupWindow: BasePopupWindow? = null
 
@@ -297,10 +296,10 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
             // 如果当前没有设置重心，就自动获取布局重心
             if (gravity == DEFAULT_ANCHORED_GRAVITY) {
                 if (layoutParams is FrameLayout.LayoutParams) {
-                    val gravity: Int = layoutParams.gravity
+                   /* val gravity: Int = layoutParams.gravity
                     if (gravity != FrameLayout.LayoutParams.UNSPECIFIED_GRAVITY) {
                         setGravity(gravity)
-                    }
+                    }*/
                 } else if (layoutParams is LinearLayout.LayoutParams) {
                     val gravity: Int = layoutParams.gravity
                     if (gravity != Gravity.NO_GRAVITY) {
@@ -370,7 +369,8 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
          */
         open fun setGravity(gravity: Int): B {
             // 适配布局反方向
-            this.gravity = Gravity.getAbsoluteGravity(gravity, getResources().configuration.layoutDirection)
+            this.gravity =
+                Gravity.getAbsoluteGravity(gravity, getResources().configuration.layoutDirection)
             return this as B
         }
 
@@ -531,7 +531,8 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
             }
             clickArray!!.put(id, listener as OnClickListener<View>)
             if (isCreated()) {
-                popupWindow?.findViewById<View?>(id)?.setOnClickListener(ViewClickWrapper(popupWindow, listener))
+                popupWindow?.findViewById<View?>(id)
+                    ?.setOnClickListener(ViewClickWrapper(popupWindow, listener))
             }
             return this as B
         }
@@ -583,8 +584,8 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
                 clickArray?.let { array ->
                     var i = 0
                     while (i < array.size()) {
-                        contentView!!.findViewById<View?>(array.keyAt(i))?.
-                        setOnClickListener(ViewClickWrapper(popupWindow, array.valueAt(i)))
+                        /*contentView!!.findViewById<View?>(array.keyAt(i))
+                            ?.setOnClickListener(ViewClickWrapper(popupWindow, array.valueAt(i)))*/
                         i++
                     }
                 }
@@ -680,7 +681,7 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
                 // 没有 setContentView 就想 findViewById ?
                 throw IllegalStateException("are you ok?")
             }
-            return contentView!!.findViewById(id)
+            return contentView!!.findViewById(id) as V
         }
 
         /**
@@ -727,9 +728,9 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
     /**
      * PopupWindow 生命周期绑定
      */
-    private class PopupWindowLifecycle constructor(private var activity: Activity?,
-                                                   private var popupWindow: BasePopupWindow?) :
-        ActivityLifecycleCallbacks, OnShowListener, OnDismissListener {
+    private class PopupWindowLifecycle constructor(
+        private var activity: Activity?, private var popupWindow: BasePopupWindow?
+    ) : ActivityLifecycleCallbacks, OnShowListener, OnDismissListener {
 
         companion object {
             fun with(activity: Activity, popupWindow: BasePopupWindow?) {
@@ -817,7 +818,7 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
     private class PopupBackground : OnShowListener, OnDismissListener {
 
         private var alpha: Float = 0f
-        
+
         fun setAlpha(alpha: Float) {
             this.alpha = alpha
         }
@@ -848,8 +849,8 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
      */
     private class ViewClickWrapper constructor(
 
-        private val popupWindow: BasePopupWindow?,
-        private val listener: OnClickListener<View>?) : View.OnClickListener {
+        private val popupWindow: BasePopupWindow?, private val listener: OnClickListener<View>?
+    ) : View.OnClickListener {
 
         override fun onClick(view: View) {
             listener?.onClick(popupWindow, view)
@@ -871,8 +872,8 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
      * postDelayed 任务包装类
      */
     private class ShowPostDelayedWrapper constructor(
-        private val runnable: Runnable,
-        private val delayMillis: Long) : OnShowListener {
+        private val runnable: Runnable, private val delayMillis: Long
+    ) : OnShowListener {
 
         override fun onShow(popupWindow: BasePopupWindow?) {
             popupWindow?.removeOnShowListener(this)
@@ -884,8 +885,8 @@ open class BasePopupWindow constructor(private val context: Context) : PopupWind
      * postAtTime 任务包装类
      */
     private class ShowPostAtTimeWrapper constructor(
-        private val runnable: Runnable,
-        private val uptimeMillis: Long) : OnShowListener {
+        private val runnable: Runnable, private val uptimeMillis: Long
+    ) : OnShowListener {
 
         override fun onShow(popupWindow: BasePopupWindow?) {
             popupWindow?.removeOnShowListener(this)

@@ -3,6 +3,7 @@ package com.hjq.base.action
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
+import android.view.View
 
 /**
  *    author : Android 轮子哥
@@ -59,4 +60,6 @@ interface HandlerAction {
         // 移除和当前对象相关的消息回调
         HANDLER.removeCallbacksAndMessages(this)
     }
+
+//    fun <V : View?> findViewById(id: Int): V
 }

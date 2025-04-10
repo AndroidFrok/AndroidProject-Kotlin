@@ -31,14 +31,14 @@ class PasswordEditText @JvmOverloads constructor(
     OnTouchListener, OnFocusChangeListener, TextWatcher {
 
     private var currentDrawable: Drawable
-    private val visibleDrawable: Drawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.password_off_ic)!!)
+    private val visibleDrawable: Drawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.button_dialogx_material_light)!!)
     private val invisibleDrawable: Drawable
     private var touchListener: OnTouchListener? = null
     private var focusChangeListener: OnFocusChangeListener? = null
 
     init {
         visibleDrawable.setBounds(0, 0, visibleDrawable.intrinsicWidth, visibleDrawable.intrinsicHeight)
-        invisibleDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.password_on_ic)!!)
+        invisibleDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.button_dialogx_material_light)!!)
         invisibleDrawable.setBounds(0, 0, invisibleDrawable.intrinsicWidth, invisibleDrawable.intrinsicHeight)
         currentDrawable = visibleDrawable
 

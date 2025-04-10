@@ -4,9 +4,9 @@ import android.content.Intent
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.*
-import android.os.Build.VERSION.SDK
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
+import com.blankj.utilcode.util.AppUtils
 import com.hjq.base.BaseActivity
 import com.hjq.demo.R
 import com.hjq.demo.aop.Log
@@ -15,6 +15,9 @@ import com.hjq.demo.app.AppActivity
 import com.hjq.demo.other.AppConfig
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
+import com.hjq.toast.BuildConfig
+import com.hjq.toast.ToastUtils
+import com.kongzue.dialogx.dialogs.PopTip
 import timber.log.Timber
 import java.io.File
 import java.text.SimpleDateFormat
@@ -35,7 +38,10 @@ class CameraActivity : AppActivity() {
         const val INTENT_KEY_OUT_ERROR: String = "error"
 
         fun start(activity: BaseActivity, listener: OnCameraListener?) {
-            if (Build.VERSION.SDK_INT >= 32) {
+//            val v = Build.VERSION.SDK_INT;
+            val v = 34;
+            ToastUtils.show("$v");
+            if (v >= 33) {
                 XXPermissions.with(activity).permission(
                     Permission.CAMERA,
                     Permission.READ_MEDIA_IMAGES,
@@ -149,8 +155,15 @@ class CameraActivity : AppActivity() {
             Permission.WRITE_EXTERNAL_STORAGE,
             Permission.CAMERA
         )
+        val isGrant33 = XXPermissions.isGranted(
+            this,
+            Permission.CAMERA,
+            Permission.READ_MEDIA_IMAGES,
+            Permission.READ_MEDIA_VIDEO,
+            Permission.READ_MEDIA_AUDIO,
+        )
         val isResolve = intent.resolveActivity(packageManager)
-        if (isResolve == null || !isGrant) {
+        if (isResolve == null || (!isGrant && !isGrant33)) {
             setResult(
                 RESULT_ERROR,
                 Intent().putExtra(INTENT_KEY_OUT_ERROR, getString(R.string.camera_launch_fail))
@@ -169,7 +182,9 @@ class CameraActivity : AppActivity() {
         }
         val imageUri: Uri? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             // 通过 FileProvider 创建一个 Content 类型的 Uri 文件
-            FileProvider.getUriForFile(this, AppConfig.getPackageName() + ".provider", file)
+            val pkg = AppConfig.getPackageName();
+            Timber.i("包名 $pkg");
+            FileProvider.getUriForFile(this, pkg + ".provider", file)
         } else {
             Uri.fromFile(file)
         }

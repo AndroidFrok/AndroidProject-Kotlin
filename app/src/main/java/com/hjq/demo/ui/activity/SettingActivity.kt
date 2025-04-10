@@ -11,7 +11,6 @@ import com.hjq.demo.app.AppActivity
 import com.hjq.demo.http.api.demo.LogoutApi
 import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.http.model.HttpData
-import com.hjq.demo.manager.ActivityManager
 import com.hjq.demo.manager.CacheDataManager
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.ui.dialog.MenuDialog

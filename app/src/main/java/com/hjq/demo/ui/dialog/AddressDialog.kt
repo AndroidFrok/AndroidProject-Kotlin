@@ -395,7 +395,7 @@ class AddressDialog {
                 }
                 return list
             } catch (e: JSONException) {
-                CrashReport.postCatchedException(e)
+//                CrashReport.postCatchedException(e)
             }
             return null
         }
@@ -420,7 +420,7 @@ class AddressDialog {
                 }
                 list
             } catch (e: JSONException) {
-                CrashReport.postCatchedException(e)
+//                CrashReport.postCatchedException(e)
                 null
             }
         }
@@ -441,7 +441,7 @@ class AddressDialog {
                 }
                 list
             } catch (e: JSONException) {
-                CrashReport.postCatchedException(e)
+//                CrashReport.postCatchedException(e)
                 null
             }
         }
@@ -463,9 +463,9 @@ class AddressDialog {
                 inputStream.close()
                 return JSONArray(outStream.toString())
             } catch (e: IOException) {
-                CrashReport.postCatchedException(e)
+//                CrashReport.postCatchedException(e)
             } catch (e: JSONException) {
-                CrashReport.postCatchedException(e)
+//                CrashReport.postCatchedException(e)
             }
             return null
         }

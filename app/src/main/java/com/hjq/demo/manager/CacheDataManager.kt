@@ -68,7 +68,7 @@ object CacheDataManager {
                 }
             }
         } catch (e: Exception) {
-            CrashReport.postCatchedException(e)
+//            CrashReport.postCatchedException(e)
         }
         return size
     }

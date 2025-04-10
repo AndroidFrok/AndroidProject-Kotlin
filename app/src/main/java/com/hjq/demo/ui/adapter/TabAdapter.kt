@@ -119,7 +119,7 @@ class TabAdapter @JvmOverloads constructor(
 
         init {
             if (fixed) {
-                val itemView: View = getItemView()
+                val itemView: View = getItemView()!!
                 val layoutParams: ViewGroup.LayoutParams = itemView.layoutParams
                 layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
                 itemView.layoutParams = layoutParams
@@ -144,7 +144,7 @@ class TabAdapter @JvmOverloads constructor(
         init {
             titleView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, mDefaultTextSize.toFloat())
             if (fixed) {
-                val itemView: View = getItemView()
+                val itemView: View = getItemView()!!
                 val layoutParams: ViewGroup.LayoutParams = itemView.layoutParams
                 layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
                 itemView.layoutParams = layoutParams

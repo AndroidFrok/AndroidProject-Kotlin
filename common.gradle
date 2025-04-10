@@ -2,19 +2,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 // 通用配置
 android {
-
-    // 编译源码版本  targetSdkVersion 最低到29就行  再低要改清单文件很多地方
-//    def androidapi = 29
-    compileSdkVersion rootProject.ext.vc.compileSdkVersion
+    compileSdkVersion 34
     defaultConfig {
         // 最低安装版本
-        minSdkVersion 21
+        minSdkVersion 19
         // 目标适配版本
-        targetSdkVersion rootProject.ext.vc.compileSdkVersion
-        versionName "20230713"
-        versionCode 1
-        renderscriptTargetApi 21
-        renderscriptSupportModeEnabled true
+        targetSdkVersion 36
     }
 
     // 支持 Java JDK 8
@@ -67,38 +60,31 @@ dependencies {
     // 依赖 libs 目录下所有的 jar 和 aar 包
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     /* 以下依赖不可随意升级版本 */
-    // AndroidX 库：https://github.com/androidx/androidx
-    implementation 'androidx.appcompat:appcompat:1.3.0'//API29 适用1.3.0  别改了，， 1.4.0  1.5.0不行
     // Material 库：https://github.com/material-components/material-components-android
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.8.0'
 //material >1.4.0 太高 出现 values-v31.xml:3: error: resource android:color/system_neutral1_1000 not found.
     implementation 'com.airbnb.android:lottie:4.1.0'
     // Kotlin 协程：https://github.com/Kotlin/kotlinx.coroutines
     def coroutines = "1.6.0"//1.6.0
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines}"
-    // Json 解析框架：https://github.com/google/gson
-    implementation 'com.google.code.gson:gson:2.8.9'
-    implementation 'com.tencent:mmkv:1.3.9'
-    // Shape 框架：https://github.com/getActivity/ShapeView
-    implementation 'com.github.getActivity:ShapeView:6.0'
-    /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑以上依赖不可随意升级版本 */
-
-    implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     def lifecycleV = "2.3.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycleV}"
-//    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-//    implementation 'com.tencent:mmkv-static:1.2.14'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.tencent:mmkv-static:1.3.0'
+    /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑以上依赖不可随意升级版本 */
+
+    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
+    implementation 'org.greenrobot:eventbus:3.3.1'
 //    https://github.com/kongzue/DialogX/releases
     def dialogx_version = "0.0.49"
     implementation "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
-    implementation "com.github.kongzue.DialogX:DialogXMIUIStyle:${dialogx_version}"
+    implementation "com.github.kongzue.DialogX:DialogXMIUIStyle:0.0.49"
     api 'com.blankj:utilcode:1.30.6'
     def work_version = "2.4.0"
-    // https://developer.android.google.cn/jetpack/androidx/releases/work?hl=zh-cn (Java only)https://developer.android.google.cn/topic/libraries/architecture/workmanager/how-to/define-work?hl=zh-cn#java
-    implementation "androidx.work:work-runtime:$work_version"
     implementation 'com.github.getActivity:MultiLanguages:9.3'
-    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
     implementation 'com.github.getActivity:XXPermissions:20.0'
     // 标题栏框架：https://github.com/getActivity/TitleBar
     implementation 'com.github.getActivity:TitleBar:10.5'
@@ -109,32 +95,52 @@ dependencies {
     // OkHttp 框架：https://github.com/square/okhttp
     // noinspection GradleDependency
     implementation 'com.squareup.okhttp3:okhttp:3.12.13'
+    // Json 解析框架：https://github.com/google/gson  正常版本  2.8.8
+    implementation 'com.google.code.gson:gson:2.10.1'
     // Gson 解析容错：https://github.com/getActivity/GsonFactory
     implementation 'com.github.getActivity:GsonFactory:5.2'
     // AOP 插件库：https://mvnrepository.com/artifact/org.aspectj/aspectjrt
     implementation 'org.aspectj:aspectjrt:1.9.6'
     // 图片加载框架：https://github.com/bumptech/glide
     // 官方使用文档：https://github.com/Muyangmin/glide-docs-cn
-    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    // 沉浸式框架：https://github.com/gyf-dev/ImmersionBar
-    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+    // 沉浸式框架：https://github.com/gyf-dev/ImmersionBar android <= 4.4 不用
+//    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     // 手势 ImageView：https://github.com/Baseflow/PhotoView
     implementation 'com.github.Baseflow:PhotoView:2.3.0'
     // Bugly 异常捕捉：https://bugly.qq.com/docs/user-guide/instruction-manual-android/?v=20190418140644
-    implementation 'com.tencent.bugly:crashreport:4.1.9'
+    implementation 'com.tencent.bugly:crashreport:4.1.9.3'
     implementation 'com.tencent.bugly:nativecrashreport:3.9.2'
     // 上拉刷新下拉加载框架：https://github.com/scwang90/SmartRefreshLayout
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'
     implementation 'com.scwang.smart:refresh-header-material:2.0.3'
     // 日志打印框架：https://github.com/JakeWharton/timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
-    // 指示器框架：https://github.com/ongakuer/CircleIndicator
-    implementation 'me.relex:circleindicator:2.1.6'
     // 内存泄漏监测框架：https://github.com/square/leakcanary
     def logcat = 11.85 // 11.86 佬报错
-    debugImplementation "com.github.getActivity:Logcat:$logcat"
+//    debugImplementation "com.github.getActivity:Logcat:$logcat"
     previewImplementation "com.github.getActivity:Logcat:$logcat"
+    // Shape 框架：https://github.com/getActivity/ShapeView
+    implementation 'com.github.getActivity:ShapeView:6.0'
+    // 指示器框架：https://github.com/ongakuer/CircleIndicator
+    implementation 'me.relex:circleindicator:2.1.6'
+
+    /*可选区域 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+    // https://github.com/jenly1314/ZXingLite/tree/androidx  不用升级了 高版本要求 api21+ https://mvnrepository.com/artifact/com.github.jenly1314/zxing-lite
+//    implementation 'com.king.zxing:zxing-lite:1.1.9-androidx'
+//    implementation 'io.github.xmaihh:serialport:2.1.2'
+
+//    implementation 'com.kyle.nestedradiogrouplib:radiogrouplib:1.0.1'
+//       自定义 斜门的tablayout需求 优选 dsl
+    /*implementation 'com.github.angcyo.DslTablayout:TabLayout:3.5.5'
+    implementation 'io.github.h07000223:flycoTabLayout:3.0.0'*/
+
+    /*轮播 三选一  xbanner */
+    /*implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
+    implementation 'io.github.youth5201314:banner:2.2.3'*/
+    /*轮播 三选一*/
+//    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
+    /*可选区域 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
 
 }

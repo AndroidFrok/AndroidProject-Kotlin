@@ -29,11 +29,8 @@ class KeyboardWatcher private constructor(private var activity: Activity) :
     private var statusBarHeight: Int = 0
 
     init {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            activity.registerActivityLifecycleCallbacks(this)
-        } else {
-            activity.application.registerActivityLifecycleCallbacks(this)
-        }
+        activity.application.registerActivityLifecycleCallbacks(this)
+
         contentView.viewTreeObserver.addOnGlobalLayoutListener(this)
 
         // 获取 status_bar_height 资源的 ID
@@ -90,11 +87,8 @@ class KeyboardWatcher private constructor(private var activity: Activity) :
 
     override fun onActivityDestroyed(activity: Activity) {
         if (this.activity === activity) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                this.activity.unregisterActivityLifecycleCallbacks(this)
-            } else {
-                this.activity.application.unregisterActivityLifecycleCallbacks(this)
-            }
+            this.activity.application.unregisterActivityLifecycleCallbacks(this)
+
             contentView.viewTreeObserver.removeOnGlobalLayoutListener(this)
             listeners = null
         }

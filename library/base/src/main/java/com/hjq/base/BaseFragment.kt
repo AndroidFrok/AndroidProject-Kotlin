@@ -25,7 +25,7 @@ import com.hjq.base.action.KeyboardAction
  *    desc   : Fragment 技术基类
  */
 abstract class BaseFragment<A : BaseActivity> : Fragment(),
-    HandlerAction, ClickAction, BundleAction, KeyboardAction {
+    HandlerAction,   BundleAction, KeyboardAction {
 
     /** Activity 对象 */
     private var activity: A? = null
@@ -141,10 +141,12 @@ abstract class BaseFragment<A : BaseActivity> : Fragment(),
     /**
      * 根据资源 id 获取一个 View 对象
      */
-    override fun <V : View?> findViewById(@IdRes id: Int): V? {
-        return rootView?.findViewById(id)
-    }
-
+    /*override fun <V : View> findViewById(@IdRes id: Int): V {
+        return rootView!!.findViewById(id)!!
+    }*/
+    /*override fun <V : View?> findViewById(@IdRes id: Int): V {
+        return rootView!!.findViewById(id)
+    }*/
     override fun getBundle(): Bundle? {
         return arguments
     }

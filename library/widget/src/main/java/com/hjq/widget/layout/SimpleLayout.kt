@@ -15,8 +15,9 @@ import kotlin.math.max
  */
 open class SimpleLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0, defStyleRes: Int = 0) :
-    ViewGroup(context, attrs, defStyleAttr, defStyleRes) {
+    defStyleAttr: Int = 0, defStyleRes: Int = 0
+) :
+    ViewGroup(context, attrs, defStyleAttr) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val count: Int = childCount
@@ -31,8 +32,10 @@ open class SimpleLayout @JvmOverloads constructor(
             if (child.visibility != GONE) {
                 measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0)
                 val params: MarginLayoutParams = child.layoutParams as MarginLayoutParams
-                maxWidth = max(maxWidth, child.measuredWidth + params.leftMargin + params.rightMargin)
-                maxHeight = max(maxHeight, child.measuredHeight + params.topMargin + params.bottomMargin)
+                maxWidth =
+                    max(maxWidth, child.measuredWidth + params.leftMargin + params.rightMargin)
+                maxHeight =
+                    max(maxHeight, child.measuredHeight + params.topMargin + params.bottomMargin)
                 childState = combineMeasuredStates(childState, child.measuredState)
             }
         }
@@ -44,8 +47,14 @@ open class SimpleLayout @JvmOverloads constructor(
         maxHeight = max(maxHeight, suggestedMinimumHeight)
 
         // 测量自身
-        setMeasuredDimension(resolveSizeAndState(maxWidth, widthMeasureSpec, childState),
-            resolveSizeAndState(maxHeight, heightMeasureSpec, childState shl MEASURED_HEIGHT_STATE_SHIFT))
+        setMeasuredDimension(
+            resolveSizeAndState(maxWidth, widthMeasureSpec, childState),
+            resolveSizeAndState(
+                maxHeight,
+                heightMeasureSpec,
+                childState shl MEASURED_HEIGHT_STATE_SHIFT
+            )
+        )
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {

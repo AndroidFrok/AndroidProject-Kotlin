@@ -440,9 +440,9 @@ open class BaseDialog constructor(
             if (gravity == Gravity.NO_GRAVITY) {
                 if (layoutParams is FrameLayout.LayoutParams) {
                     val gravity: Int = layoutParams.gravity
-                    if (gravity != FrameLayout.LayoutParams.UNSPECIFIED_GRAVITY) {
+                    /*if (gravity != FrameLayout.LayoutParams.UNSPECIFIED_GRAVITY) {
                         setGravity(gravity)
-                    }
+                    }*/
                 } else if (layoutParams is LinearLayout.LayoutParams) {
                     val gravity: Int = layoutParams.gravity
                     if (gravity != Gravity.NO_GRAVITY) {
@@ -720,7 +720,7 @@ open class BaseDialog constructor(
             }
             clickArray!!.put(id, listener as OnClickListener<View>)
             if (isCreated()) {
-                dialog?.findViewById<View?>(id)
+                dialog?.findViewById<View>(id)
                     ?.setOnClickListener(ViewClickWrapper(dialog, listener))
             }
             return this as B
@@ -791,8 +791,8 @@ open class BaseDialog constructor(
                 clickArray?.let { array ->
                     var i = 0
                     while (i < array.size()) {
-                        contentView!!.findViewById<View?>(array.keyAt(i))
-                            ?.setOnClickListener(ViewClickWrapper(dialog, array.valueAt(i)))
+                        /*contentView!!.findViewById<View?>(array.keyAt(i))
+                            ?.setOnClickListener(ViewClickWrapper(dialog, array.valueAt(i)))*/
                         i++
                     }
                 }
@@ -907,7 +907,7 @@ open class BaseDialog constructor(
                 // 没有 setContentView 就想 findViewById ?
                 throw IllegalStateException("are you ok?")
             }
-            return contentView!!.findViewById(id)
+            return contentView!!.findViewById(id) as V?
         }
 
         /**
@@ -1018,10 +1018,10 @@ open class BaseDialog constructor(
          */
         private fun registerActivityLifecycleCallbacks() {
             activity?.let {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+               /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 //                    it.registerActivityLifecycleCallbacks(this)
                 } else {
-                }
+                }*/
                 it.application.registerActivityLifecycleCallbacks(this)
 
             }
@@ -1241,9 +1241,9 @@ open class BaseDialog constructor(
         fun onKey(dialog: BaseDialog?, event: KeyEvent?): Boolean
     }
 
-    override fun getLifecycle(): Lifecycle {
+    /*override fun getLifecycle(): Lifecycle {
         return lifecycle
-    }
+    }*/
 
 
 }

@@ -15,7 +15,7 @@ import timber.log.Timber
 class ToastLogInterceptor : IToastInterceptor {
 
     override fun intercept(text: CharSequence): Boolean {
-        if (AppConfig.isLogEnable()) {
+        if ( AppConfig.isLogEnable()) {
             // 获取调用的堆栈信息
             val stackTrace: Array<StackTraceElement> = Throwable().stackTrace
             // 跳过最前面两个堆栈

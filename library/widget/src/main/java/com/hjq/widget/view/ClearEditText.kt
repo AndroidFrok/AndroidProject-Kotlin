@@ -27,7 +27,7 @@ class ClearEditText @JvmOverloads constructor(
     RegexEditText(context, attrs, defStyleAttr),
     OnTouchListener, OnFocusChangeListener, TextWatcher {
 
-    private val clearDrawable: Drawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.input_delete_ic)!!)
+    private val clearDrawable: Drawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.button_dialogx_material_light)!!)
     private var touchListener: OnTouchListener? = null
     private var focusChangeListener: OnFocusChangeListener? = null
 

@@ -2,7 +2,6 @@ package com.hjq.demo.http.model
 
 import com.hjq.demo.other.AppConfig
 import com.hjq.http.config.IRequestServer
-import com.hjq.http.model.BodyType
 
 /**
  *    author : Android 轮子哥

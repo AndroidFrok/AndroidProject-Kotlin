@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import com.blankj.utilcode.util.ThreadUtils
 import com.hjq.demo.R
 import com.hjq.demo.http.HttpCacheManager
 import com.hjq.demo.manager.ActivityManager
@@ -15,17 +14,16 @@ import com.hjq.http.exception.CancelException
 import com.hjq.http.exception.DataException
 import com.hjq.http.exception.HttpException
 import com.hjq.http.exception.NetworkException
-import com.hjq.http.exception.ResponseException
 import com.hjq.http.exception.ServerException
 import com.hjq.http.exception.TimeoutException
 import com.hjq.http.request.HttpRequest
-import com.tencent.bugly.crashreport.CrashReport
 import okhttp3.Headers
 import okhttp3.Response
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
 import java.lang.reflect.Type
@@ -73,12 +71,12 @@ class RequestHandler constructor(private val application: Application) : IReques
             text = body.string()
         } catch (e: IOException) {
             // 返回结果读取异常
-            CrashReport.postCatchedException(Throwable("${httpRequest.requestApi},${e.localizedMessage}"))
+//            CrashReport.postCatchedException(Throwable("${httpRequest.requestApi},${e.localizedMessage}"))
             throw DataException(application.getString(R.string.http_data_explain_error), e)
         }
 
         // 打印这个 Json 或者文本
-        EasyLog.printJson(httpRequest, text)
+//        EasyLog.printJson(httpRequest, text)
         if ((String::class.java == type)) {
             return text
         }
@@ -88,7 +86,7 @@ class RequestHandler constructor(private val application: Application) : IReques
                 // 如果这是一个 JSONObject 对象
                 return JSONObject(text)
             } catch (e: JSONException) {
-                CrashReport.postCatchedException(Throwable("${httpRequest.requestApi},${e.localizedMessage}"))
+//                CrashReport.postCatchedException(Throwable("${httpRequest.requestApi},${e.localizedMessage}"))
                 throw DataException(application.getString(R.string.http_data_explain_error), e)
             }
         }
@@ -98,12 +96,14 @@ class RequestHandler constructor(private val application: Application) : IReques
                 // 如果这是一个 JSONArray 对象
                 return JSONArray(text)
             } catch (e: JSONException) {
-                CrashReport.postCatchedException(Throwable("${httpRequest.requestApi},${e.localizedMessage}"))
+//                CrashReport.postCatchedException(Throwable("${httpRequest.requestApi},${e.localizedMessage}"))
                 throw DataException(application.getString(R.string.http_data_explain_error), e)
             }
         }
 
-        var result: Any? = ""/*try {  这段备用
+        var result: Any? = ""
+
+        /*try {  这段备用
 //                 处理正常请求但返回了数据错误的响应
             try {
                 val error = GsonFactory.getSingletonGson().fromJson(text, CommonModel::class.java)
@@ -142,6 +142,8 @@ class RequestHandler constructor(private val application: Application) : IReques
             if (info == null || !info.isConnected) {
                 // 没有连接就是网络异常
                 return NetworkException(application.getString(R.string.http_network_error), e)
+            } else {
+                Timber.d("   info.typeName" + info.typeName)
             }
 
             // 有连接就是服务器的问题
@@ -159,9 +161,8 @@ class RequestHandler constructor(private val application: Application) : IReques
         val cacheValue = HttpCacheManager.getMmkv()!!.getString(cacheKey, null)
         if (cacheValue == null || "" == cacheValue || "{}".equals(cacheValue)) {
             return null
-        }
-        EasyLog.printLog(httpRequest, "----- readCache cacheKey -----")
-        EasyLog.printJson(httpRequest, cacheKey)
+        }/*EasyLog.printLog(httpRequest, "----- readCache cacheKey -----")
+        EasyLog.printJson(httpRequest, cacheKey)*/
         EasyLog.printLog(httpRequest, "----- readCache cacheValue -----")
         EasyLog.printJson(httpRequest, cacheValue)
 //        return GsonFactory.getSingletonGson().fromJson(cacheValue, attr.type)
@@ -173,9 +174,8 @@ class RequestHandler constructor(private val application: Application) : IReques
         val cacheValue = GsonFactory.getSingletonGson().toJson(result)
         if (cacheValue == null || "" == cacheValue || "{}".equals(cacheValue)) {
             return false
-        }
-        EasyLog.printLog(httpRequest, "----- writeCache cacheKey -----")
-        EasyLog.printJson(httpRequest, cacheKey)
+        }/*EasyLog.printLog(httpRequest, "----- writeCache cacheKey -----")
+        EasyLog.printJson(httpRequest, cacheKey)*/
         EasyLog.printLog(httpRequest, "----- writeCache cacheValue -----")
         EasyLog.printJson(httpRequest, cacheValue)
         return HttpCacheManager.getMmkv()?.putString(cacheKey, cacheValue)?.commit() == true

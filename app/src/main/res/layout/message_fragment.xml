@@ -23,6 +23,14 @@
             android:layout_marginHorizontal="@dimen/dp_30"
             android:orientation="vertical">
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="Android 版本适配" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_message_image"
                 android:layout_width="match_parent"

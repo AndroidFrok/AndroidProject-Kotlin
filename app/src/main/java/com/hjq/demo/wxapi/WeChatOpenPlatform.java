@@ -1,3 +1,4 @@
+/*
 package com.hjq.demo.wxapi;
 
 import android.content.BroadcastReceiver;
@@ -94,7 +95,8 @@ public class WeChatOpenPlatform {
         api.sendReq(req);
     }
 
-    /**
+    */
+/**
      * 微信  -分享图片
      *
      * @param context
@@ -117,7 +119,8 @@ public class WeChatOpenPlatform {
      * });
      * }
      * });
-     */
+     *//*
+
     public static void sharePic(Context context, int scene, String title, String content, Bitmap bmp) {
 //初始化 WXImageObject 和 WXMediaMessage 对象
         init(context);
@@ -160,3 +163,4 @@ public class WeChatOpenPlatform {
         api.sendReq(req);
     }
 }
+*/

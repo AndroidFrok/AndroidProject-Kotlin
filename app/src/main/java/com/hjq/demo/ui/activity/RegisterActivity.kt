@@ -7,7 +7,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
-import com.gyf.immersionbar.ImmersionBar
 import com.hjq.base.BaseActivity
 import com.hjq.demo.R
 import com.hjq.demo.aop.Log
@@ -82,7 +81,7 @@ class RegisterActivity : AppActivity(), OnEditorActionListener {
         secondPassword?.setOnEditorActionListener(this)
 
         // 给这个 View 设置沉浸式，避免状态栏遮挡
-        ImmersionBar.setTitleBar(this, findViewById(R.id.tv_register_title))
+//        ImmersionBar.setTitleBar(this, findViewById(R.id.tv_register_title))
         commitView?.let {
             InputTextManager.with(this)
                 .addView(phoneView)
@@ -242,11 +241,6 @@ class RegisterActivity : AppActivity(), OnEditorActionListener {
         }
     }
 
-    override fun createStatusBarConfig(): ImmersionBar {
-        return super.createStatusBarConfig() // 指定导航栏背景颜色
-            .navigationBarColor(R.color.white) // 不要把整个布局顶上去
-            .keyboardEnable(true)
-    }
 
     /**
      * [TextView.OnEditorActionListener]

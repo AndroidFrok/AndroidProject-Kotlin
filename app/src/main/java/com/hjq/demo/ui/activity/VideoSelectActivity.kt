@@ -220,9 +220,9 @@ class VideoSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
             allAlbum[parentFile.name]?.remove(bean)
             adapter.notifyDataSetChanged()
             if (selectVideo.isEmpty()) {
-                floatingView?.setImageResource(R.drawable.videocam_ic)
+                floatingView?.setImageResource(R.mipmap.add)
             } else {
-                floatingView?.setImageResource(R.drawable.succeed_ic)
+                floatingView?.setImageResource(R.mipmap.add)
             }
         }
     }
@@ -315,7 +315,7 @@ class VideoSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
                 if (selectVideo.contains(bean)) {
                     selectVideo.remove(bean)
                     if (selectVideo.isEmpty()) {
-                        floatingView?.setImageResource(R.drawable.videocam_ic)
+                        floatingView?.setImageResource(R.mipmap.add)
                     }
                     adapter.notifyItemChanged(position)
                     return
@@ -330,7 +330,7 @@ class VideoSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
                 } else if (selectVideo.size < maxSelect) {
                     selectVideo.add(bean)
                     if (selectVideo.size == 1) {
-                        floatingView?.setImageResource(R.drawable.succeed_ic)
+                        floatingView?.setImageResource(R.mipmap.add)
                     }
                 } else {
                     toast(String.format(getString(R.string.video_select_max_hint), maxSelect))
@@ -409,9 +409,9 @@ class VideoSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
             // 设置新的列表数据
             adapter.setData(allVideo)
             if (selectVideo.isEmpty()) {
-                floatingView?.setImageResource(R.drawable.videocam_ic)
+                floatingView?.setImageResource(R.mipmap.add)
             } else {
-                floatingView?.setImageResource(R.drawable.succeed_ic)
+                floatingView?.setImageResource(R.mipmap.add)
             }
 
             // 执行列表动画
@@ -530,7 +530,7 @@ class VideoSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
                 } catch (e: RuntimeException) {
                     // 荣耀 LLD AL20 Android 8.0 出现：java.lang.IllegalArgumentException
                     // 荣耀 HLK AL00 Android 10.0 出现：java.lang.RuntimeException：setDataSource failed: status = 0x80000000
-                    CrashReport.postCatchedException(e)
+//                    CrashReport.postCatchedException(e)
                 }
                 val videoSize: Long = File(videoPath).length()
                 return VideoBean(videoPath, videoWidth, videoHeight, videoDuration, videoSize)

@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
-                app:srcCompat="@drawable/info_ic" />
+                app:srcCompat="@mipmap/launcher_ic" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_crash_title"
@@ -47,14 +47,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
-                app:srcCompat="@drawable/share_ic" />
+                app:srcCompat="@drawable/bg_circle1" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_crash_restart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
-                app:srcCompat="@drawable/reboot_ic" />
+                app:srcCompat="@drawable/bg_circle1" />
 
         </LinearLayout>
 

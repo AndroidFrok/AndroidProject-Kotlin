@@ -16,7 +16,6 @@ import com.hjq.demo.aop.Permissions
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.other.AppConfig
 import com.hjq.permissions.Permission
-import com.tencent.bugly.crashreport.CrashReport
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -204,7 +203,7 @@ class ImageCropActivity : AppActivity() {
                 }
             })
         } catch (e: ActivityNotFoundException) {
-            CrashReport.postCatchedException(e)
+//            CrashReport.postCatchedException(e)
             setResult(RESULT_ERROR, Intent().putExtra(INTENT_KEY_OUT_ERROR, getString(R.string.image_crop_error_not_support)))
             finish()
         }
