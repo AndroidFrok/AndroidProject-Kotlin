@@ -40,7 +40,6 @@ class CameraActivity : AppActivity() {
         fun start(activity: BaseActivity, listener: OnCameraListener?) {
 //            val v = Build.VERSION.SDK_INT;
             val v = 34;
-            ToastUtils.show("$v");
             if (v >= 33) {
                 XXPermissions.with(activity).permission(
                     Permission.CAMERA,

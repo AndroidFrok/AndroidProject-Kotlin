@@ -10,6 +10,7 @@ import android.view.*
 import android.view.animation.*
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.LogUtils.A
 import com.hjq.bar.TitleBar
 import com.hjq.base.BaseActivity
 import com.hjq.base.BaseAdapter
@@ -21,6 +22,7 @@ import com.hjq.demo.aop.Permissions
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.other.GridSpaceDecoration
+import com.hjq.demo.ui.activity.CameraActivity.Companion
 import com.hjq.demo.ui.activity.CameraActivity.OnCameraListener
 import com.hjq.demo.ui.adapter.ImageSelectAdapter
 import com.hjq.demo.ui.dialog.AlbumDialog
@@ -31,6 +33,7 @@ import com.hjq.permissions.XXPermissions
 import com.hjq.widget.view.FloatActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.io.File
 import java.util.*
 
@@ -40,9 +43,8 @@ import java.util.*
  *    time   : 2019/07/24
  *    desc   : 选择图片
  */
-class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
-    BaseAdapter.OnItemClickListener, BaseAdapter.OnItemLongClickListener,
-    BaseAdapter.OnChildClickListener {
+class ImageSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.OnItemClickListener,
+    BaseAdapter.OnItemLongClickListener, BaseAdapter.OnChildClickListener {
 
     companion object {
 
@@ -50,11 +52,23 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
         private const val INTENT_KEY_OUT_IMAGE_LIST: String = "imageList"
 
         fun start(activity: BaseActivity, listener: OnPhotoSelectListener?) {
-            start(activity, 1, listener)
+
+            XXPermissions.with(activity).permission(
+//                Permission.CAMERA,
+                Permission.READ_MEDIA_IMAGES,
+//                Permission.READ_MEDIA_VIDEO,
+//                Permission.READ_MEDIA_AUDIO,
+            ).request { permissions, all ->
+                if (all) {
+                    start(activity, 1, listener)
+
+                } else {
+                    Timber.d("权限未通过 ")
+                }
+            }
         }
 
         @Log
-        @Permissions(Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE)
         fun start(activity: BaseActivity, maxSelect: Int, listener: OnPhotoSelectListener?) {
             if (maxSelect < 1) {
                 // 最少要选择一个图片
@@ -174,31 +188,43 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
                 continue
             }
             count += list.size
-            data.add(AlbumInfo(list[0], key, String.format(getString(R.string.image_select_total), list.size), adapter.getData() === list))
+            data.add(
+                AlbumInfo(
+                    list[0],
+                    key,
+                    String.format(getString(R.string.image_select_total), list.size),
+                    adapter.getData() === list
+                )
+            )
         }
-        data.add(0, AlbumInfo(allImage[0], getString(R.string.image_select_all),
-            String.format(getString(R.string.image_select_total), count), adapter.getData() === allImage))
+        data.add(
+            0, AlbumInfo(
+                allImage[0],
+                getString(R.string.image_select_all),
+                String.format(getString(R.string.image_select_total), count),
+                adapter.getData() === allImage
+            )
+        )
         if (albumDialog == null) {
-            albumDialog = AlbumDialog.Builder(this)
-                .setListener(object : AlbumDialog.OnListener {
-                    override fun onSelected(dialog: BaseDialog?, position: Int, bean: AlbumInfo) {
-                        setRightTitle(bean.getName())
-                        // 滚动回第一个位置
-                        recyclerView?.scrollToPosition(0)
-                        if (position == 0) {
-                            adapter.setData(allImage)
-                        } else {
-                            adapter.setData(allAlbum[bean.getName()])
-                        }
-                        // 执行列表动画
-                        recyclerView?.layoutAnimation = AnimationUtils.loadLayoutAnimation(
-                            getActivity(), R.anim.layout_from_right)
-                        recyclerView?.scheduleLayoutAnimation()
+            albumDialog = AlbumDialog.Builder(this).setListener(object : AlbumDialog.OnListener {
+                override fun onSelected(dialog: BaseDialog?, position: Int, bean: AlbumInfo) {
+                    setRightTitle(bean.getName())
+                    // 滚动回第一个位置
+                    recyclerView?.scrollToPosition(0)
+                    if (position == 0) {
+                        adapter.setData(allImage)
+                    } else {
+                        adapter.setData(allAlbum[bean.getName()])
                     }
-                })
+                    // 执行列表动画
+                    recyclerView?.layoutAnimation = AnimationUtils.loadLayoutAnimation(
+                        getActivity(), R.anim.layout_from_right
+                    )
+                    recyclerView?.scheduleLayoutAnimation()
+                }
+            })
         }
-        albumDialog!!.setData(data)
-            .show()
+        albumDialog!!.setData(data).show()
     }
 
     override fun onRestart() {
@@ -269,7 +295,9 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
      * @param position          被点击的条目位置
      */
     override fun onItemClick(recyclerView: RecyclerView?, itemView: View?, position: Int) {
-        ImagePreviewActivity.start(this@ImageSelectActivity, adapter.getData().toMutableList(), position)
+        ImagePreviewActivity.start(
+            this@ImageSelectActivity, adapter.getData().toMutableList(), position
+        )
     }
 
     /**
@@ -278,7 +306,9 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
      * @param itemView          被点击的条目对象
      * @param position          被点击的条目位置
      */
-    override fun onItemLongClick(recyclerView: RecyclerView?, itemView: View?, position: Int): Boolean {
+    override fun onItemLongClick(
+        recyclerView: RecyclerView?, itemView: View?, position: Int
+    ): Boolean {
         if (selectImage.size < maxSelect) {
             // 长按的时候模拟选中
             itemView?.findViewById<View?>(R.id.fl_image_select_check)?.let {
@@ -335,15 +365,31 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
         allImage.clear()
         val contentUri: Uri = MediaStore.Files.getContentUri("external")
         val sortOrder: String = MediaStore.Files.FileColumns.DATE_MODIFIED + " DESC"
-        val selection: String = "(" + MediaStore.Files.FileColumns.MEDIA_TYPE + "=?)" + " AND " + MediaStore.MediaColumns.SIZE + ">0"
+        val selection: String =
+            "(" + MediaStore.Files.FileColumns.MEDIA_TYPE + "=?)" + " AND " + MediaStore.MediaColumns.SIZE + ">0"
         val contentResolver: ContentResolver = contentResolver
-        val projections: Array<String?> = arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.MediaColumns.DATA,
-            MediaStore.MediaColumns.DISPLAY_NAME, MediaStore.MediaColumns.DATE_MODIFIED, MediaStore.MediaColumns.MIME_TYPE,
-            MediaStore.MediaColumns.WIDTH, MediaStore.MediaColumns.HEIGHT, MediaStore.MediaColumns.SIZE)
+        val projections: Array<String?> = arrayOf(
+            MediaStore.Files.FileColumns._ID,
+            MediaStore.MediaColumns.DATA,
+            MediaStore.MediaColumns.DISPLAY_NAME,
+            MediaStore.MediaColumns.DATE_MODIFIED,
+            MediaStore.MediaColumns.MIME_TYPE,
+            MediaStore.MediaColumns.WIDTH,
+            MediaStore.MediaColumns.HEIGHT,
+            MediaStore.MediaColumns.SIZE
+        )
         var cursor: Cursor? = null
-        if (XXPermissions.isGranted(this, Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE)) {
-            cursor = contentResolver.query(contentUri, projections, selection,
-                arrayOf<String?>(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE.toString()), sortOrder)
+        if (XXPermissions.isGranted(
+                this, Permission.READ_MEDIA_IMAGES, Permission.READ_MEDIA_IMAGES
+            )
+        ) {
+            cursor = contentResolver.query(
+                contentUri,
+                projections,
+                selection,
+                arrayOf<String?>(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE.toString()),
+                sortOrder
+            )
         }
         if (cursor != null && cursor.moveToFirst()) {
             val pathIndex: Int = cursor.getColumnIndex(MediaStore.MediaColumns.DATA)
@@ -390,7 +436,8 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
             }
 
             // 执行列表动画
-            recyclerView?.layoutAnimation = AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.layout_fall_down)
+            recyclerView?.layoutAnimation =
+                AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.layout_fall_down)
             recyclerView?.scheduleLayoutAnimation()
             if (allImage.isEmpty()) {
                 // 显示空布局

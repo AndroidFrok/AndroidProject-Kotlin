@@ -31,6 +31,14 @@
                 android:paddingVertical="10dp"
                 android:text="Android 版本适配" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="选择框" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_message_image"
                 android:layout_width="match_parent"
@@ -45,7 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_30"
-                android:text="加载普通图片" />
+                android:text="加载普通图片"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_message_image2"
@@ -53,7 +62,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_30"
-                android:text="加载圆形图片" />
+                android:text="加载圆形图片"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_message_image3"
@@ -61,7 +71,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_30"
-                android:text="加载圆角图片" />
+                android:text="加载圆角图片"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_message_toast"
@@ -69,7 +80,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_30"
-                android:text="弹一个吐司" />
+                android:text="弹一个吐司"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_message_permission"
@@ -77,7 +89,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_30"
-                android:text="申请摄像头权限" />
+                android:text="申请摄像头权限"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_message_setting"
@@ -85,7 +98,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_30"
-                android:text="跳转到应用详情页" />
+                android:text="跳转到应用详情页"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_message_black"
@@ -93,7 +107,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_30"
-                android:text="状态栏黑色字体" />
+                android:text="状态栏黑色字体"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_message_white"
@@ -101,7 +116,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_30"
-                android:text="状态栏白色字体" />
+                android:text="状态栏白色字体"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_message_tab"
@@ -109,7 +125,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dp_30"
-                android:text="切换到首页 Tab" />
+                android:text="切换到首页 Tab"
+                android:visibility="gone" />
 
         </LinearLayout>
 

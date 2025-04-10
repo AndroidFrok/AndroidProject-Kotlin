@@ -11,6 +11,7 @@ import com.hjq.demo.manager.Router
 import com.hjq.demo.ui.activity.AdminActivity
 import com.hjq.demo.ui.activity.HomeActivity
 import com.hjq.permissions.Permission
+import com.kongzue.dialogx.dialogs.MessageDialog
 import timber.log.Timber
 
 /**
@@ -22,6 +23,7 @@ import timber.log.Timber
 class MessageFragment : TitleBarFragment<HomeActivity>() {
 
     private var btn_13: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
+    private var btn_dialog: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
 
     //btn_13
     companion object {
@@ -39,7 +41,10 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
 
     override fun initView() {
         btn_13 = activity?.findViewById(R.id.btn_13);
-        imageView = activity?.findViewById(com.hjq.demo.R.id.iv_message_image)/*setOnClickListener(
+        btn_dialog = activity?.findViewById(R.id.btn_dialog);
+        imageView = activity?.findViewById(com.hjq.demo.R.id.iv_message_image)
+
+        /*setOnClickListener(
             R.id.btn_message_image1,
             R.id.btn_message_image2,
             R.id.btn_message_image3,
@@ -53,6 +58,11 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
 
         btn_13?.setOnClickListener {
             ARouter.getInstance().build(Router.A13).navigation();
+        }
+        btn_dialog?.setOnClickListener {
+            val dialog = MessageDialog.build().setMessage("我是消息框").setOkButton("确定")
+                .setCancelButton("取消");
+            dialog.show();
         }
         if (getAttachActivity() == null) {
             Timber.e("aaaa");
