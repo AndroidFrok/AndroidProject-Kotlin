@@ -17,7 +17,7 @@ object AppConfig {
      * 当前是否为调试模式
      */
     fun isDebug(): Boolean {
-        return true ;
+        return true;
         val isUserDebug: Boolean = MmkvUtil.getBool(MmkvUtil.DeveloperOpenDebug)
         return if (!isUserDebug) {
             BuildConfig.DEBUG
@@ -57,6 +57,7 @@ object AppConfig {
      */
     fun getVersionCode(): Int {
         return BuildConfig.VERSION_CODE
+//        return 1
     }
 
     /**

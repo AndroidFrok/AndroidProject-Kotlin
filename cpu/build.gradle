@@ -12,7 +12,8 @@ android {
 
     // 资源目录存放指引：https://developer.android.google.cn/guide/topics/resources/providing-resources
     defaultConfig {
-
+        versionCode 22
+        versionName "20250409"
         // 无痛修改包名：https://www.jianshu.com/p/17327e191d2e
         applicationId 'com.juhui2024.demo'
         multiDexEnabled true
@@ -62,7 +63,7 @@ android {
 
         debug {
             // 给包名添加后缀
-            applicationIdSuffix '.debug'
+//            applicationIdSuffix '.debug'// 没特殊需要 别开这玩意
             // 调试模式开关
             debuggable true
             jniDebuggable true
@@ -138,6 +139,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion '1.1.1'
     }
+    namespace 'com.hjq.copy'
 
     applicationVariants.all { variant ->
         // apk 输出文件名配置

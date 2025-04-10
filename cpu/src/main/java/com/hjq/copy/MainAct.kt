@@ -21,8 +21,8 @@ class MainAct : AppActivity() {
         MmkvUtil.save(MmkvUtil.DEBUG, BuildConfig.DEBUG)
         MmkvUtil.save(MmkvUtil.APPLICATION_ID, BuildConfig.APPLICATION_ID)
         MmkvUtil.save(MmkvUtil.BUGLY_ID, BuildConfig.BUGLY_ID)
-        MmkvUtil.save(MmkvUtil.VERSION_CODE, BuildConfig.VERSION_CODE)
-        MmkvUtil.save(MmkvUtil.VERSION_NAME, BuildConfig.VERSION_NAME)
+        MmkvUtil.save(MmkvUtil.VERSION_CODE, AppConfig.getVersionCode())
+        MmkvUtil.save(MmkvUtil.VERSION_NAME, AppConfig.getVersionName())
         MmkvUtil.save(MmkvUtil.HOST_URL, BuildConfig.HOST_URL)
     }
 
