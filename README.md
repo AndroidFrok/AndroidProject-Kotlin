@@ -1,18 +1,19 @@
 # 安卓技术中台 Kotlin 版
 
 # fork编者 注
-1. 文本显示直接用 SmartTextView  方便处理null等值的过滤
+
+1. 文本显示直接用 SmartTextView 方便处理null等值的过滤
 2. 物联网应用如果是横屏直接在land文件夹放xml
 3. 物联网应用在首次安装，主界面里就应该申请到所有权限，避免后面无人值守 无法操作。
 
 ## 分支简述
 
-0 .`getactivity` 推荐指数 ☆   仅供与原仓库贡献用 ，主要由原作者LTS   
-1.`api19-gradle7` 推荐指数☆ 适用于暂时不想升级到gradle8的情况使用 ，不再更新 , api19+   
-2.`api19-g8`**推荐指数☆☆☆☆☆ LTS 推荐使用 基于分支1  api19+**  
-3.`master` 最新  
+0 .`getactivity` 推荐指数 ☆ 仅供与原仓库贡献用 ，主要由原作者LTS   
+1.`api19-gradle7` 推荐指数☆ 兼容低版本（api19+）安卓+低版本AndroidStudio。适用于暂时不想升级到gradle8的情况使用 ，不再更新 ,    
+2.`api19-g8` 测试分支 推荐指数☆ LTS 推荐使用 基于分支1 api19+  
+3.`master` **推荐指数☆☆☆☆☆ LTS 推荐使用 基于分支1 api19+ ，Gradle8+，只兼容低版本安卓，不兼容低版本AndroidStudio**  
 4.`iot` 测试分支 工控屏专用分支，android api等级尽量低 ，减少工作量   
-5.`applib` 推荐指数☆ 基于分支0 api21+  
+5.`applib` 仅供无需兼容API21以下用 ； 推荐指数☆ 基于分支0 api21+
 
 #### 用过的好用的东西
 
