@@ -65,6 +65,7 @@ dependencies {
 //material >1.4.0 太高 出现 values-v31.xml:3: error: resource android:color/system_neutral1_1000 not found.
     implementation 'com.airbnb.android:lottie:4.1.0'
     // Kotlin 协程：https://github.com/Kotlin/kotlinx.coroutines
+
     def coroutines = "1.6.0"//1.6.0
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines}"
