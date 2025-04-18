@@ -6,6 +6,7 @@ package com.hjq.demo.http.model
  *    time   : 2019/12/07
  *    desc   : 统一接口数据结构
  */
+@Deprecated("废弃，关联太多 懒得删了")
 open class HttpData<T> {
 
     /** 返回码 */

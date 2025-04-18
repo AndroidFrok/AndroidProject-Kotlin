@@ -21,8 +21,8 @@
         android:background="@color/main_nav_bg"
         android:elevation="@dimen/dp_10"
         android:orientation="vertical"
-        app:spanCount="4"
-        tools:itemCount="4"
+        app:spanCount="3"
+        tools:itemCount="3"
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/home_navigation_item" />
 

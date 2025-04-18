@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hjq.base.BaseAdapter
 import com.hjq.demo.R
 import com.hjq.demo.app.AppAdapter
+import timber.log.Timber
 
 /**
  *    author : Android 轮子哥
@@ -81,6 +82,7 @@ class NavigationAdapter constructor(context: Context) :
                 iconView?.setImageDrawable(getDrawable())
                 titleView?.text = getText()
                 iconView?.isSelected = (selectedPosition == position)
+                Timber.d("$selectedPosition $position")
                 titleView?.isSelected = (selectedPosition == position)
             }
         }

@@ -9,6 +9,8 @@ import kotlin.math.ceil
  *    time   : 2020/10/07
  *    desc   : 统一接口列表数据结构
  */
+
+@Deprecated("废弃")
 class HttpListData<T> : HttpData<ListBean<T?>?>() {
 
     class ListBean<T> {
