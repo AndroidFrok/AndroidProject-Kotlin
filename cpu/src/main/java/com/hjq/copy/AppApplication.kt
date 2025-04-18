@@ -127,7 +127,7 @@ class AppApplication : MultiDexApplication() {
         DialogX.onlyOnePopTip = false
 
         if (DynamicColors.isDynamicColorAvailable()) {
-            DynamicColors.applyToActivitiesIfAvailable(this);
+//            DynamicColors.applyToActivitiesIfAvailable(this);
             Timber.i("动态颜色可用");
             PopTip.show("应用主题色已根据手机壁纸切换").iconSuccess();
         } else {

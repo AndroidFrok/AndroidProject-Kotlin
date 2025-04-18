@@ -27,6 +27,8 @@
                 android:id="@+id/btn_13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:backgroundTintMode="add"
                 android:gravity="center"
                 android:paddingVertical="10dp"
                 android:text="Android 版本适配" />
