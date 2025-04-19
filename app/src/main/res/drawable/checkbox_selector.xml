@@ -5,9 +5,9 @@
     <item android:drawable="@drawable/bg_circle1" android:state_checked="true" />
 
     <!-- 未选状态 -->
-    <item android:drawable="@drawable/bg_circle1" android:state_enabled="false" />
+    <item android:drawable="@drawable/bg_circle2" android:state_enabled="false" />
 
     <!-- 默认状态-->
-    <item android:drawable="@drawable/bg_circle1" />
+    <item android:drawable="@drawable/bg_circle3" />
 
 </selector>

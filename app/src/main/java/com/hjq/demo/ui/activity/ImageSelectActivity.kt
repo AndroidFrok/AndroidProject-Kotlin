@@ -26,7 +26,9 @@ import com.hjq.demo.ui.dialog.AlbumDialog.AlbumInfo
 import com.hjq.demo.widget.StatusLayout
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
+import com.hjq.toast.ToastUtils
 import com.hjq.widget.view.FloatActionButton
+import com.kongzue.dialogx.dialogs.PopTip
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -237,10 +239,11 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
             val parentFile: File = file.parentFile ?: continue
             allAlbum[parentFile.name]?.remove(path)
             adapter.notifyDataSetChanged()
+            ToastUtils.show("" + selectImage.size);
             if (selectImage.isEmpty()) {
                 floatingView?.setImageResource(R.mipmap.add)
             } else {
-                floatingView?.setImageResource(R.mipmap.add)
+                floatingView?.setImageResource(R.mipmap.ico_dialogx_success)
             }
         }
     }
@@ -346,7 +349,7 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
             } else if (selectImage.size < maxSelect) {
                 selectImage.add(path)
                 if (selectImage.size == 1) {
-                    floatingView?.setImageResource(R.mipmap.add)
+                    floatingView?.setImageResource(R.mipmap.ico_dialogx_success)//todo
                 }
             } else {
                 toast(String.format(getString(R.string.image_select_max_hint), maxSelect))

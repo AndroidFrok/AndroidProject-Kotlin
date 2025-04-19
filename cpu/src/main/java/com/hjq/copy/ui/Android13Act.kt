@@ -62,7 +62,7 @@ class Android13Act : AppActivity() {
             this.checkClipBoard();
         }
         btn_photochoose?.setOnClickListener {
-            ImageSelectActivity.start(this, 1,object : ImageSelectActivity.OnPhotoSelectListener {
+            ImageSelectActivity.start(this, 5,object : ImageSelectActivity.OnPhotoSelectListener {
 
                 override fun onSelected(data: MutableList<String>) {
                     // 裁剪头像

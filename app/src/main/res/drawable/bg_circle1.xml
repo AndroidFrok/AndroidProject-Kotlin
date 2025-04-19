@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <solid android:color="@color/transparent" />
+    <solid android:color="@color/common_accent_color" />
     <padding
         android:bottom="2px"
         android:left="2px"
@@ -10,5 +10,5 @@
         />
     <stroke
         android:width="0.1dp"
-        android:color="@color/gray" />
+        android:color="@color/common_accent_color" />
 </shape>
