@@ -44,6 +44,7 @@
         android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:persistent="true"
+        android:requestLegacyExternalStorage="true"
         android:resizeableActivity="true"
         android:roundIcon="@mipmap/launcher_ic"
         android:supportsRtl="false"

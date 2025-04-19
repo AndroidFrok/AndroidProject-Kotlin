@@ -4,26 +4,21 @@ import android.content.ContentResolver
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
-import android.os.Build
 import android.provider.MediaStore
 import android.text.TextUtils
-import android.view.*
-import android.view.animation.*
+import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.LogUtils.A
 import com.hjq.bar.TitleBar
 import com.hjq.base.BaseActivity
 import com.hjq.base.BaseAdapter
 import com.hjq.base.BaseDialog
 import com.hjq.demo.R
 import com.hjq.demo.action.StatusAction
-import com.hjq.demo.aop.Log
-import com.hjq.demo.aop.Permissions
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.other.GridSpaceDecoration
-import com.hjq.demo.ui.activity.CameraActivity.Companion
 import com.hjq.demo.ui.activity.CameraActivity.OnCameraListener
 import com.hjq.demo.ui.adapter.ImageSelectAdapter
 import com.hjq.demo.ui.dialog.AlbumDialog
@@ -36,7 +31,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
-import java.util.*
 
 /**
  *    author : Android 轮子哥
@@ -52,7 +46,7 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
         private const val INTENT_KEY_IN_MAX_SELECT: String = "maxSelect"
         private const val INTENT_KEY_OUT_IMAGE_LIST: String = "imageList"
 
-        fun start(activity: BaseActivity, listener: OnPhotoSelectListener?) {
+        fun start(activity: BaseActivity, maxSelect: Int, listener: OnPhotoSelectListener?) {
 
             XXPermissions.with(activity).permission(
 //                Permission.CAMERA,
@@ -61,16 +55,16 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
 //                Permission.READ_MEDIA_AUDIO,
             ).request { permissions, all ->
                 if (all) {
-                    start(activity, 1, listener)
-
+                    start1(activity, maxSelect, listener)
                 } else {
                     Timber.d("权限未通过 ")
                 }
             }
         }
 
-        @Log
-        fun start(activity: BaseActivity, maxSelect: Int, listener: OnPhotoSelectListener?) {
+        private fun start1(
+            activity: BaseActivity, maxSelect: Int, listener: OnPhotoSelectListener?
+        ) {
             if (maxSelect < 1) {
                 // 最少要选择一个图片
                 throw IllegalArgumentException("are you ok?")
