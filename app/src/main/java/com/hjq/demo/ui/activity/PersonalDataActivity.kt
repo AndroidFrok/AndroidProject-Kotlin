@@ -78,7 +78,7 @@ class PersonalDataActivity : AppActivity() {
     @SingleClick
     override fun onClick(view: View) {
         if (view === avatarLayout) {
-            ImageSelectActivity.start(this, object : ImageSelectActivity.OnPhotoSelectListener {
+            ImageSelectActivity.start(this, 1 ,object : ImageSelectActivity.OnPhotoSelectListener {
 
                 override fun onSelected(data: MutableList<String>) {
                     // 裁剪头像

@@ -97,7 +97,7 @@ dependencies {
     // noinspection GradleDependency
     implementation 'com.squareup.okhttp3:okhttp:3.12.13'
     // Json 解析框架：https://github.com/google/gson  正常版本  2.8.8
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.google.code.gson:gson:2.8.8'
     // Gson 解析容错：https://github.com/getActivity/GsonFactory
     implementation 'com.github.getActivity:GsonFactory:5.2'
     // AOP 插件库：https://mvnrepository.com/artifact/org.aspectj/aspectjrt

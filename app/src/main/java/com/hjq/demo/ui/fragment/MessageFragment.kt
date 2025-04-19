@@ -24,6 +24,7 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
 
     private var btn_13: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
     private var btn_dialog: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
+    private var btn_english: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
 
     //btn_13
     companion object {
@@ -42,7 +43,8 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
     override fun initView() {
         btn_13 = activity?.findViewById(R.id.btn_13);
         btn_dialog = activity?.findViewById(R.id.btn_dialog);
-        imageView = activity?.findViewById(com.hjq.demo.R.id.iv_message_image)
+        imageView = activity?.findViewById(R.id.iv_message_image)
+        btn_english = activity?.findViewById(R.id.btn_english)
 
         /*setOnClickListener(
             R.id.btn_message_image1,
@@ -56,6 +58,9 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
             R.id.btn_message_tab
         )*/
 
+        btn_english?.setOnClickListener {
+
+        }
         btn_13?.setOnClickListener {
             ARouter.getInstance().build(Router.A13).navigation();
         }
