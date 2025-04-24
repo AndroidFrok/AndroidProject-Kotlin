@@ -15,7 +15,7 @@
 4.`iot` 测试分支 工控屏专用分支，android api等级尽量低 ，减少工作量   
 5.`applib` 仅供无需兼容API21以下用 ； 推荐指数☆ 基于分支0 api21+
 
-#### 用过的好用的东西
+## 用过的好用的东西
 
 1- 带有全屏的视频播放器   https://github.com/CarGuo/GSYVideoPlayer    'com.github.xiaoyanger0825:
 NiceVieoPlayer:v2.2'
@@ -27,7 +27,26 @@ in.xiandan:count-down-timer ,图片视频混合轮播 https://github.com/Android
 3- // 动画解析库：https://github.com/airbnb/lottie-android
 // 动画资源：https://lottiefiles.com
 、https://icons8.com/animated-icons https://www.iconfont.cn/lotties/index?spm=a313x.home_index.i1.4.58a33a8144qZSU
-
+## 目录结构
+* app\src\main 
+  * java\com\hjq\demo
+    *  action 应用全局的布局状态、标题栏、吐司 意图封装
+    *  aop 一些方便的注解 
+    *  app activity/fragment/adapter/ 的父类 
+    * http 网络请求：接口目录、图片缓存、拦截器、服务端答复数据的实体类 
+    * manager 存放一些静态实例的管理类
+    * other 乱七八糟
+    * ui / widget  与应用的整体功能没有强关联的 act、适配器、对话框等UI组件，通用的组件
+    * wxapi 微信开放平台专用 
+  * res 通用的使用规则 没有基于Android官方变更
+* build.gradle 工程级 gradle配置
+* common.gradle 存放所有模块都可用的依赖、统一控制的 安卓版本  `minSdkVersion` `compileSdkVersion` `targetSdkVersion`
+* configs.gradle 存放编译后生效的一些常量，基本没改动过
+* maven.gradle AGP、各种依赖下载地址的镜像地址
+* settings.gradle 模块的声明
+* gradle.propertites 除了存放官方的默认的配置，我还把证书信息放到这里面了 ；
+* CPU 基于轮子哥框架 新加的一个主模块，用于存放应用的功能代码 ，可直接调用 app 中的各种组件，子模块们可通过阿里的Arouter跳转回CPU；  
+  说明：application的生效 改到了CPU的清单文件，权限列表放在原位置（app的清单文件中），
 # 原作者注
 
 * 详见 项目地址：[Github](https://github.com/getActivity/AndroidProject-Kotlin)

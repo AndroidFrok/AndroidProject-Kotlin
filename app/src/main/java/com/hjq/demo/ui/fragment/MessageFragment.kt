@@ -1,6 +1,7 @@
 package com.hjq.demo.ui.fragment
 
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatButton
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.button.MaterialButton
@@ -65,8 +66,10 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
             ARouter.getInstance().build(Router.A13).navigation();
         }
         btn_dialog?.setOnClickListener {
-            val dialog = MessageDialog.build().setMessage("我是消息框").setOkButton("确定")
-                .setCancelButton("取消");
+            val dialog = MessageDialog.build().setTitle("是否同意性行为").setMessage("")
+                .setOkButton("仅在使用中允许").setOtherButton("本次运行允许")
+                .setButtonOrientation(LinearLayout.VERTICAL)
+                .setCancelButton("拒绝");
             dialog.show();
         }
         if (getAttachActivity() == null) {

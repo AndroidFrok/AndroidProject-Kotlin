@@ -11,3 +11,4 @@ app/preview
 .DS_Store
 local.properties
 gradle.properties
+/gradle/
