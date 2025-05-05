@@ -3,8 +3,10 @@ package com.hjq.demo.ui.activity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -17,6 +19,7 @@ import com.hjq.demo.manager.Router
 import com.hjq.demo.other.DoubleClickHelper
 import com.hjq.demo.ui.adapter.NavigationAdapter
 import com.hjq.demo.ui.fragment.MessageFragment
+import kotlinx.coroutines.launch
 
 /**
  *    author : Android 轮子哥
@@ -82,8 +85,20 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
                 )
             )*/
             setOnNavigationListener(this@HomeActivity)
-            navigationView?.adapter = this
+            navigationView?.adapter = this;
+            lifecycleScope.launch {
+
+            }
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+    }
+
+    override fun onTopResumedActivityChanged(isTopResumedActivity: Boolean) {
+        super.onTopResumedActivityChanged(isTopResumedActivity)
+//        https://blog.csdn.net/weixin_40611659/article/details/108747360
     }
 
     override fun initData() {
