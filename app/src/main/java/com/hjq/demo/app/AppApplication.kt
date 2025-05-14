@@ -38,12 +38,17 @@ import com.hjq.language.OnLanguageListener
 import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.DialogX
 import com.kongzue.dialogx.style.MIUIStyle
-import com.kongzue.dialogx.util.InputInfo
-import com.kongzue.dialogx.util.TextInfo
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.taobao.weex.WXSDKEngine
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
+import io.dcloud.feature.sdk.DCSDKInitConfig
+import io.dcloud.feature.sdk.DCUniMPSDK
+import io.dcloud.feature.sdk.Interface.IDCUniMPPreInitCallback
+import io.dcloud.feature.sdk.MenuActionSheetItem
+import io.dcloud.uniplugin.TestModule
+import io.dcloud.uniplugin.TestText
 import okhttp3.OkHttpClient
 import timber.log.Timber
 import java.util.Locale
@@ -187,8 +192,7 @@ class AppApplication : Application() {
 
             EasyConfig.with(okHttpClient)
                 // 是否打印日志
-                .setLogEnabled(AppConfig.isLogEnable())
-                .setInterceptor(MyIntercept())
+                .setLogEnabled(AppConfig.isLogEnable()).setInterceptor(MyIntercept())
                 // 设置服务器配置
                 .setServer(RequestServer())
                 // 设置请求处理策略
@@ -231,6 +235,42 @@ class AppApplication : Application() {
                     }
                 })
             }
+            this.initUnimp(application);
+        }
+
+        private fun initUnimp(application: Application) {
+            try {
+                WXSDKEngine.registerModule("TestModule", TestModule::class.java)
+                WXSDKEngine.registerComponent("myText", TestText::class.java)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            //初始化 uni小程序SDK ----start----------
+            val item: MenuActionSheetItem = MenuActionSheetItem("关于", "gy")
+
+            val item1: MenuActionSheetItem = MenuActionSheetItem("获取当前页面url", "hqdqym")
+            val item2: MenuActionSheetItem =
+                MenuActionSheetItem("跳转到宿主原生测试页面", "gotoTestPage")
+            val sheetItems: MutableList<MenuActionSheetItem> = ArrayList<MenuActionSheetItem>()
+            sheetItems.add(item)
+            sheetItems.add(item1)
+            sheetItems.add(item2)
+            android.util.Log.i("unimp", "onCreate----")
+            val config: DCSDKInitConfig =
+                io.dcloud.feature.sdk.DCSDKInitConfig.Builder().setCapsule(false)
+                    .setMenuDefFontSize("16px").setMenuDefFontColor("#ff00ff")
+                    .setMenuDefFontWeight("normal").setMenuActionSheetItems(sheetItems)
+                    .setEnableBackground(true) //开启后台运行
+                    .setUniMPFromRecents(true).build()
+            DCUniMPSDK.getInstance()
+                .initialize(application, config, object : IDCUniMPPreInitCallback {
+                    override fun onInitFinished(b: Boolean) {
+                        android.util.Log.d("unimpaa", "onInitFinished----$b")
+                    }
+                })
         }
     }
+
+
 }

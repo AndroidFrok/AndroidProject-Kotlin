@@ -117,6 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextInputEditText" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_root"
                 android:layout_width="wrap_content"
@@ -144,6 +145,20 @@
                 app:layout_constraintStart_toEndOf="@+id/t_host"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_unimp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="内置小程序测试" />
+
+        </LinearLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

@@ -1,0 +1,90 @@
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply from: '../common.gradle'
+//必须配置
+def mfph = [
+    //包名
+    "apk.applicationId" : "com.example.unimpdemo",
+]
+android {
+    namespace = "com.example.unimpdemo"
+//    compileSdkVersion 35
+//    buildToolsVersion "35.0.0"
+    defaultConfig {
+//        applicationId "com.example.unimpdemo"
+//        minSdkVersion 21 // uniapp必须是19及以上
+//        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        manifestPlaceholders = mfph
+        ndk {
+            abiFilters 'x86_64','arm64-v8a' //不支持armeabi
+        }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+        }
+    }
+    //此处配置必须添加 否则无法正确运行
+    aaptOptions {
+        additionalParameters '--auto-add-overlay'
+        //noCompress 'foo', 'bar'
+        ignoreAssetsPattern "!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~"
+    }
+	compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+//导入aar需要的配置
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+dependencies {
+    //导入SDK相关依赖jar、aar
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.aar'], dir: 'libs')
+    //必须添加的依赖
+    api "androidx.recyclerview:recyclerview:1.1.0"
+    api "androidx.legacy:legacy-support-v4:1.0.0"
+    api "androidx.appcompat:appcompat:1.1.0"
+    api 'com.alibaba:fastjson:1.2.83'
+    api 'com.facebook.fresco:fresco:2.5.0'
+    api 'com.facebook.fresco:animated-gif:2.5.0'
+    api 'com.facebook.fresco:webpsupport:2.5.0'
+    api 'com.facebook.fresco:animated-webp:2.5.0'
+    api 'com.github.bumptech.glide:glide:4.9.0'
+    api 'com.android.support:multidex:1.0.3'
+
+    api project(':TestModule')
+    api project(':TestComponent')
+
+    api 'com.squareup.okhttp3:okhttp:3.7.0'
+    api 'com.squareup.okio:okio:1.8.0'
+    // 重要：更新版本至1.5.0
+    api 'androidx.webkit:webkit:1.5.0'
+    // 重要：避免部分设备可能卡死的问题
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    // add since 2023-03-30 微信支付/分享  需要新增配置
+    api 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.0'
+    // https://mvnrepository.com/artifact/com.amap.api/3dmap
+    api("com.amap.api:3dmap:10.0.600")
+
+    api 'androidx.core:core-ktx:1.10.0'
+    api 'androidx.core:core:1.6.0'
+
+
+
+}

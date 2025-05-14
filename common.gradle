@@ -5,7 +5,7 @@ android {
 
     // 编译源码版本  targetSdkVersion 最低到29就行  再低要改清单文件很多地方
 //    def androidapi = 29
-    compileSdkVersion rootProject.ext.vc.compileSdkVersion
+    compileSdkVersion rootProject.ext.vc.targetSdkVersion
     defaultConfig {
         // 最低安装版本
         minSdkVersion 21
@@ -136,5 +136,16 @@ dependencies {
     def logcat = 11.85 // 11.86 佬报错
     debugImplementation "com.github.getActivity:Logcat:$logcat"
     previewImplementation "com.github.getActivity:Logcat:$logcat"
+
+
+//    unimp
+    /*api 'androidx.legacy:legacy-support-v4:1.0.0' //必须集成，androidx support支持
+    api 'com.alibaba:fastjson:1.2.83' //必须集成，fastjson功能需要
+    api 'com.facebook.fresco:fresco:2.5.0'//必须集成，图片加载需要
+    api 'com.facebook.fresco:animated-gif:2.5.0'//必须集成，图片加载需要
+//    api 'com.github.bumptech.glide:glide:4.9.0'//必须集成，图片加载需要
+    api 'androidx.webkit:webkit:1.5.0'*/ //4.45版本之后 必须集成，用来支持暗黑模式
+//    api 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.0'
+//    unimp
 
 }

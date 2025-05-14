@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
+import com.example.unimpdemo.UniMpActivity
 import com.google.android.material.button.MaterialButton
 import com.hjq.base.BaseDialog
 import com.hjq.demo.BuildConfig
@@ -39,6 +40,7 @@ class AdminActivity : AppActivity() {
     private val bt_ko: MaterialButton? by lazy { findViewById(R.id.bt_ko) }
     private val bt_simple: MaterialButton? by lazy { findViewById(R.id.bt_simple) }
     private val bt_def: MaterialButton? by lazy { findViewById(R.id.bt_def) }
+    private val btn_unimp: MaterialButton? by lazy { findViewById(R.id.btn_unimp) }
 
     //    private val btn_reboot: MaterialButton? by lazy { findViewById(R.id.btn_reboot) }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +78,12 @@ class AdminActivity : AppActivity() {
 
         btn_back?.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-        }/*tv_root?.text =
+        }
+        btn_unimp?.setOnClickListener {
+            startActivity(UniMpActivity::class.java);
+        }
+
+        /*tv_root?.text =
             "Superuser:${checkRootPermission()} 是否root:  ${AppUtils.isAppRoot()},SU:${isSuEnable()}"*/
         bt_def?.setOnClickListener {
             val restart = MultiLanguages.clearAppLanguage(this)

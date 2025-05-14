@@ -99,4 +99,5 @@ dependencies {
     implementation project(':library:base')
     // 控件封装
     implementation project(':library:widget')
+    api project(':unimp')
 }
