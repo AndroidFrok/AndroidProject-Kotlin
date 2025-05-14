@@ -137,9 +137,9 @@ dependencies {
     /*implementation 'com.github.angcyo.DslTablayout:TabLayout:3.5.5'
     implementation 'io.github.h07000223:flycoTabLayout:3.0.0'*/
 
-    /*轮播 三选一  xbanner */
-    /*implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
-    implementation 'io.github.youth5201314:banner:2.2.3'*/
+    /*轮播 三选一  xbanner https://github.com/xiaohaibin/XBanner */
+    /*implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1' https://github.com/bingoogolapple/BGABanner-Android
+    implementation 'io.github.youth5201314:banner:2.2.3' https://github.com/youth5201314/banner */
     /*轮播 三选一*/
 //    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
     /*可选区域 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
