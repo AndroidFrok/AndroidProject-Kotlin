@@ -78,7 +78,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
     // add since 2023-03-30 微信支付/分享  需要新增配置
-    api 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.0'
+//    api 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.0'
     // https://mvnrepository.com/artifact/com.amap.api/3dmap
     api("com.amap.api:3dmap:10.0.600")
 

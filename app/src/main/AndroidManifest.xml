@@ -39,7 +39,8 @@
         android:supportsRtl="false"
         android:testOnly="false"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowClearUserData;android:resizeableActivity;android:supportsRtl">
         <activity
             android:name=".ui.activity.ComposeTestActivity"
             android:exported="true"
