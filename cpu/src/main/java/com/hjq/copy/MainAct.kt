@@ -7,12 +7,20 @@ import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.manager.Router
 import com.hjq.demo.ui.activity.HomeActivity
+import com.kongzue.dialogx.dialogs.PopTip
+
 
 @Route(path = Router.Main)
 class MainAct : AppActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         storeBuildconfig()
+
+        val uri = intent.data
+        if (uri != null) {
+            val name = uri.getQueryParameter("name") // 例如：myapp://open/scan?name=user
+            PopTip.show("从网页跳转成功 $name").iconSuccess();
+        }
         startActivity(Intent(this, HomeActivity::class.java))
     }
 
