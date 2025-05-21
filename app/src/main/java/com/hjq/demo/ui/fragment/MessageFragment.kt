@@ -5,6 +5,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatButton
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.button.MaterialButton
+import com.hjq.base.CommonContext
 import com.hjq.demo.R
 import com.hjq.demo.aop.Permissions
 import com.hjq.demo.app.TitleBarFragment
@@ -25,6 +26,7 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
 
     private var btn_13: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
     private var btn_dialog: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
+    private var btn_dialog1: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
     private var btn_english: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
 
     //btn_13
@@ -44,6 +46,7 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
     override fun initView() {
         btn_13 = activity?.findViewById(R.id.btn_13);
         btn_dialog = activity?.findViewById(R.id.btn_dialog);
+        btn_dialog1 = activity?.findViewById(R.id.btn_dialog1);
         imageView = activity?.findViewById(R.id.iv_message_image)
         btn_english = activity?.findViewById(R.id.btn_english)
 
@@ -62,14 +65,17 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
         btn_english?.setOnClickListener {
 
         }
+        btn_dialog1?.setOnClickListener {
+            com.hjq.demo.ui.dialog.MessageDialog.Builder(CommonContext.getContext())
+                .setMessage("aaaaaaaaaaa").setTitle("title").show();
+        }
         btn_13?.setOnClickListener {
             ARouter.getInstance().build(Router.A13).navigation();
         }
         btn_dialog?.setOnClickListener {
             val dialog = MessageDialog.build().setTitle("是否同意性行为").setMessage("")
                 .setOkButton("仅在使用中允许").setOtherButton("本次运行允许")
-                .setButtonOrientation(LinearLayout.VERTICAL)
-                .setCancelButton("拒绝");
+                .setButtonOrientation(LinearLayout.VERTICAL).setCancelButton("拒绝");
             dialog.show();
         }
         if (getAttachActivity() == null) {

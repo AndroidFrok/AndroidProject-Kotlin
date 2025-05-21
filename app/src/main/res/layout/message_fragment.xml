@@ -47,6 +47,13 @@
                 android:gravity="center"
                 android:paddingVertical="10dp"
                 android:text="英语" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_dialog1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="轮子哥对话框" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_message_image"
@@ -54,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dp_30"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_message_image1"
