@@ -228,7 +228,9 @@ class AppApplication : MultiDexApplication() {
             .setHandler(RequestHandler(this)).addHeader(MmkvUtil.Token, "")
             .addHeader(MmkvUtil.Version, AppConfig.getVersionName())
             .addHeader(MmkvUtil.MN, MmkvUtil.getString(MmkvUtil.MN, "-"))
-            .addHeader("v-code", "${AppConfig.getVersionCode()}").addHeader(
+            .addHeader("v-code", "${AppConfig.getVersionCode()}")
+
+            .addHeader(
                 "phone",
                 Build.BRAND + "-" + Build.MODEL + "-" + Build.PRODUCT + "-" + Build.BOARD + "-" + Build.DEVICE + "-Android" + Build.VERSION.RELEASE + "-API" + Build.VERSION.SDK_INT
             )
