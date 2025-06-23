@@ -2,6 +2,7 @@ package com.hjq.demo.ui.activity
 
 import android.content.ComponentName
 import android.content.Intent
+import android.net.TrafficStats
 import android.os.Bundle
 import android.os.PowerManager
 import android.view.View
@@ -19,6 +20,7 @@ import com.hjq.demo.manager.ActivityManager
 import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.RomHelper
+import com.hjq.demo.services.TrafficMonitor
 import com.hjq.demo.ui.dialog.InputDialog
 import com.hjq.http.EasyConfig
 import com.hjq.language.LocaleContract
@@ -29,6 +31,8 @@ import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.dialogs.PopTip
 import com.kongzue.dialogx.dialogs.TipDialog
 import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener
+import com.tencent.bugly.crashreport.CrashReport
+import timber.log.Timber
 import java.io.DataOutputStream
 import java.io.IOException
 
@@ -48,6 +52,9 @@ class AdminActivity : AppActivity() {
     private val bt_simple: MaterialButton? by lazy { findViewById(R.id.bt_simple) }
     private val bt_def: MaterialButton? by lazy { findViewById(R.id.bt_def) }
     private val btn_reboot: MaterialButton? by lazy { findViewById(R.id.btn_reboot) }
+    private val btn_devinfo: MaterialButton? by lazy { findViewById(R.id.btn_devinfo) }
+    private val btn_liuliang: MaterialButton? by lazy { findViewById(R.id.btn_liuliang) }
+
     private val tv_info: MaterialTextView? by lazy { findViewById(com.hjq.demo.R.id.tv_info) }
 
     private val switch_log: SwitchButton? by lazy { findViewById(R.id.switch_log) }
@@ -60,7 +67,20 @@ class AdminActivity : AppActivity() {
     override fun getLayoutId(): Int {
         return R.layout.activity_admin
     }
+    private fun computeKb() {
+        var rxBytes = 0L;
+        var txBytes = 0L;
+        // 获取应用启动后的总接收字节数
+        rxBytes = TrafficStats.getUidRxBytes(applicationInfo.uid) / 1024;
 
+        // 获取应用启动后的总发送字节数
+        txBytes = TrafficStats.getUidTxBytes(applicationInfo.uid) / 1024;
+        val current = TrafficMonitor.getCurrentSessionTraffic(this);
+        val s = "下行总接收${rxBytes}kb  上行总发送${txBytes}kb  $current ";
+        Timber.d(s)
+        MessageDialog.build().setMessage("$s").show();
+        ToastUtils.show("$s");
+    }
     /**
      * https://blog.csdn.net/wzystal/article/details/26088987
      */
@@ -98,29 +118,41 @@ class AdminActivity : AppActivity() {
     }
 
     override fun initView() {
-        InputDialog.Builder(getContext()).setCancelable(false).setTitle("请输入超管密码").setContent("").setHint("请输入密码").setConfirm(getString(R.string.common_confirm)).setCancel(getString(R.string.common_cancel)).setListener(object : InputDialog.OnListener {
-            override fun onConfirm(dialog: BaseDialog?, content: String) {
-                if (content == "qqqqqq") {
-                    PopTip.show("欢迎管理员")
-                } else {
-                    PopTip.show("密码错误")
-                    if (!AppConfig.isDebug()) {
-                        finish();
+        btn_liuliang?.setOnClickListener {
+            computeKb();
+        }
+
+        if (AppConfig.isDebug()) {
+            PopTip.show("调试模式无需密码").iconSuccess();
+        } else {
+            InputDialog.Builder(getContext()).setCancelable(false).setTitle("请输入超管密码")
+                .setContent("").setHint("请输入密码").setConfirm(getString(R.string.common_confirm))
+                .setCancel(getString(R.string.common_cancel))
+                .setListener(object : InputDialog.OnListener {
+                    override fun onConfirm(dialog: BaseDialog?, content: String) {
+                        if (content == "qqqqqq") {
+                            PopTip.show("欢迎管理员")
+                        } else {
+                            PopTip.show("密码错误")
+                            finish();
+                        }
                     }
 
-                }
-            }
+                    override fun onCancel(dialog: BaseDialog?) {
+                        super.onCancel(dialog)
+                        finish()
+                    }
+                }).show()
+        }
 
-            override fun onCancel(dialog: BaseDialog?) {
-                super.onCancel(dialog)
-                finish()
-            }
-        }).show()
-        
+
         tv_info?.text = "ROOT:${AppUtils.isAppRoot()}"
 
         btn_back?.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+        btn_devinfo?.setOnClickListener {
+            CrashReport.testJavaCrash();
         }
         btn_reboot?.setOnClickListener {
             MessageDialog.build().okButtonClickListener = OnDialogButtonClickListener { dialog, v ->
@@ -218,7 +250,7 @@ class AdminActivity : AppActivity() {
             val code: String = MmkvUtil.getString(MmkvUtil.MN, "")
 
             InputDialog.Builder(this).setTitle("请设置后台分配的设备编码").setContent(code)
-                .setHint("内测可用 mj_2409120002").setConfirm(getString(R.string.common_confirm))
+                .setHint("").setConfirm(getString(R.string.common_confirm))
                 .setCancel(getString(R.string.common_cancel))
                 .setListener(object : InputDialog.OnListener {
 

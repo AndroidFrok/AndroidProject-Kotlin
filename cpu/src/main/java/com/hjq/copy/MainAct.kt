@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.manager.Router
+import com.hjq.demo.services.TrafficMonitor
 import com.hjq.demo.ui.activity.HomeActivity
 import com.kongzue.dialogx.dialogs.PopTip
 
@@ -15,13 +16,13 @@ class MainAct : AppActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         storeBuildconfig()
-
+        TrafficMonitor.init(this);
         val uri = intent.data
         if (uri != null) {
             val name = uri.getQueryParameter("name") // 例如：myapp://open/scan?name=user
             PopTip.show("从网页跳转成功 $name").iconSuccess();
         }
-        startActivity(Intent(this, HomeActivity::class.java))
+        startActivity(Intent(this, HomeActivity::class.java));// 前往演示界面
     }
 
     private fun storeBuildconfig() {

@@ -27,11 +27,11 @@
                 android:id="@+id/btn_13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:backgroundTint="@color/common_accent_color"
                 android:gravity="center"
-                app:cornerRadius="20dp"
                 android:paddingVertical="10dp"
-                android:text="Android 版本适配" />
+                android:text="Android 版本适配"
+                app:backgroundTint="@color/common_accent_color"
+                app:cornerRadius="20dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_dialog"
@@ -40,13 +40,18 @@
                 android:gravity="center"
                 android:paddingVertical="10dp"
                 android:text="选择框" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_english"
+                style="?android:attr/selectableItemBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
                 android:gravity="center"
+                android:clickable="true"
                 android:paddingVertical="10dp"
                 android:text="英语" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_dialog1"
                 android:layout_width="match_parent"
@@ -70,7 +75,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_30"
                 android:text="加载普通图片"
-                android:visibility="gone" />
+                android:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/launcher_ic" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_message_image2"

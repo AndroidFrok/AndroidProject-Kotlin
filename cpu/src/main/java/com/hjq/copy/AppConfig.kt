@@ -64,7 +64,7 @@ object AppConfig {
      * 获取 Bugly Id
      */
     fun getBuglyId(): String {
-        return BuildConfig.BUGLY_ID
+        return BuildConfig.BUGLY_ID ;// e3ff148613
     }
 
     /**

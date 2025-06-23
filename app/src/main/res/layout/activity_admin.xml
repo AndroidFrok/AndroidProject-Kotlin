@@ -18,6 +18,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="国际化调试"
             android:orientation="horizontal"
             android:visibility="gone">
 
@@ -155,6 +156,31 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@+id/tt_debug"
                 app:layout_constraintStart_toEndOf="@+id/tt_debug" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_watchdog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="看门狗"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_reboot" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_devinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看设备参数"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_reboot" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_liuliang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看流量消耗"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_devinfo"
+                app:layout_constraintStart_toEndOf="@+id/btn_devinfo" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

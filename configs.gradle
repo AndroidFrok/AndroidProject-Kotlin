@@ -39,7 +39,7 @@ ext {
     WX_APP_ID = "wxd35706cc9f46114c"
     // 微信 Secret
     WX_APP_SECRET = "0c8c7cf831dd135a32b3e395ea459b5a"
-    BUGLY_ID = "ba539e395b"
+    BUGLY_ID = "e3ff148613"
 
     switch (serverType) {
         case SERVER_TYPE_TEST:

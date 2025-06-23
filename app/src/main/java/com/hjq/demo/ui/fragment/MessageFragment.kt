@@ -1,8 +1,13 @@
 package com.hjq.demo.ui.fragment
 
+import android.graphics.RenderEffect
+import android.graphics.Shader
+import android.os.Build
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.button.MaterialButton
 import com.hjq.base.CommonContext
@@ -14,6 +19,7 @@ import com.hjq.demo.ui.activity.AdminActivity
 import com.hjq.demo.ui.activity.HomeActivity
 import com.hjq.permissions.Permission
 import com.kongzue.dialogx.dialogs.MessageDialog
+import com.kongzue.dialogx.dialogs.PopTip
 import timber.log.Timber
 
 /**
@@ -89,14 +95,28 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
             toast("aaaaaaa");
         }
         btn_message_image1?.setOnClickListener {
-
-            ARouter.getInstance().build(Router.Main).navigation();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                mohu()
+            } else {
+                PopTip.show("11+").iconWarning()
+            }
+//            ARouter.getInstance().build(Router.Main).navigation();
         }
         btn_message_image1?.setOnLongClickListener {
             startActivity(AdminActivity::class.java)
             true
         }
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun mohu() {
+        val iv_test: AppCompatImageView? = getAttachActivity()?.findViewById(R.id.iv_test)
+        val blurRenderEffect = RenderEffect.createBlurEffect(
+            20F, 20f,
+            Shader.TileMode.MIRROR
+        )
+        iv_test?.setRenderEffect(blurRenderEffect)
     }
 
     override fun initData() {}
