@@ -3,12 +3,14 @@ package com.hjq.demo.widget
 import android.content.*
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.AttributeSet
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
+import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.airbnb.lottie.LottieAnimationView
@@ -20,6 +22,7 @@ import com.hjq.demo.R
  *    time   : 2019/04/18
  *    desc   : 状态布局（网络错误，异常错误，空数据）
  */
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class StatusLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null,
     defStyleAttr: Int = 0, defStyleRes: Int = 0) :

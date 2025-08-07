@@ -32,7 +32,8 @@ class MainAct : AppActivity() {
         MmkvUtil.save(MmkvUtil.BUGLY_ID, BuildConfig.BUGLY_ID)
         MmkvUtil.save(MmkvUtil.VERSION_CODE, AppConfig.getVersionCode())
         MmkvUtil.save(MmkvUtil.VERSION_NAME, AppConfig.getVersionName())
-        MmkvUtil.save(MmkvUtil.HOST_URL, BuildConfig.HOST_URL)
+//        MmkvUtil.save(MmkvUtil.HOST_URL, BuildConfig.HOST_URL)
+        MmkvUtil.save(MmkvUtil.HOST_URL, "https://55cloud.oss-cn-hangzhou.aliyuncs.com/test/user_mp/agreement/privacyPolicy.html")
     }
 
     override fun getLayoutId(): Int {

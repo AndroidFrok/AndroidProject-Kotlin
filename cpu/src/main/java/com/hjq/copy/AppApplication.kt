@@ -183,9 +183,9 @@ class AppApplication : MultiDexApplication() {
         // 设置全局的 Header 构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context: Context, layout: RefreshLayout ->
             MaterialHeader(context).setColorSchemeColors(
-                /*ContextCompat.getColor(
-                    context, R.color.common_accent_color
-                )*/
+                ContextCompat.getColor(
+                    context,  com.hjq.base.R.color.red
+                )
             )
         }
         // 设置全局的 Footer 构建器

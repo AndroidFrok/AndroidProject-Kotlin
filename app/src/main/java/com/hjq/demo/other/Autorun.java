@@ -9,6 +9,12 @@ import com.hjq.demo.ui.activity.SplashActivity;
 import com.hjq.toast.ToastUtils;
 import com.kongzue.dialogx.dialogs.PopTip;
 
+/**
+ * 高版本安卓  需要 在act中动态注册了
+ * val filterAutorun = IntentFilter();
+ * filterAutorun.addAction(Intent.ACTION_BOOT_COMPLETED);
+ * registerReceiver(Autorun(), filterAutorun)
+ */
 public class Autorun extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent1) {

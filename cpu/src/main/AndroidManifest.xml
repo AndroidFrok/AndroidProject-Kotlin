@@ -4,17 +4,17 @@
         <activity
             android:name="com.hjq.copy.MainAct"
             android:exported="true">
-            <intent-filter>
+           <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
 
-                <!--<category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />-->
+                &lt;!&ndash;<category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />&ndash;&gt;
 
 
-            </intent-filter>
+            </intent-filter>-->
             <!-- 处理DeepLink 如需测试  请手机浏览器访问  https://330132662.github.io/larabbs/public/index.html  或者转为二维码扫码-->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

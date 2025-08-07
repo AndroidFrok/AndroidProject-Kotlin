@@ -6,6 +6,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.MmkvUtil
+import com.hjq.demo.manager.ThreadPoolManager
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.AppConfig.getHostUrl
 import com.hjq.widget.view.SlantedTextView
@@ -27,8 +28,8 @@ class SplashActivity : AppActivity() {
     }
 
     override fun initView() {
-        toMain()
-//        ThreadPoolManager.getInstance().execute(r) // 用自己的闪屏  不用现有动画
+//        toMain()
+        ThreadPoolManager.getInstance().execute(r) // 用自己的闪屏  不用现有动画
         // 设置动画监听
 //        lottieView?.speed = 8.6f;
         /*lottieView?.addAnimatorListener(object : AnimatorListenerAdapter() {
@@ -65,7 +66,6 @@ class SplashActivity : AppActivity() {
             }
         }
     }
-
 
 
     override fun onBackPressed() {
@@ -107,7 +107,11 @@ class SplashActivity : AppActivity() {
 //        toMain()
         val u = getHostUrl()
 //        u = "#";
-        BrowserActivity.start(getContext(), u)
+        BrowserActivity.start(
+            getContext(),
+//            "http://55cloud.oss-cn-hangzhou.aliyuncs.com/test/user_mp/agreement/privacyPolicy.html"
+            "https://www.zkyxai.com/ailearnh5/jzx/#/previewHome?userld=4e0f9868-ddfd-4955-b590-07df0a1e4ddf&chapterld=1821494025723109376"
+        )
         finish()
     }
 }
