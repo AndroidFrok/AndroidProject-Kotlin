@@ -46,9 +46,9 @@
                 style="?android:attr/selectableItemBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
-                android:clickable="true"
                 android:paddingVertical="10dp"
                 android:text="英语" />
 
@@ -154,6 +154,16 @@
                 android:layout_marginVertical="@dimen/dp_30"
                 android:text="切换到首页 Tab"
                 android:visibility="gone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_joy"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_30"
+                android:text="摇杆"
+                android:textColor="@color/blue"
+                android:visibility="visible" />
 
         </LinearLayout>
 

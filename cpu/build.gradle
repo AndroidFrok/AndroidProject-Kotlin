@@ -7,9 +7,8 @@ apply plugin: 'org.jetbrains.kotlin.android'
 // Android 代码规范文档：https://github.com/getActivity/AndroidCodeStandard
 android {
     namespace "com.hjq.copy"
-    compileSdkVersion 34
-    buildToolsVersion '34.0.0'
-
+//    compileSdkVersion 34
+//    buildToolsVersion '34.0.0'
     // 资源目录存放指引：https://developer.android.google.cn/guide/topics/resources/providing-resources
     defaultConfig {
         versionCode 22

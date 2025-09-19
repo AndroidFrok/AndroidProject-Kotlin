@@ -119,6 +119,7 @@ dependencies {
     // 日志打印框架：https://github.com/JakeWharton/timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
     // 内存泄漏监测框架：https://github.com/square/leakcanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
     def logcat = 11.85 // 11.86 佬报错
 //    debugImplementation "com.github.getActivity:Logcat:$logcat"
     previewImplementation "com.github.getActivity:Logcat:$logcat"

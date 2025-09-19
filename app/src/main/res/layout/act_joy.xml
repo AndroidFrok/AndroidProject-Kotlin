@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".ui.activity.JoyAct">
+
+    <!-- 游戏背景（这里使用深色背景模拟） -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:ignore="MissingContentDescription" />
+    <!-- 全屏摇杆区域 -->
+    <com.hjq.demo.widget.FreePositionJoystickView
+        android:id="@+id/freeJoystick"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!-- 左下角移动摇杆 -->
+    <com.hjq.demo.widget.JoystickView
+        android:id="@+id/movementJoystick"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_margin="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- 右下角技能摇杆（可以用于攻击或释放技能） -->
+    <com.hjq.demo.widget.JoystickView
+        android:id="@+id/attackJoystick"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 显示摇杆状态信息 -->
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="#80000000"
+        android:padding="8dp"
+        android:text="方向: 0°, 力度: 0%"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

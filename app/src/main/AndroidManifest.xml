@@ -71,7 +71,9 @@
             </intent-filter>
         </receiver>
 
-
+        <activity
+            android:name=".ui.activity.JoyAct"
+            android:exported="true" />
         <activity
             android:name=".act.PayAct"
             android:exported="true"

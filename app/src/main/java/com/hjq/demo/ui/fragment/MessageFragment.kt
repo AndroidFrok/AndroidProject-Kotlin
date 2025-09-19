@@ -17,6 +17,7 @@ import com.hjq.demo.app.TitleBarFragment
 import com.hjq.demo.manager.Router
 import com.hjq.demo.ui.activity.AdminActivity
 import com.hjq.demo.ui.activity.HomeActivity
+import com.hjq.demo.ui.activity.JoyAct
 import com.hjq.permissions.Permission
 import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.dialogs.PopTip
@@ -34,6 +35,7 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
     private var btn_dialog: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
     private var btn_dialog1: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
     private var btn_english: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
+    private var btn_joy: MaterialButton? = null;//by lazy { findViewById(R.id.btn_renew) }
 
     //btn_13
     companion object {
@@ -55,6 +57,7 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
         btn_dialog1 = activity?.findViewById(R.id.btn_dialog1);
         imageView = activity?.findViewById(R.id.iv_message_image)
         btn_english = activity?.findViewById(R.id.btn_english)
+        btn_joy = activity?.findViewById(R.id.btn_joy)
 
         /*setOnClickListener(
             R.id.btn_message_image1,
@@ -68,8 +71,8 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
             R.id.btn_message_tab
         )*/
 
-        btn_english?.setOnClickListener {
-
+        btn_joy?.setOnClickListener {
+            startActivity(JoyAct::class.java)
         }
         btn_dialog1?.setOnClickListener {
             com.hjq.demo.ui.dialog.MessageDialog.Builder(CommonContext.getContext())
@@ -113,8 +116,7 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
     private fun mohu() {
         val iv_test: AppCompatImageView? = getAttachActivity()?.findViewById(R.id.iv_test)
         val blurRenderEffect = RenderEffect.createBlurEffect(
-            20F, 20f,
-            Shader.TileMode.MIRROR
+            20F, 20f, Shader.TileMode.MIRROR
         )
         iv_test?.setRenderEffect(blurRenderEffect)
     }

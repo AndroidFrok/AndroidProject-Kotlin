@@ -81,12 +81,7 @@ class AppApplication : MultiDexApplication() {
     private fun privacySdk() {
         MultiDex.install(this)
         if (isDebug()) {
-            // 设置标题栏初始化器
-            if (ImageUtils.isDark(this)) {
-                TitleBar.setDefaultStyle(NightBarStyle())
-            } else {
-                TitleBar.setDefaultStyle(TitleBarStyle())
-            }
+
 
             /*StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
 //                     .detectDiskReads().detectDiskWrites().detectNetwork()
@@ -105,6 +100,12 @@ class AppApplication : MultiDexApplication() {
         } else {
 //             如果已经配置了深色模式资源  而客户没这个需求则需要开启这样代码
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+        // 设置标题栏初始化器
+        if (ImageUtils.isDark(this)) {
+            TitleBar.setDefaultStyle(NightBarStyle())
+        } else {
+            TitleBar.setDefaultStyle(TitleBarStyle())
         }
         // Bugly 异常捕捉
         if (AppConfig.buglyUpload()) {

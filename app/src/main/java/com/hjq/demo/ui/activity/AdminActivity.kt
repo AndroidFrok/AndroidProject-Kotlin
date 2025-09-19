@@ -23,6 +23,7 @@ import com.hjq.demo.other.RomHelper
 import com.hjq.demo.services.TrafficMonitor
 import com.hjq.demo.ui.dialog.InputDialog
 import com.hjq.http.EasyConfig
+import com.hjq.http.EasyHttp
 import com.hjq.language.LocaleContract
 import com.hjq.language.MultiLanguages
 import com.hjq.toast.ToastUtils
