@@ -72,7 +72,7 @@ class BrowserView @JvmOverloads constructor(
         // 允许保存密码
         settings.savePassword = true
         settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
-        settings.setAppCacheEnabled(true)
+//        settings.setAppCacheEnabled(true)
         // 允许网页弹对话框
         settings.javaScriptCanOpenWindowsAutomatically = true
         // 加快网页加载完成的速度，等页面完成再加载图片

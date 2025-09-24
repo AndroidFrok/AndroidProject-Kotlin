@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace 'com.jh.main'
-    compileSdk 33
+    compileSdk vc.compileSdkVersion
 
     defaultConfig {
         applicationId "com.jh.main"
-        minSdk 21
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        minSdk vc.minSdkVersion
+        targetSdk vc.targetSdkVersion
+        versionCode vc.versionCode
+        versionName vc.versionName
 
 //        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
