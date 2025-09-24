@@ -4,13 +4,12 @@ apply plugin: 'kotlin-kapt'
 android {
 
     // 编译源码版本  targetSdkVersion 最低到29就行  再低要改清单文件很多地方
-//    def androidapi = 29
     compileSdkVersion rootProject.ext.vc.compileSdkVersion
     defaultConfig {
         // 最低安装版本
         minSdkVersion 21
         // 目标适配版本
-        targetSdkVersion rootProject.ext.vc.compileSdkVersion
+        targetSdkVersion rootProject.ext.vc.targetSdkVersion
         versionName "20230713"
         versionCode 1
         renderscriptTargetApi 21
@@ -79,7 +78,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines}"
     // Json 解析框架：https://github.com/google/gson
     implementation 'com.google.code.gson:gson:2.8.9'
-    implementation 'com.tencent:mmkv:1.3.9'
+    implementation 'com.tencent:mmkv:1.3.14' // //    implementation 'com.tencent:mmkv-static:1.2.14'
     // Shape 框架：https://github.com/getActivity/ShapeView
     implementation 'com.github.getActivity:ShapeView:6.0'
     /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑以上依赖不可随意升级版本 */
@@ -88,7 +87,6 @@ dependencies {
     def lifecycleV = "2.3.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycleV}"
 //    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-//    implementation 'com.tencent:mmkv-static:1.2.14'
 //    https://github.com/kongzue/DialogX/releases
     def dialogx_version = "0.0.49"
     implementation "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
