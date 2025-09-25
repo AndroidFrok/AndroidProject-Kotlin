@@ -50,8 +50,10 @@ class CrashActivity : AppActivity() {
         private const val INTENT_KEY_IN_THROWABLE: String = "throwable"
 
         /** 系统包前缀列表 */
-        private val SYSTEM_PACKAGE_PREFIX_LIST: Array<String> = arrayOf("android", "com.android",
-            "androidx", "com.google.android", "java", "javax", "dalvik", "kotlin")
+        private val SYSTEM_PACKAGE_PREFIX_LIST: Array<String> = arrayOf(
+            "android", "com.android",
+            "androidx", "com.google.android", "java", "javax", "dalvik", "kotlin"
+        )
 
         /** 报错代码行数正则表达式 */
         private val CODE_REGEX: Pattern = Pattern.compile("\\(\\w+\\.\\w+:\\d+\\)")
@@ -124,7 +126,12 @@ class CrashActivity : AppActivity() {
                 }
 
                 // 设置前景
-                spannable.setSpan(ForegroundColorSpan(codeColor), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannable.setSpan(
+                    ForegroundColorSpan(codeColor),
+                    start,
+                    end,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
                 // 设置下划线
                 spannable.setSpan(UnderlineSpan(), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
@@ -139,18 +146,23 @@ class CrashActivity : AppActivity() {
             displayMetrics.densityDpi > 480 -> {
                 targetResource = "xxxhdpi"
             }
+
             displayMetrics.densityDpi > 320 -> {
                 targetResource = "xxhdpi"
             }
+
             displayMetrics.densityDpi > 240 -> {
                 targetResource = "xhdpi"
             }
+
             displayMetrics.densityDpi > 160 -> {
                 targetResource = "hdpi"
             }
+
             displayMetrics.densityDpi > 120 -> {
                 targetResource = "mdpi"
             }
+
             else -> {
                 targetResource = "ldpi"
             }
@@ -175,31 +187,52 @@ class CrashActivity : AppActivity() {
 
         try {
             val dateFormat = SimpleDateFormat("MM-dd HH:mm", Locale.getDefault())
-            val packageInfo: PackageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS)
+            val packageInfo: PackageInfo =
+                packageManager.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS)
             builder.append("\n首次安装：\t")
                 .append(dateFormat.format(Date(packageInfo.firstInstallTime)))
                 .append("\n最近安装：\t").append(dateFormat.format(Date(packageInfo.lastUpdateTime)))
                 .append("\n崩溃时间：\t").append(dateFormat.format(Date()))
-            val permissions: MutableList<String> = mutableListOf(*packageInfo.requestedPermissions!!)
+            val permissions: MutableList<String> =
+                mutableListOf(*packageInfo.requestedPermissions!!)
             if (permissions.contains(Permission.READ_EXTERNAL_STORAGE) ||
-                permissions.contains(Permission.WRITE_EXTERNAL_STORAGE)) {
+                permissions.contains(Permission.WRITE_EXTERNAL_STORAGE)
+            ) {
                 builder.append("\n存储权限：\t").append(
-                    if (XXPermissions.isGranted(this, *Permission.Group.STORAGE)) "已获得" else "未获得"
+                    if (XXPermissions.isGrantedPermissions(
+                            this,
+                            Permission.READ_EXTERNAL_STORAGE
+                        )
+                    ) "已获得" else "未获得"
                 )
             }
             if (permissions.contains(Permission.ACCESS_FINE_LOCATION) ||
-                permissions.contains(Permission.ACCESS_COARSE_LOCATION)) {
+                permissions.contains(Permission.ACCESS_COARSE_LOCATION)
+            ) {
                 builder.append("\n定位权限：\t")
-                if (XXPermissions.isGranted(this, Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION)) {
+                if (XXPermissions.isGrantedPermissions(
+                        this,
+                        Permission.ACCESS_FINE_LOCATION,
+                        Permission.ACCESS_COARSE_LOCATION
+                    )
+                ) {
                     builder.append("精确、粗略")
                 } else {
                     when {
-                        XXPermissions.isGranted(this, Permission.ACCESS_FINE_LOCATION) -> {
+                        XXPermissions.isGrantedPermissions(
+                            this,
+                            Permission.ACCESS_FINE_LOCATION
+                        ) -> {
                             builder.append("精确")
                         }
-                        XXPermissions.isGranted(this, Permission.ACCESS_COARSE_LOCATION) -> {
+
+                        XXPermissions.isGrantedPermissions(
+                            this,
+                            Permission.ACCESS_COARSE_LOCATION
+                        ) -> {
                             builder.append("粗略")
                         }
+
                         else -> {
                             builder.append("未获得")
                         }
@@ -208,21 +241,39 @@ class CrashActivity : AppActivity() {
             }
             if (permissions.contains(Permission.CAMERA)) {
                 builder.append("\n相机权限：\t")
-                    .append(if (XXPermissions.isGranted(this, Permission.CAMERA)) "已获得" else "未获得")
+                    .append(
+                        if (XXPermissions.isGrantedPermissions(
+                                this,
+                                Permission.CAMERA
+                            )
+                        ) "已获得" else "未获得"
+                    )
             }
             if (permissions.contains(Permission.RECORD_AUDIO)) {
                 builder.append("\n录音权限：\t").append(
-                    if (XXPermissions.isGranted(this, Permission.RECORD_AUDIO)) "已获得" else "未获得"
+                    if (XXPermissions.isGrantedPermissions(
+                            this,
+                            Permission.RECORD_AUDIO
+                        )
+                    ) "已获得" else "未获得"
                 )
             }
             if (permissions.contains(Permission.SYSTEM_ALERT_WINDOW)) {
                 builder.append("\n悬浮窗权限：\t").append(
-                    if (XXPermissions.isGranted(this, Permission.SYSTEM_ALERT_WINDOW)) "已获得" else "未获得"
+                    if (XXPermissions.isGrantedPermissions(
+                            this,
+                            Permission.SYSTEM_ALERT_WINDOW
+                        )
+                    ) "已获得" else "未获得"
                 )
             }
             if (permissions.contains(Permission.REQUEST_INSTALL_PACKAGES)) {
                 builder.append("\n安装包权限：\t").append(
-                    if (XXPermissions.isGranted(this, Permission.REQUEST_INSTALL_PACKAGES)) "已获得" else "未获得"
+                    if (XXPermissions.isGrantedPermissions(
+                            this,
+                            Permission.REQUEST_INSTALL_PACKAGES
+                        )
+                    ) "已获得" else "未获得"
                 )
             }
             if (permissions.contains(Manifest.permission.INTERNET)) {
@@ -253,6 +304,7 @@ class CrashActivity : AppActivity() {
             R.id.iv_crash_info -> {
                 drawerLayout?.openDrawer(GravityCompat.START)
             }
+
             R.id.iv_crash_share -> {
                 // 分享文本
                 val intent = Intent(Intent.ACTION_SEND)
@@ -260,6 +312,7 @@ class CrashActivity : AppActivity() {
                 intent.putExtra(Intent.EXTRA_TEXT, stackTrace)
                 startActivity(Intent.createChooser(intent, ""))
             }
+
             R.id.iv_crash_restart -> {
                 onBackPressed()
             }

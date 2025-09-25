@@ -134,13 +134,13 @@ class CameraActivity : AppActivity() {
             // 拍摄照片
             intent.action = MediaStore.ACTION_IMAGE_CAPTURE
         }
-        val isGrant = XXPermissions.isGranted(
+        val isGrant = XXPermissions.isGrantedPermissions(
             this,
             Permission.READ_EXTERNAL_STORAGE,
             Permission.WRITE_EXTERNAL_STORAGE,
             Permission.CAMERA
         )
-        val isGrant33 = XXPermissions.isGranted(
+        val isGrant33 = XXPermissions.isGrantedPermissions(
             this,
             Permission.CAMERA,
             Permission.READ_MEDIA_IMAGES,

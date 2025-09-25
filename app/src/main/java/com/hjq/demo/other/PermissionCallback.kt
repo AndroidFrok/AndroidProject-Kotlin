@@ -20,7 +20,6 @@ import com.hjq.demo.R
  *    desc   : 权限申请回调封装
  */
 abstract class PermissionCallback : OnPermissionCallback {
-
     override fun onDenied(permissions: MutableList<String>, never: Boolean) {
         if (never) {
             showPermissionDialog(permissions)

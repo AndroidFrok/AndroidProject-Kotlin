@@ -254,7 +254,7 @@ class Android13Act : AppActivity() {
     private val wifiScanReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == WifiManager.SCAN_RESULTS_AVAILABLE_ACTION) {
-                if (XXPermissions.isGranted(
+                if (XXPermissions.isGrantedPermissions(
                         getContext(), Manifest.permission.ACCESS_FINE_LOCATION
                     )
                 ) {

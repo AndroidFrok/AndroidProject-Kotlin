@@ -377,7 +377,7 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
             MediaStore.MediaColumns.SIZE
         )
         var cursor: Cursor? = null
-        if (XXPermissions.isGranted(
+        if (XXPermissions.isGrantedPermissions(
                 this,
                 Permission.READ_MEDIA_IMAGES,
                 Permission.READ_MEDIA_AUDIO,
