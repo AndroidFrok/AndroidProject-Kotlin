@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import com.alibaba.android.arouter.launcher.ARouter
+import com.blankj.utilcode.util.ToastUtils
 import com.google.android.material.button.MaterialButton
 import com.hjq.base.CommonContext
 import com.hjq.demo.R
@@ -18,6 +19,7 @@ import com.hjq.demo.manager.Router
 import com.hjq.demo.ui.activity.AdminActivity
 import com.hjq.demo.ui.activity.HomeActivity
 import com.hjq.demo.ui.activity.JoyAct
+import com.hjq.demo.ui.activity.RecordAct
 import com.hjq.permissions.Permission
 import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.dialogs.PopTip
@@ -75,8 +77,9 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
             startActivity(JoyAct::class.java)
         }
         btn_dialog1?.setOnClickListener {
-            com.hjq.demo.ui.dialog.MessageDialog.Builder(CommonContext.getContext())
-                .setMessage("aaaaaaaaaaa").setTitle("title").show();
+            ToastUtils.showShort("???????????");
+            /* com.hjq.demo.ui.dialog.MessageDialog.Builder(CommonContext.getContext())
+                 .setMessage("aaaaaaaaaaa").setTitle("title").show();*/
         }
         btn_13?.setOnClickListener {
             ARouter.getInstance().build(Router.A13).navigation();
@@ -109,7 +112,9 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
             startActivity(AdminActivity::class.java)
             true
         }
-
+        btn_english?.setOnClickListener {
+            startActivity(RecordAct::class.java);
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

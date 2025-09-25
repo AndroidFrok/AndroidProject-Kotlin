@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
+import com.google.android.material.textview.MaterialTextView
 
 /**
  *    author : Android 轮子哥
@@ -15,7 +16,7 @@ import androidx.appcompat.widget.AppCompatTextView
 class SmartTextView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null,
     defStyleAttr: Int = android.R.attr.textViewStyle) :
-    AppCompatTextView(context, attrs, defStyleAttr) {
+    MaterialTextView(context, attrs, defStyleAttr) {
 
     init {
         refreshVisibilityStatus()

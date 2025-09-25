@@ -5,7 +5,11 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -57,7 +61,10 @@
         <meta-data
             android:name="design_height_in_dp"
             android:value="812" />
-
+        <service
+            android:name=".services.VideoRecordService"
+            android:foregroundServiceType="camera|microphone"
+            android:exported="false" />
         <service
             android:name=".other.AliveService"
             android:enabled="true"
@@ -70,7 +77,9 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
-
+        <activity
+            android:name=".ui.activity.RecordAct"
+            android:exported="true" />
         <activity
             android:name=".ui.activity.JoyAct"
             android:exported="true" />

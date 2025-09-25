@@ -104,14 +104,14 @@ class SplashActivity : AppActivity() {
               }*/
 
 
-//        toMain()
+        toMain()
         val u = getHostUrl()
 //        u = "#";
-        BrowserActivity.start(
+        /*BrowserActivity.start(
             getContext(),
 //            "http://55cloud.oss-cn-hangzhou.aliyuncs.com/test/user_mp/agreement/privacyPolicy.html"
             "https://www.zkyxai.com/ailearnh5/jzx/#/previewHome?userld=4e0f9868-ddfd-4955-b590-07df0a1e4ddf&chapterld=1821494025723109376"
-        )
+        )*/
         finish()
     }
 }
