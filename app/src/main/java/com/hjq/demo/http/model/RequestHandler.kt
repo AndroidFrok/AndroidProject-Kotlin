@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import com.google.gson.Gson
 import com.hjq.demo.R
 import com.hjq.demo.http.HttpCacheManager
 import com.hjq.demo.manager.ActivityManager
@@ -118,8 +119,8 @@ class RequestHandler constructor(private val application: Application) : IReques
         } catch (e: JsonSyntaxException) {
             Timber.e(e.localizedMessage)
         }*/
-        result = GsonFactory.getSingletonGson().fromJson(text, type)
-//            return result!!
+        // 高版本  单例报错         result = GsonFactory.getSingletonGson().fromJson(text, type)
+        result = Gson().fromJson(text, type)
         return result!!
     }
 
