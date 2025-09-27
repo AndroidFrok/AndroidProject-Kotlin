@@ -6,18 +6,27 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.hardware.camera2.*
+import android.hardware.camera2.CameraAccessException
+import android.hardware.camera2.CameraCaptureSession
+import android.hardware.camera2.CameraCharacteristics
+import android.hardware.camera2.CameraDevice
+import android.hardware.camera2.CameraManager
 import android.media.MediaRecorder
-import android.os.*
+import android.os.Binder
+import android.os.Build
+import android.os.IBinder
+import android.os.PowerManager
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.hjq.demo.R
 import com.hjq.toast.ToastUtils
+import com.kongzue.dialogx.dialogs.PopTip
 import java.io.File
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 import java.util.concurrent.Semaphore
 import java.util.concurrent.TimeUnit
 
@@ -92,7 +101,7 @@ class VideoRecordService : Service() {
             mediaRecorder?.stop()
             mediaRecorder?.reset()
         } catch (e: Exception) {
-            Log.e(TAG, "停止录制失败: ${e.localizedMessage}", e)
+            Log.e(TAG, "停止录制失败: ${e.localizedMessage}")
             ToastUtils.show("停止失败：${e.localizedMessage}")
         }
 
@@ -136,6 +145,7 @@ class VideoRecordService : Service() {
             }
             true
         } catch (e: Exception) {
+            e.printStackTrace();
             Log.e(TAG, "初始化MediaRecorder失败: ${e.message}", e)
             mediaRecorder?.release()
             mediaRecorder = null
@@ -169,10 +179,13 @@ class VideoRecordService : Service() {
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
                 cameraManager?.openCamera(cameraId!!, stateCallback, null)
+                PopTip.show("摄像头打开成功").iconSuccess();
             }
         } catch (e: Exception) {
-            Log.e(TAG, "打开摄像头失败: ${e.message}", e)
-            ToastUtils.show("打开摄像头失败：${e.localizedMessage}")
+            e.printStackTrace();
+//            Log.e(TAG, "打开摄像头失败: ${e.message}", e)
+//            ToastUtils.show("打开摄像头失败：${e.localizedMessage}")
+            PopTip.show("摄像头打开失败 ${e.localizedMessage}").iconError();
         }
     }
 
@@ -255,7 +268,7 @@ class VideoRecordService : Service() {
                     }
 
                     override fun onConfigureFailed(session: CameraCaptureSession) {
-                        Log.e(TAG, "创建捕获会话失败 " )
+                        Log.e(TAG, "创建捕获会话失败 ")
                     }
                 }, null
             )
@@ -296,8 +309,7 @@ class VideoRecordService : Service() {
      */
     private fun createNotification(): Notification {
         return NotificationCompat.Builder(this, CHANNEL_ID).setContentTitle("正在录制视频")
-            .setSmallIcon(R.mipmap.add).setPriority(NotificationCompat.PRIORITY_LOW)
-            .build()
+            .setSmallIcon(R.mipmap.add).setPriority(NotificationCompat.PRIORITY_LOW).build()
     }
 
     override fun onDestroy() {

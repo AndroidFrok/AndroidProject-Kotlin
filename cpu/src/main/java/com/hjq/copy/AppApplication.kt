@@ -44,6 +44,8 @@ import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.DialogX
 import com.kongzue.dialogx.dialogs.PopTip
 import com.kongzue.dialogx.style.MIUIStyle
+import com.kongzue.dialogx.style.MaterialStyle
+import com.kongzue.dialogx.util.TextInfo
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.tencent.mmkv.MMKV
@@ -115,12 +117,21 @@ class AppApplication : MultiDexApplication() {
         DialogX.DEBUGMODE = isDebug()
         DialogX.init(this)
 
-        /*if (brand == "xiaomi") {
-            DialogX.globalStyle = MIUIStyle()
-        } else {
-            DialogX.globalStyle = IOSStyle()
-        }*/
-        DialogX.globalStyle = MIUIStyle()
+        DialogX.globalStyle = object : MaterialStyle() {
+            override fun popTipSettings(): PopTipSettings {
+                //DefaultPopTipSettings 是主题中默认的 PopTip 设置，以下演示仅覆写其中的 align 设置
+                return object : DefaultPopTipSettings() {
+                    //                    https://github.com/kongzue/DialogX/wiki/%E7%AE%80%E5%8D%95%E6%8F%90%E7%A4%BA-PopTip
+                    override fun align(): ALIGN {
+                        return ALIGN.CENTER
+                    }
+                }
+            }
+        }
+        val info = TextInfo();
+        info.setFontSize(40);
+        DialogX.popTextInfo = info;
+        DialogX.globalStyle = MIUIStyle();
         DialogX.implIMPLMode = DialogX.IMPL_MODE.VIEW
         DialogX.useHaptic = true
         DialogX.globalTheme = DialogX.THEME.AUTO
