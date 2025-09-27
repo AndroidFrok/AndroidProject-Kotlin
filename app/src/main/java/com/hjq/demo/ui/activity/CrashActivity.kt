@@ -200,9 +200,9 @@ class CrashActivity : AppActivity() {
                 permissions.contains(Permission.WRITE_EXTERNAL_STORAGE)
             ) {
                 builder.append("\n存储权限：\t").append(
-                    if (XXPermissions.isGranted(
+                    if (XXPermissions.isGrantedPermissions(
                             this,
-                            *Permission.Group.STORAGE
+                            Permission.WRITE_EXTERNAL_STORAGE
                         )
                     ) "已获得" else "未获得"
                 )
@@ -211,7 +211,7 @@ class CrashActivity : AppActivity() {
                 permissions.contains(Permission.ACCESS_COARSE_LOCATION)
             ) {
                 builder.append("\n定位权限：\t")
-                if (XXPermissions.isGranted(
+                if (XXPermissions.isGrantedPermissions(
                         this,
                         Permission.ACCESS_FINE_LOCATION,
                         Permission.ACCESS_COARSE_LOCATION
@@ -220,11 +220,11 @@ class CrashActivity : AppActivity() {
                     builder.append("精确、粗略")
                 } else {
                     when {
-                        XXPermissions.isGranted(this, Permission.ACCESS_FINE_LOCATION) -> {
+                        XXPermissions.isGrantedPermissions(this, Permission.ACCESS_FINE_LOCATION) -> {
                             builder.append("精确")
                         }
 
-                        XXPermissions.isGranted(this, Permission.ACCESS_COARSE_LOCATION) -> {
+                        XXPermissions.isGrantedPermissions(this, Permission.ACCESS_COARSE_LOCATION) -> {
                             builder.append("粗略")
                         }
 
@@ -237,7 +237,7 @@ class CrashActivity : AppActivity() {
             if (permissions.contains(Permission.CAMERA)) {
                 builder.append("\n相机权限：\t")
                     .append(
-                        if (XXPermissions.isGranted(
+                        if (XXPermissions.isGrantedPermissions(
                                 this,
                                 Permission.CAMERA
                             )
@@ -246,7 +246,7 @@ class CrashActivity : AppActivity() {
             }
             if (permissions.contains(Permission.RECORD_AUDIO)) {
                 builder.append("\n录音权限：\t").append(
-                    if (XXPermissions.isGranted(
+                    if (XXPermissions.isGrantedPermissions(
                             this,
                             Permission.RECORD_AUDIO
                         )
@@ -255,7 +255,7 @@ class CrashActivity : AppActivity() {
             }
             if (permissions.contains(Permission.SYSTEM_ALERT_WINDOW)) {
                 builder.append("\n悬浮窗权限：\t").append(
-                    if (XXPermissions.isGranted(
+                    if (XXPermissions.isGrantedPermissions(
                             this,
                             Permission.SYSTEM_ALERT_WINDOW
                         )
@@ -264,7 +264,7 @@ class CrashActivity : AppActivity() {
             }
             if (permissions.contains(Permission.REQUEST_INSTALL_PACKAGES)) {
                 builder.append("\n安装包权限：\t").append(
-                    if (XXPermissions.isGranted(
+                    if (XXPermissions.isGrantedPermissions(
                             this,
                             Permission.REQUEST_INSTALL_PACKAGES
                         )

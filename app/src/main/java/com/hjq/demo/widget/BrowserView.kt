@@ -375,7 +375,7 @@ class BrowserView @JvmOverloads constructor(
             if (activity !is BaseActivity) {
                 return false
             }
-            XXPermissions.with(activity).permission(*Permission.Group.STORAGE)
+            XXPermissions.with(activity).permission(Permission.WRITE_EXTERNAL_STORAGE)
                 .permission(Permission.CAMERA).request(object : PermissionCallback() {
                     override fun onGranted(permissions: MutableList<String>, all: Boolean) {
                         if (all) {

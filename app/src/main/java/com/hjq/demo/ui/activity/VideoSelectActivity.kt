@@ -351,7 +351,7 @@ class VideoSelectActivity : AppActivity(), StatusAction, Runnable, BaseAdapter.O
             MediaStore.MediaColumns.DISPLAY_NAME, MediaStore.MediaColumns.DATE_MODIFIED, MediaStore.MediaColumns.MIME_TYPE,
             MediaStore.MediaColumns.WIDTH, MediaStore.MediaColumns.HEIGHT, MediaStore.MediaColumns.SIZE, MediaStore.Video.Media.DURATION)
         var cursor: Cursor? = null
-        if (XXPermissions.isGranted(this, Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE)) {
+        if (XXPermissions.isGrantedPermissions(this, Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE)) {
             cursor = contentResolver.query(contentUri, projections, selection,
                 arrayOf<String?>(MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO.toString()), sortOrder)
         }

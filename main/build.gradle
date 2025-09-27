@@ -31,7 +31,6 @@ android {
 
         debug {
             // 给包名添加后缀
-            applicationIdSuffix '.debug'
             // 调试模式开关
             debuggable true
             jniDebuggable true

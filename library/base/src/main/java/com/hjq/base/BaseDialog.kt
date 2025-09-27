@@ -1241,9 +1241,9 @@ open class BaseDialog constructor(
         fun onKey(dialog: BaseDialog?, event: KeyEvent?): Boolean
     }
 
-    override fun getLifecycle(): Lifecycle {
+    /*override fun getLifecycle(): Lifecycle {
         return lifecycle
-    }
+    }*/
 
 
 }

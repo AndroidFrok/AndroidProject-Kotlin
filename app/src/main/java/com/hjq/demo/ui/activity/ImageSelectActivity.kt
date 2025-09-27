@@ -341,7 +341,7 @@ class ImageSelectActivity : AppActivity(), StatusAction, Runnable,
             MediaStore.MediaColumns.DISPLAY_NAME, MediaStore.MediaColumns.DATE_MODIFIED, MediaStore.MediaColumns.MIME_TYPE,
             MediaStore.MediaColumns.WIDTH, MediaStore.MediaColumns.HEIGHT, MediaStore.MediaColumns.SIZE)
         var cursor: Cursor? = null
-        if (XXPermissions.isGranted(this, Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE)) {
+        if (XXPermissions.isGrantedPermissions(this, Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE)) {
             cursor = contentResolver.query(contentUri, projections, selection,
                 arrayOf<String?>(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE.toString()), sortOrder)
         }
