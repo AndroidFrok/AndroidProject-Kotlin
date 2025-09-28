@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.jh.main'
+    namespace 'com.jh.main'   // 这个会影响导包路径  别轻易改了
     compileSdk vc.compileSdkVersion
 
     defaultConfig {
