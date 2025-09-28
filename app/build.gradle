@@ -5,7 +5,7 @@ apply from: '../common.gradle'
 
 // Android 代码规范文档：https://github.com/getActivity/AndroidCodeStandard
 android {
-    namespace 'com.hjq.demo'
+    namespace 'com.hjq.demo'// 这个会影响导包路径  别轻易改了
 
     // 资源目录存放指引：https://developer.android.google.cn/guide/topics/resources/providing-resources
     defaultConfig {

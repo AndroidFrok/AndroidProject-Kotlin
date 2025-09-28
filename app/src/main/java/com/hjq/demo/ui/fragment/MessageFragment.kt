@@ -23,6 +23,8 @@ import com.hjq.demo.ui.activity.RecordAct
 import com.hjq.permissions.Permission
 import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.dialogs.PopTip
+import com.serenegiant.usb.UVCCamera
+import com.serenegiant.usb.UVCParam
 import timber.log.Timber
 
 /**
@@ -54,6 +56,7 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
     }
 
     override fun initView() {
+        val aa = UVCCamera(UVCParam());
         btn_13 = activity?.findViewById(R.id.btn_13);
         btn_dialog = activity?.findViewById(R.id.btn_dialog);
         btn_dialog1 = activity?.findViewById(R.id.btn_dialog1);
