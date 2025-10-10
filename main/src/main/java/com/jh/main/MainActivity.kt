@@ -19,8 +19,8 @@ import com.jh.main.ui.theme.AndroidProjectKotlinTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Intent(this, SplashActivity::class.java))
-        finish()
+//        startActivity(Intent(this, SplashActivity::class.java))
+//        finish()
         /*setContent {
             AndroidProjectKotlinTheme {
                 // A surface container using the 'background' color from the theme

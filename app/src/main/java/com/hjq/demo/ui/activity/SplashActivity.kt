@@ -35,19 +35,16 @@ class SplashActivity : AppActivity() {
     }
 
     override fun initView() {
-        /*GlobalScope.launch {
-
-        }*/
 //        ThreadPoolManager.getInstance().execute(r) // 用自己的闪屏  不用现有动画
         // 设置动画监听
 //        lottieView?.speed = 8.6f;
-        lottieView?.addAnimatorListener(object : AnimatorListenerAdapter() {
+        /*lottieView?.addAnimatorListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 lottieView?.removeAnimatorListener(this)
                 toMain()
             }
-        })
+        })*/
     }
 
     private fun toMain() {

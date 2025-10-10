@@ -253,7 +253,7 @@ class UpdateDialog {
                                         getContext(),
                                         1,
                                         getInstallIntent(),
-                                        Intent.FILL_IN_ACTION or PendingIntent.FLAG_IMMUTABLE
+                                        Intent.FILL_IN_ACTION or PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_MUTABLE
                                     )
                                 )
                                 // 设置点击通知后是否自动消失

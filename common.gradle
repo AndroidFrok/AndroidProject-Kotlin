@@ -106,7 +106,7 @@ dependencies {
     implementation "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
     implementation "com.github.kongzue.DialogX:DialogXMIUIStyle:${dialogx_version}"
     api 'com.blankj:utilcode:1.30.6'
-    def work_version = "2.4.0"
+    def work_version = "2.7.0" //小于2.7会发生 意图更改设置的闪退
     // https://developer.android.google.cn/jetpack/androidx/releases/work?hl=zh-cn (Java only)https://developer.android.google.cn/topic/libraries/architecture/workmanager/how-to/define-work?hl=zh-cn#java
     implementation "androidx.work:work-runtime:$work_version"
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
