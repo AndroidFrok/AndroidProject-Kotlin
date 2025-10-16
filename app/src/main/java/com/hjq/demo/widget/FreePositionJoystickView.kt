@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
+import timber.log.Timber
 
 class FreePositionJoystickView @JvmOverloads constructor(
     context: Context,
@@ -70,6 +71,7 @@ class FreePositionJoystickView @JvmOverloads constructor(
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        Timber.d("aaa ${event?.getX()} ${event?.getY()}  ")
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 // 记录初始触摸位置

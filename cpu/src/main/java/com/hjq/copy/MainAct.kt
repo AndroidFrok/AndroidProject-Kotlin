@@ -2,6 +2,7 @@ package com.hjq.copy
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.MmkvUtil
@@ -9,6 +10,7 @@ import com.hjq.demo.manager.Router
 import com.hjq.demo.services.TrafficMonitor
 import com.hjq.demo.ui.activity.HomeActivity
 import com.kongzue.dialogx.dialogs.PopTip
+import timber.log.Timber
 
 
 @Route(path = Router.Main)
@@ -43,6 +45,7 @@ class MainAct : AppActivity() {
     override fun initView() {
 
     }
+
 
     override fun initData() {
 

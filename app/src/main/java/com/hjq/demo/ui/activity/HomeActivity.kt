@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -13,10 +14,13 @@ import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.app.AppFragment
 import com.hjq.demo.manager.ActivityManager
+import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.manager.Router
+import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.DoubleClickHelper
 import com.hjq.demo.ui.adapter.NavigationAdapter
 import com.hjq.demo.ui.fragment.MessageFragment
+import timber.log.Timber
 
 /**
  *    author : Android 轮子哥
@@ -157,11 +161,15 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
             ActivityManager.getInstance().finishAllActivities()
         }, 300)
     }
-
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return super.onTouchEvent(event)
+    }
     override fun onDestroy() {
         super.onDestroy()
         viewPager?.adapter = null
         navigationView?.adapter = null
         navigationAdapter?.setOnNavigationListener(null)
     }
+
+
 }

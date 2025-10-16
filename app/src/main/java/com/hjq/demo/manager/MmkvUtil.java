@@ -12,6 +12,10 @@ public class MmkvUtil {
     public static String Port = "key0";
     public static String LastReq = "last_req_time";
     public static String Baudrate = "key1";
+    public static String Databits = "Databits";
+    public static String Parity = "Parity";
+    public static String Stopbits = "Stopbits";
+    public static String Flowcon = "Flowcon";
     //    public static String DeviceCode = "dev_code";
     public static String Token = "token";
     public static String Version = "version";

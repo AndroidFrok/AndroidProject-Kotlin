@@ -5,11 +5,13 @@ import android.content.Intent
 import android.net.TrafficStats
 import android.os.Bundle
 import android.os.PowerManager
+import android.os.SystemClock
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
 import com.blankj.utilcode.util.AppUtils
+import com.ex.serialport.SerialActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.hjq.base.BaseDialog
@@ -23,19 +25,23 @@ import com.hjq.demo.other.RomHelper
 import com.hjq.demo.services.TrafficMonitor
 import com.hjq.demo.ui.dialog.InputDialog
 import com.hjq.http.EasyConfig
-import com.hjq.http.EasyHttp
 import com.hjq.language.LocaleContract
 import com.hjq.language.MultiLanguages
 import com.hjq.toast.ToastUtils
 import com.hjq.widget.view.SwitchButton
 import com.kongzue.dialogx.dialogs.MessageDialog
+import com.kongzue.dialogx.dialogs.PopMenu
 import com.kongzue.dialogx.dialogs.PopTip
 import com.kongzue.dialogx.dialogs.TipDialog
 import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener
+import com.kongzue.dialogx.interfaces.OnMenuItemClickListener
 import com.tencent.bugly.crashreport.CrashReport
 import timber.log.Timber
 import java.io.DataOutputStream
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 /**
@@ -55,8 +61,12 @@ class AdminActivity : AppActivity() {
     private val btn_reboot: MaterialButton? by lazy { findViewById(R.id.btn_reboot) }
     private val btn_devinfo: MaterialButton? by lazy { findViewById(R.id.btn_devinfo) }
     private val btn_liuliang: MaterialButton? by lazy { findViewById(R.id.btn_liuliang) }
+    private val btn_serial: MaterialButton? by lazy { findViewById(R.id.btn_serial) }
 
     private val tv_info: MaterialTextView? by lazy { findViewById(com.hjq.demo.R.id.tv_info) }
+    private val tv_last_boot: MaterialTextView? by lazy { findViewById(com.hjq.demo.R.id.tv_last_boot) }
+    private val tv_lang: MaterialTextView? by lazy { findViewById(com.hjq.demo.R.id.tv_lang) }
+    private val tv_serialinfo: MaterialTextView? by lazy { findViewById(com.hjq.demo.R.id.tv_serialinfo) }
 
     private val switch_log: SwitchButton? by lazy { findViewById(R.id.switch_log) }
 
@@ -65,9 +75,109 @@ class AdminActivity : AppActivity() {
         super.onCreate(savedInstanceState)
     }
 
+    private fun delayTask() {
+        btn_serial?.setOnClickListener {
+            startActivityForResult(SerialActivity::class.java, object : OnActivityCallback {
+                override fun onActivityResult(resultCode: Int, data: Intent?) {
+                    data?.let { it1 -> serialData(it1) };
+                }
+
+            })
+        }
+        tv_last_boot?.text =
+            "${AppConfig.getVersionName()}-${AppConfig.getVersionCode()} 最近开机时间：${getLastBootTime()}";
+        tv_lang?.setOnClickListener {
+            PopMenu.show("默认", "简中", "英语")
+//                .disableMenu("编辑", "删除")
+                .setOnMenuItemClickListener { dialog, text, index ->
+                    when (index) {
+                        0 -> {
+                            val restart = MultiLanguages.clearAppLanguage(this)
+                            if (restart) {
+                                ActivityManager.getInstance().finishAllActivities()
+                                startActivity(AdminActivity::class.java)
+                            }
+                        }
+
+                        1 -> {//             切换中文简体
+                            val restart = MultiLanguages.setAppLanguage(
+                                this, LocaleContract.getSimplifiedChineseLocale()
+                            )
+                            if (restart) {
+                                ActivityManager.getInstance().finishAllActivities()
+                                startActivity(AdminActivity::class.java)
+                            }
+                        }
+
+                        2 -> {
+                            val restart = MultiLanguages.setAppLanguage(
+                                this,
+                                LocaleContract.getEnglishLocale()
+                            )
+                            if (restart) {
+                                ActivityManager.getInstance().finishAllActivities()
+                                startActivity(AdminActivity::class.java)
+                            }
+                        }
+                    }
+                    false
+                }
+        }
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.activity_admin
     }
+
+    private fun serialData(data: Intent) {
+        if (data != null) {
+            val port = data.getStringExtra("port")
+            val baudrate = data.getIntExtra("baudrate", 0)
+            val databits = data.getIntExtra("databits", 0)
+            val parity = data.getIntExtra("parity", 0)
+            val stopbits = data.getIntExtra("stopbits", 0)
+            val flowcon = data.getIntExtra("flowcon", 0)
+
+
+            MmkvUtil.save(MmkvUtil.Port, port);
+            MmkvUtil.save(MmkvUtil.Baudrate, baudrate);
+            MmkvUtil.save(MmkvUtil.Databits, databits)
+            MmkvUtil.save(MmkvUtil.Parity, parity)
+            MmkvUtil.save(MmkvUtil.Stopbits, stopbits)
+            MmkvUtil.save(MmkvUtil.Flowcon, flowcon)
+            tv_serialinfo?.text = getSerialInfo();
+
+            TipDialog.show("保存成功")
+        } else {
+            TipDialog.show("串口数据空")
+        }
+    }
+
+    private fun getSerialInfo(): String {
+        val port = MmkvUtil.getString(MmkvUtil.Port, "/dev/ttyS1");
+        val baudrate = MmkvUtil.getInt(MmkvUtil.Baudrate, 57600);
+        val databits = MmkvUtil.getInt(MmkvUtil.Databits, 8)
+        val parity = MmkvUtil.getInt(MmkvUtil.Parity, 2)
+        val stopbits = MmkvUtil.getInt(MmkvUtil.Stopbits, 1)
+        val flowcon = MmkvUtil.getInt(MmkvUtil.Flowcon, 0)
+        val s =
+            "(检验位和流控显示的是所选索引无需担心)端口 ${port}  波特率$baudrate  数据位$databits  校验位$parity  停止位$stopbits 流控${flowcon}";
+        return s;
+    }
+
+    fun getLastBootTime(): String {
+        // 获取从开机到现在的毫秒数（包含睡眠时间）
+        val elapsedMillis = SystemClock.elapsedRealtime()
+        // 当前系统时间（毫秒）
+        val currentMillis = System.currentTimeMillis()
+        // 计算开机时间（当前时间 - 已开机时长）
+        val bootTimeMillis = currentMillis - elapsedMillis
+
+        // 格式化时间（如：2024-09-13 08:30:45）
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        return sdf.format(Date(bootTimeMillis))
+    }
+
     private fun computeKb() {
         var rxBytes = 0L;
         var txBytes = 0L;
@@ -82,6 +192,7 @@ class AdminActivity : AppActivity() {
         MessageDialog.build().setMessage("$s").show();
         ToastUtils.show("$s");
     }
+
     /**
      * https://blog.csdn.net/wzystal/article/details/26088987
      */
@@ -349,5 +460,7 @@ class AdminActivity : AppActivity() {
     }
 
     override fun initData() {
+        postDelayed({ delayTask() }, 1000)
     }
+
 }

@@ -3,9 +3,11 @@ package com.hjq.demo.ui.activity
 import android.content.Intent
 import android.view.View
 import com.airbnb.lottie.LottieAnimationView
+import com.alibaba.android.arouter.launcher.ARouter
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.MmkvUtil
+import com.hjq.demo.manager.Router
 import com.hjq.demo.manager.ThreadPoolManager
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.AppConfig.getHostUrl
@@ -42,8 +44,9 @@ class SplashActivity : AppActivity() {
     }
 
     private fun toMain() {
+        ARouter.getInstance().build(Router.Main).navigation()
 //        startActivity(MainAct::class.java)
-        startActivity(HomeActivity::class.java)
+//      不可直接跳home  有些本地存储没初始化   startActivity(HomeActivity::class.java)
         val isAgreePrivacy = MmkvUtil.getBool("is_agree")  //这个需要用 datastore组件来维护
 
         /*if (isAgreePrivacy) {

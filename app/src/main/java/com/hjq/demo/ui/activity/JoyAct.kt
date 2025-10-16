@@ -1,15 +1,22 @@
 package com.hjq.demo.ui.activity
 
+import android.view.MotionEvent
 import android.widget.TextView
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.widget.FreePositionJoystickView
+import timber.log.Timber
 
 class JoyAct : AppActivity() {
     override fun getLayoutId(): Int {
         return R.layout.act_joy;
     }
 
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+
+
+        return super.onTouchEvent(event)
+    }
     override fun initView() {
         val joystick = findViewById<FreePositionJoystickView>(R.id.freeJoystick)
         val statusText = findViewById<TextView>(R.id.statusText)

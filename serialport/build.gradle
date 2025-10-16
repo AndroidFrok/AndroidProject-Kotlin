@@ -1,0 +1,59 @@
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+android {
+    namespace "com.ex.serialport"
+    compileSdkVersion 32
+    defaultConfig {
+        minSdkVersion 14
+
+        /*applicationId "com.ex.serialport"
+        targetSdkVersion 32
+        versionCode 1
+        versionName "1.0"*/
+
+    }
+    buildTypes {
+        debug {
+            // 给包名添加后缀
+//            applicationIdSuffix ''
+            // 调试模式开关
+            debuggable true
+            jniDebuggable true
+            // 压缩对齐开关
+            zipAlignEnabled false
+            // 移除无用的资源
+            shrinkResources false
+            // 代码混淆开关
+            minifyEnabled false
+            // 签名信息配置
+//            signingConfig signingConfigs.config
+            // 添加清单占位符
+            addManifestPlaceholders(['app_name': 'dev端口调试'])
+        }
+        preview {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            addManifestPlaceholders(['app_name': '端口调试'])
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            addManifestPlaceholders(['app_name': '端口调试'])
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
+//    implementation project(path: ':serialport')
+    api 'io.github.xmaihh:serialport:2.1.1'
+}

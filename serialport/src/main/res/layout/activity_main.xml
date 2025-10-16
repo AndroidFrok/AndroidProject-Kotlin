@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SerialActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="保存为生产设置并返回"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_unsave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="不保存-返回上页"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_save"
+        app:layout_constraintStart_toEndOf="@+id/btn_save" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/tv_custom_baudrate"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_weight="1"
+            android:text="@string/send_setting_send_text" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/send_setting_send_hex" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_custom_baudrate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:text="@string/title_custom_buardate"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@id/tv_serial"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_serial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:text="@string/title_serial_port"
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_serial"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sp_serial" />
+
+    <Spinner
+        android:id="@+id/sp_serial"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/sp_databits"
+        app:layout_constraintEnd_toStartOf="@id/gline"
+        app:layout_constraintStart_toEndOf="@+id/tv_serial" />
+
+
+    <TextView
+        android:id="@+id/tv_baudrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_baudrate"
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_serial"
+        app:layout_constraintStart_toEndOf="@+id/gline"
+        app:layout_constraintTop_toTopOf="@+id/sp_serial" />
+
+    <Spinner
+        android:id="@+id/sp_baudrate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_serial"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_baudrate"
+        app:layout_constraintTop_toTopOf="@+id/sp_serial" />
+
+
+    <TextView
+        android:id="@+id/tv_databits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:text="@string/title_data_bits"
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_databits"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sp_databits" />
+
+    <Spinner
+        android:id="@+id/sp_databits"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/sp_stopbits"
+        app:layout_constraintEnd_toStartOf="@id/gline"
+        app:layout_constraintStart_toEndOf="@+id/tv_databits" />
+
+
+    <TextView
+        android:id="@+id/tv_parity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_parity"
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_databits"
+        app:layout_constraintStart_toEndOf="@+id/gline"
+        app:layout_constraintTop_toTopOf="@+id/sp_databits" />
+
+    <Spinner
+        android:id="@+id/sp_parity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_databits"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_parity"
+        app:layout_constraintTop_toTopOf="@+id/sp_databits" />
+
+    <TextView
+        android:id="@+id/tv_stopbits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:text="@string/title_stop_bits"
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_stopbits"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sp_stopbits" />
+
+    <Spinner
+        android:id="@+id/sp_stopbits"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/btn_open"
+        app:layout_constraintEnd_toStartOf="@id/gline"
+        app:layout_constraintStart_toEndOf="@+id/tv_stopbits" />
+
+
+    <TextView
+        android:id="@+id/tv_flowcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="@string/title_flow_type"
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_stopbits"
+        app:layout_constraintStart_toEndOf="@+id/gline"
+        app:layout_constraintTop_toTopOf="@+id/sp_stopbits" />
+
+    <Spinner
+        android:id="@+id/sp_flowcon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_stopbits"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_flowcon"
+        app:layout_constraintTop_toTopOf="@+id/sp_stopbits" />
+
+    <EditText
+        android:id="@+id/ed_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:maxLines="1"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/btn_send"
+        app:layout_constraintEnd_toStartOf="@+id/gline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_send" />
+
+    <Button
+        android:id="@+id/btn_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_open"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_send"
+        app:layout_constraintStart_toEndOf="@id/gline" />
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_send"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_open" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
