@@ -116,7 +116,6 @@ class AppApplication : MultiDexApplication() {
 //        val brand = Build.BRAND.lowercase(Locale.getDefault())
         DialogX.DEBUGMODE = isDebug()
         DialogX.init(this)
-
         DialogX.globalStyle = object : MaterialStyle() {
             override fun popTipSettings(): PopTipSettings {
                 //DefaultPopTipSettings 是主题中默认的 PopTip 设置，以下演示仅覆写其中的 align 设置
@@ -196,7 +195,7 @@ class AppApplication : MultiDexApplication() {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context: Context, layout: RefreshLayout ->
             MaterialHeader(context).setColorSchemeColors(
                 ContextCompat.getColor(
-                    context,  com.hjq.base.R.color.red
+                    context, com.hjq.base.R.color.red
                 )
             )
         }

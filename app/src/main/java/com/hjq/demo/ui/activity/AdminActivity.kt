@@ -3,12 +3,16 @@ package com.hjq.demo.ui.activity
 import android.content.ComponentName
 import android.content.Intent
 import android.net.TrafficStats
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.PowerManager
 import android.os.SystemClock
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSpinner
 import com.blankj.utilcode.util.AppUtils
 import com.ex.serialport.SerialActivity
@@ -28,13 +32,13 @@ import com.hjq.http.EasyConfig
 import com.hjq.language.LocaleContract
 import com.hjq.language.MultiLanguages
 import com.hjq.toast.ToastUtils
+import com.hjq.widget.layout.ObfuscatedProxy
 import com.hjq.widget.view.SwitchButton
 import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.dialogs.PopMenu
 import com.kongzue.dialogx.dialogs.PopTip
 import com.kongzue.dialogx.dialogs.TipDialog
 import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener
-import com.kongzue.dialogx.interfaces.OnMenuItemClickListener
 import com.tencent.bugly.crashreport.CrashReport
 import timber.log.Timber
 import java.io.DataOutputStream
@@ -42,6 +46,11 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.Random
+import java.util.concurrent.CopyOnWriteArrayList
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.tan
 
 
 /**
@@ -62,6 +71,7 @@ class AdminActivity : AppActivity() {
     private val btn_devinfo: MaterialButton? by lazy { findViewById(R.id.btn_devinfo) }
     private val btn_liuliang: MaterialButton? by lazy { findViewById(R.id.btn_liuliang) }
     private val btn_serial: MaterialButton? by lazy { findViewById(R.id.btn_serial) }
+    private val btn_pgyer: MaterialButton? by lazy { findViewById(R.id.btn_pgyer) }
 
     private val tv_info: MaterialTextView? by lazy { findViewById(com.hjq.demo.R.id.tv_info) }
     private val tv_last_boot: MaterialTextView? by lazy { findViewById(com.hjq.demo.R.id.tv_last_boot) }
@@ -111,8 +121,7 @@ class AdminActivity : AppActivity() {
 
                         2 -> {
                             val restart = MultiLanguages.setAppLanguage(
-                                this,
-                                LocaleContract.getEnglishLocale()
+                                this, LocaleContract.getEnglishLocale()
                             )
                             if (restart) {
                                 ActivityManager.getInstance().finishAllActivities()
@@ -230,8 +239,16 @@ class AdminActivity : AppActivity() {
     }
 
     override fun initView() {
+        btn_pgyer?.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://www.pgyer.com/zhibingji")//todo 改成项目对应的蒲公英链接
+            startActivity(intent)
+        }
         btn_liuliang?.setOnClickListener {
-            computeKb();
+//            computeKb();
+//            ObfuscatedProxy.init();
+
+            startStressTest();
         }
 
         if (AppConfig.isDebug()) {
@@ -461,6 +478,125 @@ class AdminActivity : AppActivity() {
 
     override fun initData() {
         postDelayed({ delayTask() }, 1000)
+    }
+
+    private val cpuThreads = mutableListOf<Thread>() // CPU压力线程
+    private val memoryHolder = CopyOnWriteArrayList<ByteArray>() // 内存占用容器（线程安全）
+    private var isRunning = false // 控制开关
+    private val mainHandler = Handler(Looper.getMainLooper()) // 主线程更新UI
+
+    // 资源占用状态更新间隔（500ms，避免频繁UI操作）
+    private val STATUS_UPDATE_INTERVAL = 500L
+
+    /**
+     * 启动资源压力测试（CPU+内存）
+     */
+    private fun startStressTest() {
+        if (isRunning) return
+        isRunning = true
+        tv_serialinfo?.text = "测试中..."
+
+        // 启动CPU压力任务（核心数-1，留1个核心给主线程）
+        val cpuCoreCount = Runtime.getRuntime().availableProcessors()
+        repeat(cpuCoreCount - 1) {
+            val thread = Thread { cpuStressTask() }
+            thread.priority = Thread.MIN_PRIORITY // 最低优先级，避免抢占主线程
+            cpuThreads.add(thread)
+            thread.start()
+        }
+
+        // 启动内存压力任务（单独线程，低优先级）
+        val memoryThread = Thread { memoryStressTask() }
+        memoryThread.priority = Thread.MIN_PRIORITY
+        memoryThread.start()
+
+        // 定期更新资源占用状态（UI线程）
+        updateStatus()
+    }
+
+    /**
+     * 停止测试，释放资源
+     */
+    private fun stopStressTest() {
+        isRunning = false
+        // 停止CPU线程
+        cpuThreads.forEach { it.interrupt() }
+        cpuThreads.clear()
+        // 释放内存
+        memoryHolder.clear()
+        tv_serialinfo?.text = "已停止"
+    }
+
+    /**
+     * CPU压力任务：低强度持续计算（避免100%满载，留响应空间）
+     */
+    private fun cpuStressTask() {
+        val random = Random()
+        while (isRunning && !Thread.interrupted()) {
+            // 执行计算但插入微小休眠（1ms），降低强度，避免完全阻塞线程调度
+            val value = random.nextDouble() * 1000.0
+            // 浮点运算（sin/cos/tan组合，消耗CPU但可控）
+            val result = sin(value) * cos(value) + tan(value / 2)
+            // 微小休眠，允许线程调度器切换到主线程
+            try {
+                Thread.sleep(1)
+            } catch (e: InterruptedException) {
+                break
+            }
+        }
+    }
+
+    /**
+     * 内存压力任务：缓慢分配+定期释放，维持高占用但不溢出
+     */
+    private fun memoryStressTask() {
+        val random = Random()
+        while (isRunning && !Thread.interrupted()) {
+            try {
+                // 每次分配512KB~2MB（较小块，避免瞬间占满）
+                val size = random.nextInt(1536) * 1024 + 512 * 102400 // 512KB ~ 2MB
+                val data = ByteArray(size)
+                random.nextBytes(data) // 填充数据，避免被JVM优化
+                memoryHolder.add(data)
+
+                // 当内存占用超过阈值（如1.5GB），释放 oldest 的20%对象（动态平衡）
+                val totalMB = memoryHolder.sumOf { it.size.toLong() } / 1024 / 1024
+                if (totalMB > 1500) {
+                    val removeCount = (memoryHolder.size * 0.2).toInt().coerceAtLeast(1)
+                    memoryHolder.subList(0, removeCount).clear()
+                }
+
+                // 分配间隔延长（200ms），避免内存增长过快
+                Thread.sleep(200)
+            } catch (e: OutOfMemoryError) {
+                // 内存不足时，释放一半对象
+                memoryHolder.subList(0, memoryHolder.size / 2).clear()
+                Thread.sleep(1000)
+            } catch (e: InterruptedException) {
+                break
+            }
+        }
+    }
+
+    /**
+     * 定期更新UI显示资源占用状态（主线程执行）
+     */
+    private fun updateStatus() {
+        if (!isRunning) return
+        mainHandler.postDelayed({
+            // 计算当前内存占用
+            val totalMB = memoryHolder.sumOf { it.size.toLong() } / 1024 / 1024
+            // 获取CPU使用率（简化：通过活跃线程数估算）
+            val cpuUsage =
+                (cpuThreads.count { it.isAlive } * 100) / (cpuThreads.size.coerceAtLeast(1))
+            tv_serialinfo?.text = "CPU占用: ${cpuUsage}%\n内存占用: ${totalMB}MB"
+            updateStatus() // 循环更新
+        }, STATUS_UPDATE_INTERVAL)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopStressTest() // 退出时确保释放资源
     }
 
 }

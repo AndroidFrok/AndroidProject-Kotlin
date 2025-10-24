@@ -8,7 +8,7 @@ import com.hjq.http.config.IRequestApi
  *    time   : 2019/12/07
  *    desc   : 可进行拷贝的副本
  */
-class CopyApi : IRequestApi {
+class CopyApi : BaseEasyHttp() {
 
     override fun getApi(): String {
         return ""
