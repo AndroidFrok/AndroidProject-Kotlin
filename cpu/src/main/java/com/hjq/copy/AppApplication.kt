@@ -1,5 +1,6 @@
 package com.hjq.copy
 
+import TimberFile
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
@@ -143,8 +144,7 @@ class AppApplication : MultiDexApplication() {
             PopTip.show("应用主题色已根据手机壁纸切换").iconSuccess();
         } else {
             Timber.w("动态颜色不可用");
-        }
-        /*DoKit.Builder(this) //                .productId("需要使用平台功能的话，需要到dokit.cn平台申请id")
+        }/*DoKit.Builder(this) //                .productId("需要使用平台功能的话，需要到dokit.cn平台申请id")
     //            .customKits(mapKits)
                 .build()*/
     }
@@ -260,7 +260,7 @@ class AppApplication : MultiDexApplication() {
         if (AppConfig.isLogEnable()) {
             Timber.plant(DebugLoggerTree())
         }
-
+        Timber.plant(TimberFile(this))
         // 注册网络状态变化监听
         val connectivityManager: ConnectivityManager? =
             ContextCompat.getSystemService(this, ConnectivityManager::class.java)
