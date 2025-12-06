@@ -27,6 +27,9 @@ class MainAct : AppActivity() {
         startActivity(Intent(this, HomeActivity::class.java));// 前往演示界面
     }
 
+    /**
+     * 特别说明：此方法是为了在CPU模块首页  将appconfig内的配置存本地，供app模块使用
+     */
     private fun storeBuildconfig() {
         MmkvUtil.save(MmkvUtil.BUILD_TYPE, BuildConfig.BUILD_TYPE)
         MmkvUtil.save(MmkvUtil.DEBUG, BuildConfig.DEBUG)
@@ -35,7 +38,7 @@ class MainAct : AppActivity() {
         MmkvUtil.save(MmkvUtil.VERSION_CODE, AppConfig.getVersionCode())
         MmkvUtil.save(MmkvUtil.VERSION_NAME, AppConfig.getVersionName())
 //        MmkvUtil.save(MmkvUtil.HOST_URL, BuildConfig.HOST_URL)
-        MmkvUtil.save(MmkvUtil.HOST_URL, "https://55cloud.oss-cn-hangzhou.aliyuncs.com/test/user_mp/agreement/privacyPolicy.html")
+        MmkvUtil.save(MmkvUtil.Hosts, AppConfig.getHostUrl())
     }
 
     override fun getLayoutId(): Int {

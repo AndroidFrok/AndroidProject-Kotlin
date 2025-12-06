@@ -1,13 +1,14 @@
 // AndroidProject-Kotlin 版本：v13.1
 // 导入配置文件
-apply from : 'configs.gradle'
+apply from: 'configs.gradle'
 
 buildscript {
     ext {
-        dokit = "3.5.0"  //https://xingyun.xiaojukeji.com/docs/dokit/#/androidGuide?id=dokit-android-%e6%9c%80%e6%96%b0%e7%89%88%e6%9c%ac
+        dokit = "3.5.0"
+        //https://xingyun.xiaojukeji.com/docs/dokit/#/androidGuide?id=dokit-android-%e6%9c%80%e6%96%b0%e7%89%88%e6%9c%ac
     }
     // 导入通用的 Maven 库配置
-    apply from : 'maven.gradle'
+    apply from: 'maven.gradle'
 
     repositories {
         addCommonMaven(repositories)
@@ -17,7 +18,7 @@ buildscript {
     dependencies {
         // Gradle 插件版本说明：https://developer.android.google.cn/studio/releases/gradle-plugin.html#updating-plugin
         // noinspection GradleDependency https://blog.csdn.net/fxjzzyo/article/details/134390809c
-        classpath 'com.android.tools.build:gradle:8.4.0'
+        classpath 'com.android.tools.build:gradle:8.4.0'// 多模块的用 7.4.2   ，省的挨个模块改namespace  
         // Kotlin 插件：https://plugins.jetbrains.com/plugin/6954-kotlin
         // noinspection GradleDependency
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21'

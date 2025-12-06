@@ -71,7 +71,7 @@ object AppConfig {
      * 获取服务器主机地址
      */
     fun getHostUrl(): String {
-        return "http://xcx.cottonh2o.com"
+        return MmkvUtil.getString(MmkvUtil.Hosts, "http://baidu.com");
     }
 
     /**

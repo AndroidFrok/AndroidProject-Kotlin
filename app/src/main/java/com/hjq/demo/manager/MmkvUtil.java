@@ -7,6 +7,9 @@ import com.tencent.mmkv.MMKV;
  */
 public class MmkvUtil {
     private static MMKV kv;
+    /**
+     *  主机域名内容
+     */
     public static String Hosts = "hosts";
     public static String HostsIndex = "hosts_index";
     public static String Port = "key0";
@@ -31,7 +34,7 @@ public class MmkvUtil {
     static public String BUGLY_ID = "BUGLY_ID";
     static public String VERSION_CODE = "VERSION_CODE";
     static public String VERSION_NAME = "VERSION_NAME";
-    static public String HOST_URL = "HOST_URL";
+
 
 
     private static MMKV init() {

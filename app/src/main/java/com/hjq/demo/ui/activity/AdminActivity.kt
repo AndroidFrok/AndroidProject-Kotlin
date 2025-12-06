@@ -416,6 +416,7 @@ class AdminActivity : AppActivity() {
     }
 
     private fun restartApp() {
+        saveInfo();
         ToastUtils.show("即将重启应用")
         WebSocketManager.getInstance().closeWebSocket()
         postDelayed({
@@ -424,8 +425,15 @@ class AdminActivity : AppActivity() {
         }, 500)
     }
 
+    /**
+     *  输入框 信息保存
+     */
+    private fun saveInfo() {
+
+    }
+
     private val sp_host: AppCompatSpinner? by lazy { findViewById(com.hjq.demo.R.id.sp_host) }
-    val hosts = arrayOf("请选择", "http://xcx.cottonh2o.com");
+    val hosts = arrayOf("host1", "http://host2");
 
     private fun initHostSpinner() {
         val adapter = ArrayAdapter(
@@ -599,4 +607,8 @@ class AdminActivity : AppActivity() {
         stopStressTest() // 退出时确保释放资源
     }
 
+    override fun onBackPressed() {
+        restartApp()
+//        super.onBackPressed()
+    }
 }
