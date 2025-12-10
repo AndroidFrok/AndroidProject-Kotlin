@@ -12,3 +12,4 @@ app/preview
 local.properties
 gradle.properties
 /gradle/
+gradle/wrapper/gradle-wrapper.properties
