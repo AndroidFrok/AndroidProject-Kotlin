@@ -24,3 +24,4 @@ KeyPassword=juhui2020
 android.defaults.buildfeatures.buildconfig=true
 android.nonTransitiveRClass=false
 android.nonFinalResIds=false
+GRADLE_USER_HOME= D:\\all_dev_sdk\\gradle_home
