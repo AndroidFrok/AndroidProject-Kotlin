@@ -1,6 +1,0 @@
-zipStoreBase = GRADLE_USER_HOME
-zipStorePath = wrapper/dists
-distributionBase = GRADLE_USER_HOME
-distributionPath = wrapper/dists
-#distributionUrl = https\://services.gradle.org/distributions/gradle-8.10.2-bin.zip
-distributionUrl = file:///D://all_dev_sdk//gradle_home//gradle-8.10.2-bin.zip
