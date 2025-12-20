@@ -22,6 +22,7 @@ import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.DoubleClickHelper
 import com.hjq.demo.ui.adapter.NavigationAdapter
 import com.hjq.demo.ui.fragment.MessageFragment
+import com.hjq.demo.widget.WaveView
 import timber.log.Timber
 
 /**
@@ -92,7 +93,9 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
         }
     }
 
+    lateinit var waveView: WaveView
     override fun initData() {
+        waveView = WaveView(this)
         pagerAdapter = FragmentPagerAdapter<AppFragment<*>>(this).apply {
             addFragment(MessageFragment.newInstance())
             addFragment(MessageFragment.newInstance())
@@ -100,6 +103,8 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
             viewPager?.adapter = this
         }
         onNewIntent(intent)
+
+
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -163,11 +168,14 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
             ActivityManager.getInstance().finishAllActivities()
         }, 300)
     }
+
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         return super.onTouchEvent(event)
     }
+
     override fun onDestroy() {
         super.onDestroy()
+        waveView.onDestroy()
         viewPager?.adapter = null
         navigationView?.adapter = null
         navigationAdapter?.setOnNavigationListener(null)
