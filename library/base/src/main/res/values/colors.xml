@@ -62,6 +62,10 @@
     <color name="green">#FF008000</color>
     <!-- 蓝色 -->
     <color name="blue">#FF0000FF</color>
+    <color name="blue80">#CC0000FF</color>
+    <color name="blue67">#AB0000FF</color>
+    <color name="blue50">#880000FF</color>
+    <color name="blue40">#660000FF</color>
     <!-- 紫色 -->
     <color name="purple">#FF800080</color>
     <!-- 粉色 -->

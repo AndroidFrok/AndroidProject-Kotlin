@@ -4,6 +4,7 @@
     <color name="common_primary_color">@color/white</color>
     <color name="common_primary_dark_color">@color/black</color>
     <color name="common_accent_color">#70C5BE</color>
+    <color name="wave">#80FFFFFF</color>
 
 <!--实测背景色 F4F3F4  掘金背景色 F2F3F5   原设置 F4F4F4  -->
     <color name="common_window_background_color">#F2F3F5</color>

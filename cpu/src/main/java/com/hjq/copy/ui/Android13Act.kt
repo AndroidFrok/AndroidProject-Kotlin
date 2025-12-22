@@ -5,7 +5,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothManager
 import android.content.BroadcastReceiver
 import android.content.ClipboardManager
 import android.content.Context
@@ -22,11 +21,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.color.DynamicColors
 import com.hjq.copy.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.Router
 import com.hjq.demo.ui.activity.ImageSelectActivity
+import com.hjq.demo.widget.MultiWaveAnimationView
+import com.hjq.demo.widget.WaveAnimationView
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
@@ -44,11 +44,18 @@ class Android13Act : AppActivity() {
     private val btn_photochoose: MaterialButton? by lazy { findViewById(R.id.btn_photochoose) }
     private val btn_clipboard: MaterialButton? by lazy { findViewById(R.id.btn_clipboard) }
     private val btn_ble: MaterialButton? by lazy { findViewById(R.id.btn_ble) }
+
+    private val waveView: WaveAnimationView? by lazy { findViewById(R.id.waveView) }
+    private val multiWaveView: MultiWaveAnimationView? by lazy { findViewById(R.id.multiWaveView) }
+    private var isRedWave = false
     override fun getLayoutId(): Int {
         return R.layout.act_a13;
     }
 
     override fun initView() {
+        // 启动动画（也可以让 View 自动启动，onVisibilityChanged 已处理）
+        waveView?.startWaveAnimation()
+        multiWaveView?.startAnimation()
         btn_ble?.setOnClickListener {
             testBle();
         }
@@ -62,7 +69,7 @@ class Android13Act : AppActivity() {
             this.checkClipBoard();
         }
         btn_photochoose?.setOnClickListener {
-            ImageSelectActivity.start(this, 5,object : ImageSelectActivity.OnPhotoSelectListener {
+            ImageSelectActivity.start(this, 5, object : ImageSelectActivity.OnPhotoSelectListener {
 
                 override fun onSelected(data: MutableList<String>) {
                     // 裁剪头像
@@ -277,6 +284,12 @@ class Android13Act : AppActivity() {
     private fun registerWifiReceiver() {
         val intentFilter = IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)
         registerReceiver(wifiScanReceiver, intentFilter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        waveView?.pauseWaveAnimation()
+        multiWaveView?.pauseAnimation()
     }
 
     // 取消注册（在 onDestroy 中调用）

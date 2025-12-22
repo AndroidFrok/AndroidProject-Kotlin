@@ -95,7 +95,7 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
 
     lateinit var waveView: WaveView
     override fun initData() {
-        waveView = WaveView(this)
+//        waveView = WaveView(this)
         pagerAdapter = FragmentPagerAdapter<AppFragment<*>>(this).apply {
             addFragment(MessageFragment.newInstance())
             addFragment(MessageFragment.newInstance())

@@ -120,7 +120,9 @@ abstract class AppActivity : BaseActivity(), ToastAction, TitleBarAction, OnHttp
      */
     override fun setTitle(title: CharSequence?) {
         super<BaseActivity>.setTitle(title)
-        getTitleBar()?.title = title
+        if (AppConfig.isDebug()) {
+            getTitleBar()?.title = "$localClassName-${getTitleBar()?.title}"
+        }
     }
 
     override fun getTitleBar(): TitleBar? {

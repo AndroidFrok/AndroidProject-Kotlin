@@ -43,6 +43,27 @@
         <item name="backgroundTint">@color/white</item>
         <item name="android:textColor">@color/black</item>
     </style>
+    <!-- 波浪动画 View 自定义属性 -->
+    <declare-styleable name="WaveAnimationView">
+        <!-- 波浪颜色 -->
+        <attr name="waveColor" format="color" />
+        <!-- 振幅（波浪高度） -->
+        <attr name="waveAmplitude" format="dimension" />
+        <!-- 波长（一个完整波浪的宽度） -->
+        <attr name="waveWavelength" format="dimension" />
+        <!-- 波速（滚动速度） -->
+        <attr name="waveSpeed" format="float" />
+        <!-- 是否显示双层波浪 -->
+        <attr name="isDoubleWave" format="boolean" />
+    </declare-styleable>
+    <!-- 多波浪动画 View 自定义属性 -->
+    <declare-styleable name="MultiWaveAnimationView">
+        <!-- 基础波浪颜色（所有波浪基于此渐变） -->
+        <attr name="baseWaveColor" format="color" />
+    </declare-styleable>
+
+    <!-- 默认波浪颜色（可自定义） -->
+    <color name="default_wave_color">#4A90E2</color>
     <!-- 全屏主题样式 -->
     <style name="FullScreenTheme" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
