@@ -1,6 +1,5 @@
 package com.hjq.copy
 
-import TimberFile
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
@@ -37,6 +36,7 @@ import com.hjq.demo.other.SmartBallPulseFooter
 import com.hjq.demo.other.TitleBarStyle
 import com.hjq.demo.other.ToastLogInterceptor
 import com.hjq.demo.other.ToastStyle
+import com.hjq.demo.util.TimberFile
 import com.hjq.gson.factory.GsonFactory
 import com.hjq.http.EasyConfig
 import com.hjq.language.MultiLanguages

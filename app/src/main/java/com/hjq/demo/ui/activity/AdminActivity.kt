@@ -14,6 +14,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.lifecycle.lifecycleScope
 import com.blankj.utilcode.util.AppUtils
 import com.ex.serialport.SerialActivity
 import com.google.android.material.button.MaterialButton
@@ -28,6 +29,7 @@ import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.RomHelper
 import com.hjq.demo.services.TrafficMonitor
 import com.hjq.demo.ui.dialog.InputDialog
+import com.hjq.demo.util.LogUploadUtil
 import com.hjq.http.EasyConfig
 import com.hjq.language.LocaleContract
 import com.hjq.language.MultiLanguages
@@ -38,10 +40,12 @@ import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.dialogs.PopMenu
 import com.kongzue.dialogx.dialogs.PopTip
 import com.kongzue.dialogx.dialogs.TipDialog
+import com.kongzue.dialogx.dialogs.WaitDialog
 import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener
 import com.tencent.bugly.crashreport.CrashReport
 import timber.log.Timber
 import java.io.DataOutputStream
+import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -72,6 +76,7 @@ class AdminActivity : AppActivity() {
     private val btn_liuliang: MaterialButton? by lazy { findViewById(R.id.btn_liuliang) }
     private val btn_serial: MaterialButton? by lazy { findViewById(R.id.btn_serial) }
     private val btn_pgyer: MaterialButton? by lazy { findViewById(R.id.btn_pgyer) }
+    private val btn_uploadlog: MaterialButton? by lazy { findViewById(R.id.btn_uploadlog) }
 
     private val tv_info: MaterialTextView? by lazy { findViewById(com.hjq.demo.R.id.tv_info) }
     private val tv_last_boot: MaterialTextView? by lazy { findViewById(com.hjq.demo.R.id.tv_last_boot) }
@@ -239,6 +244,9 @@ class AdminActivity : AppActivity() {
     }
 
     override fun initView() {
+        btn_uploadlog?.setOnClickListener {
+            compressAndUploadLogs()
+        }
         btn_pgyer?.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("https://www.pgyer.com/zhibingji")//todo 改成项目对应的蒲公英链接
@@ -610,5 +618,43 @@ class AdminActivity : AppActivity() {
     override fun onBackPressed() {
         restartApp()
 //        super.onBackPressed()
+    }
+
+    /**
+     * 压缩日志目录并上传
+     */
+    private fun compressAndUploadLogs() {
+        WaitDialog.show("正在扫描日志...").setCancelable(false)
+
+        LogUploadUtil.compressAndUploadLogs(
+            this,
+            lifecycleScope,
+            object : LogUploadUtil.UploadCallback {
+                override fun onScanComplete(fileCount: Int) {
+                    if (fileCount > 0) {
+                        WaitDialog.show("正在压缩 $fileCount 个文件...").setCancelable(false)
+                    }
+                }
+
+                override fun onCompressSuccess(zipFile: File, fileCount: Int, sizeKB: Long) {
+                    WaitDialog.show("正在上传日志...").setCancelable(false)
+                    Timber.d("压缩成功: $fileCount 个文件, ${sizeKB}KB")
+                }
+
+                override fun onCompressFailed(error: String) {
+                    WaitDialog.dismiss()
+                    PopTip.show(error).iconWarning()
+                }
+
+                override fun onUploadSuccess(deletedCount: Int, sizeKB: Long) {
+                    WaitDialog.dismiss()
+                    PopTip.show("上传成功 ($deletedCount 个文件已清理, ${sizeKB}KB)").iconSuccess()
+                }
+
+                override fun onUploadFailed(error: String) {
+                    WaitDialog.dismiss()
+                    PopTip.show(error).iconError()
+                }
+            })
     }
 }

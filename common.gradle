@@ -81,6 +81,8 @@ dependencies {
 
     implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     implementation 'org.greenrobot:eventbus:3.3.1'
+
+// 弹框建议    https://github.com/AndroidFrok/XPopup
 //    https://github.com/kongzue/DialogX/releases
     def dialogx_version = "0.0.50"
     implementation "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
