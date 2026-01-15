@@ -11,9 +11,16 @@ import com.kongzue.dialogx.dialogs.PopTip;
 
 /**
  * 高版本安卓  需要 在act中动态注册了
- * val filterAutorun = IntentFilter();
+ * 1-      <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+ *  2-     private val autoRun = Autorun()
+ * 3 - val filterAutorun = IntentFilter();
  * filterAutorun.addAction(Intent.ACTION_BOOT_COMPLETED);
  * registerReceiver(Autorun(), filterAutorun)
+ *
+ *   override fun onDestroy() {
+ *         unregisterReceiver(autoRun)
+ *     4    super.onDestroy()
+ *     }
  */
 public class Autorun extends BroadcastReceiver {
     @Override
