@@ -44,8 +44,9 @@ public class WebSocketManager extends WebSocketListener {
     private OkHttpClient sClient = null;
     /**
      * 如果是null  就是未连接状态
+     * 使用 volatile 确保多线程间的内存可见性
      */
-    private WebSocket sWebSocket = null;
+    private volatile WebSocket sWebSocket = null;
     private String mSocketURL;
     private final int ACTION_EMPTYMSG = 1400;
     private final int ACTION_FAILURE = 1401;
@@ -103,10 +104,12 @@ public class WebSocketManager extends WebSocketListener {
                         .retryOnConnectionFailure(true) // 没用。。
                         .build();
             }
-            if (sWebSocket == null) {
+            synchronized (this) {
+                if (sWebSocket == null) {
 //                 mSocketURL = AppConfig.INSTANCE.getSockHost();
-                Request request = new Request.Builder().url(mSocketURL).build();
-                sWebSocket = sClient.newWebSocket(request, this);
+                    Request request = new Request.Builder().url(mSocketURL).build();
+                    sWebSocket = sClient.newWebSocket(request, this);
+                }
             }
             Timber.d("connectWebSocket");
         } else {
@@ -116,14 +119,19 @@ public class WebSocketManager extends WebSocketListener {
 //        reqLogin();
     }
 
+    /**
+     * 发送数据，线程安全
+     */
     public boolean sendData(String info) {
-        boolean sentSuccess = false;
-        if (sWebSocket != null) {
-            if (!TextUtils.isEmpty(info) && sWebSocket != null) {
-                sentSuccess = sWebSocket.send(info);
+        if (TextUtils.isEmpty(info)) {
+            return false;
+        }
+        synchronized (this) {
+            if (sWebSocket != null) {
+                return sWebSocket.send(info);
             }
         }
-        return sentSuccess;
+        return false;
     }
 
     @Override
@@ -164,9 +172,11 @@ public class WebSocketManager extends WebSocketListener {
     public void onFailure(WebSocket webSocket, Throwable t, Response response) {
         isConnected = false;
         Timber.d("socket onFailure " + t.getLocalizedMessage());
-        if (sWebSocket != null) {
-            sWebSocket.close(NORMAL_CLOSURE_STATUS, "Goodbye!");
-            sWebSocket = null;
+        synchronized (this) {
+            if (sWebSocket != null) {
+                sWebSocket.close(NORMAL_CLOSURE_STATUS, "Goodbye!");
+                sWebSocket = null;
+            }
         }
         sClient = null;
         handler.removeMessages(ACTION_EMPTYMSG);
@@ -186,9 +196,11 @@ public class WebSocketManager extends WebSocketListener {
     }
 
     public void closeWebSocket() {
-        if (sWebSocket != null) {
-            sWebSocket.close(NORMAL_CLOSURE_STATUS, "Goodbye!");
-            sWebSocket = null;
+        synchronized (this) {
+            if (sWebSocket != null) {
+                sWebSocket.close(NORMAL_CLOSURE_STATUS, "Goodbye!");
+                sWebSocket = null;
+            }
         }
         if (sClient != null) {
             sClient = null;

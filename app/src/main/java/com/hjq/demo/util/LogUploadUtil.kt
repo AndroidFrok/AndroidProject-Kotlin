@@ -1,6 +1,9 @@
 package com.hjq.demo.util
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Environment
 import android.util.Log
 import com.hjq.demo.http.api.UploadApi
 import com.hjq.demo.http.model.CommonResp
@@ -113,6 +116,8 @@ object LogUploadUtil {
 
                     withContext(Dispatchers.Main) {
                         callback?.onCompressSuccess(zipFile, filesToCompress.size, fileSizeKB)
+                        // 压缩成功后打开文件管理器
+                        openFileLocation(context, zipFile.parentFile)
                         uploadLogFile(context, zipFile, callback)
                     }
                     scope.launch {
@@ -305,6 +310,8 @@ object LogUploadUtil {
 
                 if (compressed) {
                     val fileSizeKB = zipFile.length() / 1024
+                    // 压缩成功后打开文件管理器
+                    openFileLocation(context, zipFile.parentFile)
                     withContext(Dispatchers.Main) {
                         onSuccess(zipFile, filesToCompress.size, fileSizeKB)
                     }
@@ -367,5 +374,60 @@ object LogUploadUtil {
         val time = System.currentTimeMillis()
         val imageName = timeFormatter.format(Date(time))
         return imageName
+    }
+
+    /**
+     * 打开文件管理器并定位到指定目录
+     * @param context 上下文
+     * @param directory 要打开的目录
+     */
+    fun openFileLocation(context: Context, directory: File?) {
+        if (directory == null || !directory.exists()) {
+            Timber.w("目录不存在，无法打开文件管理器")
+            return
+        }
+
+        try {
+            // 方式1: 尝试使用 ACTION_VIEW 打开目录
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(Uri.fromFile(directory), "resource/folder")
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+
+            // 检查是否有应用可以处理此 Intent
+            if (intent.resolveActivity(context.packageManager) != null) {
+                context.startActivity(intent)
+                Timber.d("已打开文件管理器: ${directory.absolutePath}")
+                return
+            }
+
+            // 方式2: 尝试使用 CATEGORY_BROWSABLE 打开
+            val intent2 = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.fromFile(directory)
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+
+            if (intent2.resolveActivity(context.packageManager) != null) {
+                context.startActivity(intent2)
+                Timber.d("已打开文件管理器: ${directory.absolutePath}")
+                return
+            }
+
+            // 方式3: 尝试打开父目录
+            val parentDir = directory.parentFile
+            if (parentDir != null && parentDir.exists()) {
+                val intent3 = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.fromFile(parentDir)
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+                context.startActivity(intent3)
+                Timber.d("已打开父目录: ${parentDir.absolutePath}")
+            } else {
+                Timber.w("无法打开文件管理器: 没有找到可以处理的应用")
+            }
+
+        } catch (e: Exception) {
+            Timber.e(e, "打开文件管理器失败")
+        }
     }
 }
