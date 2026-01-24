@@ -147,6 +147,12 @@ android {
         }
     }
 }
+
+// KSP 配置 - ARouter 模块名称
+ksp {
+    arg("AROUTER_MODULE_NAME", project.getName())
+}
+
 /*afterEvaluate {
     // 前提条件是这个 Module 工程必须是 Library 类型，并且排除名为 umeng 的 Module 工程
     // 排除 BuildConfig.class

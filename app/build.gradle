@@ -37,6 +37,11 @@ android {
 
 }
 
+// KSP 配置 - ARouter 模块名称
+ksp {
+    arg("AROUTER_MODULE_NAME", project.getName())
+}
+
 // 添加构建依赖项：https://developer.android.google.cn/studio/build/dependencies
 // api 与 implementation 的区别：https://www.jianshu.com/p/8962d6ba936e
 dependencies {
@@ -48,4 +53,7 @@ dependencies {
     // ARouter KSP 支持 (使用第三方 ArouterKspCompiler 兼容 Gradle 9)
     ksp 'com.github.JailedBird:ArouterKspCompiler:2.0.0-1.0.24'
     implementation 'com.alibaba:arouter-api:1.5.2'
+
+    // Glide KSP 编译器 (生成 GlideApp)
+    ksp 'com.github.bumptech.glide:compiler:4.16.0'
 }
