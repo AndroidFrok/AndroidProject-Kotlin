@@ -1,7 +1,3 @@
-// AndroidProject-Kotlin 版本：v13.1
-// 导入配置文件
-apply from : 'configs.gradle'
-
 buildscript {
     ext {
         dokit = "3.5.0"  //https://xingyun.xiaojukeji.com/docs/dokit/#/androidGuide?id=dokit-android-%e6%9c%80%e6%96%b0%e7%89%88%e6%9c%ac
@@ -17,15 +13,24 @@ buildscript {
     dependencies {
         // Gradle 插件版本说明：https://developer.android.google.cn/studio/releases/gradle-plugin.html#updating-plugin
         // noinspection GradleDependency https://blog.csdn.net/fxjzzyo/article/details/134390809c
-        classpath 'com.android.tools.build:gradle:8.4.0'
+        classpath 'com.android.tools.build:gradle:8.7.3'
         // Kotlin 插件：https://plugins.jetbrains.com/plugin/6954-kotlin
         // noinspection GradleDependency
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0'
         // AOP 配置插件：https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx
 //        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'
 //        classpath "io.github.didi.dokit:dokitx-plugin:${dokit}"
     }
 }
+
+// KSP 插件配置
+plugins {
+    id 'com.google.devtools.ksp' version '2.0.0-1.0.24' apply false
+}
+
+// AndroidProject-Kotlin 版本：v13.1
+// 导入配置文件
+apply from : 'configs.gradle'
 
 allprojects {
 
@@ -41,8 +46,8 @@ allprojects {
     tasks.withType(Javadoc) {
         // 设置文档编码
         options {
-            encoding 'UTF-8'
-            charSet 'UTF-8'
+            encoding = 'UTF-8'
+            charSet = 'UTF-8'
             links 'http://docs.oracle.com/javase/7/docs/api'
         }
     }

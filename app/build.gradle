@@ -1,5 +1,6 @@
 //apply plugin: 'com.android.application'
 apply plugin: 'com.android.library'
+apply plugin: 'com.google.devtools.ksp'
 apply from: '../common.gradle'
 
 
@@ -31,11 +32,6 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
     }
 
 
@@ -49,6 +45,7 @@ dependencies {
     // 控件封装
     api project(':library:widget')
 
-    kapt 'com.alibaba:arouter-compiler:1.5.2'
+    // ARouter KSP 支持 (使用第三方 ArouterKspCompiler 兼容 Gradle 9)
+    ksp 'com.github.JailedBird:ArouterKspCompiler:2.0.0-1.0.24'
     implementation 'com.alibaba:arouter-api:1.5.2'
 }

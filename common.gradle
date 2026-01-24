@@ -1,5 +1,4 @@
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 // 通用配置
 android {
     compileSdkVersion 34
@@ -12,12 +11,12 @@ android {
 
     // 支持 Java JDK 8
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_17
         sourceCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = "17"
     }
 
     // 设置存放 so 文件的目录
@@ -38,21 +37,23 @@ android {
     }
 
     // 代码警告配置
-    lintOptions {
+    /*lintOptions {
         // 禁用文本硬编码警告
         disable 'HardcodedText'
         // 禁用图片描述警告
         disable 'ContentDescription'
-    }
+    }*/
 }
 
 afterEvaluate {
     // 前提条件是这个 Module 工程必须是 Library 类型，并且排除名为 umeng 的 Module 工程
     if (android.defaultConfig.applicationId == null && "umeng" != getName()) {
-        // 排除 BuildConfig.class
-        generateReleaseBuildConfig.enabled = false
-        generatePreviewBuildConfig.enabled = false
-        generateDebugBuildConfig.enabled = false
+        // 排除 BuildConfig.class (AGP 8.7+ 使用新的方式)
+        tasks.configureEach { task ->
+            if (task.name.contains('generate') && task.name.contains('BuildConfig')) {
+                task.enabled = false
+            }
+        }
     }
 }
 
@@ -105,7 +106,6 @@ dependencies {
     // 图片加载框架：https://github.com/bumptech/glide
     // 官方使用文档：https://github.com/Muyangmin/glide-docs-cn
     implementation 'com.github.bumptech.glide:glide:4.16.0'
-    kapt 'com.github.bumptech.glide:compiler:4.16.0'
     // 沉浸式框架：https://github.com/gyf-dev/ImmersionBar android <= 4.4 不用
 //    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     // 手势 ImageView：https://github.com/Baseflow/PhotoView

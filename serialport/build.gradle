@@ -41,10 +41,10 @@ android {
             addManifestPlaceholders(['app_name': '端口调试'])
         }
     }
-    lintOptions {
+    /*lintOptions {
         checkReleaseBuilds false
         abortOnError false
-    }
+    }*/
 
 }
 
