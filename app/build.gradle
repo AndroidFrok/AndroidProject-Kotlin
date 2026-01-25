@@ -54,6 +54,6 @@ dependencies {
     ksp 'com.github.JailedBird:ArouterKspCompiler:2.0.0-1.0.24'
     implementation 'com.alibaba:arouter-api:1.5.2'
 
-    // Glide KSP 编译器 (生成 GlideApp)
+    // Glide KSP 编译器 (生成 Glide)
     ksp 'com.github.bumptech.glide:compiler:4.16.0'
 }

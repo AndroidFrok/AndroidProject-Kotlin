@@ -7,12 +7,12 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.hjq.base.BaseAdapter
 import com.hjq.base.BaseDialog
 import com.hjq.base.BottomSheetDialog
 import com.hjq.demo.R
 import com.hjq.demo.app.AppAdapter
-import com.hjq.demo.http.glide.GlideApp
 
 /**
  *    author : Android 轮子哥
@@ -91,7 +91,7 @@ class AlbumDialog {
             override fun onBindView(position: Int) {
                 getItem(position).apply {
                     iconView?.let {
-                        GlideApp.with(getContext())
+                        Glide.with(getContext())
                             .asBitmap()
                             .load(getIcon())
                             .into(it)

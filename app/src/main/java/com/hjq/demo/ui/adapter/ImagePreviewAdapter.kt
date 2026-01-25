@@ -2,10 +2,10 @@ package com.hjq.demo.ui.adapter
 
 import android.content.Context
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.PhotoView
 import com.hjq.demo.R
 import com.hjq.demo.app.AppAdapter
-import com.hjq.demo.http.glide.GlideApp
 
 /**
  *    author : Android 轮子哥
@@ -24,7 +24,7 @@ class ImagePreviewAdapter constructor(context: Context) : AppAdapter<String?>(co
         private val photoView: PhotoView by lazy { getItemView() as PhotoView }
 
         override fun onBindView(position: Int) {
-            GlideApp.with(getContext())
+            Glide.with(getContext())
                 .load(getItem(position))
                 .into(photoView)
         }

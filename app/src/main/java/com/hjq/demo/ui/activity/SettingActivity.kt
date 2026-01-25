@@ -3,13 +3,13 @@ package com.hjq.demo.ui.activity
 import android.view.Gravity
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.hjq.base.BaseDialog
 import com.hjq.base.action.AnimAction
 import com.hjq.demo.R
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.http.api.demo.LogoutApi
-import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.manager.CacheDataManager
 import com.hjq.demo.other.AppConfig
@@ -133,11 +133,11 @@ class SettingActivity : AppActivity(), SwitchButton.OnCheckedChangeListener {
             R.id.sb_setting_cache -> {
 
                 // 清除内存缓存（必须在主线程）
-                GlideApp.get(this@SettingActivity).clearMemory()
+                Glide.get(this@SettingActivity).clearMemory()
                 lifecycleScope.launch(Dispatchers.IO) {
                     CacheDataManager.clearAllCache(this@SettingActivity)
                     // 清除本地缓存（必须在子线程）
-                    GlideApp.get(this@SettingActivity).clearDiskCache()
+                    Glide.get(this@SettingActivity).clearDiskCache()
                     withContext(Dispatchers.Main) {
                         // 重新获取应用缓存大小
                         cleanCacheView?.setRightText(CacheDataManager.getTotalCacheSize(this@SettingActivity))

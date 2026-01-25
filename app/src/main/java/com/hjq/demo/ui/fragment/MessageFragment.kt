@@ -143,14 +143,14 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
             R.id.btn_message_image1 -> {
                 imageView?.let {
                     it.visibility = View.VISIBLE
-                    GlideApp.with(this).load("https://www.baidu.com/img/bd_logo.png").into(it)
+                    Glide.with(this).load("https://www.baidu.com/img/bd_logo.png").into(it)
                 }
             }
 
             R.id.btn_message_image2 -> {
                 imageView?.let {
                     it.visibility = View.VISIBLE
-                    GlideApp.with(this).load("https://www.baidu.com/img/bd_logo.png").circleCrop()
+                    Glide.with(this).load("https://www.baidu.com/img/bd_logo.png").circleCrop()
                         .into(it)
                 }
             }
@@ -159,7 +159,7 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
 
                 imageView?.let {
                     it.visibility = View.VISIBLE
-                    GlideApp.with(this).load("https://www.baidu.com/img/bd_logo.png")
+                    Glide.with(this).load("https://www.baidu.com/img/bd_logo.png")
                         .transform(RoundedCorners(resources.getDimension(R.dimen.dp_20).toInt()))
                         .into(it)
                 }

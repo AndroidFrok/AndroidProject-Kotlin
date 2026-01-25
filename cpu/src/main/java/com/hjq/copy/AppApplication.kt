@@ -6,8 +6,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Build
-import android.os.Build.VERSION_CODES.R
-import android.os.StrictMode
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
@@ -15,21 +13,20 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
+import com.bumptech.glide.Glide
 import com.google.android.material.color.DynamicColors
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonToken
 import com.hjq.bar.TitleBar
 import com.hjq.bar.style.NightBarStyle
 import com.hjq.base.CommonContext
-import com.hjq.demo.R
+import com.hjq.copy.AppConfig.isDebug
 import com.hjq.demo.aop.Log
-import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.http.glide.ImageUtils
 import com.hjq.demo.http.model.RequestHandler
 import com.hjq.demo.http.model.RequestServer
 import com.hjq.demo.manager.ActivityManager
 import com.hjq.demo.manager.MmkvUtil
-import com.hjq.copy.AppConfig.isDebug
 import com.hjq.demo.other.CrashHandler
 import com.hjq.demo.other.DebugLoggerTree
 import com.hjq.demo.other.MaterialHeader
@@ -153,13 +150,13 @@ class AppApplication : MultiDexApplication() {
     override fun onLowMemory() {
         super.onLowMemory()
         // 清理所有图片内存缓存
-        GlideApp.get(this).onLowMemory()
+        Glide.get(this).onLowMemory()
     }
 
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
         // 根据手机内存剩余情况清理图片内存缓存
-        GlideApp.get(this).onTrimMemory(level)
+        Glide.get(this).onTrimMemory(level)
     }
 
     override fun attachBaseContext(base: Context?) {
