@@ -69,7 +69,7 @@ object FileUtil {
         val m = Message()
         m.obj = f
         messageHandler.sendMessage(m)
-        fileSave?.saved(f)
+        f?.let { fileSave?.saved(it) }
     }
 
     private val messageHandler = object : Handler() {

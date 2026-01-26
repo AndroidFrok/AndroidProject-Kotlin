@@ -57,7 +57,7 @@ object TcpClientJava {
     private val handler = object : Handler() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
-            EventBus.getDefault().post(SocketEvent(line, 1))
+            line?.let { EventBus.getDefault().post(SocketEvent(it, 1)) }
             Log.i("PDA", "---TCP--->$line")
         }
     }

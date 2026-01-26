@@ -27,7 +27,7 @@ object AppConfig {
      * 获取当前构建的模式
      */
     fun getBuildType(): String {
-        return MmkvUtil.getString(MmkvUtil.BUILD_TYPE, "");
+        return MmkvUtil.getString(MmkvUtil.BUILD_TYPE, "")!!;
     }
 
     /**
@@ -41,14 +41,14 @@ object AppConfig {
      * 获取当前应用的包名
      */
     fun getPackageName(): String {
-        return MmkvUtil.getString(MmkvUtil.APPLICATION_ID, "");
+        return MmkvUtil.getString(MmkvUtil.APPLICATION_ID, "")!!;
     }
 
     /**
      * 获取当前应用的版本名
      */
     fun getVersionName(): String {
-        return MmkvUtil.getString(MmkvUtil.VERSION_NAME, "");
+        return MmkvUtil.getString(MmkvUtil.VERSION_NAME, "")!!;
     }
 
     /**
@@ -62,14 +62,14 @@ object AppConfig {
      * 获取 Bugly Id
      */
     fun getBuglyId(): String {
-        return MmkvUtil.getString(MmkvUtil.BUGLY_ID, "");
+        return MmkvUtil.getString(MmkvUtil.BUGLY_ID, "")!!;
     }
 
     /**
      * 获取服务器主机地址
      */
     fun getHostUrl(): String {
-        return MmkvUtil.getString(MmkvUtil.HOST_URL, "http://baidu.com");
+        return MmkvUtil.getString(MmkvUtil.HOST_URL, "http://baidu.com")!!;
     }
 
     /**

@@ -32,8 +32,8 @@ object ImageUtils {
     fun getValidAvatar(inputAvatar: String?): String {
         if (inputAvatar != null && inputAvatar.contains("thirdwx.qlogo.cn")) {
             return inputAvatar.replace("https://thirdwx.qlogo.cn", "http://wx.qlogo.cn")
-        } else if (inputAvatar != null && !inputAvatar.contains(AppConfig.hostUrl)) {
-            return AppConfig.hostUrl + inputAvatar
+        } else if (inputAvatar != null && !inputAvatar.contains(AppConfig.getHostUrl())) {
+            return AppConfig.getHostUrl() + inputAvatar
         }
         return inputAvatar ?: ""
     }
@@ -107,7 +107,7 @@ object ImageUtils {
             image.compress(Bitmap.CompressFormat.JPEG, options, baos)
         }
         val isBm = ByteArrayInputStream(baos.toByteArray())
-        return BitmapFactory.decodeStream(isBm, null, null)
+        return BitmapFactory.decodeStream(isBm, null, null)!!
     }
 
     fun bmpToByteArray(bitmap: Bitmap?, needRecycle: Boolean, maxkb: Int): ByteArray? {

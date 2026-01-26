@@ -16,7 +16,7 @@ import com.kongzue.dialogx.dialogs.PopTip
 class Autorun : BroadcastReceiver() {
     override fun onReceive(context: Context, intent1: Intent) {
         if (intent1.action == "android.intent.action.BOOT_COMPLETED") {
-            if (!AppConfig.isDebug) {
+            if (!AppConfig.isDebug()) {
                 ToastUtils.show("开机了")
                 val intent = Intent()
                 intent.setClass(context, SplashActivity::class.java)

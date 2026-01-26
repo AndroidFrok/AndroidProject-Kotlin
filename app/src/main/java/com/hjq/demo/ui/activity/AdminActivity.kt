@@ -11,7 +11,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
 import com.blankj.utilcode.util.AppUtils
-import com.ex.serialport.SerialActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.hjq.base.BaseDialog
@@ -77,12 +76,12 @@ class AdminActivity : AppActivity() {
 
     private fun delayTask() {
         btn_serial?.setOnClickListener {
-            startActivityForResult(SerialActivity::class.java, object : OnActivityCallback {
+            /*startActivityForResult(SerialActivity::class.java, object : OnActivityCallback {
                 override fun onActivityResult(resultCode: Int, data: Intent?) {
-                    data?.let { it1 -> serialData(it1) };
+                    data?.let { serialData(it) }
                 }
 
-            })
+            })*/
         }
         tv_last_boot?.text =
             "${AppConfig.getVersionName()}-${AppConfig.getVersionCode()} 最近开机时间：${getLastBootTime()}";
@@ -359,7 +358,7 @@ class AdminActivity : AppActivity() {
             }
         }
         btn_sn?.setOnClickListener {
-            val code: String = MmkvUtil.getString(MmkvUtil.MN, "")
+            val code: String = MmkvUtil.getString(MmkvUtil.MN, "")!!
 
             InputDialog.Builder(this).setTitle("请设置后台分配的设备编码").setContent(code)
                 .setHint("").setConfirm(getString(R.string.common_confirm))

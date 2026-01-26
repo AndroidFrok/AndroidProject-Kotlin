@@ -43,7 +43,7 @@ class WebSocketManager private constructor() : WebSocketListener() {
         override fun handleMessage(@NonNull msg: Message) {
             super.handleMessage(msg)
             when (msg.what) {
-                ACTION_EMPTYMSG -> {
+                /*ACTION_EMPTYMSG -> {
                     val params = ArrayMap<String, String>()
                     params["type"] = "3"
                     handler.sendEmptyMessageDelayed(ACTION_EMPTYMSG, 5000)
@@ -55,7 +55,7 @@ class WebSocketManager private constructor() : WebSocketListener() {
                         connectWebSocket()
                     }
                 }
-                else -> {}
+                else -> {}*/
             }
         }
     }
@@ -87,7 +87,7 @@ class WebSocketManager private constructor() : WebSocketListener() {
                     .build()
             }
             if (sWebSocket == null) {
-                val url = socketURL ?: AppConfig.sockHost
+                val url = socketURL  
                 val request = Request.Builder().url(url).build()
                 sWebSocket = sClient!!.newWebSocket(request, this)
             }
