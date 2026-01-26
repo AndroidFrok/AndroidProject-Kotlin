@@ -6,9 +6,14 @@ build
 captures
 app/release
 app/preview
+cpu/preview
 ._*
 *.iml
 .DS_Store
 local.properties
 gradle.properties
 /gradle/
+gradle/wrapper/gradle-wrapper.properties
+/app/release/
+.claude
+nul

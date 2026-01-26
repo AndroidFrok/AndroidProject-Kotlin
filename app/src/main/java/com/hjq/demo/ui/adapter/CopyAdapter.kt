@@ -13,9 +13,6 @@ import com.hjq.demo.app.AppAdapter
  */
 class CopyAdapter constructor(context: Context) : AppAdapter<String?>(context) {
 
-    override fun getItemCount(): Int {
-        return 10
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder()

@@ -69,7 +69,7 @@ object AppConfig {
      * 获取服务器主机地址
      */
     fun getHostUrl(): String {
-        return MmkvUtil.getString(MmkvUtil.HOST_URL, "http://baidu.com");
+        return MmkvUtil.getString(MmkvUtil.Hosts, "http://baidu.com");
     }
 
     /**

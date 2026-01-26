@@ -117,6 +117,9 @@ android {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
+        jniLibs {
+            useLegacyPackaging true
+        }
     }
 
     // AOP 配置（exclude 和 include 二选一）

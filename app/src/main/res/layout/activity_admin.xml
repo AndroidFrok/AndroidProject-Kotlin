@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.AdminActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -38,7 +40,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="国际化调试"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
@@ -114,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="固件桌面"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_sys_setting"
@@ -220,5 +222,15 @@
             android:layout_height="wrap_content"
             android:hint="串口信息" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_pgyer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下载重装" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_uploadlog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上传日志" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

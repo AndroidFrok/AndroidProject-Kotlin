@@ -34,3 +34,13 @@
 -keep class androidx.renderscript.** {
     <fields>;
 }
+# 混淆所有自定义类（保留系统类）
+-keep class android.** { *; }
+-keep class androidx.** { *; }
+# 不保留任何类名、方法名、变量名
+-dontkeepnames
+-keepparameternames
+# 混淆程度最大化
+-optimizationpasses 5
+# 混淆时应用大小写混合（增加可读性难度）
+-mixcaseclassnames

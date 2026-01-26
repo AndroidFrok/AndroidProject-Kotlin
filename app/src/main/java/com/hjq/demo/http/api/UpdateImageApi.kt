@@ -1,20 +1,22 @@
 package com.hjq.demo.http.api
 
 import com.hjq.http.config.IRequestApi
+import java.io.File
 
 /**
  *    author : Android 轮子哥
  *    github : https://github.com/getActivity/AndroidProject-Kotlin
  *    time   : 2019/12/07
- *    desc   : 可进行拷贝的副本
+ *    desc   : 上传
  */
-class CopyApi : BaseEasyHttp() {
+class UploadApi : IRequestApi {
 
     override fun getApi(): String {
-        return ""
+        return "/api/pub/upload"
     }
 
-    class Bean {
+    /** 图片文件 */
+    var file: File? = null
 
-    }
+
 }

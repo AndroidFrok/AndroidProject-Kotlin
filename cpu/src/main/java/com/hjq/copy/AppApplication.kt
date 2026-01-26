@@ -1,6 +1,5 @@
 package com.hjq.copy
 
-import TimberFile
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
@@ -37,6 +36,7 @@ import com.hjq.demo.other.SmartBallPulseFooter
 import com.hjq.demo.other.TitleBarStyle
 import com.hjq.demo.other.ToastLogInterceptor
 import com.hjq.demo.other.ToastStyle
+import com.hjq.demo.util.TimberFile
 import com.hjq.gson.factory.GsonFactory
 import com.hjq.http.EasyConfig
 import com.hjq.language.MultiLanguages
@@ -117,7 +117,6 @@ class AppApplication : MultiDexApplication() {
 //        val brand = Build.BRAND.lowercase(Locale.getDefault())
         DialogX.DEBUGMODE = isDebug()
         DialogX.init(this)
-
         DialogX.globalStyle = object : MaterialStyle() {
             override fun popTipSettings(): PopTipSettings {
                 //DefaultPopTipSettings 是主题中默认的 PopTip 设置，以下演示仅覆写其中的 align 设置

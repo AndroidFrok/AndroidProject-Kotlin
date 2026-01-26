@@ -2,7 +2,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 // 通用配置
 android {
-    compileSdkVersion 34
+    compileSdkVersion 36
     defaultConfig {
         // 最低安装版本
         minSdkVersion 19
@@ -50,9 +50,9 @@ afterEvaluate {
     // 前提条件是这个 Module 工程必须是 Library 类型，并且排除名为 umeng 的 Module 工程
     if (android.defaultConfig.applicationId == null && "umeng" != getName()) {
         // 排除 BuildConfig.class
-        generateReleaseBuildConfig.enabled = false
-        generatePreviewBuildConfig.enabled = false
-        generateDebugBuildConfig.enabled = false
+//        generateReleaseBuildConfig.enabled = false
+//        generatePreviewBuildConfig.enabled = false
+//        generateDebugBuildConfig.enabled = false
     }
 }
 
@@ -81,6 +81,8 @@ dependencies {
 
     implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     implementation 'org.greenrobot:eventbus:3.3.1'
+
+// 弹框建议    https://github.com/AndroidFrok/XPopup
 //    https://github.com/kongzue/DialogX/releases
     def dialogx_version = "0.0.50"
     implementation "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
