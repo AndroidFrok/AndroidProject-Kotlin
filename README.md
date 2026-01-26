@@ -5,6 +5,7 @@
 1. 文本显示直接用 SmartTextView 方便处理null等值的过滤
 2. 物联网应用如果是横屏直接在land文件夹放xml
 3. 物联网应用在首次安装，主界面里就应该申请到所有权限，避免后面无人值守 无法操作。
+4. 重要：为了防止不同计算机编译前 忘记修改一些配置   需要改一下文件：`gradlebakproperties`  改名为  `gradle.properties` ,`gradle-wrapperproperties.txt`  改名为 `gradle-wrapper.properties`
 
 ## 分支简述
 
