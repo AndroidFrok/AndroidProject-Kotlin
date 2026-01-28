@@ -9,9 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.blankj.utilcode.util.ToastUtils
 import com.google.android.material.button.MaterialButton
-import com.hjq.base.CommonContext
 import com.hjq.demo.R
 import com.hjq.demo.aop.Permissions
 import com.hjq.demo.app.TitleBarFragment
@@ -21,10 +19,9 @@ import com.hjq.demo.ui.activity.HomeActivity
 import com.hjq.demo.ui.activity.JoyAct
 import com.hjq.demo.ui.activity.RecordAct
 import com.hjq.permissions.Permission
+import com.hjq.toast.ToastUtils
 import com.kongzue.dialogx.dialogs.MessageDialog
 import com.kongzue.dialogx.dialogs.PopTip
-import com.serenegiant.usb.UVCCamera
-import com.serenegiant.usb.UVCParam
 import timber.log.Timber
 
 /**
@@ -56,7 +53,6 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
     }
 
     override fun initView() {
-        val aa = UVCCamera(UVCParam());
         btn_13 = activity?.findViewById(R.id.btn_13);
         btn_dialog = activity?.findViewById(R.id.btn_dialog);
         btn_dialog1 = activity?.findViewById(R.id.btn_dialog1);
@@ -80,7 +76,7 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
             startActivity(JoyAct::class.java)
         }
         btn_dialog1?.setOnClickListener {
-            ToastUtils.showShort("???????????");
+            ToastUtils.show("???????????");
             /* com.hjq.demo.ui.dialog.MessageDialog.Builder(CommonContext.getContext())
                  .setMessage("aaaaaaaaaaa").setTitle("title").show();*/
         }

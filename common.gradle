@@ -86,7 +86,7 @@ dependencies {
     def dialogx_version = "0.0.50"
     implementation "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
     implementation "com.github.kongzue.DialogX:DialogXMIUIStyle:0.0.50"
-    api 'com.blankj:utilcode:1.30.6'
+//    api 'com.blankj:utilcode:1.30.6'
     def work_version = "2.4.0"
     implementation 'com.github.getActivity:MultiLanguages:9.3'
     // 标题栏框架：https://github.com/getActivity/TitleBar
@@ -144,7 +144,7 @@ dependencies {
     /*轮播 三选一*/
 //    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
     /*可选区域 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
-    implementation 'com.herohan:UVCAndroid:1.0.5'
-    api project(':serialport')
+//    implementation 'com.herohan:UVCAndroid:1.0.5' todo
+//    api project(':serialport') todo
 
 }

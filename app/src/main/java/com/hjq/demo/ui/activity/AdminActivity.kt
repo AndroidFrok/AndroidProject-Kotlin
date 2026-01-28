@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
-import com.blankj.utilcode.util.AppUtils
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.hjq.base.BaseDialog
@@ -19,6 +18,7 @@ import com.hjq.demo.app.AppActivity
 import com.hjq.demo.http.WebSocketManager
 import com.hjq.demo.manager.ActivityManager
 import com.hjq.demo.manager.MmkvUtil
+import com.hjq.demo.manager.RootCmd
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.RomHelper
 import com.hjq.demo.services.TrafficMonitor
@@ -33,7 +33,6 @@ import com.kongzue.dialogx.dialogs.PopMenu
 import com.kongzue.dialogx.dialogs.PopTip
 import com.kongzue.dialogx.dialogs.TipDialog
 import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener
-import com.kongzue.dialogx.interfaces.OnMenuItemClickListener
 import com.tencent.bugly.crashreport.CrashReport
 import timber.log.Timber
 import java.io.DataOutputStream
@@ -257,7 +256,7 @@ class AdminActivity : AppActivity() {
         }
 
 
-        tv_info?.text = "ROOT:${AppUtils.isAppRoot()}"
+        tv_info?.text = "ROOT:${RootCmd.isAppRoot()}"
 
         btn_back?.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
