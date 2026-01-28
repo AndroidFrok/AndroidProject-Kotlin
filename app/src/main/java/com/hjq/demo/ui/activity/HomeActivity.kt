@@ -92,9 +92,10 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
 
     override fun initData() {
         pagerAdapter = FragmentPagerAdapter<AppFragment<*>>(this).apply {
-            addFragment(MessageFragment.newInstance())
-            addFragment(MessageFragment.newInstance())
-            addFragment(MessageFragment.newInstance())
+            addFragment(MessageFragment())
+            addFragment(MessageFragment())
+            addFragment(MessageFragment())
+//            addFragment(MessageFragment.newInstance())
             viewPager?.adapter = this
         }
         onNewIntent(intent)
@@ -161,9 +162,11 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
             ActivityManager.getInstance().finishAllActivities()
         }, 300)
     }
+
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         return super.onTouchEvent(event)
     }
+
     override fun onDestroy() {
         super.onDestroy()
         viewPager?.adapter = null
