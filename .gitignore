@@ -5,10 +5,13 @@
 build
 captures
 app/release
+cpu/release
 app/preview
+cpu/preview
 ._*
 *.iml
 .DS_Store
 local.properties
 gradle.properties
 /gradle/
+.claude
