@@ -62,7 +62,7 @@ class Android13Act : AppActivity() {
             this.checkClipBoard();
         }
         btn_photochoose?.setOnClickListener {
-            ImageSelectActivity.start(this, 5,object : ImageSelectActivity.OnPhotoSelectListener {
+            ImageSelectActivity.start(this, 5, object : ImageSelectActivity.OnPhotoSelectListener {
 
                 override fun onSelected(data: MutableList<String>) {
                     // 裁剪头像
@@ -82,7 +82,7 @@ class Android13Act : AppActivity() {
     }
 
     private fun testBle() {
-        val adapter = BluetoothAdapter.getDefaultAdapter();XXPermissions.with(this)
+        val adapter = BluetoothAdapter.getDefaultAdapter(); XXPermissions.with(this)
             .permission(Permission.BLUETOOTH_CONNECT)
             .request(object : OnPermissionCallback {
                 override fun onGranted(p0: MutableList<String>, p1: Boolean) {
@@ -205,11 +205,12 @@ class Android13Act : AppActivity() {
                     // 设置通知标题
                     .setContentTitle(getString(com.hjq.demo.R.string.app_name))
                     // 设置通知小图标
-                    .setSmallIcon(com.hjq.demo.R.mipmap.launcher_ic)
+//                    .setSmallIcon( R.mipmap.launcher_ic)
+                    .setSmallIcon(android.R.mipmap.sym_def_app_icon)
                     // 设置通知大图标
                     .setLargeIcon(
                         BitmapFactory.decodeResource(
-                            getResources(), com.hjq.demo.R.mipmap.launcher_ic
+                            getResources(), android.R.mipmap.sym_def_app_icon
                         )
                     )
                     // 设置通知静音
