@@ -406,7 +406,7 @@ class AdminActivity : AppActivity() {
     }
 
     private val sp_host: AppCompatSpinner? by lazy { findViewById(com.hjq.demo.R.id.sp_host) }
-    val hosts = arrayOf("请选择", "http://xcx.cottonh2o.com");
+    val hosts = arrayOf("http://baidu.com", "http://xcx.cottonh2o.com");
 
     private fun initHostSpinner() {
         val adapter = ArrayAdapter(
