@@ -19,6 +19,7 @@ import com.hjq.demo.manager.Router
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.DoubleClickHelper
 import com.hjq.demo.ui.adapter.NavigationAdapter
+import com.hjq.demo.ui.fragment.HomeFragment
 import com.hjq.demo.ui.fragment.MessageFragment
 import timber.log.Timber
 
@@ -92,7 +93,7 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
 
     override fun initData() {
         pagerAdapter = FragmentPagerAdapter<AppFragment<*>>(this).apply {
-            addFragment(MessageFragment())
+            addFragment(HomeFragment())
             addFragment(MessageFragment())
             addFragment(MessageFragment())
 //            addFragment(MessageFragment.newInstance())

@@ -1,8 +1,11 @@
 package com.hjq.copy
 
 import android.content.Intent
+import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.view.MotionEvent
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.manager.MmkvUtil
@@ -11,10 +14,15 @@ import com.hjq.demo.services.TrafficMonitor
 import com.hjq.demo.ui.activity.HomeActivity
 import com.kongzue.dialogx.dialogs.PopTip
 import timber.log.Timber
+import java.time.Clock
+import java.time.ZoneId
 
 
 @Route(path = Router.Main)
 class MainAct : AppActivity() {
+    private val tv_price: TextView? by lazy { findViewById(R.id.tv_price) }
+    private val btn_submit: ConstraintLayout? by lazy { findViewById(R.id.btn_submit) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         storeBuildconfig()
@@ -35,7 +43,10 @@ class MainAct : AppActivity() {
         MmkvUtil.save(MmkvUtil.VERSION_CODE, AppConfig.getVersionCode())
         MmkvUtil.save(MmkvUtil.VERSION_NAME, AppConfig.getVersionName())
 //        MmkvUtil.save(MmkvUtil.HOST_URL, BuildConfig.HOST_URL)
-        MmkvUtil.save(MmkvUtil.HOST_URL, "https://55cloud.oss-cn-hangzhou.aliyuncs.com/test/user_mp/agreement/privacyPolicy.html")
+        MmkvUtil.save(
+            MmkvUtil.HOST_URL,
+            "https://55cloud.oss-cn-hangzhou.aliyuncs.com/test/user_mp/agreement/privacyPolicy.html"
+        )
     }
 
     override fun getLayoutId(): Int {
@@ -43,7 +54,10 @@ class MainAct : AppActivity() {
     }
 
     override fun initView() {
+        btn_submit?.setOnClickListener {
 
+            tv_price?.text = "${System.currentTimeMillis()}"
+        }
     }
 
 

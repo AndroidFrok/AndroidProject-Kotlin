@@ -16,10 +16,10 @@
         <com.hjq.demo.widget.XCollapsingToolbarLayout
             android:id="@+id/ctl_home_bar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_256"
+            android:layout_height="100dp"
             app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:scrimVisibleHeightTrigger="@dimen/dp_100">
+            app:scrimVisibleHeightTrigger="100dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:id="@+id/tb_home_title"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                app:layout_collapseMode="pin" >
+                app:layout_collapseMode="pin">
 
                 <LinearLayout
                     android:layout_width="match_parent"

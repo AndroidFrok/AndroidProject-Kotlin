@@ -138,7 +138,7 @@
         </activity> <!-- 引导页 -->
         <activity
             android:name=".ui.activity.AdminActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.activity.GuideActivity"
             android:exported="false"

@@ -82,6 +82,7 @@ dependencies {
 
     implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation 'org.greenrobot:greendao:3.3.0'
 //    https://github.com/kongzue/DialogX/releases
     def dialogx_version = "0.0.50"
     implementation "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
@@ -108,6 +109,11 @@ dependencies {
     // 图片加载框架：https://github.com/bumptech/glide
     // 官方使用文档：https://github.com/Muyangmin/glide-docs-cn
     implementation 'com.github.bumptech.glide:glide:4.16.0'
+    // Room 数据库：https://developer.android.google.cn/jetpack/androidx/releases/room
+    def roomVersion = "2.6.1"
+    implementation "androidx.room:room-runtime:${roomVersion}"
+    implementation "androidx.room:room-ktx:${roomVersion}"
+    ksp "androidx.room:room-compiler:${roomVersion}"
     // 沉浸式框架：https://github.com/gyf-dev/ImmersionBar android <= 4.4 不用
 //    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     // 手势 ImageView：https://github.com/Baseflow/PhotoView
