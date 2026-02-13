@@ -113,7 +113,6 @@ dependencies {
     def roomVersion = "2.6.1"
     implementation "androidx.room:room-runtime:${roomVersion}"
     implementation "androidx.room:room-ktx:${roomVersion}"
-    ksp "androidx.room:room-compiler:${roomVersion}"
     // 沉浸式框架：https://github.com/gyf-dev/ImmersionBar android <= 4.4 不用
 //    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     // 手势 ImageView：https://github.com/Baseflow/PhotoView
