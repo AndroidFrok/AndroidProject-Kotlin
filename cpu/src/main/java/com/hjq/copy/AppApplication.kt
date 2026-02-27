@@ -46,6 +46,7 @@ import com.kongzue.dialogx.style.MaterialStyle
 import com.kongzue.dialogx.util.TextInfo
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
 import okhttp3.OkHttpClient
 import timber.log.Timber
@@ -109,8 +110,8 @@ class AppApplication : MultiDexApplication() {
         }
         // Bugly 异常捕捉
         if (AppConfig.buglyUpload()) {
-//        CrashReport.initCrashReport(this, AppConfig.getBuglyId(), isDebug())
         }
+        CrashReport.initCrashReport(this, AppConfig.getBuglyId(), isDebug())
 //        val brand = Build.BRAND.lowercase(Locale.getDefault())
         DialogX.DEBUGMODE = isDebug()
         DialogX.init(this)
@@ -172,7 +173,7 @@ class AppApplication : MultiDexApplication() {
         MultiLanguages.init(this)
         MMKV.initialize(this)
         if (isDebug()) {
-            ARouter.openDebug();ARouter.openLog()
+            ARouter.openDebug(); ARouter.openLog()
         }
         ARouter.init(this)
         MultiLanguages.setOnLanguageListener(object : OnLanguageListener {

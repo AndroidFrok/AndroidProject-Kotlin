@@ -5,10 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.InputFilter
-import android.text.Spanned
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
@@ -19,6 +17,7 @@ import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import android_serialport_api.SerialPortFinder
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -27,14 +26,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ex.serialport.adapter.LogListAdapter
 import com.ex.serialport.adapter.SpAdapter
+import tp.xmaihh.serialport.SerialHelper
+import tp.xmaihh.serialport.bean.ComBean
+import tp.xmaihh.serialport.utils.ByteUtil
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.Date
-import android_serialport_api.SerialPortFinder
-import tp.xmaihh.serialport.SerialHelper
-import tp.xmaihh.serialport.bean.ComBean
-import tp.xmaihh.serialport.utils.ByteUtil
 
 class SerialActivity : AppCompatActivity() {
 
