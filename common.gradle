@@ -80,7 +80,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.13.2'
     /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑以上依赖不可随意升级版本 */
 
-    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
+//    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     implementation 'org.greenrobot:eventbus:3.3.1'
     implementation 'org.greenrobot:greendao:3.3.0'
 //    https://github.com/kongzue/DialogX/releases
