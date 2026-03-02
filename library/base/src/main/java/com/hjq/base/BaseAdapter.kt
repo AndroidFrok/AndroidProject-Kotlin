@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hjq.base.action.ResourcesAction
+import timber.log.Timber
 
 /**
  *    author : Android 轮子哥
@@ -17,7 +18,7 @@ import com.hjq.base.action.ResourcesAction
  *    desc   : RecyclerView 适配器技术基类
  */
 @Suppress("LeakingThis")
-abstract class BaseAdapter<VH : BaseAdapter<VH>.BaseViewHolder> (private val context: Context) :
+abstract class BaseAdapter<VH : BaseAdapter<VH>.BaseViewHolder>(private val context: Context) :
     RecyclerView.Adapter<VH>(), ResourcesAction {
 
     /** RecyclerView 对象 */
@@ -42,7 +43,18 @@ abstract class BaseAdapter<VH : BaseAdapter<VH>.BaseViewHolder> (private val con
         // 根据 ViewHolder 绑定的位置和传入的位置进行对比
         // 一般情况下这两个位置值是相等的，但是有一种特殊的情况
         // 在外层添加头部 View 的情况下，这两个位置值是不对等的
-        positionOffset = position - holder.adapterPosition
+        // 如果 adapterPosition 为 -1，说明 ViewHolder 正在被移除（动画中），使用 layoutPosition 代替
+        val adapterPos = holder.adapterPosition
+        positionOffset = if (adapterPos == RecyclerView.NO_POSITION) {
+            // ViewHolder 正在被移除，不做偏移计算
+            0
+        } else {
+            position - adapterPos
+        }
+        // 临时调试日志
+        if (positionOffset != 0) {
+//            Timber.w("BaseAdapter: position=$position, adapterPosition=$adapterPos, layoutPosition=${holder.layoutPosition}, offset=$positionOffset")
+        }
         holder.onBindView(position)
     }
 

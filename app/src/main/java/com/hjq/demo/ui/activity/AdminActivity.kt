@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
+import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.hjq.base.BaseDialog
@@ -19,6 +20,7 @@ import com.hjq.demo.http.WebSocketManager
 import com.hjq.demo.manager.ActivityManager
 import com.hjq.demo.manager.MmkvUtil
 import com.hjq.demo.manager.RootCmd
+import com.hjq.demo.manager.Router
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.RomHelper
 import com.hjq.demo.services.TrafficMonitor
@@ -75,12 +77,7 @@ class AdminActivity : AppActivity() {
 
     private fun delayTask() {
         btn_serial?.setOnClickListener {
-            /*startActivityForResult(SerialActivity::class.java, object : OnActivityCallback {
-                override fun onActivityResult(resultCode: Int, data: Intent?) {
-                    data?.let { serialData(it) }
-                }
-
-            })*/
+            ARouter.getInstance().build(Router.SerialPort).navigation()
         }
         tv_last_boot?.text =
             "${AppConfig.getVersionName()}-${AppConfig.getVersionCode()} 最近开机时间：${getLastBootTime()}";

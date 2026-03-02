@@ -5,5 +5,6 @@ interface Router {
         const val Main = "/cpu/main"
         const val A13 = "/cpu/a13"
         const val Core = "/app/main"
+        const val SerialPort: String = "/serialport/main"
     }
 }
