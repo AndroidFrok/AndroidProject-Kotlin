@@ -24,8 +24,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.ex.serialport.adapter.LogListAdapter
 import com.ex.serialport.adapter.SpAdapter
+import com.hjq.demo.manager.Router
 import tp.xmaihh.serialport.SerialHelper
 import tp.xmaihh.serialport.bean.ComBean
 import tp.xmaihh.serialport.utils.ByteUtil
@@ -33,7 +35,7 @@ import java.io.IOException
 import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.Date
-
+@Route(path = Router.SerialPort)
 class SerialActivity : AppCompatActivity() {
 
     private lateinit var recy: RecyclerView

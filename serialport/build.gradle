@@ -1,5 +1,8 @@
 //apply plugin: 'com.android.application'
 apply plugin: 'com.android.library'
+apply from: '../common.gradle'
+// KSP 插件（用于 ARouter 注解处理器）
+apply plugin: 'com.google.devtools.ksp'
 android {
     namespace "com.ex.serialport"
     compileSdkVersion 32
@@ -47,13 +50,20 @@ android {
     }*/
 
 }
-
+// KSP 配置：ARouter 模块名称
+ksp {
+    arg("AROUTER_MODULE_NAME", project.getName())
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
+    // ARouter KSP 支持 (使用第三方 ArouterKspCompiler 兼容 Gradle 9)
+    ksp 'com.github.JailedBird:ArouterKspCompiler:2.0.0-1.0.24'
+    implementation 'com.alibaba:arouter-api:1.5.2'
 //    implementation project(path: ':serialport')
     api 'io.github.xmaihh:serialport:2.1.1'
+    api project(':app')
 }
