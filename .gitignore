@@ -14,5 +14,6 @@ cpu/preview
 local.properties
 gradle.properties
 /gradle/
+/gradle/wrapper/gradle-wrapper.properties
 .claude
 .cursor
