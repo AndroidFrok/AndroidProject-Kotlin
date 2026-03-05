@@ -91,6 +91,7 @@ dependencies {
     def work_version = "2.7.0"
     // (Java only)https://developer.android.google.cn/topic/libraries/architecture/workmanager/how-to/define-work?hl=zh-cn#java
     implementation "androidx.work:work-runtime:2.7.0"
+    implementation "androidx.work:work-runtime-ktx:2.7.0"
     implementation 'com.github.getActivity:MultiLanguages:9.3'
     // 标题栏框架：https://github.com/getActivity/TitleBar
     implementation 'com.github.getActivity:TitleBar:10.5'

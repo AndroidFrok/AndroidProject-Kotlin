@@ -259,7 +259,7 @@ class AppApplication : MultiDexApplication() {
         if (AppConfig.isLogEnable()) {
             Timber.plant(DebugLoggerTree())
         }
-        Timber.plant(TimberFile(this))
+        Timber.plant(com.hjq.demo.util.TimberFile(this))
         // 注册网络状态变化监听
         val connectivityManager: ConnectivityManager? =
             ContextCompat.getSystemService(this, ConnectivityManager::class.java)

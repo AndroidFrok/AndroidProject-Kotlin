@@ -3,6 +3,7 @@ import timber.log.Timber
 import java.io.File
 import java.util.Calendar
 
+@Deprecated("1")
 class TimberFile(ctx: Context) : Timber.Tree() {
     private val context = ctx;
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
