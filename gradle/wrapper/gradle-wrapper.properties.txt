@@ -4,3 +4,13 @@ distributionBase = GRADLE_USER_HOME
 distributionPath = wrapper/dists
 #distributionUrl = https\://services.gradle.org/distributions/gradle-8.10.2-bin.zip
 distributionUrl = file:///D://all_dev_sdk//gradle_home//gradle-8.10.2-bin.zip
+
+# 以下是 local.properties 文件中的
+
+sdk.dir=D\:\\Office\\Android\\Sdk
+# 主模块下的 gradle.properties
+StoreFile = D:\\Office\\codes\\certs\\lishanhe.jks
+StorePassword=888888
+KeyAlias=a
+KeyPassword=888888
+

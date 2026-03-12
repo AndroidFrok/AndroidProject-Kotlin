@@ -106,7 +106,7 @@ cpu (主应用模块，Application 在此)
 - `KeyAlias`: 密钥别名
 - `KeyPassword`: 密钥密码
 
-**注意**: 证书文件位于 `d:\\certs\\juhui2020.keystore`，团队协作时请确保本地有该证书。
+**注意**: 证书文件位于 `d:\\certs\\x.keystore`，团队协作时请确保本地有该证书。
 
 ## 服务器环境配置
 
