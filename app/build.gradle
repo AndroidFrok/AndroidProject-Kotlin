@@ -12,7 +12,7 @@ android {
     defaultConfig {
 
         // 无痛修改包名：https://www.jianshu.com/p/17327e191d2e
-//        applicationId 'com.juhui2024.demo'
+//        applicationId 'com.aaaa.demo'
         multiDexEnabled true
         // 仅保留中文语种的资源
 //        resConfigs 'zh'

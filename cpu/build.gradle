@@ -15,7 +15,7 @@ android {
         versionCode 22
         versionName "20250409"
         // 无痛修改包名：https://www.jianshu.com/p/17327e191d2e
-        applicationId 'com.jh.main19'
+        applicationId 'com.bbiot.main19'
         multiDexEnabled true
         // 仅保留中文语种的资源
 //        resConfigs 'zh'
@@ -139,7 +139,7 @@ android {
     applicationVariants.all { variant ->
         // apk 输出文件名配置
         variant.outputs.all { output ->
-            outputFileName = 'juhui_android_vCode' + variant.versionCode + '_vName' + variant.versionName + '_' + variant.buildType.name
+            outputFileName = 'bbiot_android_vCode' + variant.versionCode + '_vName' + variant.versionName + '_' + variant.buildType.name
             if (variant.buildType.name == buildTypes.release.getName()) {
                 outputFileName += '_' + new Date().format('MMdd')
             }

@@ -279,7 +279,7 @@ class SerialActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        sharedPreferences = getSharedPreferences("juhui_serial", MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("bbiot_serial", MODE_PRIVATE)
         editor = sharedPreferences.edit()
 
         toasttt("如果切换了任何设置需要重新开启端口!")
