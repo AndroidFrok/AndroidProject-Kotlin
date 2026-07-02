@@ -15,14 +15,13 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.core.content.FileProvider
-import com.blankj.utilcode.util.AppUtils
-import com.blankj.utilcode.util.ShellUtils
 import com.hjq.base.BaseDialog
 import com.hjq.base.action.AnimAction
 import com.hjq.demo.R
 import com.hjq.demo.aop.CheckNet
 import com.hjq.demo.aop.Permissions
 import com.hjq.demo.aop.SingleClick
+import com.hjq.demo.manager.RootCmd
 import com.hjq.demo.other.AppConfig
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.OnDownloadListener
@@ -295,7 +294,7 @@ class UpdateDialog {
          */
         @Permissions(Permission.REQUEST_INSTALL_PACKAGES)
         private fun installApk() {
-            if (AppUtils.isAppRoot()) {
+            if (RootCmd.isAppRoot()) {
                 ToastUtils.show("静默更新中")
                 slience()
             } else {
@@ -315,8 +314,8 @@ class UpdateDialog {
         private fun slience() {
 //            1 静默安装
             updateView?.setText("静默安装")
-            val result = ShellUtils.execCmd("pm install -r $apkFile", true)
-            if (result.errorMsg != "") {
+            val result = RootCmd.execCmd("pm install -r $apkFile", true)
+            if (result != "") {
 //                CrashReport.postCatchedException(Throwable(result.errorMsg))
             }
         }

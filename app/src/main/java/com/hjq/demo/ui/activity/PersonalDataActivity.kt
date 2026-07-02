@@ -5,6 +5,7 @@ import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -13,7 +14,6 @@ import com.hjq.demo.R
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.http.api.demo.UpdateImageApi
-import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.ui.dialog.AddressDialog
 import com.hjq.demo.ui.dialog.InputDialog
@@ -61,7 +61,7 @@ class PersonalDataActivity : AppActivity() {
 
     override fun initData() {
         avatarView?.let {
-            GlideApp.with(this)
+            Glide.with(this)
                 .load(R.mipmap.add)
                 /*.placeholder(R.drawable.avatar_placeholder_ic)
                 .error(R.drawable.avatar_placeholder_ic)*/
@@ -174,7 +174,7 @@ class PersonalDataActivity : AppActivity() {
         if (true) {
             avatarUrl = if (file is FileContentResolver) { file.contentUri } else { Uri.fromFile(file) }
             avatarView?.let {
-                GlideApp.with(this)
+                Glide.with(this)
                     .load(avatarUrl)
                     .transform(MultiTransformation(CenterCrop(), CircleCrop()))
                     .into(it)
@@ -190,7 +190,7 @@ class PersonalDataActivity : AppActivity() {
                 override fun onSucceed(data: HttpData<String?>) {
                     avatarUrl = Uri.parse(data.getData())
                     avatarView?.let {
-                        GlideApp.with(this@PersonalDataActivity)
+                        Glide.with(this@PersonalDataActivity)
                             .load(avatarUrl)
                             .transform(MultiTransformation(CenterCrop(), CircleCrop()))
                             .into(it)

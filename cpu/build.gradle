@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.devtools.ksp'
 apply from: '../common.gradle'
 //apply plugin: 'android-aspectjx'
 apply plugin: 'org.jetbrains.kotlin.android'
@@ -14,7 +15,7 @@ android {
         versionCode 22
         versionName "20250409"
         // 无痛修改包名：https://www.jianshu.com/p/17327e191d2e
-        applicationId 'com.jh.main19'
+        applicationId 'com.bbiot.main19'
         multiDexEnabled true
         // 仅保留中文语种的资源
 //        resConfigs 'zh'
@@ -38,12 +39,7 @@ android {
             // 警告：无特殊情况不要改这里了  armeabi：万金油架构平台（占用率：0%）
             // armeabi-v7a：开发板应用 仅选择  ；曾经主流的架构平台（占用率：10%）
             // arm64-v8a：普通手机应用 仅选择 ；目前主流架构平台（占用率：95%）
-            abiFilters 'armeabi-v7a',"arm64-v8a"
-        }
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
+            abiFilters "arm64-v8a"
         }
     }
 
@@ -146,7 +142,7 @@ android {
     applicationVariants.all { variant ->
         // apk 输出文件名配置
         variant.outputs.all { output ->
-            outputFileName = 'juhui_android_vCode' + variant.versionCode + '_vName' + variant.versionName + '_' + variant.buildType.name
+            outputFileName = 'bbiot_android_vCode' + variant.versionCode + '_vName' + variant.versionName + '_' + variant.buildType.name
             if (variant.buildType.name == buildTypes.release.getName()) {
                 outputFileName += '_' + new Date().format('MMdd')
             }
@@ -154,6 +150,12 @@ android {
         }
     }
 }
+
+// KSP 配置 - ARouter 模块名称
+ksp {
+    arg("AROUTER_MODULE_NAME", project.getName())
+}
+
 /*afterEvaluate {
     // 前提条件是这个 Module 工程必须是 Library 类型，并且排除名为 umeng 的 Module 工程
     // 排除 BuildConfig.class
@@ -167,11 +169,15 @@ android {
 // 添加构建依赖项：https://developer.android.google.cn/studio/build/dependencies
 // api 与 implementation 的区别：https://www.jianshu.com/p/8962d6ba936e
 dependencies {
+    // Room KSP 编译器（需要在应用了 KSP 插件的模块中声明）
+    def roomVersion = "2.6.1"
+    ksp "androidx.room:room-compiler:${roomVersion}"
     // 基类封装       无特殊情况  请勿在模块级配置文件增加依赖！！！！！！！！！！！！！！！！
     api project(':app')
     // 控件封装
 //    implementation project(':library:widget')
 
-    kapt 'com.alibaba:arouter-compiler:1.5.2'
+    // ARouter KSP 支持 (使用第三方 ArouterKspCompiler 兼容 Gradle 9)
+    ksp 'com.github.JailedBird:ArouterKspCompiler:2.0.0-1.0.24'
     implementation 'com.alibaba:arouter-api:1.5.2'
 }

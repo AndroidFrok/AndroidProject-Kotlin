@@ -1,5 +1,6 @@
 //apply plugin: 'com.android.application'
 apply plugin: 'com.android.library'
+apply plugin: 'com.google.devtools.ksp'
 apply from: '../common.gradle'
 
 
@@ -11,7 +12,7 @@ android {
     defaultConfig {
 
         // 无痛修改包名：https://www.jianshu.com/p/17327e191d2e
-//        applicationId 'com.juhui2024.demo'
+//        applicationId 'com.aaaa.demo'
         multiDexEnabled true
         // 仅保留中文语种的资源
 //        resConfigs 'zh'
@@ -31,14 +32,14 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
     }
 
 
+}
+
+// KSP 配置 - ARouter 模块名称
+ksp {
+    arg("AROUTER_MODULE_NAME", project.getName())
 }
 
 // 添加构建依赖项：https://developer.android.google.cn/studio/build/dependencies
@@ -49,6 +50,10 @@ dependencies {
     // 控件封装
     api project(':library:widget')
 
-    kapt 'com.alibaba:arouter-compiler:1.5.2'
+    // ARouter KSP 支持 (使用第三方 ArouterKspCompiler 兼容 Gradle 9)
+    ksp 'com.github.JailedBird:ArouterKspCompiler:2.0.0-1.0.24'
     implementation 'com.alibaba:arouter-api:1.5.2'
+
+    // Glide KSP 编译器 (生成 Glide)
+    ksp 'com.github.bumptech.glide:compiler:4.16.0'
 }

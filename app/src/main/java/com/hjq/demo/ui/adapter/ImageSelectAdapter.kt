@@ -6,9 +6,9 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.hjq.demo.R
 import com.hjq.demo.app.AppAdapter
-import com.hjq.demo.http.glide.GlideApp
 
 /**
  *    author : Android 轮子哥
@@ -30,7 +30,7 @@ class ImageSelectAdapter constructor(context: Context, private val mSelectImages
         override fun onBindView(position: Int) {
             getItem(position).apply {
                 imageView?.let {
-                    GlideApp.with(getContext())
+                    Glide.with(getContext())
                         .asBitmap()
                         .load(this)
                         .into(it)

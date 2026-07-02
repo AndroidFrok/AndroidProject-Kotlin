@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.hjq.demo.R
 import com.hjq.demo.app.AppAdapter
-import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.manager.CacheDataManager
 import com.hjq.demo.ui.activity.VideoSelectActivity
 import com.hjq.demo.widget.PlayerView
@@ -41,7 +41,7 @@ class VideoSelectAdapter constructor(
             getItem(position).apply {
 
                 imageView?.let {
-                    GlideApp.with(getContext())
+                    Glide.with(getContext())
                         .load(getVideoPath())
                         .into(it)
                 }

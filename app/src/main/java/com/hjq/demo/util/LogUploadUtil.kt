@@ -3,10 +3,15 @@ package com.hjq.demo.util
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.util.Log
+import androidx.core.content.FileProvider
+import com.hjq.demo.app.AppApplication
 import com.hjq.demo.http.api.UploadApi
 import com.hjq.demo.http.model.CommonResp
+import com.hjq.demo.manager.MmkvUtil
+import com.hjq.demo.manager.SharePreferenceUtil
 import com.hjq.http.EasyHttp
 import com.hjq.http.lifecycle.ActivityLifecycle
 import com.hjq.http.lifecycle.ApplicationLifecycle
@@ -101,13 +106,19 @@ object LogUploadUtil {
                 // 检查是否有文件要压缩
                 if (filesToCompress.isEmpty()) {
                     withContext(Dispatchers.Main) {
-                        callback?.onCompressFailed("没有找到日志文件")
+                        callback?.onCompressFailed("没有找到日志文件1")
                     }
                     return@launch
                 }
 
-                // 创建 zip 文件
-                val zipFile = File(logDir.parentFile, "logs_${System.currentTimeMillis()}.zip")
+                // 创建 zip 文件 - 保存到应用外部存储目录的 LogBackup 子目录
+                val zipBackupDir = getZipBackupDirectory(context)
+                val code: String = SharePreferenceUtil.getSharePreferenceUtil(AppApplication.get())
+                    .getStrData(MmkvUtil.DeviceCode, "");
+
+                val xiahuaxian = "_"
+                val zipFile =
+                    File(zipBackupDir, "logs_$code$xiahuaxian${System.currentTimeMillis()}.zip")
                 val compressed = compressFilesToZip(filesToCompress, zipFile)
 
                 if (compressed) {
@@ -117,11 +128,10 @@ object LogUploadUtil {
                     withContext(Dispatchers.Main) {
                         callback?.onCompressSuccess(zipFile, filesToCompress.size, fileSizeKB)
                         // 压缩成功后打开文件管理器
-                        openFileLocation(context, zipFile.parentFile)
+//                        openFileLocation(context, zipFile.parentFile)
                         uploadLogFile(context, zipFile, callback)
                     }
-                    scope.launch {
-                    }
+                    scope.launch {}
                     // 上传 zip 文件
                 } else {
                     withContext(Dispatchers.Main) {
@@ -181,7 +191,7 @@ object LogUploadUtil {
      * @param file 要上传的文件
      * @param callback 回调接口
      */
-    fun uploadLogFile(context: Context, file: File, callback: UploadCallback? = null) {
+    private fun uploadLogFile(context: Context, file: File, callback: UploadCallback? = null) {
         if (!file.exists()) {
             callback?.onUploadFailed("文件不存在")
             return
@@ -201,13 +211,13 @@ object LogUploadUtil {
                         callback?.onUploadSuccess(deletedCount, sizeKB)
                     } else {
                         val sizeKB = file.length() / 1024
-                        Timber.d("日志上传失败: ${response?.msg}")
+//                        Timber.w("日志上传失败1: ${response?.msg}")
                         callback?.onUploadFailed("${response?.msg} (${sizeKB}KB)")
                     }
                 }
 
                 override fun onFail(e: java.lang.Exception?) {
-                    Timber.e(e, "日志上传失败")
+                    Timber.w(e, "日志上传失败2")
                     callback?.onUploadFailed("上传失败: ${e?.message}")
                 }
 
@@ -305,13 +315,17 @@ object LogUploadUtil {
                     return@launch
                 }
 
-                val zipFile = File(logDir.parentFile, "logs_${System.currentTimeMillis()}.zip")
+                // 创建 zip 文件 - 保存到应用外部存储目录的 LogBackup 子目录
+                val zipBackupDir = getZipBackupDirectory(context)
+                val code: String = SharePreferenceUtil.getSharePreferenceUtil(AppApplication.get())
+                    .getStrData(MmkvUtil.DeviceCode, "");
+                val zipFile = File(zipBackupDir, "logs_$code ${System.currentTimeMillis()}.zip")
                 val compressed = compressFilesToZip(filesToCompress, zipFile)
 
                 if (compressed) {
                     val fileSizeKB = zipFile.length() / 1024
                     // 压缩成功后打开文件管理器
-                    openFileLocation(context, zipFile.parentFile)
+//                    openFileLocation(context, zipFile.parentFile)
                     withContext(Dispatchers.Main) {
                         onSuccess(zipFile, filesToCompress.size, fileSizeKB)
                     }
@@ -333,8 +347,7 @@ object LogUploadUtil {
     fun getLogPath(ctx: Context): File {
         // Android 10 (API 29) 及以上使用分区存储，无法在外部根目录创建文件夹
         // 使用应用专属外部目录，所有 Android 版本都支持
-        // 路径: /storage/emulated/0/Android/data/com.jh2025.zhibingji/files/zhibingji_logs/
-        val logDir = File(ctx.getExternalFilesDir(null), "zhibingji_logs")
+        val logDir = File(ctx.getExternalFilesDir(null), "feige_logs")
 
         if (!logDir.exists()) {
             val created = logDir.mkdirs()
@@ -347,7 +360,7 @@ object LogUploadUtil {
 
         // 验证目录是否可写
         if (logDir.exists() && logDir.canWrite()) {
-            Log.d(TAG, "日志目录: " + logDir.absolutePath)
+//            Log.d(TAG, "日志目录: " + logDir.absolutePath)
             return logDir
         } else {
             Log.w(TAG, "外部存储目录不可写，回退到内部存储: " + logDir.absolutePath)
@@ -369,6 +382,61 @@ object LogUploadUtil {
         return internalDir
     }
 
+    /**
+     * 获取压缩文件备份目录
+     * 适配所有 Android 版本 (API 19+) 和不同品牌手机
+     *
+     * 优先使用路径：
+     * /storage/emulated/0/Android/data/[包名]/files/LogBackup/
+     *
+     * 如果外部存储不可用，则回退到内部存储：
+     * /data/data/[包名]/files/LogBackup/
+     *
+     * @param context 上下文
+     * @return 备份目录文件对象
+     */
+    fun getZipBackupDirectory(context: Context): File {
+        // 获取应用外部存储根目录
+        val externalFilesDir = context.getExternalFilesDir(null)
+
+        return if (externalFilesDir != null) {
+            // 在外部存储目录下创建 LogBackup 子目录
+            val backupDir = File(externalFilesDir, "LogBackup")
+
+            if (!backupDir.exists()) {
+                val created = backupDir.mkdirs()
+                if (!created) {
+                    Log.w(TAG, "无法创建外部备份目录: ${backupDir.absolutePath}，回退到内部存储")
+                    return getInternalBackupDirectory(context)
+                }
+            }
+
+            // 验证目录是否可写
+            if (backupDir.canWrite()) {
+                Log.d(TAG, "压缩文件备份目录: ${backupDir.absolutePath}")
+                backupDir
+            } else {
+                Log.w(TAG, "外部备份目录不可写，回退到内部存储: ${backupDir.absolutePath}")
+                getInternalBackupDirectory(context)
+            }
+        } else {
+            Log.w(TAG, "外部存储不可用，使用内部存储")
+            getInternalBackupDirectory(context)
+        }
+    }
+
+    /**
+     * 获取内部存储备份目录（回退方案）
+     */
+    private fun getInternalBackupDirectory(context: Context): File {
+        val internalDir = File(context.filesDir, "LogBackup")
+        if (!internalDir.exists()) {
+            internalDir.mkdirs()
+        }
+        Log.d(TAG, "使用内部备份目录: ${internalDir.absolutePath}")
+        return internalDir
+    }
+
     fun getImageName(): String {
         val timeFormatter = SimpleDateFormat("yyyyMMdd", Locale.CHINA) //_HHmmss
         val time = System.currentTimeMillis()
@@ -378,6 +446,7 @@ object LogUploadUtil {
 
     /**
      * 打开文件管理器并定位到指定目录
+     * 适配 Android 7.0+ 使用 FileProvider
      * @param context 上下文
      * @param directory 要打开的目录
      */
@@ -388,46 +457,80 @@ object LogUploadUtil {
         }
 
         try {
-            // 方式1: 尝试使用 ACTION_VIEW 打开目录
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                setDataAndType(Uri.fromFile(directory), "resource/folder")
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            // 方式1: 使用 ACTION_VIEW + URI (兼容性最好)
+            val uri: Uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                FileProvider.getUriForFile(
+                    context, context.packageName + ".provider", directory
+                )
+            } else {
+                Uri.fromFile(directory)
             }
 
-            // 检查是否有应用可以处理此 Intent
-            if (intent.resolveActivity(context.packageManager) != null) {
-                context.startActivity(intent)
+            val intent1 = Intent(Intent.ACTION_VIEW).apply {
+                data = uri
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                }
+            }
+
+            if (intent1.resolveActivity(context.packageManager) != null) {
+                context.startActivity(intent1)
                 Timber.d("已打开文件管理器: ${directory.absolutePath}")
                 return
             }
 
-            // 方式2: 尝试使用 CATEGORY_BROWSABLE 打开
+            // 方式2: 使用 CATEGORY_BROWSABLE (某些文件管理器支持)
             val intent2 = Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.fromFile(directory)
+                data = uri
+                addCategory(Intent.CATEGORY_BROWSABLE)
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
             }
 
             if (intent2.resolveActivity(context.packageManager) != null) {
                 context.startActivity(intent2)
-                Timber.d("已打开文件管理器: ${directory.absolutePath}")
+                Timber.d("已打开文件管理器 (Browsable): ${directory.absolutePath}")
                 return
             }
 
-            // 方式3: 尝试打开父目录
-            val parentDir = directory.parentFile
-            if (parentDir != null && parentDir.exists()) {
-                val intent3 = Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.fromFile(parentDir)
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            // 方式3: 尝试打开应用外部存储根目录 (Android/data/xxx/files/)
+            val externalFilesDir = context.getExternalFilesDir(null)
+            if (externalFilesDir != null && externalFilesDir.exists()) {
+                val rootUri: Uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    FileProvider.getUriForFile(
+                        context, context.packageName + ".provider", externalFilesDir
+                    )
+                } else {
+                    Uri.fromFile(externalFilesDir)
                 }
-                context.startActivity(intent3)
-                Timber.d("已打开父目录: ${parentDir.absolutePath}")
-            } else {
-                Timber.w("无法打开文件管理器: 没有找到可以处理的应用")
+
+                val intent3 = Intent(Intent.ACTION_VIEW).apply {
+                    data = rootUri
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                    }
+                }
+
+                if (intent3.resolveActivity(context.packageManager) != null) {
+                    context.startActivity(intent3)
+                    Timber.d("已打开外部存储根目录: ${externalFilesDir.absolutePath}")
+                    return
+                }
             }
+
+            Timber.w("无法打开文件管理器: 没有找到可以处理的应用")
+            // 提示用户文件保存位置
+            com.hjq.toast.ToastUtils.show("压缩包已保存至: ${directory.absolutePath}")
 
         } catch (e: Exception) {
             Timber.e(e, "打开文件管理器失败")
+            com.hjq.toast.ToastUtils.show("压缩包已保存至: ${directory.absolutePath}")
         }
     }
 }

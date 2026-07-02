@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.*
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
-import com.blankj.utilcode.util.AppUtils
 import com.hjq.base.BaseActivity
 import com.hjq.demo.R
 import com.hjq.demo.aop.Log

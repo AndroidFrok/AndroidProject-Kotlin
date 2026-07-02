@@ -1,8 +1,7 @@
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 // 通用配置
 android {
-    compileSdkVersion 36
+    compileSdkVersion 34
     defaultConfig {
         // 最低安装版本
         minSdkVersion 19
@@ -10,14 +9,14 @@ android {
         targetSdkVersion 36
     }
 
-    // 支持 Java JDK 8
+    // 支持 Java JDK 17
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = "17"
     }
 
     // 设置存放 so 文件的目录
@@ -38,21 +37,23 @@ android {
     }
 
     // 代码警告配置
-    lintOptions {
+    /*lintOptions {
         // 禁用文本硬编码警告
         disable 'HardcodedText'
         // 禁用图片描述警告
         disable 'ContentDescription'
-    }
+    }*/
 }
 
 afterEvaluate {
     // 前提条件是这个 Module 工程必须是 Library 类型，并且排除名为 umeng 的 Module 工程
     if (android.defaultConfig.applicationId == null && "umeng" != getName()) {
-        // 排除 BuildConfig.class
-//        generateReleaseBuildConfig.enabled = false
-//        generatePreviewBuildConfig.enabled = false
-//        generateDebugBuildConfig.enabled = false
+        // 排除 BuildConfig.class (AGP 8.7+ 使用新的方式)
+        tasks.configureEach { task ->
+            if (task.name.contains('generate') && task.name.contains('BuildConfig')) {
+                task.enabled = false
+            }
+        }
     }
 }
 
@@ -79,16 +80,18 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.13.2'
     /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑以上依赖不可随意升级版本 */
 
-    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
+//    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     implementation 'org.greenrobot:eventbus:3.3.1'
-
-// 弹框建议    https://github.com/AndroidFrok/XPopup
+    implementation 'org.greenrobot:greendao:3.3.0'
 //    https://github.com/kongzue/DialogX/releases
     def dialogx_version = "0.0.50"
     implementation "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
     implementation "com.github.kongzue.DialogX:DialogXMIUIStyle:0.0.50"
-    api 'com.blankj:utilcode:1.30.6'
-    def work_version = "2.4.0"
+//    api 'com.blankj:utilcode:1.30.6'
+    def work_version = "2.7.0"
+    // (Java only)https://developer.android.google.cn/topic/libraries/architecture/workmanager/how-to/define-work?hl=zh-cn#java
+    implementation "androidx.work:work-runtime:2.7.0"
+    implementation "androidx.work:work-runtime-ktx:2.7.0"
     implementation 'com.github.getActivity:MultiLanguages:9.3'
     // 标题栏框架：https://github.com/getActivity/TitleBar
     implementation 'com.github.getActivity:TitleBar:10.5'
@@ -107,7 +110,10 @@ dependencies {
     // 图片加载框架：https://github.com/bumptech/glide
     // 官方使用文档：https://github.com/Muyangmin/glide-docs-cn
     implementation 'com.github.bumptech.glide:glide:4.16.0'
-    kapt 'com.github.bumptech.glide:compiler:4.16.0'
+    // Room 数据库：https://developer.android.google.cn/jetpack/androidx/releases/room
+    def roomVersion = "2.6.1"
+    implementation "androidx.room:room-runtime:${roomVersion}"
+    implementation "androidx.room:room-ktx:${roomVersion}"
     // 沉浸式框架：https://github.com/gyf-dev/ImmersionBar android <= 4.4 不用
 //    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     // 手势 ImageView：https://github.com/Baseflow/PhotoView
@@ -146,7 +152,12 @@ dependencies {
     /*轮播 三选一*/
 //    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
     /*可选区域 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
-    implementation 'com.herohan:UVCAndroid:1.0.5'
-    api project(':serialport')
+//    implementation 'com.herohan:UVCAndroid:1.0.5' todo
+//    api project(':serialport') todo
 
+
+    // 单元测试依赖
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:2.0.0"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:2.0.0"
 }

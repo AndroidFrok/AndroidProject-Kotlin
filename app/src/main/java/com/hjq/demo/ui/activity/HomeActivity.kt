@@ -21,6 +21,7 @@ import com.hjq.demo.manager.Router
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.other.DoubleClickHelper
 import com.hjq.demo.ui.adapter.NavigationAdapter
+import com.hjq.demo.ui.fragment.HomeFragment
 import com.hjq.demo.ui.fragment.MessageFragment
 import com.hjq.demo.widget.WaveView
 import timber.log.Timber
@@ -97,9 +98,10 @@ class HomeActivity : AppActivity(), NavigationAdapter.OnNavigationListener {
     override fun initData() {
 //        waveView = WaveView(this)
         pagerAdapter = FragmentPagerAdapter<AppFragment<*>>(this).apply {
-            addFragment(MessageFragment.newInstance())
-            addFragment(MessageFragment.newInstance())
-            addFragment(MessageFragment.newInstance())
+            addFragment(HomeFragment())
+            addFragment(MessageFragment())
+            addFragment(MessageFragment())
+//            addFragment(MessageFragment.newInstance())
             viewPager?.adapter = this
         }
         onNewIntent(intent)

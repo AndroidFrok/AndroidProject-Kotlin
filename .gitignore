@@ -5,6 +5,7 @@
 build
 captures
 app/release
+cpu/release
 app/preview
 cpu/preview
 ._*
@@ -13,7 +14,6 @@ cpu/preview
 local.properties
 gradle.properties
 /gradle/
-gradle/wrapper/gradle-wrapper.properties
-/app/release/
+/gradle/wrapper/gradle-wrapper.properties
 .claude
-nul
+.cursor

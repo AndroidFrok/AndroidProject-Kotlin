@@ -3,8 +3,8 @@ package com.hjq.demo.services
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import com.blankj.utilcode.util.AppUtils
 import com.hjq.demo.manager.ActivityManager
+import com.hjq.demo.manager.RootCmd
 import timber.log.Timber
 import java.util.Timer
 import java.util.TimerTask
@@ -18,7 +18,7 @@ class AliveService : Service() {
         val timer = Timer()
         val task = object : TimerTask() {
             override fun run() {
-                val isF = AppUtils.isAppForeground()
+                val isF = RootCmd.isAppForeground(applicationContext, packageName)
                 if (!isF) {
                     Timber.e("处于后台  $isF")
                     ActivityManager.getInstance().finishAllActivities();

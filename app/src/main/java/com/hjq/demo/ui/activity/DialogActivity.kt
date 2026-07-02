@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import com.hjq.bar.TitleBar
 import com.hjq.base.BaseDialog
+import com.hjq.base.BaseDialog.Builder
 import com.hjq.base.BasePopupWindow
 import com.hjq.base.action.AnimAction
 import com.hjq.demo.R
@@ -442,7 +443,7 @@ class DialogActivity : AppActivity() {
             R.id.btn_dialog_custom -> {
 
                 // 自定义对话框
-                BaseDialog.Builder<BaseDialog.Builder<*>>(this)
+                BaseDialog.Builder(context = this)
                     .setContentView(R.layout.custom_dialog)
                     .setAnimStyle(AnimAction.ANIM_SCALE) //.setText(id, "我是预设置的文本")
                     .setOnClickListener(R.id.btn_dialog_custom_ok, object : BaseDialog.OnClickListener<Button> {

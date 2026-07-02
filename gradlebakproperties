@@ -17,11 +17,11 @@ org.gradle.jvmargs = -Xmx2048m
 android.useAndroidX = true
 android.enableJetifier = true
 
-StoreFile = d:\\certs\\juhui2020.keystore
-StorePassword=juhui2020
-KeyAlias=juhui2020
-KeyPassword=juhui2020
+
 android.defaults.buildfeatures.buildconfig=true
 android.nonTransitiveRClass=false
 android.nonFinalResIds=false
-GRADLE_USER_HOME= D:\\all_dev_sdk\\gradle_home
+
+# Gradle 9 兼容性配置
+org.gradle.configuration-cache=false
+org.gradle.configuration-cache-problems=warn

@@ -21,7 +21,7 @@ class TimberFile(ctx: Context) : Timber.Tree() {
             val month = calendar.get(Calendar.MONTH) + 1
             val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val fileName = "月_$month" + "日_$dayOfMonth.txt"
+            val fileName = "log_$month 月$dayOfMonth 日.txt"
 
             // 获取日志目录（优先外置存储，失败则回退到内部存储）
             val logDir = LogUploadUtil.getLogPath(context)

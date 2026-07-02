@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:maxLength="14"
-            android:text="￥ 12345678.88"
+            android:hint="你咬我啊"
             android:textColor="@color/red"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
